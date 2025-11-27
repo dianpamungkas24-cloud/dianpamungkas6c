@@ -408,8 +408,11 @@
     .calendar {
       background: white;
       border-radius: 20px;
-      padding: 20px;
+      padding: 15px;
       box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+      width: 100%;
+      max-width: 100%;
+      overflow: hidden;
     }
     
     .calendar-header {
@@ -418,12 +421,14 @@
       font-weight: 600;
       color: #2C3E50;
       margin-bottom: 15px;
+      padding: 0 5px;
     }
     
     .calendar-grid {
       display: grid;
       grid-template-columns: repeat(7, 1fr);
-      gap: 5px;
+      gap: 4px;
+      width: 100%;
     }
     
     .calendar-day {
@@ -435,14 +440,15 @@
       font-size: 0.75em;
       font-weight: 600;
       color: #2C3E50;
-      min-height: 32px;
+      min-height: 30px;
+      padding: 2px;
     }
     
     .calendar-day.header {
       background: #F0F8F0;
       color: #5DADE2;
       font-weight: 700;
-      font-size: 0.7em;
+      font-size: 0.65em;
     }
     
     .calendar-day.date {
@@ -472,7 +478,7 @@
     
     .calendar-day.date:hover {
       color: white;
-      transform: scale(1.1);
+      transform: scale(1.05);
       box-shadow: 0 4px 15px rgba(102, 126, 234, 0.5);
     }
     
@@ -484,9 +490,33 @@
     .calendar-day.event::after {
       content: '📌';
       position: absolute;
-      bottom: 1px;
-      right: 1px;
-      font-size: 0.6em;
+      bottom: 0px;
+      right: 0px;
+      font-size: 0.5em;
+    }
+    
+    @media (max-width: 480px) {
+      .calendar {
+        padding: 10px;
+      }
+      
+      .calendar-grid {
+        gap: 3px;
+      }
+      
+      .calendar-day {
+        font-size: 0.65em;
+        min-height: 28px;
+        border-radius: 6px;
+      }
+      
+      .calendar-day.header {
+        font-size: 0.6em;
+      }
+      
+      .calendar-day.event::after {
+        font-size: 0.45em;
+      }
     }
     
     /* Announcements */
@@ -975,8 +1005,130 @@
     
     /* Responsive */
     @media (max-width: 768px) {
+      .header {
+        padding: 40px 15px;
+      }
+      
       .header h1 {
+        font-size: 1.8em;
+      }
+      
+      .header p {
+        font-size: 1em;
+      }
+      
+      .badge {
+        padding: 10px 20px;
+        font-size: 0.9em;
+      }
+      
+      .section {
+        padding: 30px 15px;
+      }
+      
+      .section-title {
+        font-size: 1.8em;
+        margin-bottom: 25px;
+      }
+      
+      .hero {
+        padding: 25px 20px;
+        margin: -30px 15px 30px;
+      }
+      
+      .cards-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+      
+      .card {
+        padding: 25px;
+      }
+      
+      .teacher-avatar {
+        width: 120px;
+        height: 120px;
+        font-size: 3.5em;
+      }
+      
+      .teacher-profile {
+        padding: 25px;
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .teacher-info h2 {
         font-size: 1.5em;
+      }
+      
+      .subjects-taught {
+        justify-content: center;
+      }
+      
+      .points-header {
+        padding: 25px 15px;
+      }
+      
+      .points-header h2 {
+        font-size: 1.5em;
+      }
+      
+      .points-header .subtitle {
+        font-size: 1em;
+      }
+      
+      .points-icons {
+        font-size: 2em;
+      }
+      
+      .subjects-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .rewards-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+      }
+      
+      .reward-card {
+        padding: 20px;
+      }
+      
+      .reward-icon {
+        font-size: 2.5em;
+      }
+      
+      .exchange-steps {
+        grid-template-columns: 1fr;
+        gap: 15px;
+      }
+      
+      .schedule-table {
+        overflow-x: auto;
+      }
+      
+      .schedule-table th,
+      .schedule-table td {
+        padding: 10px;
+        font-size: 0.9em;
+      }
+      
+      .gallery-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .contact-cards {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .header h1 {
+        font-size: 1.4em;
+      }
+      
+      .header p {
+        font-size: 0.9em;
       }
       
       .section-title {
@@ -984,25 +1136,34 @@
       }
       
       .hero {
-        padding: 25px;
+        padding: 20px 15px;
+      }
+      
+      .card {
+        padding: 20px;
+      }
+      
+      .card-icon {
+        font-size: 2.5em;
       }
       
       .teacher-avatar {
-        width: 150px;
-        height: 150px;
-        font-size: 4em;
-      }
-      
-      .calendar-grid {
-        gap: 5px;
-      }
-      
-      .calendar-day {
-        font-size: 0.8em;
+        width: 100px;
+        height: 100px;
+        font-size: 3em;
       }
       
       .points-header h2 {
-        font-size: 1.8em;
+        font-size: 1.3em;
+      }
+      
+      .rewards-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .btn {
+        padding: 12px 24px;
+        font-size: 0.9em;
       }
     }
   </style>
@@ -2009,5 +2170,5 @@
       });
     }
   </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9a4d59e0c400fe04',t:'MTc2NDIwMTY4Ny4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9a4e36ea1003fd13',t:'MTc2NDIxMDc0MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
