@@ -17,56 +17,135 @@
     }
     
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #E8F4F8 0%, #F5F9E9 100%);
+      font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #0F2027 0%, #203A43 50%, #2C5364 100%);
       color: #2C3E50;
       line-height: 1.6;
       width: 100%;
       overflow-x: hidden;
+      position: relative;
+    }
+    
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        radial-gradient(circle at 20% 50%, rgba(168, 216, 234, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(184, 230, 213, 0.1) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: 0;
     }
     
     .app-container {
       width: 100%;
       min-height: 100%;
+      position: relative;
+      z-index: 1;
+    }
+    
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
+    }
+    
+    @keyframes slideInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
     }
     
     /* Header */
     .header {
-      background: linear-gradient(135deg, #A8D8EA 0%, #B8E6D5 100%);
-      padding: 40px 20px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 60px 20px;
       text-align: center;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+      position: relative;
+      overflow: hidden;
+      animation: fadeIn 1s ease-out;
+    }
+    
+    .header::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(168, 216, 234, 0.2) 0%, transparent 70%);
+      animation: float 6s ease-in-out infinite;
     }
     
     .header h1 {
-      font-size: 2em;
-      color: #2C3E50;
-      margin-bottom: 10px;
-      font-weight: 700;
+      font-size: 2.5em;
+      color: #FFFFFF;
+      margin-bottom: 15px;
+      font-weight: 800;
+      position: relative;
+      z-index: 1;
+      text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      letter-spacing: 1px;
     }
     
     .header p {
-      font-size: 1.1em;
-      color: #34495E;
-      margin-bottom: 20px;
+      font-size: 1.2em;
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: 25px;
+      position: relative;
+      z-index: 1;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.2);
     }
     
     .vision-badges {
       display: flex;
       justify-content: center;
-      gap: 15px;
+      gap: 20px;
       flex-wrap: wrap;
-      margin-top: 20px;
+      margin-top: 30px;
+      position: relative;
+      z-index: 1;
     }
     
     .badge {
-      background: white;
-      padding: 8px 20px;
-      border-radius: 25px;
-      font-size: 0.9em;
-      color: #5DADE2;
-      font-weight: 600;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      padding: 12px 28px;
+      border-radius: 30px;
+      font-size: 1em;
+      color: #FFFFFF;
+      font-weight: 700;
+      box-shadow: 0 4px 20px rgba(168, 216, 234, 0.3);
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+    
+    .badge:hover {
+      background: rgba(168, 216, 234, 0.3);
+      transform: translateY(-5px);
+      box-shadow: 0 8px 30px rgba(168, 216, 234, 0.5);
     }
     
     /* Section */
@@ -77,11 +156,27 @@
     }
     
     .section-title {
-      font-size: 2em;
-      color: #2C3E50;
+      font-size: 2.5em;
+      color: #FFFFFF;
       text-align: center;
-      margin-bottom: 30px;
-      font-weight: 700;
+      margin-bottom: 40px;
+      font-weight: 800;
+      text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      position: relative;
+      display: inline-block;
+      width: 100%;
+    }
+    
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 4px;
+      background: linear-gradient(90deg, transparent, #667eea, #764ba2, transparent);
+      border-radius: 2px;
     }
     
     .section-subtitle {
@@ -93,15 +188,31 @@
     
     /* Hero Section */
     .hero {
-      background: white;
-      border-radius: 25px;
-      padding: 40px;
-      margin: -30px 20px 30px;
-      box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 30px;
+      padding: 50px;
+      margin: -50px 20px 40px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
       display: flex;
-      gap: 30px;
+      gap: 40px;
       align-items: center;
       flex-wrap: wrap;
+      position: relative;
+      overflow: hidden;
+      animation: slideInUp 0.8s ease-out;
+    }
+    
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(102, 126, 234, 0.1) 0%, transparent 70%);
+      animation: float 8s ease-in-out infinite;
     }
     
     .hero-images {
@@ -148,21 +259,51 @@
     }
     
     .card {
-      background: white;
-      border-radius: 20px;
-      padding: 30px;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 25px;
+      padding: 35px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+      animation: slideInUp 0.6s ease-out;
+    }
+    
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(168, 216, 234, 0.2), transparent);
+      transition: left 0.5s ease;
+    }
+    
+    .card:hover::before {
+      left: 100%;
     }
     
     .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 15px 50px rgba(168, 216, 234, 0.4);
+      border-color: rgba(168, 216, 234, 0.5);
     }
     
     .card-icon {
-      font-size: 2.5em;
-      margin-bottom: 15px;
+      font-size: 3em;
+      margin-bottom: 20px;
+      display: inline-block;
+      animation: float 3s ease-in-out infinite;
+      filter: drop-shadow(0 5px 15px rgba(168, 216, 234, 0.4));
+      position: relative;
+      z-index: 1;
+    }
+    
+    .card:hover .card-icon {
+      animation: pulse 0.5s ease-in-out;
     }
     
     .card h3 {
@@ -184,22 +325,46 @@
     }
     
     .btn {
-      background: linear-gradient(135deg, #A8D8EA, #B8E6D5);
-      color: #2C3E50;
-      padding: 12px 24px;
-      border-radius: 25px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: #FFFFFF;
+      padding: 14px 32px;
+      border-radius: 30px;
       text-decoration: none;
       text-align: center;
-      font-weight: 600;
-      transition: all 0.3s ease;
+      font-weight: 700;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       border: none;
       cursor: pointer;
       font-size: 0.95em;
+      box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+    }
+    
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+      transition: left 0.3s ease;
+      z-index: -1;
+    }
+    
+    .btn:hover::before {
+      left: 0;
     }
     
     .btn:hover {
-      background: linear-gradient(135deg, #89CFF0, #A0D9C3);
-      transform: scale(1.05);
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 8px 25px rgba(102, 126, 234, 0.6);
+    }
+    
+    .btn:active {
+      transform: translateY(-1px) scale(1.02);
     }
     
     .btn-small {
@@ -243,22 +408,22 @@
     .calendar {
       background: white;
       border-radius: 20px;
-      padding: 25px;
+      padding: 20px;
       box-shadow: 0 5px 20px rgba(0,0,0,0.08);
     }
     
     .calendar-header {
       text-align: center;
-      font-size: 1.3em;
+      font-size: 1.1em;
       font-weight: 600;
       color: #2C3E50;
-      margin-bottom: 20px;
+      margin-bottom: 15px;
     }
     
     .calendar-grid {
       display: grid;
       grid-template-columns: repeat(7, 1fr);
-      gap: 10px;
+      gap: 5px;
     }
     
     .calendar-day {
@@ -266,27 +431,49 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      border-radius: 10px;
-      font-size: 0.9em;
+      border-radius: 8px;
+      font-size: 0.75em;
       font-weight: 600;
       color: #2C3E50;
+      min-height: 32px;
     }
     
     .calendar-day.header {
       background: #F0F8F0;
       color: #5DADE2;
       font-weight: 700;
+      font-size: 0.7em;
     }
     
     .calendar-day.date {
-      background: #F8FEFF;
+      background: rgba(248, 254, 255, 0.8);
       cursor: pointer;
-      transition: all 0.2s ease;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+    }
+    
+    .calendar-day.date::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      border-radius: 8px;
+      transition: transform 0.3s ease;
+      z-index: -1;
+    }
+    
+    .calendar-day.date:hover::before {
+      transform: translate(-50%, -50%) scale(1);
     }
     
     .calendar-day.date:hover {
-      background: #A8D8EA;
       color: white;
+      transform: scale(1.1);
+      box-shadow: 0 4px 15px rgba(102, 126, 234, 0.5);
     }
     
     .calendar-day.event {
@@ -297,9 +484,9 @@
     .calendar-day.event::after {
       content: '📌';
       position: absolute;
-      bottom: 2px;
-      right: 2px;
-      font-size: 0.7em;
+      bottom: 1px;
+      right: 1px;
+      font-size: 0.6em;
     }
     
     /* Announcements */
@@ -1180,7 +1367,7 @@
      </div>
      <div class="gallery-item">
       <div class="gallery-placeholder">
-       🎭
+       ����
       </div>
       <div class="gallery-caption">
        Pentas Seni
@@ -1213,6 +1400,79 @@
       <p><strong>Pengalaman Mengajar:</strong> 8 Tahun</p>
       <h4 style="margin-top: 20px; color: #5DADE2;">Mata Pelajaran yang Diampu:</h4>
       <div class="subjects-taught"><span class="subject-tag">Bahasa Indonesia</span> <span class="subject-tag">IPAS</span> <span class="subject-tag">Matematika</span> <span class="subject-tag">PPKn</span> <span class="subject-tag">IPS</span>
+      </div>
+     </div>
+    </div><!-- CV Detail -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; margin-top: 40px;">
+     <div class="card">
+      <div class="card-icon">
+       🎓
+      </div>
+      <h3>Pendidikan</h3>
+      <div style="color: #34495E; line-height: 1.8;">
+       <p><strong>S1 Pendidikan Guru Sekolah Dasar</strong></p>
+       <p style="font-size: 0.9em; color: #7F8C8D;">Universitas Negeri Yogyakarta (2015)</p>
+       <p style="margin-top: 10px;"><strong>Sertifikasi Guru</strong></p>
+       <p style="font-size: 0.9em; color: #7F8C8D;">Kementerian Pendidikan (2018)</p>
+      </div>
+     </div>
+     <div class="card">
+      <div class="card-icon">
+       🏆
+      </div>
+      <h3>Prestasi &amp; Penghargaan</h3>
+      <div style="color: #34495E; line-height: 1.8;">
+       <p>• Guru Berprestasi Tingkat Kecamatan (2022)</p>
+       <p>• Best Practice Pembelajaran PjBL (2023)</p>
+       <p>• Juara 1 Inovasi Pembelajaran (2024)</p>
+       <p>• Fasilitator Pembelajaran Digital</p>
+      </div>
+     </div>
+     <div class="card">
+      <div class="card-icon">
+       💡
+      </div>
+      <h3>Keahlian &amp; Kompetensi</h3>
+      <div style="color: #34495E; line-height: 1.8;">
+       <p>• Pembelajaran Berdiferensiasi</p>
+       <p>• Project-Based Learning (PjBL)</p>
+       <p>• Pendekatan Sosial Emosional</p>
+       <p>• Teknologi Pembelajaran Digital</p>
+       <p>• Manajemen Kelas Inklusif</p>
+      </div>
+     </div>
+     <div class="card">
+      <div class="card-icon">
+       📚
+      </div>
+      <h3>Pelatihan &amp; Workshop</h3>
+      <div style="color: #34495E; line-height: 1.8;">
+       <p>• Pelatihan Guru Penggerak (2023)</p>
+       <p>• Workshop Kurikulum Merdeka (2024)</p>
+       <p>• Sertifikat Google Educator Level 1</p>
+       <p>• Pelatihan Assessment Autentik</p>
+      </div>
+     </div>
+     <div class="card">
+      <div class="card-icon">
+       🌟
+      </div>
+      <h3>Filosofi Mengajar</h3>
+      <div style="color: #34495E; line-height: 1.8;">
+       <p style="font-style: italic;">"Setiap anak adalah bintang dengan cahayanya sendiri. Tugas guru adalah membantu mereka bersinar sesuai potensi unik yang dimiliki."</p>
+       <p style="margin-top: 10px; font-weight: 600; color: #5DADE2;">~ Dian Agung Pamungkas</p>
+      </div>
+     </div>
+     <div class="card">
+      <div class="card-icon">
+       🎯
+      </div>
+      <h3>Fokus Pembelajaran 2025</h3>
+      <div style="color: #34495E; line-height: 1.8;">
+       <p>• Penguatan literasi &amp; numerasi</p>
+       <p>• Pengembangan karakter Pancasila</p>
+       <p>• Kolaborasi orang tua - sekolah</p>
+       <p>• Pembelajaran berbasis teknologi</p>
       </div>
      </div>
     </div>
@@ -1275,7 +1535,7 @@
      </div>
     </div><!-- Katalog Reward -->
     <div class="rewards-header">
-     <h3>🎁 TUKAR POINMU DISINI! 🎁</h3>
+     <h3>�� TUKAR POINMU DISINI! 🎁</h3>
      <p>Pilih hadiah sesuai poin yang kamu miliki</p>
     </div>
     <div class="reward-category">
@@ -1560,6 +1820,31 @@
    </div>
   </div>
   <script>
+    // Scroll animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -100px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, observerOptions);
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const cards = document.querySelectorAll('.card, .subject-card, .reward-card, .gallery-item');
+      cards.forEach((card, index) => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(30px)';
+        card.style.transition = `all 0.6s ease ${index * 0.1}s`;
+        observer.observe(card);
+      });
+    });
+
     const defaultConfig = {
       class_title: "KELAS DIGITAL 6C – SD",
       class_subtitle: "Portal Informasi Pembelajaran Siswa & Orang Tua",
@@ -1724,5 +2009,5 @@
       });
     }
   </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9a4d221ae40dfd30',t:'MTc2NDE5OTQwMy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9a4d59e0c400fe04',t:'MTc2NDIwMTY4Ny4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
