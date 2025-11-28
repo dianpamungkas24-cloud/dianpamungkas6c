@@ -508,3 +508,604 @@
                 </tr>
                 <tr style="border-bottom: 1px solid #E5E7EB;">
                   <td style
+              <script>
+    const defaultConfig = {
+      site_title: "Kelas Digital 6C SDN 19 Martapura",
+      welcome_text: "Selamat Datang di Portal Pembelajaran Digital Kami",
+      teacher_name: "Dian Agung Pamungkas, S.Pd",
+      teacher_motto: "Belajar dengan Hati, Tumbuh dengan Prestasi",
+      contact_phone: "0812-3456-7890",
+      school_address: "Jl. Lintas Sumatera No.12, RT.01/RW.03, Kota Baru, Kec. Martapura, Kabupaten Ogan Komering Ulu Timur, Sumatera Selatan 32311",
+      background_color: "#E0F2FE",
+      surface_color: "#FFFFFF",
+      text_color: "#111827",
+      primary_action_color: "#3B82F6",
+      secondary_action_color: "#10B981",
+      csv_url_matematika: "",
+      csv_url_ipas: "",
+      csv_url_indonesia: "",
+      csv_url_inggris: "",
+      csv_url_pkn: "",
+      csv_url_pai: "",
+      csv_url_budaya: "",
+      csv_url_pjok: "",
+      csv_url_koding: ""
+    };
+
+    let config = { ...defaultConfig };
+
+    // Data nilai siswa
+    const nilaiData = {
+      matematika: [],
+      ipas: [],
+      indonesia: [],
+      inggris: [],
+      pkn: [],
+      pai: [],
+      budaya: [],
+      pjok: [],
+      koding: []
+    };
+
+    const subjectInfo = {
+      matematika: { icon: "🔢", name: "Matematika", color: "#3B82F6" },
+      ipas: { icon: "🔬", name: "IPAS", color: "#10B981" },
+      indonesia: { icon: "📚", name: "Bahasa Indonesia", color: "#F59E0B" },
+      inggris: { icon: "🗣️", name: "Bahasa Inggris", color: "#EC4899" },
+      pkn: { icon: "🏛️", name: "PKn", color: "#EF4444" },
+      pai: { icon: "🕌", name: "PAI", color: "#06B6D4" },
+      budaya: { icon: "🎭", name: "Budaya Komering", color: "#6366F1" },
+      pjok: { icon: "⚽", name: "PJOK", color: "#84CC16" },
+      koding: { icon: "💻", name: "Koding & AI", color: "#8B5CF6" }
+    };
+
+    let currentSubject = 'matematika';
+
+    // Data sample untuk demo
+    const sampleData = {
+      matematika: [
+        { nama: "Ahmad Rizki", nh1: 85, nh2: 88, nh3: 90, nh4: 87, nh5: 92, sts: 89, sas: 91 },
+        { nama: "Siti Nurhaliza", nh1: 92, nh2: 95, nh3: 93, nh4: 94, nh5: 96, sts: 95, sas: 97 },
+        { nama: "Budi Santoso", nh1: 78, nh2: 82, nh3: 80, nh4: 85, nh5: 79, sts: 83, sas: 81 },
+        { nama: "Dewi Lestari", nh1: 88, nh2: 90, nh3: 87, nh4: 89, nh5: 91, sts: 90, sas: 92 },
+        { nama: "Fajar Hidayat", nh1: 75, nh2: 78, nh3: 80, nh4: 77, nh5: 82, sts: 79, sas: 81 }
+      ],
+      ipas: [
+        { nama: "Ahmad Rizki", nh1: 82, nh2: 85, nh3: 88, nh4: 84, nh5: 87, sts: 86, sas: 89 },
+        { nama: "Siti Nurhaliza", nh1: 90, nh2: 92, nh3: 94, nh4: 91, nh5: 93, sts: 95, sas: 96 },
+        { nama: "Budi Santoso", nh1: 76, nh2: 79, nh3: 78, nh4: 82, nh5: 80, sts: 81, sas: 83 },
+        { nama: "Dewi Lestari", nh1: 85, nh2: 87, nh3: 89, nh4: 86, nh5: 88, sts: 90, sas: 91 },
+        { nama: "Fajar Hidayat", nh1: 72, nh2: 75, nh3: 78, nh4: 74, nh5: 79, sts: 76, sas: 78 }
+      ]
+    };
+
+    // Fungsi untuk mengisi data sample
+    function initializeSampleData() {
+      Object.keys(sampleData).forEach(subject => {
+        if (nilaiData[subject].length === 0) {
+          nilaiData[subject] = sampleData[subject];
+        }
+      });
+    }
+
+    // Parse CSV data
+    function parseCSV(csvText) {
+      const lines = csvText.trim().split('\n');
+      if (lines.length < 2) return [];
+      
+      const headers = lines[0].split(',').map(h => h.trim().toLowerCase());
+      const data = [];
+      
+      for (let i = 1; i < lines.length; i++) {
+        const values = lines[i].split(',').map(v => v.trim());
+        if (values.length >= 8 && values[0]) {
+          const student = {
+            nama: values[0] || '',
+            nh1: parseFloat(values[1]) || 0,
+            nh2: parseFloat(values[2]) || 0,
+            nh3: parseFloat(values[3]) || 0,
+            nh4: parseFloat(values[4]) || 0,
+            nh5: parseFloat(values[5]) || 0,
+            sts: parseFloat(values[6]) || 0,
+            sas: parseFloat(values[7]) || 0
+          };
+          data.push(student);
+        }
+      }
+      
+      return data;
+    }
+
+    // Load CSV data from URL
+    async function loadCSVData(subject, url) {
+      if (!url || url.trim() === '') {
+        return false;
+      }
+
+      try {
+        const response = await fetch(url);
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const csvText = await response.text();
+        const parsedData = parseCSV(csvText);
+        
+        if (parsedData.length > 0) {
+          nilaiData[subject] = parsedData;
+          return true;
+        }
+        return false;
+      } catch (error) {
+        console.error(`Error loading CSV for ${subject}:`, error);
+        showError(`Gagal memuat data CSV untuk ${subjectInfo[subject].name}: ${error.message}`);
+        return false;
+      }
+    }
+
+    // Load all CSV data
+    async function loadAllCSVData() {
+      const subjects = ['matematika', 'ipas', 'indonesia', 'inggris', 'pkn', 'pai', 'budaya', 'pjok', 'koding'];
+      const promises = subjects.map(subject => {
+        const url = config[`csv_url_${subject}`];
+        return loadCSVData(subject, url);
+      });
+      
+      await Promise.all(promises);
+    }
+
+    function calculateAverage(student) {
+      const total = student.nh1 + student.nh2 + student.nh3 + student.nh4 + student.nh5 + student.sts + student.sas;
+      return (total / 7).toFixed(1);
+    }
+
+    function getPredikat(avg) {
+      if (avg >= 90) return { label: 'A', bg: '#FEF3C7', color: '#92400E' };
+      if (avg >= 80) return { label: 'B', bg: '#DBEAFE', color: '#1E40AF' };
+      if (avg >= 70) return { label: 'C', bg: '#D1FAE5', color: '#065F46' };
+      if (avg >= 60) return { label: 'D', bg: '#FEE2E2', color: '#991B1B' };
+      return { label: 'E', bg: '#F3F4F6', color: '#6B7280' };
+    }
+
+    // Fungsi untuk menampilkan error
+    function showError(message) {
+      const errorContainer = document.getElementById('error-container');
+      if (errorContainer) {
+        errorContainer.innerHTML = `
+          <div class="error-message">
+            <strong>⚠️ Error:</strong> ${message}
+          </div>
+        `;
+        errorContainer.style.display = 'block';
+        
+        // Auto hide setelah 5 detik
+        setTimeout(() => {
+          errorContainer.style.display = 'none';
+        }, 5000);
+      }
+    }
+
+    // Fungsi untuk menampilkan loading
+    function setLoading(state) {
+      const loadingIndicator = document.getElementById('loading-indicator');
+      if (loadingIndicator) {
+        loadingIndicator.style.display = state ? 'block' : 'none';
+      }
+    }
+
+    function updateRankingTable() {
+      const studentAverages = [];
+      
+      // Ambil semua siswa unik dari semua mata pelajaran
+      const allStudentNames = new Set();
+      Object.keys(nilaiData).forEach(subject => {
+        nilaiData[subject].forEach(student => {
+          if (student.nama) allStudentNames.add(student.nama);
+        });
+      });
+
+      allStudentNames.forEach(nama => {
+        let totalAverage = 0;
+        let subjectCount = 0;
+
+        Object.keys(nilaiData).forEach(subject => {
+          const studentData = nilaiData[subject].find(s => s.nama === nama);
+          if (studentData) {
+            const avg = parseFloat(calculateAverage(studentData));
+            totalAverage += avg;
+            subjectCount++;
+          }
+        });
+
+        if (subjectCount > 0) {
+          const overallAverage = totalAverage / subjectCount;
+          studentAverages.push({
+            nama: nama,
+            average: overallAverage
+          });
+        }
+      });
+
+      studentAverages.sort((a, b) => b.average - a.average);
+      const top10 = studentAverages.slice(0, 10);
+
+      const tbody = document.getElementById('ranking-table-body');
+      if (!tbody) return;
+      
+      tbody.innerHTML = '';
+
+      if (top10.length === 0) {
+        const row = document.createElement('tr');
+        row.innerHTML = '<td colspan="4" style="padding: 32px; text-align: center; color: #6B7280;">Tidak ada data nilai. Silakan tambahkan URL CSV di pengaturan.</td>';
+        tbody.appendChild(row);
+        return;
+      }
+
+      top10.forEach((student, index) => {
+        const rank = index + 1;
+        const avg = student.average.toFixed(1);
+        const predikat = getPredikat(parseFloat(avg));
+        
+        let rankDisplay = rank.toString();
+        let bgColor = 'white';
+        let textColor = '#374151';
+        
+        if (rank === 1) {
+          rankDisplay = '🥇 1';
+          bgColor = '#FEF3C7';
+          textColor = '#92400E';
+        } else if (rank === 2) {
+          rankDisplay = '🥈 2';
+          bgColor = '#E5E7EB';
+          textColor = '#6B7280';
+        } else if (rank === 3) {
+          rankDisplay = '🥉 3';
+          bgColor = '#FED7AA';
+          textColor = '#C2410C';
+        } else {
+          bgColor = index % 2 === 1 ? '#F9FAFB' : 'white';
+        }
+
+        const row = document.createElement('tr');
+        row.style.borderBottom = '1px solid #E5E7EB';
+        row.style.background = bgColor;
+        
+        row.innerHTML = `
+          <td style="padding: 16px; font-weight: 700; color: ${textColor};">${rankDisplay}</td>
+          <td style="padding: 16px; font-weight: 600; color: #111827;">${student.nama}</td>
+          <td style="padding: 16px; text-align: center; font-weight: 700; color: ${textColor};">${avg}</td>
+          <td style="padding: 16px; text-align: center;">
+            <span style="background: ${predikat.bg}; color: ${predikat.color}; padding: 4px 12px; border-radius: 6px; font-weight: 600;">
+              ${predikat.label}
+            </span>
+          </td>
+        `;
+        
+        tbody.appendChild(row);
+      });
+    }
+
+    async function showSubject(subject) {
+      currentSubject = subject;
+      
+      // Update button styles
+      document.querySelectorAll('.subject-btn').forEach(btn => {
+        btn.style.border = '2px solid #E5E7EB';
+      });
+      const subjectBtn = document.getElementById('btn-' + subject);
+      if (subjectBtn) {
+        subjectBtn.style.border = '3px solid ' + subjectInfo[subject].color;
+      }
+
+      // Update title
+      const info = subjectInfo[subject];
+      const subjectTitle = document.getElementById('subject-title');
+      if (subjectTitle) {
+        subjectTitle.innerHTML = `
+          <span style="font-size: 32px;">${info.icon}</span>
+          Nilai ${info.name}
+        `;
+      }
+
+      // Show loading
+      setLoading(true);
+      const nilaiContainer = document.getElementById('nilai-detail-container');
+      const errorContainer = document.getElementById('error-container');
+      
+      if (nilaiContainer) nilaiContainer.style.display = 'none';
+      if (errorContainer) errorContainer.style.display = 'none';
+
+      // Load data if not loaded yet or if URL changed
+      const url = config[`csv_url_${subject}`];
+      if (url && url.trim() !== '') {
+        await loadCSVData(subject, url);
+      } else {
+        // Gunakan sample data jika CSV tidak tersedia
+        if (nilaiData[subject].length === 0 && sampleData[subject]) {
+          nilaiData[subject] = sampleData[subject];
+        }
+      }
+
+      // Hide loading
+      setLoading(false);
+      if (nilaiContainer) nilaiContainer.style.display = 'block';
+
+      // Update table
+      const data = nilaiData[subject];
+      const tbody = document.getElementById('nilai-table-body');
+      if (!tbody) return;
+      
+      tbody.innerHTML = '';
+
+      if (data.length === 0) {
+        const row = document.createElement('tr');
+        row.innerHTML = '<td colspan="10" style="padding: 32px; text-align: center; color: #6B7280;">Tidak ada data nilai untuk mata pelajaran ini. Silakan tambahkan URL CSV di pengaturan.</td>';
+        tbody.appendChild(row);
+        return;
+      }
+
+      data.forEach((student, index) => {
+        const avg = calculateAverage(student);
+        const row = document.createElement('tr');
+        row.style.borderBottom = '1px solid #E5E7EB';
+        row.style.background = index % 2 === 0 ? '#F9FAFB' : 'white';
+        
+        row.innerHTML = `
+          <td style="padding: 14px 12px; color: #374151;">${index + 1}</td>
+          <td style="padding: 14px 12px; font-weight: 600; color: #111827;">${student.nama}</td>
+          <td style="padding: 14px 12px; text-align: center; color: #374151;">${student.nh1}</td>
+          <td style="padding: 14px 12px; text-align: center; color: #374151;">${student.nh2}</td>
+          <td style="padding: 14px 12px; text-align: center; color: #374151;">${student.nh3}</td>
+          <td style="padding: 14px 12px; text-align: center; color: #374151;">${student.nh4}</td>
+          <td style="padding: 14px 12px; text-align: center; color: #374151;">${student.nh5}</td>
+          <td style="padding: 14px 12px; text-align: center; font-weight: 600; color: #374151;">${student.sts}</td>
+          <td style="padding: 14px 12px; text-align: center; font-weight: 600; color: #374151;">${student.sas}</td>
+          <td style="padding: 14px 12px; text-align: center; font-weight: 700; color: #111827; background: #F3F4F6;">${avg}</td>
+        `;
+        
+        tbody.appendChild(row);
+      });
+    }
+
+    // Fungsi untuk download file
+    function downloadFile(fileType, subject) {
+      const subjectName = subjectInfo[subject]?.name || subject;
+      let fileName = '';
+      let content = '';
+      
+      switch(fileType) {
+        case 'lkpd':
+          fileName = `LKPD_${subjectName}.pdf`;
+          content = `Ini adalah LKPD untuk mata pelajaran ${subjectName}`;
+          break;
+        case 'modul':
+          fileName = `Modul_${subjectName}.pdf`;
+          content = `Ini adalah Modul untuk mata pelajaran ${subjectName}`;
+          break;
+        case 'video':
+          fileName = `Video_Pembelajaran_${subjectName}.mp4`;
+          content = `Ini adalah Video Pembelajaran untuk mata pelajaran ${subjectName}`;
+          break;
+        default:
+          fileName = `File_${subjectName}.pdf`;
+          content = `Ini adalah file untuk mata pelajaran ${subjectName}`;
+      }
+      
+      // Simulasi download (dalam implementasi real, ini akan mengunduh file sebenarnya)
+      const blob = new Blob([content], { type: 'application/pdf' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = fileName;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      
+      // Tampilkan notifikasi
+      alert(`File ${fileName} berhasil diunduh!`);
+    }
+
+    // Fungsi untuk menukar poin
+    function tukarPoin(reward, poin) {
+      const konfirmasi = confirm(`Apakah Anda yakin ingin menukar ${poin} poin untuk ${reward}?`);
+      if (konfirmasi) {
+        alert(`Selamat! Anda berhasil menukar ${poin} poin untuk ${reward}. Reward akan diberikan pada pertemuan berikutnya.`);
+      }
+    }
+
+    // Fungsi untuk mengirim pesan kontak
+    function kirimPesan() {
+      const nama = document.getElementById('contactName').value;
+      const email = document.getElementById('contactEmail').value;
+      const pesan = document.getElementById('contactMessage').value;
+      
+      if (!nama || !email || !pesan) {
+        alert('Harap lengkapi semua field!');
+        return;
+      }
+      
+      // Simulasi pengiriman pesan
+      alert(`Terima kasih ${nama}! Pesan Anda telah terkirim. Kami akan membalas ke ${email} dalam 1x24 jam.`);
+      
+      // Reset form
+      document.getElementById('contactName').value = '';
+      document.getElementById('contactEmail').value = '';
+      document.getElementById('contactMessage').value = '';
+    }
+
+    function showPage(pageName) {
+      const pages = document.querySelectorAll('.page-section');
+      pages.forEach(page => page.classList.remove('active'));
+      
+      const targetPage = document.getElementById('page-' + pageName);
+      if (targetPage) {
+        targetPage.classList.add('active');
+      }
+
+      const navButtons = document.querySelectorAll('.nav-btn');
+      navButtons.forEach(btn => {
+        btn.style.background = 'white';
+        btn.style.color = '#374151';
+        btn.style.border = '1px solid #E5E7EB';
+      });
+
+      const activeButton = document.getElementById('nav-' + pageName);
+      if (activeButton) {
+        activeButton.style.background = config.primary_action_color;
+        activeButton.style.color = 'white';
+        activeButton.style.border = 'none';
+      }
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      // Initialize specific page content
+      if (pageName === 'nilai') {
+        showSubject(currentSubject);
+        updateRankingTable();
+      } else if (pageName === 'materi') {
+        // Initialize materi page jika perlu
+        console.log('Materi page loaded');
+      } else if (pageName === 'poin') {
+        // Initialize poin page jika perlu
+        console.log('Poin page loaded');
+      }
+    }
+
+    async function onConfigChange(newConfig) {
+      config = { ...defaultConfig, ...newConfig };
+
+      document.body.style.background = `linear-gradient(135deg, ${config.background_color} 0%, #F0FDF4 50%, #FEF3C7 100%)`;
+
+      // Update semua elemen dengan data dari config
+      const elementsToUpdate = {
+        'navTitle': config.site_title.split(' ').slice(0, 3).join(' '),
+        'heroTitle': config.site_title,
+        'heroSubtitle': config.welcome_text,
+        'teacherNameCard': config.teacher_name,
+        'teacherNameProfile': config.teacher_name,
+        'teacherMottoDisplay': `✨ ${config.teacher_motto} ✨`,
+        'contactTeacherName': config.teacher_name,
+        'contactPhone': config.contact_phone,
+        'schoolAddress': config.school_address
+      };
+
+      Object.entries(elementsToUpdate).forEach(([id, value]) => {
+        const element = document.getElementById(id);
+        if (element) {
+          element.textContent = value;
+        }
+      });
+
+      const logoCircle = document.getElementById('logoCircle');
+      if (logoCircle) {
+        logoCircle.style.background = `linear-gradient(135deg, ${config.primary_action_color}, ${config.secondary_action_color})`;
+      }
+
+      // Update nav button colors
+      const navButtons = document.querySelectorAll('.nav-btn');
+      navButtons.forEach(btn => {
+        if (btn.id === 'nav-home') {
+          btn.style.background = config.primary_action_color;
+        }
+      });
+
+      // Update text colors
+      document.querySelectorAll('h1, h2, h3, h4').forEach(el => {
+        el.style.color = config.text_color;
+      });
+
+      // Reload CSV data if URLs changed
+      await loadAllCSVData();
+      
+      // Refresh current view if on nilai page
+      const nilaiPage = document.getElementById('page-nilai');
+      if (nilaiPage && nilaiPage.classList.contains('active')) {
+        showSubject(currentSubject);
+        updateRankingTable();
+      }
+    }
+
+    // Initialize when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+      // Initialize sample data
+      initializeSampleData();
+      
+      // Set default active page
+      showPage('home');
+      
+      // Initialize nilai page if needed
+      if (document.getElementById('page-nilai').classList.contains('active')) {
+        showSubject(currentSubject);
+        updateRankingTable();
+      }
+      
+      console.log('Website Kelas Digital 6C berhasil dimuat!');
+    });
+
+    // SDK Integration
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange,
+        mapToCapabilities: (cfg) => ({
+          recolorables: [
+            {
+              get: () => cfg.background_color || defaultConfig.background_color,
+              set: (value) => {
+                cfg.background_color = value;
+                window.elementSdk.setConfig({ background_color: value });
+              }
+            },
+            {
+              get: () => cfg.surface_color || defaultConfig.surface_color,
+              set: (value) => {
+                cfg.surface_color = value;
+                window.elementSdk.setConfig({ surface_color: value });
+              }
+            },
+            {
+              get: () => cfg.text_color || defaultConfig.text_color,
+              set: (value) => {
+                cfg.text_color = value;
+                window.elementSdk.setConfig({ text_color: value });
+              }
+            },
+            {
+              get: () => cfg.primary_action_color || defaultConfig.primary_action_color,
+              set: (value) => {
+                cfg.primary_action_color = value;
+                window.elementSdk.setConfig({ primary_action_color: value });
+              }
+            },
+            {
+              get: () => cfg.secondary_action_color || defaultConfig.secondary_action_color,
+              set: (value) => {
+                cfg.secondary_action_color = value;
+                window.elementSdk.setConfig({ secondary_action_color: value });
+              }
+            }
+          ],
+          borderables: [],
+          fontEditable: undefined,
+          fontSizeable: undefined
+        }),
+        mapToEditPanelValues: (cfg) => new Map([
+          ["site_title", cfg.site_title || defaultConfig.site_title],
+          ["welcome_text", cfg.welcome_text || defaultConfig.welcome_text],
+          ["teacher_name", cfg.teacher_name || defaultConfig.teacher_name],
+          ["teacher_motto", cfg.teacher_motto || defaultConfig.teacher_motto],
+          ["contact_phone", cfg.contact_phone || defaultConfig.contact_phone],
+          ["school_address", cfg.school_address || defaultConfig.school_address],
+          ["csv_url_matematika", cfg.csv_url_matematika || defaultConfig.csv_url_matematika],
+          ["csv_url_ipas", cfg.csv_url_ipas || defaultConfig.csv_url_ipas],
+          ["csv_url_indonesia", cfg.csv_url_indonesia || defaultConfig.csv_url_indonesia],
+          ["csv_url_inggris", cfg.csv_url_inggris || defaultConfig.csv_url_inggris],
+          ["csv_url_pkn", cfg.csv_url_pkn || defaultConfig.csv_url_pkn],
+          ["csv_url_pai", cfg.csv_url_pai || defaultConfig.csv_url_pai],
+          ["csv_url_budaya", cfg.csv_url_budaya || defaultConfig.csv_url_budaya],
+          ["csv_url_pjok", cfg.csv_url_pjok || defaultConfig.csv_url_pjok],
+          ["csv_url_koding", cfg.csv_url_koding || defaultConfig.csv_url_koding]
+        ])
+      });
+    }
+  </script>
