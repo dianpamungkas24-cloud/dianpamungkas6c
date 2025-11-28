@@ -1,1128 +1,1308 @@
 <!doctype html>
 <html lang="id">
-<head>
+ <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kelas Digital 6C SDN 19 Martapura</title>
+  <title>Kelas 6C SDN 19 Martapura</title>
   <script src="/_sdk/element_sdk.js"></script>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    body {
-      box-sizing: border-box;
-    }
-    
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    
-    body {
-      font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
-      overflow-x: hidden;
-    }
-    
-    .gradient-bg {
-      background: linear-gradient(135deg, #E0F2FE 0%, #F0FDF4 50%, #FEF3C7 100%);
-    }
-    
-    .card-hover {
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    
-    .card-hover:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-    }
-    
-    .nav-btn {
-      transition: all 0.2s ease;
-    }
-    
-    .nav-btn:hover {
-      transform: scale(1.05);
-    }
-    
-    .section-card {
-      backdrop-filter: blur(10px);
-      background: rgba(255, 255, 255, 0.9);
-    }
-    
-    .icon-circle {
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 24px;
-    }
-    
-    .page-section {
-      display: none;
-    }
-    
-    .page-section.active {
-      display: block;
-      animation: fadeIn 0.4s ease;
-    }
-    
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    
-    .nav-indicator {
-      height: 3px;
-      background: linear-gradient(90deg, #3B82F6, #10B981);
-      border-radius: 2px;
-      transition: all 0.3s ease;
-    }
+        body {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+        
+        * {
+            box-sizing: border-box;
+        }
+        
+        .page {
+            display: none;
+            animation: fadeIn 0.3s ease-in;
+        }
+        
+        .page.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .nav-btn {
+            transition: all 0.3s ease;
+        }
+        
+        .nav-btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        .card {
+            transition: all 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #E3F2FD 0%, #E8F5E9 50%, #FFF9E6 100%);
+        }
+        
+        .hero-pattern {
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(144, 202, 249, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(165, 214, 167, 0.1) 0%, transparent 50%);
+        }
 
-    .loading-spinner {
-      border: 3px solid #f3f3f3;
-      border-top: 3px solid #3B82F6;
-      border-radius: 50%;
-      width: 40px;
-      height: 40px;
-      animation: spin 1s linear infinite;
-      margin: 20px auto;
-    }
+        .table-container {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
 
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.75rem;
+        }
 
-    .error-message {
-      background: #FEE2E2;
-      color: #991B1B;
-      padding: 12px 16px;
-      border-radius: 8px;
-      margin: 16px 0;
-      border-left: 4px solid #EF4444;
-    }
+        .data-table th {
+            background: linear-gradient(135deg, #3B82F6 0%, #10B981 100%);
+            color: white;
+            padding: 0.75rem 0.5rem;
+            text-align: left;
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
 
-    .info-message {
-      background: #DBEAFE;
-      color: #1E40AF;
-      padding: 12px 16px;
-      border-radius: 8px;
-      margin: 16px 0;
-      border-left: 4px solid #3B82F6;
-    }
+        .data-table td {
+            padding: 0.75rem 0.5rem;
+            border-bottom: 1px solid #E5E7EB;
+        }
 
-    /* Mobile Responsiveness */
-    @media (max-width: 768px) {
-      .nav-buttons {
-        flex-direction: column;
-        width: 100%;
-        gap: 8px;
-      }
-      
-      .nav-btn {
-        width: 100%;
-        text-align: center;
-      }
-      
-      table {
-        font-size: 12px;
-      }
-      
-      .mobile-stack {
-        flex-direction: column;
-      }
-      
-      .mobile-text-center {
-        text-align: center;
-      }
-    }
+        .data-table tr:hover {
+            background-color: #F3F4F6;
+        }
 
-    /* Gallery Grid */
-    .gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-      gap: 16px;
-    }
+        .loading-spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #3B82F6;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
 
-    .gallery-item {
-      aspect-ratio: 1;
-      border-radius: 12px;
-      overflow: hidden;
-      background: #F3F4F6;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-    }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
 
-    .gallery-item img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.3s ease;
-    }
+        .folder-card {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
 
-    .gallery-item:hover img {
-      transform: scale(1.05);
-    }
-
-    /* Form Styles */
-    .form-input {
-      width: 100%;
-      padding: 12px 16px;
-      border: 1px solid #D1D5DB;
-      border-radius: 8px;
-      font-size: 14px;
-      transition: border-color 0.2s;
-    }
-
-    .form-input:focus {
-      outline: none;
-      border-color: #3B82F6;
-      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-    }
-
-    .form-textarea {
-      min-height: 120px;
-      resize: vertical;
-    }
-
-    /* Modal Styles */
-    .modal-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(0, 0, 0, 0.5);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 1000;
-      padding: 20px;
-    }
-
-    .modal-content {
-      background: white;
-      border-radius: 16px;
-      max-width: 500px;
-      width: 100%;
-      max-height: 90vh;
-      overflow-y: auto;
-    }
-
-    /* Achievement Badges */
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      padding: 4px 12px;
-      border-radius: 20px;
-      font-size: 12px;
-      font-weight: 600;
-    }
-
-    .badge-gold {
-      background: #FEF3C7;
-      color: #92400E;
-    }
-
-    .badge-silver {
-      background: #E5E7EB;
-      color: #6B7280;
-    }
-
-    .badge-bronze {
-      background: #FED7AA;
-      color: #C2410C;
-    }
-  </style>
+        .folder-card:active {
+            transform: scale(0.95);
+        }
+    </style>
   <style>@view-transition { navigation: auto; }</style>
   <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
-</head>
-<body>
-  <div class="gradient-bg" style="width: 100%; min-height: 100%;">
-    <!-- Navigation Bar -->
-    <nav id="navbar" style="background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(0, 0, 0, 0.05); position: sticky; top: 0; z-index: 50; width: 100%;">
-      <div style="max-width: 1200px; margin: 0 auto; padding: 16px 24px;">
-        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
-          <div style="display: flex; align-items: center; gap: 12px;">
-            <div class="icon-circle" id="logoCircle" style="background: linear-gradient(135deg, #3B82F6, #10B981); color: white;">
-              🎓
-            </div>
+ </head>
+ <body class="gradient-bg min-h-full">
+  <div class="w-full"><!-- Navigation -->
+   <nav class="w-full bg-white shadow-md sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-4 py-3">
+     <div class="flex items-center justify-between mb-3">
+      <h1 id="nav-title" class="text-lg font-bold text-blue-600">Kelas Digital 6C</h1>
+      <div class="text-xs text-gray-600">
+       SDN 19 Martapura
+      </div>
+     </div>
+     <div class="grid grid-cols-4 gap-2"><button onclick="showPage('home')" class="nav-btn bg-blue-100 text-blue-700 px-2 py-2 rounded-lg text-xs font-semibold hover:bg-blue-200"> 🏠 Home </button> <button onclick="showPage('profile')" class="nav-btn bg-green-100 text-green-700 px-2 py-2 rounded-lg text-xs font-semibold hover:bg-green-200"> 👤 Profil </button> <button onclick="showPage('info')" class="nav-btn bg-yellow-100 text-yellow-700 px-2 py-2 rounded-lg text-xs font-semibold hover:bg-yellow-200"> 📋 Info </button> <button onclick="showPage('materi')" class="nav-btn bg-purple-100 text-purple-700 px-2 py-2 rounded-lg text-xs font-semibold hover:bg-purple-200"> 📚 Materi </button>
+     </div>
+     <div class="grid grid-cols-4 gap-2 mt-2"><button onclick="showPage('nilai')" class="nav-btn bg-indigo-100 text-indigo-700 px-2 py-2 rounded-lg text-xs font-semibold hover:bg-indigo-200"> 📊 Nilai </button> <button onclick="showPage('poin')" class="nav-btn bg-pink-100 text-pink-700 px-2 py-2 rounded-lg text-xs font-semibold hover:bg-pink-200"> ⭐ Poin </button> <button onclick="showPage('galeri')" class="nav-btn bg-teal-100 text-teal-700 px-2 py-2 rounded-lg text-xs font-semibold hover:bg-teal-200"> 📸 Galeri </button> <button onclick="showPage('kontak')" class="nav-btn bg-orange-100 text-orange-700 px-2 py-2 rounded-lg text-xs font-semibold hover:bg-orange-200"> 📞 Kontak </button>
+     </div>
+    </div>
+   </nav><!-- Homepage -->
+   <div id="home" class="page active">
+    <div class="hero-pattern w-full min-h-screen py-8 px-4">
+     <div class="max-w-4xl mx-auto"><!-- Hero Section -->
+      <div class="bg-white rounded-3xl shadow-xl p-6 mb-6 text-center">
+       <div class="w-20 h-20 bg-gradient-to-br from-blue-400 to-green-400 rounded-full mx-auto mb-4 flex items-center justify-center"><span class="text-4xl">🎓</span>
+       </div>
+       <h1 id="hero-title" class="text-3xl font-bold text-gray-800 mb-2">Kelas Digital 6C</h1>
+       <p class="text-lg text-gray-600 mb-1">SDN 19 Martapura</p>
+       <p class="text-sm text-gray-500">Tahun Ajaran 2024/2025</p>
+      </div><!-- Stats Cards -->
+      <div class="grid grid-cols-3 gap-3 mb-6">
+       <div class="card bg-white rounded-2xl shadow-lg p-4 text-center">
+        <div class="text-3xl mb-2">
+         👨‍🎓
+        </div>
+        <div class="text-2xl font-bold text-blue-600">
+         27
+        </div>
+        <div class="text-xs text-gray-600">
+         Siswa
+        </div>
+       </div>
+       <div class="card bg-white rounded-2xl shadow-lg p-4 text-center">
+        <div class="text-3xl mb-2">
+         📚
+        </div>
+        <div class="text-2xl font-bold text-green-600">
+         9
+        </div>
+        <div class="text-xs text-gray-600">
+         Mata Pelajaran
+        </div>
+       </div>
+       <div class="card bg-white rounded-2xl shadow-lg p-4 text-center">
+        <div class="text-3xl mb-2">
+         🏆
+        </div>
+        <div class="text-2xl font-bold text-yellow-600">
+         100+
+        </div>
+        <div class="text-xs text-gray-600">
+         Prestasi
+        </div>
+       </div>
+      </div><!-- Quick Access -->
+      <div class="bg-white rounded-3xl shadow-xl p-6 mb-6">
+       <h2 class="text-xl font-bold text-gray-800 mb-4 flex items-center"><span class="mr-2">⚡</span> Akses Cepat</h2>
+       <div class="grid grid-cols-2 gap-3"><button onclick="showPage('materi')" class="card bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl p-4 text-left">
+         <div class="text-2xl mb-2">
+          📖
+         </div>
+         <div class="font-semibold text-blue-800">
+          Materi Belajar
+         </div>
+         <div class="text-xs text-blue-600">
+          Modul &amp; LKPD
+         </div></button> <button onclick="showPage('nilai')" class="card bg-gradient-to-br from-indigo-50 to-indigo-100 rounded-2xl p-4 text-left">
+         <div class="text-2xl mb-2">
+          📊
+         </div>
+         <div class="font-semibold text-indigo-800">
+          Data Nilai
+         </div>
+         <div class="text-xs text-indigo-600">
+          Lihat nilai
+         </div></button> <button onclick="showPage('poin')" class="card bg-gradient-to-br from-yellow-50 to-yellow-100 rounded-2xl p-4 text-left">
+         <div class="text-2xl mb-2">
+          ⭐
+         </div>
+         <div class="font-semibold text-yellow-800">
+          Poin Reward
+         </div>
+         <div class="text-xs text-yellow-600">
+          Cek poinmu
+         </div></button> <button onclick="showPage('galeri')" class="card bg-gradient-to-br from-purple-50 to-purple-100 rounded-2xl p-4 text-left">
+         <div class="text-2xl mb-2">
+          📷
+         </div>
+         <div class="font-semibold text-purple-800">
+          Galeri Kelas
+         </div>
+         <div class="text-xs text-purple-600">
+          Lihat foto
+         </div></button>
+       </div>
+      </div><!-- Announcement -->
+      <div class="bg-gradient-to-r from-blue-500 to-green-500 rounded-3xl shadow-xl p-6 text-white">
+       <h3 class="text-lg font-bold mb-3 flex items-center"><span class="mr-2">📢</span> Pengumuman Terbaru</h3>
+       <div class="bg-white bg-opacity-20 rounded-2xl p-4 backdrop-blur-sm">
+        <p class="text-sm mb-2">🎉 Selamat datang di website digital kelas 6C!</p>
+        <p class="text-xs opacity-90">Semua materi pembelajaran dan informasi penting ada di sini.</p>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div><!-- Profile Page -->
+   <div id="profile" class="page">
+    <div class="w-full min-h-screen py-8 px-4">
+     <div class="max-w-4xl mx-auto">
+      <div class="bg-white rounded-3xl shadow-xl p-6 mb-6">
+       <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">👤 Profil Guru Wali Kelas</h2>
+       <div class="flex flex-col items-center mb-6">
+        <div class="w-32 h-32 bg-gradient-to-br from-blue-400 to-green-400 rounded-full mb-4 flex items-center justify-center"><span class="text-6xl">👨‍🏫</span>
+        </div>
+        <h3 id="teacher-name-display" class="text-xl font-bold text-gray-800">Dian Agung Pamungkas, S.Pd</h3>
+        <p class="text-sm text-gray-600">Wali Kelas 6C</p>
+       </div>
+       <div class="space-y-4">
+        <div class="bg-blue-50 rounded-2xl p-4">
+         <div class="flex items-start"><span class="text-2xl mr-3">💼</span>
+          <div>
+           <div class="font-semibold text-gray-800 mb-1">
+            Pendidikan
+           </div>
+           <div class="text-sm text-gray-600">
+            S1 Pendidikan
+           </div>
+          </div>
+         </div>
+        </div>
+        <div class="bg-green-50 rounded-2xl p-4">
+         <div class="flex items-start"><span class="text-2xl mr-3">📧</span>
+          <div class="flex-1">
+           <div class="font-semibold text-gray-800 mb-1">
+            Email
+           </div>
+           <div id="teacher-email-display" class="text-sm text-gray-600 break-all">
+            dianpamungkas24@guru.sd.belajar.id
+           </div>
+          </div>
+         </div>
+        </div>
+        <div class="bg-yellow-50 rounded-2xl p-4">
+         <div class="flex items-start"><span class="text-2xl mr-3">💡</span>
+          <div>
+           <div class="font-semibold text-gray-800 mb-1">
+            Motto Mengajar
+           </div>
+           <div id="teacher-motto-display" class="text-sm text-gray-600 italic">
+            "Mendidik dengan hati, membimbing dengan cinta, menginspirasi untuk masa depan yang gemilang"
+           </div>
+          </div>
+         </div>
+        </div>
+        <div class="bg-purple-50 rounded-2xl p-4">
+         <div class="flex items-start"><span class="text-2xl mr-3">🎯</span>
+          <div>
+           <div class="font-semibold text-gray-800 mb-1">
+            Mata Pelajaran
+           </div>
+           <div class="text-sm text-gray-600">
+            Matematika, IPAS, Bahasa Indonesia, PKN, dan semua mata pelajaran Kelas 6
+           </div>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div><!-- Info Page -->
+   <div id="info" class="page">
+    <div class="w-full min-h-screen py-8 px-4">
+     <div class="max-w-4xl mx-auto">
+      <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">📋 Informasi Kelas</h2><!-- Jadwal Pelajaran -->
+      <div class="bg-white rounded-3xl shadow-xl p-6 mb-6">
+       <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center"><span class="mr-2">📅</span> Jadwal Pelajaran</h3>
+       <div class="space-y-3">
+        <div class="bg-blue-50 rounded-2xl p-4">
+         <div class="font-semibold text-blue-800 mb-2">
+          Senin
+         </div>
+         <div class="text-sm text-gray-600 space-y-1">
+          <div>
+           • 07:30 - 09:00 Matematika
+          </div>
+          <div>
+           • 09:00 - 10:30 Bahasa Indonesia
+          </div>
+          <div>
+           • 10:45 - 12:15 IPAS
+          </div>
+         </div>
+        </div>
+        <div class="bg-green-50 rounded-2xl p-4">
+         <div class="font-semibold text-green-800 mb-2">
+          Selasa
+         </div>
+         <div class="text-sm text-gray-600 space-y-1">
+          <div>
+           • 07:30 - 09:00 PKN
+          </div>
+          <div>
+           • 09:00 - 10:30 Bahasa Inggris
+          </div>
+          <div>
+           • 10:45 - 12:15 PJOK
+          </div>
+         </div>
+        </div>
+        <div class="bg-yellow-50 rounded-2xl p-4">
+         <div class="font-semibold text-yellow-800 mb-2">
+          Rabu
+         </div>
+         <div class="text-sm text-gray-600 space-y-1">
+          <div>
+           • 07:30 - 09:00 Matematika
+          </div>
+          <div>
+           • 09:00 - 10:30 PAI
+          </div>
+          <div>
+           • 10:45 - 12:15 Budaya Komering
+          </div>
+         </div>
+        </div>
+        <div class="bg-purple-50 rounded-2xl p-4">
+         <div class="font-semibold text-purple-800 mb-2">
+          Kamis
+         </div>
+         <div class="text-sm text-gray-600 space-y-1">
+          <div>
+           • 07:30 - 09:00 Bahasa Indonesia
+          </div>
+          <div>
+           • 09:00 - 10:30 IPAS
+          </div>
+          <div>
+           • 10:45 - 12:15 Koding &amp; AI
+          </div>
+         </div>
+        </div>
+        <div class="bg-pink-50 rounded-2xl p-4">
+         <div class="font-semibold text-pink-800 mb-2">
+          Jumat
+         </div>
+         <div class="text-sm text-gray-600 space-y-1">
+          <div>
+           • 07:30 - 09:00 PAI
+          </div>
+          <div>
+           • 09:00 - 10:30 Koding &amp; AI
+          </div>
+         </div>
+        </div>
+       </div>
+      </div><!-- Pengumuman -->
+      <div class="bg-white rounded-3xl shadow-xl p-6 mb-6">
+       <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center"><span class="mr-2">📢</span> Pengumuman</h3>
+       <div class="space-y-3">
+        <div class="bg-blue-50 rounded-2xl p-4">
+         <div class="flex items-start"><span class="text-xl mr-3">📝</span>
+          <div>
+           <div class="font-semibold text-blue-800 mb-1">
+            Ujian Tengah Semester
+           </div>
+           <div class="text-sm text-gray-600">
+            Pelaksanaan UTS minggu depan. Persiapkan diri dengan baik!
+           </div>
+           <div class="text-xs text-gray-500 mt-1">
+            2 hari yang lalu
+           </div>
+          </div>
+         </div>
+        </div>
+        <div class="bg-green-50 rounded-2xl p-4">
+         <div class="flex items-start"><span class="text-xl mr-3">🎉</span>
+          <div>
+           <div class="font-semibold text-green-800 mb-1">
+            Kegiatan Outdoor
+           </div>
+           <div class="text-sm text-gray-600">
+            Field trip ke museum tanggal 20 bulan ini!
+           </div>
+           <div class="text-xs text-gray-500 mt-1">
+            5 hari yang lalu
+           </div>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div><!-- Kalender Kegiatan -->
+      <div class="bg-white rounded-3xl shadow-xl p-6">
+       <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center"><span class="mr-2">📆</span> Kalender Kegiatan</h3>
+       <div class="space-y-3">
+        <div class="flex items-center bg-yellow-50 rounded-2xl p-4">
+         <div class="w-12 h-12 bg-yellow-200 rounded-xl flex items-center justify-center mr-4">
+          <div class="text-center">
+           <div class="text-xs font-semibold text-yellow-800">
+            JAN
+           </div>
+           <div class="text-lg font-bold text-yellow-800">
+            15
+           </div>
+          </div>
+         </div>
+         <div>
+          <div class="font-semibold text-gray-800">
+           UTS Semester 2
+          </div>
+          <div class="text-sm text-gray-600">
+           Ujian Tengah Semester
+          </div>
+         </div>
+        </div>
+        <div class="flex items-center bg-purple-50 rounded-2xl p-4">
+         <div class="w-12 h-12 bg-purple-200 rounded-xl flex items-center justify-center mr-4">
+          <div class="text-center">
+           <div class="text-xs font-semibold text-purple-800">
+            JAN
+           </div>
+           <div class="text-lg font-bold text-purple-800">
+            20
+           </div>
+          </div>
+         </div>
+         <div>
+          <div class="font-semibold text-gray-800">
+           Field Trip Museum
+          </div>
+          <div class="text-sm text-gray-600">
+           Kunjungan Edukatif
+          </div>
+         </div>
+        </div>
+        <div class="flex items-center bg-pink-50 rounded-2xl p-4">
+         <div class="w-12 h-12 bg-pink-200 rounded-xl flex items-center justify-center mr-4">
+          <div class="text-center">
+           <div class="text-xs font-semibold text-pink-800">
+            FEB
+           </div>
+           <div class="text-lg font-bold text-pink-800">
+            05
+           </div>
+          </div>
+         </div>
+         <div>
+          <div class="font-semibold text-gray-800">
+           Lomba Kreativitas
+          </div>
+          <div class="text-sm text-gray-600">
+           Antar Kelas
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div><!-- Materi Page -->
+   <div id="materi" class="page">
+    <div class="w-full min-h-screen py-8 px-4">
+     <div class="max-w-4xl mx-auto">
+      <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">📚 Materi Pembelajaran</h2>
+      <div class="space-y-4"><!-- Matematika -->
+       <div class="card bg-white rounded-3xl shadow-xl p-5">
+        <div class="flex items-center mb-4">
+         <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mr-4"><span class="text-2xl">🔢</span>
+         </div>
+         <div>
+          <h3 class="text-lg font-bold text-gray-800">Matematika</h3>
+          <p class="text-xs text-gray-600">Semester 2 - Kelas 6</p>
+         </div>
+        </div>
+        <div class="grid grid-cols-3 gap-2"><button class="bg-blue-50 hover:bg-blue-100 text-blue-700 px-3 py-2 rounded-xl text-xs font-semibold transition"> 📄 LKPD </button> <button class="bg-blue-50 hover:bg-blue-100 text-blue-700 px-3 py-2 rounded-xl text-xs font-semibold transition"> 📖 Modul </button> <button class="bg-blue-50 hover:bg-blue-100 text-blue-700 px-3 py-2 rounded-xl text-xs font-semibold transition"> 🎥 Video </button>
+        </div>
+       </div><!-- IPAS -->
+       <div class="card bg-white rounded-3xl shadow-xl p-5">
+        <div class="flex items-center mb-4">
+         <div class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center mr-4"><span class="text-2xl">🔬</span>
+         </div>
+         <div>
+          <h3 class="text-lg font-bold text-gray-800">IPAS</h3>
+          <p class="text-xs text-gray-600">Ilmu Pengetahuan Alam &amp; Sosial</p>
+         </div>
+        </div>
+        <div class="grid grid-cols-3 gap-2"><button class="bg-green-50 hover:bg-green-100 text-green-700 px-3 py-2 rounded-xl text-xs font-semibold transition"> 📄 LKPD </button> <button class="bg-green-50 hover:bg-green-100 text-green-700 px-3 py-2 rounded-xl text-xs font-semibold transition"> 📖 Modul </button> <button class="bg-green-50 hover:bg-green-100 text-green-700 px-3 py-2 rounded-xl text-xs font-semibold transition"> 🎥 Video </button>
+        </div>
+       </div><!-- Bahasa Indonesia -->
+       <div class="card bg-white rounded-3xl shadow-xl p-5">
+        <div class="flex items-center mb-4">
+         <div class="w-12 h-12 bg-yellow-100 rounded-xl flex items-center justify-center mr-4"><span class="text-2xl">📝</span>
+         </div>
+         <div>
+          <h3 class="text-lg font-bold text-gray-800">Bahasa Indonesia</h3>
+          <p class="text-xs text-gray-600">Literasi &amp; Komunikasi</p>
+         </div>
+        </div>
+        <div class="grid grid-cols-3 gap-2"><button class="bg-yellow-50 hover:bg-yellow-100 text-yellow-700 px-3 py-2 rounded-xl text-xs font-semibold transition"> 📄 LKPD </button> <button class="bg-yellow-50 hover:bg-yellow-100 text-yellow-700 px-3 py-2 rounded-xl text-xs font-semibold transition"> 📖 Modul </button> <button class="bg-yellow-50 hover:bg-yellow-100 text-yellow-700 px-3 py-2 rounded-xl text-xs font-semibold transition"> 🎥 Video </button>
+        </div>
+       </div><!-- Bahasa Inggris -->
+       <div class="card bg-white rounded-3xl shadow-xl p-5">
+        <div class="flex items-center mb-4">
+         <div class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center mr-4"><span class="text-2xl">🌍</span>
+         </div>
+         <div>
+          <h3 class="text-lg font-bold text-gray-800">Bahasa Inggris</h3>
+          <p class="text-xs text-gray-600">English Language</p>
+         </div>
+        </div>
+        <div class="grid grid-cols-3 gap-2"><button class="bg-purple-50 hover:bg-purple-100 text-purple-700 px-3 py-2 rounded-xl text-xs font-semibold transition"> 📄 LKPD </button> <button class="bg-purple-50 hover:bg-purple-100 text-purple-700 px-3 py-2 rounded-xl text-xs font-semibold transition"> 📖 Modul </button> <button class="bg-purple-50 hover:bg-purple-100 text-purple-700 px-3 py-2 rounded-xl text-xs font-semibold transition"> 🎥 Video </button>
+        </div>
+       </div><!-- PKN -->
+       <div class="card bg-white rounded-3xl shadow-xl p-5">
+        <div class="flex items-center mb-4">
+         <div class="w-12 h-12 bg-red-100 rounded-xl flex items-center justify-center mr-4"><span class="text-2xl">🇮🇩</span>
+         </div>
+         <div>
+          <h3 class="text-lg font-bold text-gray-800">PKN</h3>
+          <p class="text-xs text-gray-600">Pendidikan Kewarganegaraan</p>
+         </div>
+        </div>
+        <div class="grid grid-cols-3 gap-2"><button class="bg-red-50 hover:bg-red-100 text-red-700 px-3 py-2 rounded-xl text-xs font-semibold transition"> 📄 LKPD </button> <button class="bg-red-50 hover:bg-red-100 text-red-700 px-3 py-2 rounded-xl text-xs font-semibold transition"> 📖 Modul </button> <button class="bg-red-50 hover:bg-red-100 text-red-700 px-3 py-2 rounded-xl text-xs font-semibold transition"> 🎥 Video </button>
+        </div>
+       </div><!-- Budaya Komering -->
+       <div class="card bg-white rounded-3xl shadow-xl p-5">
+        <div class="flex items-center mb-4">
+         <div class="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center mr-4"><span class="text-2xl">🎭</span>
+         </div>
+         <div>
+          <h3 class="text-lg font-bold text-gray-800">Budaya Komering</h3>
+          <p class="text-xs text-gray-600">Budaya Lokal</p>
+         </div>
+        </div>
+        <div class="grid grid-cols-3 gap-2"><button class="bg-orange-50 hover:bg-orange-100 text-orange-700 px-3 py-2 rounded-xl text-xs font-semibold transition"> 📄 LKPD </button> <button class="bg-orange-50 hover:bg-orange-100 text-orange-700 px-3 py-2 rounded-xl text-xs font-semibold transition"> 📖 Modul </button> <button class="bg-orange-50 hover:bg-orange-100 text-orange-700 px-3 py-2 rounded-xl text-xs font-semibold transition"> 🎥 Video </button>
+        </div>
+       </div><!-- PJOK -->
+       <div class="card bg-white rounded-3xl shadow-xl p-5">
+        <div class="flex items-center mb-4">
+         <div class="w-12 h-12 bg-teal-100 rounded-xl flex items-center justify-center mr-4"><span class="text-2xl">⚽</span>
+         </div>
+         <div>
+          <h3 class="text-lg font-bold text-gray-800">PJOK</h3>
+          <p class="text-xs text-gray-600">Pendidikan Jasmani</p>
+         </div>
+        </div>
+        <div class="grid grid-cols-3 gap-2"><button class="bg-teal-50 hover:bg-teal-100 text-teal-700 px-3 py-2 rounded-xl text-xs font-semibold transition"> 📄 LKPD </button> <button class="bg-teal-50 hover:bg-teal-100 text-teal-700 px-3 py-2 rounded-xl text-xs font-semibold transition"> 📖 Modul </button> <button class="bg-teal-50 hover:bg-teal-100 text-teal-700 px-3 py-2 rounded-xl text-xs font-semibold transition"> 🎥 Video </button>
+        </div>
+       </div><!-- PAI -->
+       <div class="card bg-white rounded-3xl shadow-xl p-5">
+        <div class="flex items-center mb-4">
+         <div class="w-12 h-12 bg-indigo-100 rounded-xl flex items-center justify-center mr-4"><span class="text-2xl">🕌</span>
+         </div>
+         <div>
+          <h3 class="text-lg font-bold text-gray-800">PAI</h3>
+          <p class="text-xs text-gray-600">Pendidikan Agama Islam</p>
+         </div>
+        </div>
+        <div class="grid grid-cols-3 gap-2"><button class="bg-indigo-50 hover:bg-indigo-100 text-indigo-700 px-3 py-2 rounded-xl text-xs font-semibold transition"> 📄 LKPD </button> <button class="bg-indigo-50 hover:bg-indigo-100 text-indigo-700 px-3 py-2 rounded-xl text-xs font-semibold transition"> 📖 Modul </button> <button class="bg-indigo-50 hover:bg-indigo-100 text-indigo-700 px-3 py-2 rounded-xl text-xs font-semibold transition"> 🎥 Video </button>
+        </div>
+       </div><!-- Koding & AI -->
+       <div class="card bg-white rounded-3xl shadow-xl p-5">
+        <div class="flex items-center mb-4">
+         <div class="w-12 h-12 bg-pink-100 rounded-xl flex items-center justify-center mr-4"><span class="text-2xl">💻</span>
+         </div>
+         <div>
+          <h3 class="text-lg font-bold text-gray-800">Koding &amp; Kecerdasan Artifisial</h3>
+          <p class="text-xs text-gray-600">Coding &amp; AI</p>
+         </div>
+        </div>
+        <div class="grid grid-cols-3 gap-2"><button class="bg-pink-50 hover:bg-pink-100 text-pink-700 px-3 py-2 rounded-xl text-xs font-semibold transition"> 📄 LKPD </button> <button class="bg-pink-50 hover:bg-pink-100 text-pink-700 px-3 py-2 rounded-xl text-xs font-semibold transition"> 📖 Modul </button> <button class="bg-pink-50 hover:bg-pink-100 text-pink-700 px-3 py-2 rounded-xl text-xs font-semibold transition"> 🎥 Video </button>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div><!-- Nilai Page - Folder View -->
+   <div id="nilai" class="page">
+    <div class="w-full min-h-screen py-8 px-4">
+     <div class="max-w-6xl mx-auto"><!-- Folder List View -->
+      <div id="folderListView">
+       <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">📊 Data Nilai Per Mata Pelajaran</h2>
+       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"><!-- Matematika Folder -->
+        <div onclick="openSubject('matematika')" class="folder-card bg-white rounded-3xl shadow-xl p-6 hover:shadow-2xl">
+         <div class="flex items-center mb-4">
+          <div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center mr-4"><span class="text-3xl">🔢</span>
+          </div>
+          <div class="flex-1">
+           <h3 class="text-lg font-bold text-gray-800">Matematika</h3>
+           <p class="text-sm text-gray-600">Lihat data nilai →</p>
+          </div>
+         </div>
+        </div><!-- IPAS Folder -->
+        <div onclick="openSubject('ipas')" class="folder-card bg-white rounded-3xl shadow-xl p-6 hover:shadow-2xl">
+         <div class="flex items-center mb-4">
+          <div class="w-16 h-16 bg-green-100 rounded-2xl flex items-center justify-center mr-4"><span class="text-3xl">🔬</span>
+          </div>
+          <div class="flex-1">
+           <h3 class="text-lg font-bold text-gray-800">IPAS</h3>
+           <p class="text-sm text-gray-600">Lihat data nilai →</p>
+          </div>
+         </div>
+        </div><!-- Bahasa Indonesia Folder -->
+        <div onclick="openSubject('bahasa_indonesia')" class="folder-card bg-white rounded-3xl shadow-xl p-6 hover:shadow-2xl">
+         <div class="flex items-center mb-4">
+          <div class="w-16 h-16 bg-yellow-100 rounded-2xl flex items-center justify-center mr-4"><span class="text-3xl">📝</span>
+          </div>
+          <div class="flex-1">
+           <h3 class="text-lg font-bold text-gray-800">Bahasa Indonesia</h3>
+           <p class="text-sm text-gray-600">Lihat data nilai →</p>
+          </div>
+         </div>
+        </div><!-- Bahasa Inggris Folder -->
+        <div onclick="openSubject('bahasa_inggris')" class="folder-card bg-white rounded-3xl shadow-xl p-6 hover:shadow-2xl">
+         <div class="flex items-center mb-4">
+          <div class="w-16 h-16 bg-purple-100 rounded-2xl flex items-center justify-center mr-4"><span class="text-3xl">🌍</span>
+          </div>
+          <div class="flex-1">
+           <h3 class="text-lg font-bold text-gray-800">Bahasa Inggris</h3>
+           <p class="text-sm text-gray-600">Lihat data nilai →</p>
+          </div>
+         </div>
+        </div><!-- PKN Folder -->
+        <div onclick="openSubject('pkn')" class="folder-card bg-white rounded-3xl shadow-xl p-6 hover:shadow-2xl">
+         <div class="flex items-center mb-4">
+          <div class="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center mr-4"><span class="text-3xl">🇮🇩</span>
+          </div>
+          <div class="flex-1">
+           <h3 class="text-lg font-bold text-gray-800">PKN</h3>
+           <p class="text-sm text-gray-600">Lihat data nilai →</p>
+          </div>
+         </div>
+        </div><!-- Koding dan AI Folder -->
+        <div onclick="openSubject('koding_ai')" class="folder-card bg-white rounded-3xl shadow-xl p-6 hover:shadow-2xl">
+         <div class="flex items-center mb-4">
+          <div class="w-16 h-16 bg-pink-100 rounded-2xl flex items-center justify-center mr-4"><span class="text-3xl">💻</span>
+          </div>
+          <div class="flex-1">
+           <h3 class="text-lg font-bold text-gray-800">Koding &amp; AI</h3>
+           <p class="text-sm text-gray-600">Lihat data nilai →</p>
+          </div>
+         </div>
+        </div><!-- Budaya Komering Folder -->
+        <div onclick="openSubject('budaya_komering')" class="folder-card bg-white rounded-3xl shadow-xl p-6 hover:shadow-2xl">
+         <div class="flex items-center mb-4">
+          <div class="w-16 h-16 bg-orange-100 rounded-2xl flex items-center justify-center mr-4"><span class="text-3xl">🎭</span>
+          </div>
+          <div class="flex-1">
+           <h3 class="text-lg font-bold text-gray-800">Budaya Komering</h3>
+           <p class="text-sm text-gray-600">Lihat data nilai →</p>
+          </div>
+         </div>
+        </div><!-- PAI Folder -->
+        <div onclick="openSubject('pai')" class="folder-card bg-white rounded-3xl shadow-xl p-6 hover:shadow-2xl">
+         <div class="flex items-center mb-4">
+          <div class="w-16 h-16 bg-indigo-100 rounded-2xl flex items-center justify-center mr-4"><span class="text-3xl">🕌</span>
+          </div>
+          <div class="flex-1">
+           <h3 class="text-lg font-bold text-gray-800">PAI</h3>
+           <p class="text-sm text-gray-600">Lihat data nilai →</p>
+          </div>
+         </div>
+        </div><!-- PJOK Folder -->
+        <div onclick="openSubject('pjok')" class="folder-card bg-white rounded-3xl shadow-xl p-6 hover:shadow-2xl">
+         <div class="flex items-center mb-4">
+          <div class="w-16 h-16 bg-teal-100 rounded-2xl flex items-center justify-center mr-4"><span class="text-3xl">⚽</span>
+          </div>
+          <div class="flex-1">
+           <h3 class="text-lg font-bold text-gray-800">PJOK</h3>
+           <p class="text-sm text-gray-600">Lihat data nilai →</p>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div><!-- Data Table View (Hidden by default) -->
+      <div id="dataTableView" class="hidden">
+       <div class="mb-6 flex items-center justify-between"><button onclick="backToFolders()" class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-xl text-sm font-semibold transition flex items-center"> ← Kembali </button>
+        <h2 id="subjectTitle" class="text-2xl font-bold text-gray-800 text-center flex-1">Data Nilai</h2><button onclick="refreshCurrentSubject()" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-xl text-sm font-semibold transition"> 🔄 Refresh </button>
+       </div><!-- Search -->
+       <div class="bg-white rounded-3xl shadow-xl p-4 mb-6"><label for="searchInput" class="block text-sm font-semibold text-gray-700 mb-2">👤 Cari Nama Siswa</label> <input type="text" id="searchInput" placeholder="Ketik nama siswa..." class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-blue-500 transition" oninput="filterTable()">
+       </div><!-- Data Table -->
+       <div class="bg-white rounded-3xl shadow-xl p-4">
+        <div id="loadingIndicator" class="flex flex-col items-center justify-center py-12">
+         <div class="loading-spinner mb-4"></div>
+         <p class="text-gray-600">Memuat data nilai...</p>
+        </div>
+        <div id="errorMessage" class="hidden">
+         <div class="bg-red-50 border-2 border-red-200 rounded-2xl p-6 text-center">
+          <div class="text-4xl mb-3">
+           ⚠️
+          </div>
+          <p class="text-red-800 font-semibold mb-2">Gagal memuat data</p>
+          <p class="text-sm text-red-600">Pastikan link Google Sheet sudah diatur dengan benar di panel edit.</p>
+         </div>
+        </div>
+        <div id="tableContainer" class="hidden table-container">
+         <table class="data-table">
+          <thead id="tableHeader"><!-- Header akan di-generate otomatis -->
+          </thead>
+          <tbody id="tableBody"><!-- Data akan di-generate otomatis -->
+          </tbody>
+         </table>
+        </div>
+        <div id="emptyState" class="hidden">
+         <div class="bg-gray-50 rounded-2xl p-8 text-center">
+          <div class="text-4xl mb-3">
+           📭
+          </div>
+          <p class="text-gray-600">Tidak ada data yang ditemukan</p>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div><!-- Poin Page -->
+   <div id="poin" class="page">
+    <div class="w-full min-h-screen py-8 px-4">
+     <div class="max-w-4xl mx-auto">
+      <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">⭐ Program Poin &amp; Reward</h2><!-- Penjelasan Sistem -->
+      <div class="bg-gradient-to-r from-yellow-400 to-orange-400 rounded-3xl shadow-xl p-6 mb-6 text-white">
+       <h3 class="text-xl font-bold mb-3 flex items-center"><span class="mr-2">🎯</span> Cara Mendapat Poin</h3>
+       <div class="space-y-2 text-sm">
+        <div class="bg-white bg-opacity-20 rounded-2xl p-3 backdrop-blur-sm">
+         <p>���� Mengerjakan tugas tepat waktu: <strong>+10 poin</strong></p>
+        </div>
+        <div class="bg-white bg-opacity-20 rounded-2xl p-3 backdrop-blur-sm">
+         <p>🌟 Aktif di kelas: <strong>+5 poin</strong></p>
+        </div>
+        <div class="bg-white bg-opacity-20 rounded-2xl p-3 backdrop-blur-sm">
+         <p>🏆 Juara lomba: <strong>+50 poin</strong></p>
+        </div>
+        <div class="bg-white bg-opacity-20 rounded-2xl p-3 backdrop-blur-sm">
+         <p>🤝 Membantu teman: <strong>+15 poin</strong></p>
+        </div>
+       </div>
+      </div><!-- Top 5 Siswa -->
+      <div class="bg-white rounded-3xl shadow-xl p-6 mb-6">
+       <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center"><span class="mr-2">🏆</span> Peringkat Teratas</h3>
+       <div class="space-y-3">
+        <div class="flex items-center bg-gradient-to-r from-yellow-50 to-yellow-100 rounded-2xl p-4">
+         <div class="text-3xl mr-4">
+          🥇
+         </div>
+         <div class="flex-1">
+          <div class="font-bold text-gray-800">
+           Ahmad Rizki
+          </div>
+          <div class="text-sm text-gray-600">
+           450 poin
+          </div>
+         </div>
+         <div class="text-2xl">
+          ⭐
+         </div>
+        </div>
+        <div class="flex items-center bg-gradient-to-r from-gray-50 to-gray-100 rounded-2xl p-4">
+         <div class="text-3xl mr-4">
+          🥈
+         </div>
+         <div class="flex-1">
+          <div class="font-bold text-gray-800">
+           Siti Nurhaliza
+          </div>
+          <div class="text-sm text-gray-600">
+           420 poin
+          </div>
+         </div>
+         <div class="text-2xl">
+          ⭐
+         </div>
+        </div>
+        <div class="flex items-center bg-gradient-to-r from-orange-50 to-orange-100 rounded-2xl p-4">
+         <div class="text-3xl mr-4">
+          🥉
+         </div>
+         <div class="flex-1">
+          <div class="font-bold text-gray-800">
+           Budi Santoso
+          </div>
+          <div class="text-sm text-gray-600">
+           395 poin
+          </div>
+         </div>
+         <div class="text-2xl">
+          ⭐
+         </div>
+        </div>
+        <div class="flex items-center bg-blue-50 rounded-2xl p-4">
+         <div class="w-10 text-center font-bold text-blue-600 mr-4">
+          4
+         </div>
+         <div class="flex-1">
+          <div class="font-semibold text-gray-800">
+           Dewi Lestari
+          </div>
+          <div class="text-sm text-gray-600">
+           370 poin
+          </div>
+         </div>
+        </div>
+        <div class="flex items-center bg-green-50 rounded-2xl p-4">
+         <div class="w-10 text-center font-bold text-green-600 mr-4">
+          5
+         </div>
+         <div class="flex-1">
+          <div class="font-semibold text-gray-800">
+           Eko Prasetyo
+          </div>
+          <div class="text-sm text-gray-600">
+           345 poin
+          </div>
+         </div>
+        </div>
+       </div>
+      </div><!-- Reward -->
+      <div class="bg-white rounded-3xl shadow-xl p-6">
+       <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center"><span class="mr-2">🎁</span> Reward Tersedia</h3>
+       <div class="grid grid-cols-2 gap-3">
+        <div class="card bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl p-4 text-center">
+         <div class="text-3xl mb-2">
+          📚
+         </div>
+         <div class="font-semibold text-blue-800 text-sm mb-1">
+          Buku Cerita
+         </div>
+         <div class="text-xs text-blue-600">
+          100 poin
+         </div>
+        </div>
+        <div class="card bg-gradient-to-br from-green-50 to-green-100 rounded-2xl p-4 text-center">
+         <div class="text-3xl mb-2">
+          ✏️
+         </div>
+         <div class="font-semibold text-green-800 text-sm mb-1">
+          Set Alat Tulis
+         </div>
+         <div class="text-xs text-green-600">
+          150 poin
+         </div>
+        </div>
+        <div class="card bg-gradient-to-br from-purple-50 to-purple-100 rounded-2xl p-4 text-center">
+         <div class="text-3xl mb-2">
+          🎨
+         </div>
+         <div class="font-semibold text-purple-800 text-sm mb-1">
+          Set Mewarnai
+         </div>
+         <div class="text-xs text-purple-600">
+          200 poin
+         </div>
+        </div>
+        <div class="card bg-gradient-to-br from-pink-50 to-pink-100 rounded-2xl p-4 text-center">
+         <div class="text-3xl mb-2">
+          🏅
+         </div>
+         <div class="font-semibold text-pink-800 text-sm mb-1">
+          Piagam Juara
+         </div>
+         <div class="text-xs text-pink-600">
+          300 poin
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div><!-- Galeri Page -->
+   <div id="galeri" class="page">
+    <div class="w-full min-h-screen py-8 px-4">
+     <div class="max-w-4xl mx-auto">
+      <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">📸 Galeri Kelas 6C</h2>
+      <div class="space-y-6"><!-- Kegiatan Belajar -->
+       <div class="bg-white rounded-3xl shadow-xl p-6">
+        <h3 class="text-lg font-bold text-gray-800 mb-4 flex items-center"><span class="mr-2">📖</span> Kegiatan Belajar</h3>
+        <div class="grid grid-cols-2 gap-3">
+         <div class="card bg-gradient-to-br from-blue-100 to-blue-200 rounded-2xl h-40 flex items-center justify-center">
+          <div class="text-center">
+           <div class="text-4xl mb-2">
+            🔢
+           </div>
+           <div class="text-sm font-semibold text-blue-800">
+            Belajar Matematika
+           </div>
+          </div>
+         </div>
+         <div class="card bg-gradient-to-br from-green-100 to-green-200 rounded-2xl h-40 flex items-center justify-center">
+          <div class="text-center">
+           <div class="text-4xl mb-2">
+            🔬
+           </div>
+           <div class="text-sm font-semibold text-green-800">
+            Praktikum IPAS
+           </div>
+          </div>
+         </div>
+         <div class="card bg-gradient-to-br from-yellow-100 to-yellow-200 rounded-2xl h-40 flex items-center justify-center">
+          <div class="text-center">
+           <div class="text-4xl mb-2">
+            💻
+           </div>
+           <div class="text-sm font-semibold text-yellow-800">
+            Kelas Koding
+           </div>
+          </div>
+         </div>
+         <div class="card bg-gradient-to-br from-purple-100 to-purple-200 rounded-2xl h-40 flex items-center justify-center">
+          <div class="text-center">
+           <div class="text-4xl mb-2">
+            🌍
+           </div>
+           <div class="text-sm font-semibold text-purple-800">
+            English Class
+           </div>
+          </div>
+         </div>
+        </div>
+       </div><!-- Kegiatan Outdoor -->
+       <div class="bg-white rounded-3xl shadow-xl p-6">
+        <h3 class="text-lg font-bold text-gray-800 mb-4 flex items-center"><span class="mr-2">🌳</span> Kegiatan Outdoor</h3>
+        <div class="grid grid-cols-2 gap-3">
+         <div class="card bg-gradient-to-br from-teal-100 to-teal-200 rounded-2xl h-40 flex items-center justify-center">
+          <div class="text-center">
+           <div class="text-4xl mb-2">
+            ⚽
+           </div>
+           <div class="text-sm font-semibold text-teal-800">
+            Olahraga PJOK
+           </div>
+          </div>
+         </div>
+         <div class="card bg-gradient-to-br from-orange-100 to-orange-200 rounded-2xl h-40 flex items-center justify-center">
+          <div class="text-center">
+           <div class="text-4xl mb-2">
+            🏛️
+           </div>
+           <div class="text-sm font-semibold text-orange-800">
+            Kunjungan Museum
+           </div>
+          </div>
+         </div>
+        </div>
+       </div><!-- Prestasi -->
+       <div class="bg-white rounded-3xl shadow-xl p-6">
+        <h3 class="text-lg font-bold text-gray-800 mb-4 flex items-center"><span class="mr-2">🏆</span> Prestasi Kelas</h3>
+        <div class="grid grid-cols-2 gap-3">
+         <div class="card bg-gradient-to-br from-pink-100 to-pink-200 rounded-2xl h-40 flex items-center justify-center">
+          <div class="text-center">
+           <div class="text-4xl mb-2">
+            🥇
+           </div>
+           <div class="text-sm font-semibold text-pink-800">
+            Juara Lomba
+           </div>
+          </div>
+         </div>
+         <div class="card bg-gradient-to-br from-indigo-100 to-indigo-200 rounded-2xl h-40 flex items-center justify-center">
+          <div class="text-center">
+           <div class="text-4xl mb-2">
+            🎨
+           </div>
+           <div class="text-sm font-semibold text-indigo-800">
+            Karya Seni
+           </div>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div><!-- Kontak Page -->
+   <div id="kontak" class="page">
+    <div class="w-full min-h-screen py-8 px-4">
+     <div class="max-w-4xl mx-auto">
+      <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">📞 Hubungi Kami</h2><!-- Kontak Guru -->
+      <div class="bg-white rounded-3xl shadow-xl p-6 mb-6">
+       <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center"><span class="mr-2">👨�����🏫</span> Kontak Wali Kelas</h3>
+       <div class="space-y-4">
+        <div class="bg-blue-50 rounded-2xl p-4">
+         <div class="flex items-start"><span class="text-2xl mr-3">👤</span>
+          <div>
+           <div class="font-semibold text-gray-800 mb-1">
+            Nama
+           </div>
+           <div id="contact-teacher-name" class="text-sm text-gray-600">
+            Dian Agung Pamungkas, S.Pd
+           </div>
+          </div>
+         </div>
+        </div>
+        <div class="bg-green-50 rounded-2xl p-4">
+         <div class="flex items-start"><span class="text-2xl mr-3">📧</span>
+          <div class="flex-1">
+           <div class="font-semibold text-gray-800 mb-1">
+            Email
+           </div>
+           <div id="contact-teacher-email" class="text-sm text-gray-600 break-all">
+            dianpamungkas24@guru.sd.belajar.id
+           </div>
+          </div>
+         </div>
+        </div><a href="#" id="whatsapp-link" target="_blank" rel="noopener noreferrer" class="block">
+         <div class="card bg-gradient-to-r from-green-400 to-green-500 rounded-2xl p-4 text-white">
+          <div class="flex items-center justify-between">
+           <div class="flex items-center"><span class="text-3xl mr-3">💬</span>
             <div>
-              <h1 id="navTitle" style="font-size: 18px; font-weight: 700; line-height: 1.3; margin: 0;">Kelas Digital 6C</h1>
-              <p style="font-size: 12px; color: #6B7280; margin: 0;">SDN 19 Martapura</p>
+             <div class="font-semibold mb-1">
+              WhatsApp
+             </div>
+             <div id="whatsapp-display" class="text-sm opacity-90">
+              +62 XXX-XXXX-XXXX
+             </div>
             </div>
+           </div><span class="text-2xl">→</span>
           </div>
-          <div class="nav-buttons" style="display: flex; gap: 8px; flex-wrap: wrap;">
-            <button onclick="showPage('home')" class="nav-btn" id="nav-home" style="padding: 8px 16px; border-radius: 8px; border: none; background: #3B82F6; color: white; font-size: 14px; font-weight: 500; cursor: pointer;">Beranda</button>
-            <button onclick="showPage('guru')" class="nav-btn" id="nav-guru" style="padding: 8px 16px; border-radius: 8px; border: none; background: white; color: #374151; font-size: 14px; font-weight: 500; cursor: pointer; border: 1px solid #E5E7EB;">Profil Guru</button>
-            <button onclick="showPage('info')" class="nav-btn" id="nav-info" style="padding: 8px 16px; border-radius: 8px; border: none; background: white; color: #374151; font-size: 14px; font-weight: 500; cursor: pointer; border: 1px solid #E5E7EB;">Info</button>
-            <button onclick="showPage('materi')" class="nav-btn" id="nav-materi" style="padding: 8px 16px; border-radius: 8px; border: none; background: white; color: #374151; font-size: 14px; font-weight: 500; cursor: pointer; border: 1px solid #E5E7EB;">Materi</button>
-            <button onclick="showPage('nilai')" class="nav-btn" id="nav-nilai" style="padding: 8px 16px; border-radius: 8px; border: none; background: white; color: #374151; font-size: 14px; font-weight: 500; cursor: pointer; border: 1px solid #E5E7EB;">Nilai</button>
-            <button onclick="showPage('poin')" class="nav-btn" id="nav-poin" style="padding: 8px 16px; border-radius: 8px; border: none; background: white; color: #374151; font-size: 14px; font-weight: 500; cursor: pointer; border: 1px solid #E5E7EB;">Poin</button>
-            <button onclick="showPage('galeri')" class="nav-btn" id="nav-galeri" style="padding: 8px 16px; border-radius: 8px; border: none; background: white; color: #374151; font-size: 14px; font-weight: 500; cursor: pointer; border: 1px solid #E5E7EB;">Galeri</button>
-            <button onclick="showPage('kontak')" class="nav-btn" id="nav-kontak" style="padding: 8px 16px; border-radius: 8px; border: none; background: white; color: #374151; font-size: 14px; font-weight: 500; cursor: pointer; border: 1px solid #E5E7EB;">Kontak</button>
+         </div></a>
+       </div>
+      </div><!-- Lokasi Sekolah -->
+      <div class="bg-white rounded-3xl shadow-xl p-6">
+       <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center"><span class="mr-2">📍</span> Lokasi Sekolah</h3>
+       <div class="space-y-4">
+        <div class="bg-purple-50 rounded-2xl p-4">
+         <div class="flex items-start"><span class="text-2xl mr-3">🏫</span>
+          <div>
+           <div class="font-semibold text-gray-800 mb-1">
+            Alamat
+           </div>
+           <div id="school-address-display" class="text-sm text-gray-600">
+            SDN 19 Martapura, Kalimantan Selatan
+           </div>
           </div>
-        </div>
+         </div>
+        </div><a href="https://share.google/CJrfu0dSSE0E7eusp" id="maps-link" target="_blank" rel="noopener noreferrer" class="block">
+         <div class="card bg-gradient-to-r from-red-400 to-red-500 rounded-2xl p-4 text-white">
+          <div class="flex items-center justify-between">
+           <div class="flex items-center"><span class="text-3xl mr-3">🗺️</span>
+            <div>
+             <div class="font-semibold mb-1">
+              Buka di Google Maps
+             </div>
+             <div class="text-sm opacity-90">
+              Lihat lokasi lengkap
+             </div>
+            </div>
+           </div><span class="text-2xl">→</span>
+          </div>
+         </div></a>
+       </div>
       </div>
-    </nav>
-
-    <!-- Homepage -->
-    <div id="page-home" class="page-section active">
-      <div style="max-width: 1200px; margin: 0 auto; padding: 40px 24px;">
-        <!-- Hero Section -->
-        <div class="section-card card-hover" style="border-radius: 24px; padding: 48px 32px; margin-bottom: 32px; text-align: center; background: rgba(255, 255, 255, 0.95);">
-          <div style="width: 120px; height: 120px; border-radius: 50%; margin: 0 auto 24px; background: linear-gradient(135deg, #3B82F6, #10B981); display: flex; align-items: center; justify-content: center; font-size: 64px;">
-            🏫
-          </div>
-          <h1 id="heroTitle" style="font-size: 36px; font-weight: 800; margin-bottom: 16px; background: linear-gradient(135deg, #3B82F6, #10B981); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Kelas Digital 6C SDN 19 Martapura</h1>
-          <p id="heroSubtitle" style="font-size: 18px; color: #6B7280; max-width: 600px; margin: 0 auto;">Selamat Datang di Portal Pembelajaran Digital Kami</p>
-        </div>
-
-        <!-- Class Info Cards -->
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-bottom: 32px;">
-          <div class="section-card card-hover" style="border-radius: 16px; padding: 24px; background: rgba(255, 255, 255, 0.95);">
-            <div class="icon-circle" style="background: linear-gradient(135deg, #3B82F6, #60A5FA); color: white; margin-bottom: 16px;">
-              👨‍🏫
-            </div>
-            <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 8px; color: #111827;">Wali Kelas</h3>
-            <p id="teacherNameCard" style="font-size: 14px; color: #6B7280; margin-bottom: 12px;">Dian Agung Pamungkas, S.Pd</p>
-            <button onclick="showPage('guru')" style="padding: 8px 16px; border-radius: 8px; border: none; background: #E0F2FE; color: #0369A1; font-size: 13px; font-weight: 500; cursor: pointer; width: 100%;">Lihat Profil</button>
-          </div>
-          <div class="section-card card-hover" style="border-radius: 16px; padding: 24px; background: rgba(255, 255, 255, 0.95);">
-            <div class="icon-circle" style="background: linear-gradient(135deg, #10B981, #34D399); color: white; margin-bottom: 16px;">
-              👥
-            </div>
-            <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 8px; color: #111827;">Jumlah Siswa</h3>
-            <p style="font-size: 14px; color: #6B7280; margin-bottom: 12px;">27 Siswa Aktif</p>
-            <button onclick="showPage('info')" style="padding: 8px 16px; border-radius: 8px; border: none; background: #D1FAE5; color: #065F46; font-size: 13px; font-weight: 500; cursor: pointer; width: 100%;">Lihat Jadwal</button>
-          </div>
-          <div class="section-card card-hover" style="border-radius: 16px; padding: 24px; background: rgba(255, 255, 255, 0.95);">
-            <div class="icon-circle" style="background: linear-gradient(135deg, #F59E0B, #FBBF24); color: white; margin-bottom: 16px;">
-              📚
-            </div>
-            <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 8px; color: #111827;">Materi Tersedia</h3>
-            <p style="font-size: 14px; color: #6B7280; margin-bottom: 12px;">9 Mata Pelajaran</p>
-            <button onclick="showPage('materi')" style="padding: 8px 16px; border-radius: 8px; border: none; background: #FEF3C7; color: #92400E; font-size: 13px; font-weight: 500; cursor: pointer; width: 100%;">Akses Materi</button>
-          </div>
-        </div>
-
-        <!-- Quick Access -->
-        <div class="section-card" style="border-radius: 16px; padding: 32px; background: rgba(255, 255, 255, 0.95);">
-          <h2 style="font-size: 24px; font-weight: 700; margin-bottom: 24px; color: #111827;">Akses Cepat</h2>
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px;">
-            <button onclick="showPage('info')" class="card-hover" style="padding: 20px; border-radius: 12px; border: 2px solid #E5E7EB; background: white; text-align: left; cursor: pointer;">
-              <div style="font-size: 28px; margin-bottom: 8px;">
-                📅
-              </div>
-              <div style="font-size: 15px; font-weight: 600; color: #111827;">
-                Jadwal Pelajaran
-              </div>
-            </button>
-            <button onclick="showPage('info')" class="card-hover" style="padding: 20px; border-radius: 12px; border: 2px solid #E5E7EB; background: white; text-align: left; cursor: pointer;">
-              <div style="font-size: 28px; margin-bottom: 8px;">
-                📢
-              </div>
-              <div style="font-size: 15px; font-weight: 600; color: #111827;">
-                Pengumuman
-              </div>
-            </button>
-            <button onclick="showPage('materi')" class="card-hover" style="padding: 20px; border-radius: 12px; border: 2px solid #E5E7EB; background: white; text-align: left; cursor: pointer;">
-              <div style="font-size: 28px; margin-bottom: 8px;">
-                📖
-              </div>
-              <div style="font-size: 15px; font-weight: 600; color: #111827;">
-                Download LKPD
-              </div>
-            </button>
-            <button onclick="showPage('poin')" class="card-hover" style="padding: 20px; border-radius: 12px; border: 2px solid #E5E7EB; background: white; text-align: left; cursor: pointer;">
-              <div style="font-size: 28px; margin-bottom: 8px;">
-                ⭐
-              </div>
-              <div style="font-size: 15px; font-weight: 600; color: #111827;">
-                Poin Kebaikan
-              </div>
-            </button>
-          </div>
-        </div>
-      </div>
+     </div>
     </div>
+   </div>
+  </div>
+  <script>
+        const defaultConfig = {
+            site_title: "Kelas Digital 6C SDN 19 Martapura",
+            teacher_name: "Dian Agung Pamungkas, S.Pd",
+            teacher_motto: "Mendidik dengan hati, membimbing dengan cinta, menginspirasi untuk masa depan yang gemilang",
+            teacher_email: "dianpamungkas24@guru.sd.belajar.id",
+            whatsapp_number: "+62 XXX-XXXX-XXXX",
+            school_address: "SDN 19 Martapura, Kalimantan Selatan",
+            maps_link: "https://share.google/CJrfu0dSSE0E7eusp",
+            sheet_url_matematika: "https://docs.google.com/spreadsheets/d/e/2PACX-1vTsBnVhAQmyqDsUKGUIFzihLFGOUkQpjZ-dehgFhyYypNcR5M_LtmNJ0sKh3RQDhv_Y1gASgz6ffVZz/pub?gid=0&single=true&output=csv",
+            sheet_url_ipas: "",
+            sheet_url_bahasa_indonesia: "",
+            sheet_url_bahasa_inggris: "",
+            sheet_url_pkn: "",
+            sheet_url_koding_ai: "",
+            sheet_url_budaya_komering: "",
+            sheet_url_pai: "",
+            sheet_url_pjok: ""
+        };
 
-    <!-- Profil Guru Page -->
-    <div id="page-guru" class="page-section">
-      <div style="max-width: 900px; margin: 0 auto; padding: 40px 24px;">
-        <div class="section-card" style="border-radius: 24px; padding: 40px; background: rgba(255, 255, 255, 0.95);">
-          <div style="text-align: center; margin-bottom: 40px;">
-            <div style="width: 150px; height: 150px; border-radius: 50%; margin: 0 auto 24px; background: linear-gradient(135deg, #3B82F6, #10B981); display: flex; align-items: center; justify-content: center; font-size: 72px; box-shadow: 0 10px 25px rgba(59, 130, 246, 0.3);">
-              👨‍🏫
-            </div>
-            <h2 id="teacherNameProfile" style="font-size: 32px; font-weight: 800; margin-bottom: 8px; color: #111827;">Dian Agung Pamungkas, S.Pd</h2>
-            <p style="font-size: 16px; color: #6B7280; margin-bottom: 16px;">Wali Kelas 6C</p>
-            <div style="display: inline-block; padding: 12px 24px; border-radius: 12px; background: linear-gradient(135deg, #E0F2FE, #D1FAE5);">
-              <p id="teacherMottoDisplay" style="font-size: 16px; font-weight: 600; color: #111827; font-style: italic; margin: 0;">✨ Belajar dengan Hati, Tumbuh dengan Prestasi ✨</p>
-            </div>
-          </div>
-          <div style="display: grid; gap: 24px;">
-            <div style="padding: 24px; border-radius: 16px; background: #F9FAFB; border-left: 4px solid #3B82F6;">
-              <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 12px; color: #111827;">🎓 Pendidikan</h3>
-              <p style="font-size: 15px; color: #374151; line-height: 1.6; margin: 0;">S1 Pendidikan Guru Sekolah Dasar<br>
-               Universitas Terbuka</p>
-            </div>
-            <div style="padding: 24px; border-radius: 16px; background: #F9FAFB; border-left: 4px solid #10B981;">
-              <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 12px; color: #111827;">💼 Pengalaman</h3>
-              <p style="font-size: 15px; color: #374151; line-height: 1.6; margin: 0;">4 Tahun Mengajar di SDN 19 Martapura<br>
-               Spesialisasi: Matematika &amp; IPA</p>
-            </div>
-            <div style="padding: 24px; border-radius: 16px; background: #F9FAFB; border-left: 4px solid #8B5CF6;">
-              <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 12px; color: #111827;">💡 Filosofi Mengajar</h3>
-              <p style="font-size: 15px; color: #374151; line-height: 1.6; margin: 0;">"Setiap anak adalah bintang yang bersinar dengan caranya sendiri. Tugas kita adalah membantu mereka menemukan cahaya itu dan membiarkannya bersinar terang."</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+        let allData = [];
+        let currentSubject = '';
 
-    <!-- Info Page -->
-    <div id="page-info" class="page-section">
-      <div style="max-width: 1200px; margin: 0 auto; padding: 40px 24px;">
-        <h2 style="font-size: 32px; font-weight: 800; margin-bottom: 32px; color: #111827; text-align: center;">Informasi Siswa &amp; Orang Tua</h2>
+        const subjectConfig = {
+            matematika: { name: 'Matematika', icon: '🔢', configKey: 'sheet_url_matematika' },
+            ipas: { name: 'IPAS', icon: '🔬', configKey: 'sheet_url_ipas' },
+            bahasa_indonesia: { name: 'Bahasa Indonesia', icon: '📝', configKey: 'sheet_url_bahasa_indonesia' },
+            bahasa_inggris: { name: 'Bahasa Inggris', icon: '🌍', configKey: 'sheet_url_bahasa_inggris' },
+            pkn: { name: 'PKN', icon: '🇮🇩', configKey: 'sheet_url_pkn' },
+            koding_ai: { name: 'Koding & AI', icon: '💻', configKey: 'sheet_url_koding_ai' },
+            budaya_komering: { name: 'Budaya Komering', icon: '🎭', configKey: 'sheet_url_budaya_komering' },
+            pai: { name: 'PAI', icon: '🕌', configKey: 'sheet_url_pai' },
+            pjok: { name: 'PJOK', icon: '⚽', configKey: 'sheet_url_pjok' }
+        };
 
-        <!-- Jadwal Pelajaran -->
-        <div class="section-card" style="border-radius: 16px; padding: 32px; margin-bottom: 32px; background: rgba(255, 255, 255, 0.95);">
-          <h3 style="font-size: 24px; font-weight: 700; margin-bottom: 24px; color: #111827; display: flex; align-items: center; gap: 12px;"><span style="font-size: 32px;">📅</span> Jadwal Pelajaran</h3>
-          <div style="overflow-x: auto;">
-            <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
-              <thead>
-                <tr style="background: linear-gradient(135deg, #3B82F6, #10B981); color: white;">
-                  <th style="padding: 16px; text-align: left; font-weight: 600;">Hari</th>
-                  <th style="padding: 16px; text-align: left; font-weight: 600;">Jam 1-2</th>
-                  <th style="padding: 16px; text-align: left; font-weight: 600;">Jam 3-4</th>
-                  <th style="padding: 16px; text-align: left; font-weight: 600;">Jam 5-6</th>
-                  <th style="padding: 16px; text-align: left; font-weight: 600;">Jam 7-8</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr style="border-bottom: 1px solid #E5E7EB;">
-                  <td style="padding: 16px; font-weight: 600; color: #111827;">Senin</td>
-                  <td style="padding: 16px; color: #374151;">Upacara</td>
-                  <td style="padding: 16px; color: #374151;">Matematika</td>
-                  <td style="padding: 16px; color: #374151;">PAI</td>
-                  <td style="padding: 16px; color: #374151;">Bahasa Indonesia</td>
-                </tr>
-                <tr style="border-bottom: 1px solid #E5E7EB; background: #F9FAFB;">
-                  <td style="padding: 16px; font-weight: 600; color: #111827;">Selasa</td>
-                  <td style="padding: 16px; color: #374151;">Bahasa Indonesia</td>
-                  <td style="padding: 16px; color: #374151;">Bahasa Inggris</td>
-                  <td style="padding: 16px; color: #374151;">PKn</td>
-                  <td style="padding: 16px; color: #374151;">PAI</td>
-                </tr>
-                <tr style="border-bottom: 1px solid #E5E7EB;">
-                  <td style="padding: 16px; font-weight: 600; color: #111827;">Rabu</td>
-                  <td style="padding: 16px; color: #374151;">PJOK</td>
-                  <td style="padding: 16px; color: #374151;">Seni &amp; Budaya</td>
-                  <td style="padding: 16px; color: #374151;">-</td>
-                  <td style="padding: 16px; color: #374151;">-</td>
-                </tr>
-                <tr style="border-bottom: 1px solid #E5E7EB; background: #F9FAFB;">
-                  <td style="padding: 16px; font-weight: 600; color: #111827;">Kamis</td>
-                  <td style="padding: 16px; color: #374151;">Matematika</td>
-                  <td style="padding: 16px; color: #374151;">Bahasa Indonesia</td>
-                  <td style="padding: 16px; color: #374151;">-</td>
-                  <td style="padding: 16px; color: #374151;">-</td>
-                </tr>
-                <tr style="border-bottom: 1px solid #E5E7EB;">
-                  <td style="padding: 16px; font-weight: 600; color: #111827;">Jumat</td>
-                  <td style="padding: 16px; color: #374151;">Senam</td>
-                  <td style="padding: 16px; color: #374151;">IPAS</td>
-                  <td style="padding: 16px; color: #374151;">-</td>
-                  <td style="padding: 16px; color: #374151;">-</td>
-                </tr>
-                <tr style="border-bottom: 1px solid #E5E7EB; background: #F9FAFB;">
-                  <td style="padding: 16px; font-weight: 600; color: #111827;">Sabtu</td>
-                  <td style="padding: 16px; color: #374151;">PKn</td>
-                  <td style="padding: 16px; color: #374151;">Budaya Komering</td>
-                  <td style="padding: 16px; color: #374151;">-</td>
-                  <td style="padding: 16px; color: #374151;">-</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
+        function showPage(pageId) {
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => page.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+            window.scrollTo(0, 0);
 
-        <!-- Pengumuman -->
-        <div class="section-card" style="border-radius: 16px; padding: 32px; margin-bottom: 32px; background: rgba(255, 255, 255, 0.95);">
-          <h3 style="font-size: 24px; font-weight: 700; margin-bottom: 24px; color: #111827; display: flex; align-items: center; gap: 12px;"><span style="font-size: 32px;">📢</span> Pengumuman Terbaru</h3>
-          <div style="display: grid; gap: 16px;">
-            <div style="padding: 20px; border-radius: 12px; background: #FEF3C7; border-left: 4px solid #F59E0B;">
-              <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 8px;">
-                <h4 style="font-size: 16px; font-weight: 700; color: #92400E; margin: 0;">Ujian Tengah Semester</h4>
-                <span style="font-size: 12px; color: #92400E; background: white; padding: 4px 12px; border-radius: 6px;">15 Jan 2024</span>
-              </div>
-              <p style="font-size: 14px; color: #78350F; margin: 0; line-height: 1.6;">UTS akan dilaksanakan tanggal 22-26 Januari 2024. Harap mempersiapkan diri dengan baik.</p>
-            </div>
-            <div style="padding: 20px; border-radius: 12px; background: #DBEAFE; border-left: 4px solid #3B82F6;">
-              <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 8px;">
-                <h4 style="font-size: 16px; font-weight: 700; color: #1E40AF; margin: 0;">Pengumpulan Tugas Proyek</h4>
-                <span style="font-size: 12px; color: #1E40AF; background: white; padding: 4px 12px; border-radius: 6px;">12 Jan 2024</span>
-              </div>
-              <p style="font-size: 14px; color: #1E3A8A; margin: 0; line-height: 1.6;">Deadline pengumpulan tugas proyek IPA tanggal 20 Januari 2024 pukul 15.00 WIB.</p>
-            </div>
-            <div style="padding: 20px; border-radius: 12px; background: #D1FAE5; border-left: 4px solid #10B981;">
-              <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 8px;">
-                <h4 style="font-size: 16px; font-weight: 700; color: #065F46; margin: 0;">Kunjungan Edukasi</h4>
-                <span style="font-size: 12px; color: #065F46; background: white; padding: 4px 12px; border-radius: 6px;">10 Jan 2024</span>
-              </div>
-              <p style="font-size: 14px; color: #064E3B; margin: 0; line-height: 1.6;">Rencana kunjungan edukasi ke Museum Wasaka pada tanggal 5 Februari 2024.</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Jadwal Ujian Detail -->
-        <div class="section-card" style="border-radius: 16px; padding: 32px; margin-bottom: 32px; background: rgba(255, 255, 255, 0.95);">
-          <h3 style="font-size: 24px; font-weight: 700; margin-bottom: 24px; color: #111827; display: flex; align-items: center; gap: 12px;"><span style="font-size: 32px;">📝</span> Jadwal Ujian Tengah Semester</h3>
-          <div style="overflow-x: auto;">
-            <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
-              <thead>
-                <tr style="background: linear-gradient(135deg, #8B5CF6, #A78BFA); color: white;">
-                  <th style="padding: 16px; text-align: left; font-weight: 600;">Hari/Tanggal</th>
-                  <th style="padding: 16px; text-align: left; font-weight: 600;">Jam</th>
-                  <th style="padding: 16px; text-align: left; font-weight: 600;">Mata Pelajaran</th>
-                  <th style="padding: 16px; text-align: left; font-weight: 600;">Keterangan</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr style="border-bottom: 1px solid #E5E7EB;">
-                  <td style="padding: 16px; font-weight: 600; color: #111827;">Senin, 22 Jan 2024</td>
-                  <td style="padding: 16px; color: #374151;">08.00 - 09.30</td>
-                  <td style="padding: 16px; color: #374151;">Matematika</td>
-                  <td style="padding: 16px; color: #374151;">Bawa alat tulis lengkap</td>
-                </tr>
-                <tr style="border-bottom: 1px solid #E5E7EB; background: #F9FAFB;">
-                  <td style="padding: 16px; font-weight: 600; color: #111827;">Selasa, 23 Jan 2024</td>
-                  <td style="padding: 16px; color: #374151;">08.00 - 09.30</td>
-                  <td style="padding: 16px; color: #374151;">Bahasa Indonesia</td>
-                  <td style="padding: 16px; color: #374151;">-</td>
-                </tr>
-                <tr style="border-bottom: 1px solid #E5E7EB;">
-                  <td style
-              <script>
-    const defaultConfig = {
-      site_title: "Kelas Digital 6C SDN 19 Martapura",
-      welcome_text: "Selamat Datang di Portal Pembelajaran Digital Kami",
-      teacher_name: "Dian Agung Pamungkas, S.Pd",
-      teacher_motto: "Belajar dengan Hati, Tumbuh dengan Prestasi",
-      contact_phone: "0812-3456-7890",
-      school_address: "Jl. Lintas Sumatera No.12, RT.01/RW.03, Kota Baru, Kec. Martapura, Kabupaten Ogan Komering Ulu Timur, Sumatera Selatan 32311",
-      background_color: "#E0F2FE",
-      surface_color: "#FFFFFF",
-      text_color: "#111827",
-      primary_action_color: "#3B82F6",
-      secondary_action_color: "#10B981",
-      csv_url_matematika: "",
-      csv_url_ipas: "",
-      csv_url_indonesia: "",
-      csv_url_inggris: "",
-      csv_url_pkn: "",
-      csv_url_pai: "",
-      csv_url_budaya: "",
-      csv_url_pjok: "",
-      csv_url_koding: ""
-    };
-
-    let config = { ...defaultConfig };
-
-    // Data nilai siswa
-    const nilaiData = {
-      matematika: [],
-      ipas: [],
-      indonesia: [],
-      inggris: [],
-      pkn: [],
-      pai: [],
-      budaya: [],
-      pjok: [],
-      koding: []
-    };
-
-    const subjectInfo = {
-      matematika: { icon: "🔢", name: "Matematika", color: "#3B82F6" },
-      ipas: { icon: "🔬", name: "IPAS", color: "#10B981" },
-      indonesia: { icon: "📚", name: "Bahasa Indonesia", color: "#F59E0B" },
-      inggris: { icon: "🗣️", name: "Bahasa Inggris", color: "#EC4899" },
-      pkn: { icon: "🏛️", name: "PKn", color: "#EF4444" },
-      pai: { icon: "🕌", name: "PAI", color: "#06B6D4" },
-      budaya: { icon: "🎭", name: "Budaya Komering", color: "#6366F1" },
-      pjok: { icon: "⚽", name: "PJOK", color: "#84CC16" },
-      koding: { icon: "💻", name: "Koding & AI", color: "#8B5CF6" }
-    };
-
-    let currentSubject = 'matematika';
-
-    // Data sample untuk demo
-    const sampleData = {
-      matematika: [
-        { nama: "Ahmad Rizki", nh1: 85, nh2: 88, nh3: 90, nh4: 87, nh5: 92, sts: 89, sas: 91 },
-        { nama: "Siti Nurhaliza", nh1: 92, nh2: 95, nh3: 93, nh4: 94, nh5: 96, sts: 95, sas: 97 },
-        { nama: "Budi Santoso", nh1: 78, nh2: 82, nh3: 80, nh4: 85, nh5: 79, sts: 83, sas: 81 },
-        { nama: "Dewi Lestari", nh1: 88, nh2: 90, nh3: 87, nh4: 89, nh5: 91, sts: 90, sas: 92 },
-        { nama: "Fajar Hidayat", nh1: 75, nh2: 78, nh3: 80, nh4: 77, nh5: 82, sts: 79, sas: 81 }
-      ],
-      ipas: [
-        { nama: "Ahmad Rizki", nh1: 82, nh2: 85, nh3: 88, nh4: 84, nh5: 87, sts: 86, sas: 89 },
-        { nama: "Siti Nurhaliza", nh1: 90, nh2: 92, nh3: 94, nh4: 91, nh5: 93, sts: 95, sas: 96 },
-        { nama: "Budi Santoso", nh1: 76, nh2: 79, nh3: 78, nh4: 82, nh5: 80, sts: 81, sas: 83 },
-        { nama: "Dewi Lestari", nh1: 85, nh2: 87, nh3: 89, nh4: 86, nh5: 88, sts: 90, sas: 91 },
-        { nama: "Fajar Hidayat", nh1: 72, nh2: 75, nh3: 78, nh4: 74, nh5: 79, sts: 76, sas: 78 }
-      ]
-    };
-
-    // Fungsi untuk mengisi data sample
-    function initializeSampleData() {
-      Object.keys(sampleData).forEach(subject => {
-        if (nilaiData[subject].length === 0) {
-          nilaiData[subject] = sampleData[subject];
-        }
-      });
-    }
-
-    // Parse CSV data
-    function parseCSV(csvText) {
-      const lines = csvText.trim().split('\n');
-      if (lines.length < 2) return [];
-      
-      const headers = lines[0].split(',').map(h => h.trim().toLowerCase());
-      const data = [];
-      
-      for (let i = 1; i < lines.length; i++) {
-        const values = lines[i].split(',').map(v => v.trim());
-        if (values.length >= 8 && values[0]) {
-          const student = {
-            nama: values[0] || '',
-            nh1: parseFloat(values[1]) || 0,
-            nh2: parseFloat(values[2]) || 0,
-            nh3: parseFloat(values[3]) || 0,
-            nh4: parseFloat(values[4]) || 0,
-            nh5: parseFloat(values[5]) || 0,
-            sts: parseFloat(values[6]) || 0,
-            sas: parseFloat(values[7]) || 0
-          };
-          data.push(student);
-        }
-      }
-      
-      return data;
-    }
-
-    // Load CSV data from URL
-   async function loadSheetData() {
-    const loadingIndicator = document.getElementById('loadingIndicator');
-    const errorMessage = document.getElementById('errorMessage');
-    const tableContainer = document.getElementById('tableContainer');
-    const emptyState = document.getElementById('emptyState');
-
-    loadingIndicator.classList.remove('hidden');
-    errorMessage.classList.add('hidden');
-    tableContainer.classList.add('hidden');
-    emptyState.classList.add('hidden');
-
-    try {
-        const config = window.elementSdk ? window.elementSdk.config : defaultConfig;
-        const sheetUrl = config.sheet_url || defaultConfig.sheet_url;
-        
-        // Daftar mata pelajaran
-        const subjects = [
-            'Matematika', 'IPAS', 'Bahasa Indonesia', 'Bahasa Inggris', 
-            'PKN', 'Koding dan AI', 'Budaya Komering', 'PAI', 'PJOK'
-        ];
-
-        // Setup filter
-        const subjectFilter = document.getElementById('subjectFilter');
-        subjectFilter.innerHTML = '<option value="">Semua Mata Pelajaran</option>';
-        subjects.forEach(subject => {
-            const option = document.createElement('option');
-            option.value = subject;
-            option.textContent = subject;
-            subjectFilter.appendChild(option);
-        });
-
-        // Load data (dalam kasus ini kita asumsikan semua data ada di satu sheet)
-        const response = await fetch(sheetUrl);
-        if (!response.ok) throw new Error('Failed to fetch');
-        
-        const csvText = await response.text();
-        const rows = csvText.split('\n').filter(row => row.trim());
-        
-        if (rows.length < 2) {
-            throw new Error('No data available');
-        }
-
-        const headers = rows[0].split(',').map(h => h.trim().replace(/"/g, ''));
-        
-        // Process data - asumsikan ada kolom yang mengindikasikan mata pelajaran
-        allData = rows.slice(1).map(row => {
-            const values = row.split(',').map(v => v.trim().replace(/"/g, ''));
-            const obj = {};
-            headers.forEach((header, index) => {
-                obj[header] = values[index] || '';
-            });
-            return obj;
-        });
-
-        // Jika tidak ada kolom mata pelajaran, kita tambahkan secara manual
-        // Cari kolom yang mungkin berisi informasi mata pelajaran
-        const possibleSubjectCol = headers.find(h => 
-            h.toLowerCase().includes('mapel') || 
-            h.toLowerCase().includes('mata') ||
-            h.toLowerCase().includes('pelajaran')
-        );
-
-        if (!possibleSubjectCol) {
-            // Jika tidak ada kolom mata pelajaran, gunakan default
-            subjectColumnName = 'Mata Pelajaran';
-            allData.forEach(row => {
-                row[subjectColumnName] = 'Matematika'; // Default, bisa disesuaikan
-            });
-        } else {
-            subjectColumnName = possibleSubjectCol;
-        }
-
-        renderTable(headers, allData);
-        
-        loadingIndicator.classList.add('hidden');
-        tableContainer.classList.remove('hidden');
-        
-    } catch (error) {
-        console.error('Error loading sheet data:', error);
-        loadingIndicator.classList.add('hidden');
-        errorMessage.classList.remove('hidden');
-    }
-}
-
-    // Fungsi untuk menampilkan loading
-    function setLoading(state) {
-      const loadingIndicator = document.getElementById('loading-indicator');
-      if (loadingIndicator) {
-        loadingIndicator.style.display = state ? 'block' : 'none';
-      }
-    }
-
-    function updateRankingTable() {
-      const studentAverages = [];
-      
-      // Ambil semua siswa unik dari semua mata pelajaran
-      const allStudentNames = new Set();
-      Object.keys(nilaiData).forEach(subject => {
-        nilaiData[subject].forEach(student => {
-          if (student.nama) allStudentNames.add(student.nama);
-        });
-      });
-
-      allStudentNames.forEach(nama => {
-        let totalAverage = 0;
-        let subjectCount = 0;
-
-        Object.keys(nilaiData).forEach(subject => {
-          const studentData = nilaiData[subject].find(s => s.nama === nama);
-          if (studentData) {
-            const avg = parseFloat(calculateAverage(studentData));
-            totalAverage += avg;
-            subjectCount++;
-          }
-        });
-
-        if (subjectCount > 0) {
-          const overallAverage = totalAverage / subjectCount;
-          studentAverages.push({
-            nama: nama,
-            average: overallAverage
-          });
-        }
-      });
-
-      studentAverages.sort((a, b) => b.average - a.average);
-      const top10 = studentAverages.slice(0, 10);
-
-      const tbody = document.getElementById('ranking-table-body');
-      if (!tbody) return;
-      
-      tbody.innerHTML = '';
-
-      if (top10.length === 0) {
-        const row = document.createElement('tr');
-        row.innerHTML = '<td colspan="4" style="padding: 32px; text-align: center; color: #6B7280;">Tidak ada data nilai. Silakan tambahkan URL CSV di pengaturan.</td>';
-        tbody.appendChild(row);
-        return;
-      }
-
-      top10.forEach((student, index) => {
-        const rank = index + 1;
-        const avg = student.average.toFixed(1);
-        const predikat = getPredikat(parseFloat(avg));
-        
-        let rankDisplay = rank.toString();
-        let bgColor = 'white';
-        let textColor = '#374151';
-        
-        if (rank === 1) {
-          rankDisplay = '🥇 1';
-          bgColor = '#FEF3C7';
-          textColor = '#92400E';
-        } else if (rank === 2) {
-          rankDisplay = '🥈 2';
-          bgColor = '#E5E7EB';
-          textColor = '#6B7280';
-        } else if (rank === 3) {
-          rankDisplay = '🥉 3';
-          bgColor = '#FED7AA';
-          textColor = '#C2410C';
-        } else {
-          bgColor = index % 2 === 1 ? '#F9FAFB' : 'white';
-        }
-
-        const row = document.createElement('tr');
-        row.style.borderBottom = '1px solid #E5E7EB';
-        row.style.background = bgColor;
-        
-        row.innerHTML = `
-          <td style="padding: 16px; font-weight: 700; color: ${textColor};">${rankDisplay}</td>
-          <td style="padding: 16px; font-weight: 600; color: #111827;">${student.nama}</td>
-          <td style="padding: 16px; text-align: center; font-weight: 700; color: ${textColor};">${avg}</td>
-          <td style="padding: 16px; text-align: center;">
-            <span style="background: ${predikat.bg}; color: ${predikat.color}; padding: 4px 12px; border-radius: 6px; font-weight: 600;">
-              ${predikat.label}
-            </span>
-          </td>
-        `;
-        
-        tbody.appendChild(row);
-      });
-    }
-
-    async function showSubject(subject) {
-      currentSubject = subject;
-      
-      // Update button styles
-      document.querySelectorAll('.subject-btn').forEach(btn => {
-        btn.style.border = '2px solid #E5E7EB';
-      });
-      const subjectBtn = document.getElementById('btn-' + subject);
-      if (subjectBtn) {
-        subjectBtn.style.border = '3px solid ' + subjectInfo[subject].color;
-      }
-
-      // Update title
-      const info = subjectInfo[subject];
-      const subjectTitle = document.getElementById('subject-title');
-      if (subjectTitle) {
-        subjectTitle.innerHTML = `
-          <span style="font-size: 32px;">${info.icon}</span>
-          Nilai ${info.name}
-        `;
-      }
-
-      // Show loading
-      setLoading(true);
-      const nilaiContainer = document.getElementById('nilai-detail-container');
-      const errorContainer = document.getElementById('error-container');
-      
-      if (nilaiContainer) nilaiContainer.style.display = 'none';
-      if (errorContainer) errorContainer.style.display = 'none';
-
-      // Load data if not loaded yet or if URL changed
-      const url = config[`csv_url_${subject}`];
-      if (url && url.trim() !== '') {
-        await loadCSVData(subject, url);
-      } else {
-        // Gunakan sample data jika CSV tidak tersedia
-        if (nilaiData[subject].length === 0 && sampleData[subject]) {
-          nilaiData[subject] = sampleData[subject];
-        }
-      }
-
-      // Hide loading
-      setLoading(false);
-      if (nilaiContainer) nilaiContainer.style.display = 'block';
-
-      // Update table
-      const data = nilaiData[subject];
-      const tbody = document.getElementById('nilai-table-body');
-      if (!tbody) return;
-      
-      tbody.innerHTML = '';
-
-      if (data.length === 0) {
-        const row = document.createElement('tr');
-        row.innerHTML = '<td colspan="10" style="padding: 32px; text-align: center; color: #6B7280;">Tidak ada data nilai untuk mata pelajaran ini. Silakan tambahkan URL CSV di pengaturan.</td>';
-        tbody.appendChild(row);
-        return;
-      }
-
-      data.forEach((student, index) => {
-        const avg = calculateAverage(student);
-        const row = document.createElement('tr');
-        row.style.borderBottom = '1px solid #E5E7EB';
-        row.style.background = index % 2 === 0 ? '#F9FAFB' : 'white';
-        
-        row.innerHTML = `
-          <td style="padding: 14px 12px; color: #374151;">${index + 1}</td>
-          <td style="padding: 14px 12px; font-weight: 600; color: #111827;">${student.nama}</td>
-          <td style="padding: 14px 12px; text-align: center; color: #374151;">${student.nh1}</td>
-          <td style="padding: 14px 12px; text-align: center; color: #374151;">${student.nh2}</td>
-          <td style="padding: 14px 12px; text-align: center; color: #374151;">${student.nh3}</td>
-          <td style="padding: 14px 12px; text-align: center; color: #374151;">${student.nh4}</td>
-          <td style="padding: 14px 12px; text-align: center; color: #374151;">${student.nh5}</td>
-          <td style="padding: 14px 12px; text-align: center; font-weight: 600; color: #374151;">${student.sts}</td>
-          <td style="padding: 14px 12px; text-align: center; font-weight: 600; color: #374151;">${student.sas}</td>
-          <td style="padding: 14px 12px; text-align: center; font-weight: 700; color: #111827; background: #F3F4F6;">${avg}</td>
-        `;
-        
-        tbody.appendChild(row);
-      });
-    }
-
-    // Fungsi untuk download file
-    function downloadFile(fileType, subject) {
-      const subjectName = subjectInfo[subject]?.name || subject;
-      let fileName = '';
-      let content = '';
-      
-      switch(fileType) {
-        case 'lkpd':
-          fileName = `LKPD_${subjectName}.pdf`;
-          content = `Ini adalah LKPD untuk mata pelajaran ${subjectName}`;
-          break;
-        case 'modul':
-          fileName = `Modul_${subjectName}.pdf`;
-          content = `Ini adalah Modul untuk mata pelajaran ${subjectName}`;
-          break;
-        case 'video':
-          fileName = `Video_Pembelajaran_${subjectName}.mp4`;
-          content = `Ini adalah Video Pembelajaran untuk mata pelajaran ${subjectName}`;
-          break;
-        default:
-          fileName = `File_${subjectName}.pdf`;
-          content = `Ini adalah file untuk mata pelajaran ${subjectName}`;
-      }
-      
-      // Simulasi download (dalam implementasi real, ini akan mengunduh file sebenarnya)
-      const blob = new Blob([content], { type: 'application/pdf' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = fileName;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      URL.revokeObjectURL(url);
-      
-      // Tampilkan notifikasi
-      alert(`File ${fileName} berhasil diunduh!`);
-    }
-
-    // Fungsi untuk menukar poin
-    function tukarPoin(reward, poin) {
-      const konfirmasi = confirm(`Apakah Anda yakin ingin menukar ${poin} poin untuk ${reward}?`);
-      if (konfirmasi) {
-        alert(`Selamat! Anda berhasil menukar ${poin} poin untuk ${reward}. Reward akan diberikan pada pertemuan berikutnya.`);
-      }
-    }
-
-    // Fungsi untuk mengirim pesan kontak
-    function kirimPesan() {
-      const nama = document.getElementById('contactName').value;
-      const email = document.getElementById('contactEmail').value;
-      const pesan = document.getElementById('contactMessage').value;
-      
-      if (!nama || !email || !pesan) {
-        alert('Harap lengkapi semua field!');
-        return;
-      }
-      
-      // Simulasi pengiriman pesan
-      alert(`Terima kasih ${nama}! Pesan Anda telah terkirim. Kami akan membalas ke ${email} dalam 1x24 jam.`);
-      
-      // Reset form
-      document.getElementById('contactName').value = '';
-      document.getElementById('contactEmail').value = '';
-      document.getElementById('contactMessage').value = '';
-    }
-
-    function showPage(pageName) {
-      const pages = document.querySelectorAll('.page-section');
-      pages.forEach(page => page.classList.remove('active'));
-      
-      const targetPage = document.getElementById('page-' + pageName);
-      if (targetPage) {
-        targetPage.classList.add('active');
-      }
-
-      const navButtons = document.querySelectorAll('.nav-btn');
-      navButtons.forEach(btn => {
-        btn.style.background = 'white';
-        btn.style.color = '#374151';
-        btn.style.border = '1px solid #E5E7EB';
-      });
-
-      const activeButton = document.getElementById('nav-' + pageName);
-      if (activeButton) {
-        activeButton.style.background = config.primary_action_color;
-        activeButton.style.color = 'white';
-        activeButton.style.border = 'none';
-      }
-
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-
-      // Initialize specific page content
-      if (pageName === 'nilai') {
-        showSubject(currentSubject);
-        updateRankingTable();
-      } else if (pageName === 'materi') {
-        // Initialize materi page jika perlu
-        console.log('Materi page loaded');
-      } else if (pageName === 'poin') {
-        // Initialize poin page jika perlu
-        console.log('Poin page loaded');
-      }
-    }
-
-    async function onConfigChange(newConfig) {
-      config = { ...defaultConfig, ...newConfig };
-
-      document.body.style.background = `linear-gradient(135deg, ${config.background_color} 0%, #F0FDF4 50%, #FEF3C7 100%)`;
-
-      // Update semua elemen dengan data dari config
-      const elementsToUpdate = {
-        'navTitle': config.site_title.split(' ').slice(0, 3).join(' '),
-        'heroTitle': config.site_title,
-        'heroSubtitle': config.welcome_text,
-        'teacherNameCard': config.teacher_name,
-        'teacherNameProfile': config.teacher_name,
-        'teacherMottoDisplay': `✨ ${config.teacher_motto} ✨`,
-        'contactTeacherName': config.teacher_name,
-        'contactPhone': config.contact_phone,
-        'schoolAddress': config.school_address
-      };
-
-      Object.entries(elementsToUpdate).forEach(([id, value]) => {
-        const element = document.getElementById(id);
-        if (element) {
-          element.textContent = value;
-        }
-      });
-
-      const logoCircle = document.getElementById('logoCircle');
-      if (logoCircle) {
-        logoCircle.style.background = `linear-gradient(135deg, ${config.primary_action_color}, ${config.secondary_action_color})`;
-      }
-
-      // Update nav button colors
-      const navButtons = document.querySelectorAll('.nav-btn');
-      navButtons.forEach(btn => {
-        if (btn.id === 'nav-home') {
-          btn.style.background = config.primary_action_color;
-        }
-      });
-
-      // Update text colors
-      document.querySelectorAll('h1, h2, h3, h4').forEach(el => {
-        el.style.color = config.text_color;
-      });
-
-      // Reload CSV data if URLs changed
-      await loadAllCSVData();
-      
-      // Refresh current view if on nilai page
-      const nilaiPage = document.getElementById('page-nilai');
-      if (nilaiPage && nilaiPage.classList.contains('active')) {
-        showSubject(currentSubject);
-        updateRankingTable();
-      }
-    }
-
-    // Initialize when page loads
-    document.addEventListener('DOMContentLoaded', function() {
-      // Initialize sample data
-      initializeSampleData();
-      
-      // Set default active page
-      showPage('home');
-      
-      // Initialize nilai page if needed
-      if (document.getElementById('page-nilai').classList.contains('active')) {
-        showSubject(currentSubject);
-        updateRankingTable();
-      }
-      
-      console.log('Website Kelas Digital 6C berhasil dimuat!');
-    });
-
-    // SDK Integration
-    if (window.elementSdk) {
-      window.elementSdk.init({
-        defaultConfig,
-        onConfigChange,
-        mapToCapabilities: (cfg) => ({
-          recolorables: [
-            {
-              get: () => cfg.background_color || defaultConfig.background_color,
-              set: (value) => {
-                cfg.background_color = value;
-                window.elementSdk.setConfig({ background_color: value });
-              }
-            },
-            {
-              get: () => cfg.surface_color || defaultConfig.surface_color,
-              set: (value) => {
-                cfg.surface_color = value;
-                window.elementSdk.setConfig({ surface_color: value });
-              }
-            },
-            {
-              get: () => cfg.text_color || defaultConfig.text_color,
-              set: (value) => {
-                cfg.text_color = value;
-                window.elementSdk.setConfig({ text_color: value });
-              }
-            },
-            {
-              get: () => cfg.primary_action_color || defaultConfig.primary_action_color,
-              set: (value) => {
-                cfg.primary_action_color = value;
-                window.elementSdk.setConfig({ primary_action_color: value });
-              }
-            },
-            {
-              get: () => cfg.secondary_action_color || defaultConfig.secondary_action_color,
-              set: (value) => {
-                cfg.secondary_action_color = value;
-                window.elementSdk.setConfig({ secondary_action_color: value });
-              }
+            if (pageId === 'nilai') {
+                backToFolders();
             }
-          ],
-          borderables: [],
-          fontEditable: undefined,
-          fontSizeable: undefined
-        }),
-        mapToEditPanelValues: (cfg) => new Map([
-          ["site_title", cfg.site_title || defaultConfig.site_title],
-          ["welcome_text", cfg.welcome_text || defaultConfig.welcome_text],
-          ["teacher_name", cfg.teacher_name || defaultConfig.teacher_name],
-          ["teacher_motto", cfg.teacher_motto || defaultConfig.teacher_motto],
-          ["contact_phone", cfg.contact_phone || defaultConfig.contact_phone],
-          ["school_address", cfg.school_address || defaultConfig.school_address],
-          ["csv_url_matematika", cfg.csv_url_matematika || defaultConfig.csv_url_matematika],
-          ["csv_url_ipas", cfg.csv_url_ipas || defaultConfig.csv_url_ipas],
-          ["csv_url_indonesia", cfg.csv_url_indonesia || defaultConfig.csv_url_indonesia],
-          ["csv_url_inggris", cfg.csv_url_inggris || defaultConfig.csv_url_inggris],
-          ["csv_url_pkn", cfg.csv_url_pkn || defaultConfig.csv_url_pkn],
-          ["csv_url_pai", cfg.csv_url_pai || defaultConfig.csv_url_pai],
-          ["csv_url_budaya", cfg.csv_url_budaya || defaultConfig.csv_url_budaya],
-          ["csv_url_pjok", cfg.csv_url_pjok || defaultConfig.csv_url_pjok],
-          ["csv_url_koding", cfg.csv_url_koding || defaultConfig.csv_url_koding]
-        ])
-      });
-    }
-  </script>
+        }
+
+        function openSubject(subject) {
+            currentSubject = subject;
+            const config = subjectConfig[subject];
+            
+            document.getElementById('folderListView').classList.add('hidden');
+            document.getElementById('dataTableView').classList.remove('hidden');
+            document.getElementById('subjectTitle').textContent = `Data Nilai ${config.icon} ${config.name}`;
+            
+            loadSubjectData(subject);
+        }
+
+        function backToFolders() {
+            document.getElementById('folderListView').classList.remove('hidden');
+            document.getElementById('dataTableView').classList.add('hidden');
+            currentSubject = '';
+            allData = [];
+        }
+
+        function refreshCurrentSubject() {
+            if (currentSubject) {
+                loadSubjectData(currentSubject);
+            }
+        }
+
+        async function loadSubjectData(subject) {
+            const loadingIndicator = document.getElementById('loadingIndicator');
+            const errorMessage = document.getElementById('errorMessage');
+            const tableContainer = document.getElementById('tableContainer');
+            const emptyState = document.getElementById('emptyState');
+
+            loadingIndicator.classList.remove('hidden');
+            errorMessage.classList.add('hidden');
+            tableContainer.classList.add('hidden');
+            emptyState.classList.add('hidden');
+
+            try {
+                const config = window.elementSdk ? window.elementSdk.config : defaultConfig;
+                const configKey = subjectConfig[subject].configKey;
+                const sheetUrl = config[configKey] || defaultConfig[configKey];
+                
+                if (!sheetUrl) {
+                    throw new Error('URL Sheet belum diatur');
+                }
+                
+                const response = await fetch(sheetUrl);
+                if (!response.ok) throw new Error('Failed to fetch');
+                
+                const csvText = await response.text();
+                const rows = csvText.split('\n').filter(row => row.trim());
+                
+                if (rows.length < 2) {
+                    throw new Error('No data available');
+                }
+
+                const headers = rows[0].split(',').map(h => h.trim().replace(/"/g, ''));
+                
+                allData = rows.slice(1).map(row => {
+                    const values = row.split(',').map(v => v.trim().replace(/"/g, ''));
+                    const obj = {};
+                    headers.forEach((header, index) => {
+                        obj[header] = values[index] || '';
+                    });
+                    return obj;
+                });
+
+                renderTable(headers, allData);
+                
+                loadingIndicator.classList.add('hidden');
+                tableContainer.classList.remove('hidden');
+            } catch (error) {
+                loadingIndicator.classList.add('hidden');
+                errorMessage.classList.remove('hidden');
+            }
+        }
+
+        function renderTable(headers, data) {
+            const tableHeader = document.getElementById('tableHeader');
+            const tableBody = document.getElementById('tableBody');
+
+            tableHeader.innerHTML = `
+                <tr>
+                    ${headers.map(header => `<th>${header}</th>`).join('')}
+                </tr>
+            `;
+
+            tableBody.innerHTML = data.map(row => `
+                <tr>
+                    ${headers.map(header => `<td>${row[header]}</td>`).join('')}
+                </tr>
+            `).join('');
+        }
+
+        function filterTable() {
+            const searchInput = document.getElementById('searchInput');
+            const searchTerm = searchInput ? searchInput.value.toLowerCase() : '';
+            const tableBody = document.getElementById('tableBody');
+            const emptyState = document.getElementById('emptyState');
+            const tableContainer = document.getElementById('tableContainer');
+
+            if (!allData.length) return;
+
+            const filteredData = allData.filter(row => {
+                return Object.values(row).some(value => 
+                    value.toString().toLowerCase().includes(searchTerm)
+                );
+            });
+
+            const headers = Object.keys(allData[0]);
+
+            if (filteredData.length === 0) {
+                tableContainer.classList.add('hidden');
+                emptyState.classList.remove('hidden');
+            } else {
+                tableContainer.classList.remove('hidden');
+                emptyState.classList.add('hidden');
+                
+                tableBody.innerHTML = filteredData.map(row => `
+                    <tr>
+                        ${headers.map(header => `<td>${row[header]}</td>`).join('')}
+                    </tr>
+                `).join('');
+            }
+        }
+
+        async function onConfigChange(config) {
+            const siteTitle = config.site_title || defaultConfig.site_title;
+            const teacherName = config.teacher_name || defaultConfig.teacher_name;
+            const teacherMotto = config.teacher_motto || defaultConfig.teacher_motto;
+            const teacherEmail = config.teacher_email || defaultConfig.teacher_email;
+            const whatsappNumber = config.whatsapp_number || defaultConfig.whatsapp_number;
+            const schoolAddress = config.school_address || defaultConfig.school_address;
+            const mapsLink = config.maps_link || defaultConfig.maps_link;
+
+            document.getElementById('nav-title').textContent = siteTitle.split(' ').slice(0, 3).join(' ');
+            document.getElementById('hero-title').textContent = siteTitle;
+            document.getElementById('teacher-name-display').textContent = teacherName;
+            document.getElementById('teacher-motto-display').textContent = `"${teacherMotto}"`;
+            document.getElementById('teacher-email-display').textContent = teacherEmail;
+            document.getElementById('contact-teacher-name').textContent = teacherName;
+            document.getElementById('contact-teacher-email').textContent = teacherEmail;
+            document.getElementById('whatsapp-display').textContent = whatsappNumber;
+            document.getElementById('school-address-display').textContent = schoolAddress;
+
+            const whatsappLink = document.getElementById('whatsapp-link');
+            const cleanNumber = whatsappNumber.replace(/[^0-9]/g, '');
+            whatsappLink.href = `https://wa.me/${cleanNumber}`;
+
+            const mapsLinkElement = document.getElementById('maps-link');
+            mapsLinkElement.href = mapsLink;
+        }
+
+        if (window.elementSdk) {
+            window.elementSdk.init({
+                defaultConfig,
+                onConfigChange,
+                mapToCapabilities: (config) => ({
+                    recolorables: [],
+                    borderables: [],
+                    fontEditable: undefined,
+                    fontSizeable: undefined
+                }),
+                mapToEditPanelValues: (config) => new Map([
+                    ["site_title", config.site_title || defaultConfig.site_title],
+                    ["teacher_name", config.teacher_name || defaultConfig.teacher_name],
+                    ["teacher_motto", config.teacher_motto || defaultConfig.teacher_motto],
+                    ["teacher_email", config.teacher_email || defaultConfig.teacher_email],
+                    ["whatsapp_number", config.whatsapp_number || defaultConfig.whatsapp_number],
+                    ["school_address", config.school_address || defaultConfig.school_address],
+                    ["maps_link", config.maps_link || defaultConfig.maps_link],
+                    ["sheet_url_matematika", config.sheet_url_matematika || defaultConfig.sheet_url_matematika],
+                    ["sheet_url_ipas", config.sheet_url_ipas || defaultConfig.sheet_url_ipas],
+                    ["sheet_url_bahasa_indonesia", config.sheet_url_bahasa_indonesia || defaultConfig.sheet_url_bahasa_indonesia],
+                    ["sheet_url_bahasa_inggris", config.sheet_url_bahasa_inggris || defaultConfig.sheet_url_bahasa_inggris],
+                    ["sheet_url_pkn", config.sheet_url_pkn || defaultConfig.sheet_url_pkn],
+                    ["sheet_url_koding_ai", config.sheet_url_koding_ai || defaultConfig.sheet_url_koding_ai],
+                    ["sheet_url_budaya_komering", config.sheet_url_budaya_komering || defaultConfig.sheet_url_budaya_komering],
+                    ["sheet_url_pai", config.sheet_url_pai || defaultConfig.sheet_url_pai],
+                    ["sheet_url_pjok", config.sheet_url_pjok || defaultConfig.sheet_url_pjok]
+                ])
+            });
+        }
+    </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9a5b3181758c8de9',t:'MTc2NDM0NjgzNC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
