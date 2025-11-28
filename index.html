@@ -617,72 +617,89 @@
     }
 
     // Load CSV data from URL
-    async function loadCSVData(subject, url) {
-      if (!url || url.trim() === '') {
-        return false;
-      }
+   async function loadSheetData() {
+    const loadingIndicator = document.getElementById('loadingIndicator');
+    const errorMessage = document.getElementById('errorMessage');
+    const tableContainer = document.getElementById('tableContainer');
+    const emptyState = document.getElementById('emptyState');
 
-      try {
-        const response = await fetch(url);
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
+    loadingIndicator.classList.remove('hidden');
+    errorMessage.classList.add('hidden');
+    tableContainer.classList.add('hidden');
+    emptyState.classList.add('hidden');
+
+    try {
+        const config = window.elementSdk ? window.elementSdk.config : defaultConfig;
+        const sheetUrl = config.sheet_url || defaultConfig.sheet_url;
+        
+        // Daftar mata pelajaran
+        const subjects = [
+            'Matematika', 'IPAS', 'Bahasa Indonesia', 'Bahasa Inggris', 
+            'PKN', 'Koding dan AI', 'Budaya Komering', 'PAI', 'PJOK'
+        ];
+
+        // Setup filter
+        const subjectFilter = document.getElementById('subjectFilter');
+        subjectFilter.innerHTML = '<option value="">Semua Mata Pelajaran</option>';
+        subjects.forEach(subject => {
+            const option = document.createElement('option');
+            option.value = subject;
+            option.textContent = subject;
+            subjectFilter.appendChild(option);
+        });
+
+        // Load data (dalam kasus ini kita asumsikan semua data ada di satu sheet)
+        const response = await fetch(sheetUrl);
+        if (!response.ok) throw new Error('Failed to fetch');
+        
         const csvText = await response.text();
-        const parsedData = parseCSV(csvText);
+        const rows = csvText.split('\n').filter(row => row.trim());
         
-        if (parsedData.length > 0) {
-          nilaiData[subject] = parsedData;
-          return true;
+        if (rows.length < 2) {
+            throw new Error('No data available');
         }
-        return false;
-      } catch (error) {
-        console.error(`Error loading CSV for ${subject}:`, error);
-        showError(`Gagal memuat data CSV untuk ${subjectInfo[subject].name}: ${error.message}`);
-        return false;
-      }
-    }
 
-    // Load all CSV data
-    async function loadAllCSVData() {
-      const subjects = ['matematika', 'ipas', 'indonesia', 'inggris', 'pkn', 'pai', 'budaya', 'pjok', 'koding'];
-      const promises = subjects.map(subject => {
-        const url = config[`csv_url_${subject}`];
-        return loadCSVData(subject, url);
-      });
-      
-      await Promise.all(promises);
-    }
-
-    function calculateAverage(student) {
-      const total = student.nh1 + student.nh2 + student.nh3 + student.nh4 + student.nh5 + student.sts + student.sas;
-      return (total / 7).toFixed(1);
-    }
-
-    function getPredikat(avg) {
-      if (avg >= 90) return { label: 'A', bg: '#FEF3C7', color: '#92400E' };
-      if (avg >= 80) return { label: 'B', bg: '#DBEAFE', color: '#1E40AF' };
-      if (avg >= 70) return { label: 'C', bg: '#D1FAE5', color: '#065F46' };
-      if (avg >= 60) return { label: 'D', bg: '#FEE2E2', color: '#991B1B' };
-      return { label: 'E', bg: '#F3F4F6', color: '#6B7280' };
-    }
-
-    // Fungsi untuk menampilkan error
-    function showError(message) {
-      const errorContainer = document.getElementById('error-container');
-      if (errorContainer) {
-        errorContainer.innerHTML = `
-          <div class="error-message">
-            <strong>⚠️ Error:</strong> ${message}
-          </div>
-        `;
-        errorContainer.style.display = 'block';
+        const headers = rows[0].split(',').map(h => h.trim().replace(/"/g, ''));
         
-        // Auto hide setelah 5 detik
-        setTimeout(() => {
-          errorContainer.style.display = 'none';
-        }, 5000);
-      }
+        // Process data - asumsikan ada kolom yang mengindikasikan mata pelajaran
+        allData = rows.slice(1).map(row => {
+            const values = row.split(',').map(v => v.trim().replace(/"/g, ''));
+            const obj = {};
+            headers.forEach((header, index) => {
+                obj[header] = values[index] || '';
+            });
+            return obj;
+        });
+
+        // Jika tidak ada kolom mata pelajaran, kita tambahkan secara manual
+        // Cari kolom yang mungkin berisi informasi mata pelajaran
+        const possibleSubjectCol = headers.find(h => 
+            h.toLowerCase().includes('mapel') || 
+            h.toLowerCase().includes('mata') ||
+            h.toLowerCase().includes('pelajaran')
+        );
+
+        if (!possibleSubjectCol) {
+            // Jika tidak ada kolom mata pelajaran, gunakan default
+            subjectColumnName = 'Mata Pelajaran';
+            allData.forEach(row => {
+                row[subjectColumnName] = 'Matematika'; // Default, bisa disesuaikan
+            });
+        } else {
+            subjectColumnName = possibleSubjectCol;
+        }
+
+        renderTable(headers, allData);
+        
+        loadingIndicator.classList.add('hidden');
+        tableContainer.classList.remove('hidden');
+        
+    } catch (error) {
+        console.error('Error loading sheet data:', error);
+        loadingIndicator.classList.add('hidden');
+        errorMessage.classList.remove('hidden');
     }
+}
 
     // Fungsi untuk menampilkan loading
     function setLoading(state) {
