@@ -3,8 +3,9 @@
  <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kelas Digital 6C SD</title>
+  <title>Kelas Digital 6C SDN 19 Martapura</title>
   <script src="/_sdk/element_sdk.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
   <style>
     body {
       box-sizing: border-box;
@@ -16,1804 +17,1316 @@
       box-sizing: border-box;
     }
     
-    html, body {
-      height: 100%;
-      width: 100%;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-    
     body {
-      background: linear-gradient(135deg, #E8F5E9 0%, #E0F7FA 50%, #D6F4FF 100%);
-      position: relative;
+      font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
       overflow-x: hidden;
     }
     
-    /* Page Container */
-    .page {
-      display: none;
-      min-height: 100%;
-      animation: fadeIn 0.5s ease;
+    .gradient-bg {
+      background: linear-gradient(135deg, #E0F2FE 0%, #F0FDF4 50%, #FEF3C7 100%);
     }
     
-    .page.active {
+    .card-hover {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .card-hover:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    }
+    
+    .nav-btn {
+      transition: all 0.2s ease;
+    }
+    
+    .nav-btn:hover {
+      transform: scale(1.05);
+    }
+    
+    .section-card {
+      backdrop-filter: blur(10px);
+      background: rgba(255, 255, 255, 0.9);
+    }
+    
+    .icon-circle {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+    }
+    
+    .page-section {
+      display: none;
+    }
+    
+    .page-section.active {
       display: block;
+      animation: fadeIn 0.4s ease;
     }
     
     @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
     }
     
-    /* Background Illustration */
-    .hero-background {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      z-index: 1;
-      pointer-events: none;
-    }
-    
-    .illustration-layer {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 900"><defs><linearGradient id="skyGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" style="stop-color:%2387CEEB;stop-opacity:1"/><stop offset="100%" style="stop-color:%23E0F7FA;stop-opacity:1"/></linearGradient><linearGradient id="grassGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" style="stop-color:%2366BB6A;stop-opacity:1"/><stop offset="100%" style="stop-color:%234CAF50;stop-opacity:1"/></linearGradient></defs><rect width="1400" height="900" fill="url(%23skyGrad)"/><ellipse cx="250" cy="120" rx="80" ry="35" fill="%23FFFFFF" opacity="0.8"><animate attributeName="cx" values="250;280;250" dur="15s" repeatCount="indefinite"/></ellipse><ellipse cx="450" cy="100" rx="100" ry="40" fill="%23FFFFFF" opacity="0.7"><animate attributeName="cx" values="450;480;450" dur="20s" repeatCount="indefinite"/></ellipse><ellipse cx="900" cy="130" rx="90" ry="38" fill="%23FFFFFF" opacity="0.75"><animate attributeName="cx" values="900;930;900" dur="18s" repeatCount="indefinite"/></ellipse><ellipse cx="1150" cy="110" rx="85" ry="36" fill="%23FFFFFF" opacity="0.8"><animate attributeName="cx" values="1150;1180;1150" dur="17s" repeatCount="indefinite"/></ellipse><circle cx="1250" cy="100" r="60" fill="%23FFD700" opacity="0.9"/><rect x="0" y="650" width="1400" height="250" fill="url(%23grassGrad)"/><g id="school-building"><rect x="450" y="350" width="500" height="300" fill="%23E57373" stroke="%23C62828" stroke-width="3"/><rect x="480" y="380" width="80" height="100" fill="%2364B5F6" stroke="%231976D2" stroke-width="2"/><rect x="480" y="500" width="80" height="100" fill="%2364B5F6" stroke="%231976D2" stroke-width="2"/><rect x="590" y="380" width="80" height="100" fill="%2364B5F6" stroke="%231976D2" stroke-width="2"/><rect x="590" y="500" width="80" height="100" fill="%2364B5F6" stroke="%231976D2" stroke-width="2"/><rect x="700" y="380" width="80" height="100" fill="%2364B5F6" stroke="%231976D2" stroke-width="2"/><rect x="700" y="500" width="80" height="100" fill="%2364B5F6" stroke="%231976D2" stroke-width="2"/><rect x="810" y="380" width="80" height="100" fill="%2364B5F6" stroke="%231976D2" stroke-width="2"/><rect x="810" y="500" width="80" height="100" fill="%2364B5F6" stroke="%231976D2" stroke-width="2"/><rect x="650" y="500" width="100" height="150" fill="%238D6E63" stroke="%234E342E" stroke-width="3"/><circle cx="680" cy="600" r="8" fill="%23FFD700"/><polygon points="700,350 450,300 950,300" fill="%23D32F2F"/><rect x="660" y="320" width="80" height="30" fill="%23FFFFFF" stroke="%231976D2" stroke-width="2"/><text x="700" y="342" font-size="18" fill="%231976D2" text-anchor="middle" font-weight="bold">SD 6C</text></g><g id="trees"><ellipse cx="280" cy="550" rx="60" ry="80" fill="%232E7D32"/><rect x="265" y="580" width="30" height="70" fill="%235D4037"/><ellipse cx="1120" cy="560" rx="55" ry="75" fill="%232E7D32"/><rect x="1107" y="590" width="26" height="60" fill="%235D4037"/></g><g id="path"><path d="M 700 650 L 700 750 Q 700 800 650 800 L 400 800" fill="%23BDBDBD" opacity="0.7"/></g><g id="flowers"><circle cx="350" cy="640" r="8" fill="%23FF4081"/><circle cx="370" cy="635" r="8" fill="%23FFD700"/><circle cx="390" cy="640" r="8" fill="%23FF4081"/><circle cx="1000" cy="640" r="8" fill="%23FFD700"/><circle cx="1020" cy="635" r="8" fill="%23FF4081"/><circle cx="1040" cy="640" r="8" fill="%23FFD700"/></g></svg>');
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      opacity: 0.9;
-    }
-    
-    .vignette {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: radial-gradient(circle at center, transparent 40%, rgba(200, 230, 201, 0.3) 100%);
-      pointer-events: none;
-    }
-    
-    /* Floating decorative shapes */
-    .floating-shape {
-      position: absolute;
-      border-radius: 50%;
-      opacity: 0.15;
-      animation: float 6s ease-in-out infinite;
-    }
-    
-    .shape1 {
-      width: 120px;
-      height: 120px;
-      background: linear-gradient(135deg, #C8E6C9, #B2EBF2);
-      top: 15%;
-      left: 10%;
-      animation-delay: 0s;
-    }
-    
-    .shape2 {
-      width: 80px;
-      height: 80px;
-      background: linear-gradient(135deg, #D9F7E3, #D6F4FF);
-      top: 70%;
-      right: 15%;
-      animation-delay: 2s;
-    }
-    
-    .shape3 {
-      width: 100px;
-      height: 100px;
-      background: linear-gradient(135deg, #B2EBF2, #C8E6C9);
-      bottom: 20%;
-      left: 20%;
-      animation-delay: 4s;
-    }
-    
-    @keyframes float {
-      0%, 100% {
-        transform: translateY(0) rotate(0deg);
-      }
-      50% {
-        transform: translateY(-30px) rotate(5deg);
-      }
-    }
-    
-    /* HOME PAGE STYLES */
-    .hero-container {
-      position: relative;
-      z-index: 10;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-    }
-    
-    .glass-card {
-      background: rgba(255, 255, 255, 0.25);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border-radius: 40px;
-      border: 2px solid rgba(255, 255, 255, 0.4);
-      box-shadow: 0 20px 60px rgba(129, 199, 132, 0.2),
-                  0 8px 16px rgba(178, 235, 242, 0.15),
-                  inset 0 1px 1px rgba(255, 255, 255, 0.6);
-      padding: 60px 50px;
-      max-width: 900px;
-      width: 90%;
-      text-align: center;
-      animation: fadeInUp 1s ease-out;
-    }
-    
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-    
-    .hero-icon {
-      font-size: 4em;
-      margin-bottom: 20px;
-      filter: drop-shadow(0 4px 12px rgba(129, 199, 132, 0.3));
-      animation: bounce 2s ease-in-out infinite;
-    }
-    
-    @keyframes bounce {
-      0%, 100% {
-        transform: translateY(0);
-      }
-      50% {
-        transform: translateY(-10px);
-      }
-    }
-    
-    .hero-title {
-      font-size: 3.5em;
-      font-weight: 800;
-      color: #2E7D32;
-      margin-bottom: 20px;
-      letter-spacing: 2px;
-      text-shadow: 0 4px 15px rgba(46, 125, 50, 0.2);
-      line-height: 1.2;
-    }
-    
-    .hero-subtitle {
-      font-size: 1.4em;
-      color: #0277BD;
-      font-weight: 500;
-      margin-bottom: 25px;
-      text-shadow: 0 2px 8px rgba(2, 119, 189, 0.15);
-    }
-    
-    .hero-welcome {
-      font-size: 1em;
-      color: #34495E;
-      line-height: 1.7;
-      margin-bottom: 35px;
-      max-width: 700px;
-      margin-left: auto;
-      margin-right: auto;
-      text-shadow: 0 1px 3px rgba(255, 255, 255, 0.8);
-    }
-    
-    .badges-container {
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      margin-bottom: 40px;
-      flex-wrap: wrap;
-    }
-    
-    .badge {
-      background: rgba(255, 255, 255, 0.5);
-      backdrop-filter: blur(10px);
-      border: 2px solid rgba(129, 199, 132, 0.4);
-      padding: 12px 28px;
-      border-radius: 50px;
-      color: #2E7D32;
-      font-weight: 600;
-      font-size: 0.95em;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      box-shadow: 0 4px 15px rgba(129, 199, 132, 0.15);
+    .nav-indicator {
+      height: 3px;
+      background: linear-gradient(90deg, #3B82F6, #10B981);
+      border-radius: 2px;
       transition: all 0.3s ease;
-      cursor: default;
-    }
-    
-    .badge:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 6px 20px rgba(129, 199, 132, 0.25);
-      background: rgba(255, 255, 255, 0.65);
-    }
-    
-    .badge-icon {
-      font-size: 1.2em;
-    }
-    
-    .cta-container {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      flex-wrap: wrap;
-    }
-    
-    .btn {
-      padding: 18px 45px;
-      border-radius: 40px;
-      border: none;
-      font-size: 1.1em;
-      font-weight: 700;
-      cursor: pointer;
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      position: relative;
-      overflow: hidden;
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
-    }
-    
-    .btn::before {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 0;
-      height: 0;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.3);
-      transform: translate(-50%, -50%);
-      transition: width 0.6s, height 0.6s;
-    }
-    
-    .btn:hover::before {
-      width: 300px;
-      height: 300px;
-    }
-    
-    .btn span {
-      position: relative;
-      z-index: 1;
-    }
-    
-    .btn-primary {
-      background: linear-gradient(135deg, #81C784 0%, #4FC3F7 100%);
-      color: white;
-    }
-    
-    .btn-primary:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 35px rgba(129, 199, 132, 0.4),
-                  0 0 30px rgba(79, 195, 247, 0.3);
-    }
-    
-    .btn-secondary {
-      background: linear-gradient(135deg, #64B5F6 0%, #81C784 100%);
-      color: white;
-    }
-    
-    .btn-secondary:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 35px rgba(100, 181, 246, 0.4),
-                  0 0 30px rgba(129, 199, 132, 0.3);
-    }
-    
-    .btn:active {
-      transform: translateY(-2px);
-    }
-    
-    .btn-back {
-      background: rgba(255, 255, 255, 0.9);
-      color: #2E7D32;
-      padding: 12px 30px;
-      font-size: 1em;
-    }
-    
-    .btn-back:hover {
-      background: white;
-      transform: translateY(-2px);
-    }
-    
-    /* INNER PAGE STYLES */
-    .inner-page {
-      position: relative;
-      z-index: 10;
-      min-height: 100%;
-      padding: 40px 20px;
-    }
-    
-    .page-header {
-      text-align: center;
-      margin-bottom: 40px;
-    }
-    
-    .page-title {
-      font-size: 2.5em;
-      font-weight: 800;
-      color: #2E7D32;
-      margin-bottom: 15px;
-      text-shadow: 0 4px 15px rgba(46, 125, 50, 0.2);
-    }
-    
-    .page-subtitle {
-      font-size: 1.2em;
-      color: #0277BD;
-      margin-bottom: 30px;
-    }
-    
-    .content-container {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-    
-    .cards-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 25px;
-      margin-bottom: 30px;
-    }
-    
-    .info-card {
-      background: rgba(255, 255, 255, 0.9);
-      backdrop-filter: blur(15px);
-      border-radius: 25px;
-      padding: 35px;
-      border: 2px solid rgba(129, 199, 132, 0.3);
-      box-shadow: 0 10px 30px rgba(129, 199, 132, 0.15);
-      transition: all 0.3s ease;
-    }
-    
-    .info-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 15px 40px rgba(129, 199, 132, 0.25);
-    }
-    
-    .card-icon {
-      font-size: 3em;
-      margin-bottom: 15px;
-      filter: drop-shadow(0 4px 10px rgba(129, 199, 132, 0.3));
-    }
-    
-    .card-title {
-      font-size: 1.5em;
-      color: #2E7D32;
-      margin-bottom: 15px;
-      font-weight: 700;
-    }
-    
-    .card-content {
-      color: #34495E;
-      line-height: 1.6;
-    }
-    
-    .stat-number {
-      font-size: 3em;
-      font-weight: 800;
-      color: #81C784;
-      margin: 20px 0;
-      text-shadow: 0 4px 10px rgba(129, 199, 132, 0.2);
-    }
-    
-    .stat-label {
-      font-size: 1.1em;
-      color: #0277BD;
-      font-weight: 600;
-    }
-    
-    /* Attendance Table */
-    .attendance-table {
-      background: rgba(255, 255, 255, 0.9);
-      border-radius: 20px;
-      overflow: hidden;
-      margin-bottom: 30px;
-      box-shadow: 0 10px 30px rgba(129, 199, 132, 0.15);
-    }
-    
-    .attendance-table table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-    
-    .attendance-table th {
-      background: linear-gradient(135deg, #81C784, #64B5F6);
-      color: white;
-      padding: 18px;
-      text-align: left;
-      font-weight: 600;
-    }
-    
-    .attendance-table td {
-      padding: 15px 18px;
-      border-bottom: 1px solid rgba(129, 199, 132, 0.2);
-      color: #34495E;
-    }
-    
-    .attendance-table tr:last-child td {
-      border-bottom: none;
-    }
-    
-    .attendance-table tr:hover {
-      background: rgba(232, 245, 233, 0.5);
-    }
-    
-    .status-badge {
-      padding: 6px 16px;
-      border-radius: 20px;
-      font-size: 0.9em;
-      font-weight: 600;
-      display: inline-block;
-    }
-    
-    .status-hadir {
-      background: rgba(129, 199, 132, 0.2);
-      color: #2E7D32;
-    }
-    
-    .status-izin {
-      background: rgba(255, 193, 7, 0.2);
-      color: #F57F17;
-    }
-    
-    .status-sakit {
-      background: rgba(244, 143, 177, 0.2);
-      color: #C2185B;
-    }
-    
-    /* Teacher Portfolio */
-    .teacher-profile {
-      background: rgba(255, 255, 255, 0.9);
-      backdrop-filter: blur(15px);
-      border-radius: 25px;
-      padding: 40px;
-      border: 2px solid rgba(129, 199, 132, 0.3);
-      box-shadow: 0 10px 30px rgba(129, 199, 132, 0.15);
-      display: flex;
-      gap: 40px;
-      align-items: center;
-      flex-wrap: wrap;
-      margin-bottom: 30px;
-    }
-    
-    .teacher-avatar {
-      width: 180px;
-      height: 180px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #81C784, #64B5F6);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 5em;
-      box-shadow: 0 10px 30px rgba(129, 199, 132, 0.3);
-      flex-shrink: 0;
-      overflow: hidden;
-    }
-    
-    .teacher-avatar img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-    
-    .teacher-info {
-      flex: 1;
-      min-width: 300px;
-    }
-    
-    .teacher-name {
-      font-size: 2em;
-      color: #2E7D32;
-      font-weight: 700;
-      margin-bottom: 10px;
-    }
-    
-    .teacher-role {
-      font-size: 1.2em;
-      color: #0277BD;
-      margin-bottom: 20px;
-      font-weight: 600;
-    }
-    
-    .teacher-bio {
-      color: #34495E;
-      line-height: 1.7;
-      margin-bottom: 20px;
-    }
-    
-    .teacher-details {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
-      margin-top: 20px;
-    }
-    
-    .detail-item {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      color: #34495E;
-    }
-    
-    .detail-icon {
-      font-size: 1.5em;
-    }
-    
-    /* Subject Cards */
-    .subject-card {
-      background: rgba(255, 255, 255, 0.9);
-      backdrop-filter: blur(15px);
-      border-radius: 25px;
-      padding: 35px;
-      border: 2px solid rgba(129, 199, 132, 0.3);
-      box-shadow: 0 10px 30px rgba(129, 199, 132, 0.15);
-      transition: all 0.3s ease;
-      cursor: pointer;
-      text-align: center;
-    }
-    
-    .subject-card:hover {
-      transform: translateY(-8px) scale(1.02);
-      box-shadow: 0 15px 45px rgba(129, 199, 132, 0.3);
-      border-color: rgba(79, 195, 247, 0.5);
-    }
-    
-    .subject-icon {
-      font-size: 4em;
-      margin-bottom: 20px;
-      filter: drop-shadow(0 4px 10px rgba(129, 199, 132, 0.3));
-    }
-    
-    .subject-name {
-      font-size: 1.5em;
-      color: #2E7D32;
-      font-weight: 700;
-      margin-bottom: 15px;
-    }
-    
-    .subject-description {
-      color: #34495E;
-      line-height: 1.6;
-      margin-bottom: 20px;
-    }
-    
-    .subject-topics {
-      background: rgba(232, 245, 233, 0.5);
-      border-radius: 15px;
-      padding: 15px;
-      margin-top: 20px;
-    }
-    
-    .subject-topics h4 {
-      color: #0277BD;
-      margin-bottom: 10px;
-      font-size: 1em;
-    }
-    
-    .subject-topics ul {
-      list-style: none;
-      padding: 0;
-    }
-    
-    .subject-topics li {
-      padding: 8px 0;
-      color: #34495E;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    
-    .subject-topics li::before {
-      content: '✓';
-      color: #81C784;
-      font-weight: bold;
-      font-size: 1.2em;
-    }
-    
-    /* Responsive Design */
-    @media (max-width: 768px) {
-      .glass-card {
-        padding: 40px 30px;
-        border-radius: 30px;
-      }
-      
-      .hero-icon {
-        font-size: 3em;
-      }
-      
-      .hero-title {
-        font-size: 2.2em;
-        letter-spacing: 1px;
-      }
-      
-      .hero-subtitle {
-        font-size: 1.1em;
-      }
-      
-      .hero-welcome {
-        font-size: 0.95em;
-      }
-      
-      .badges-container {
-        flex-direction: column;
-        align-items: center;
-      }
-      
-      .badge {
-        width: 100%;
-        max-width: 280px;
-        justify-content: center;
-      }
-      
-      .cta-container {
-        flex-direction: column;
-        width: 100%;
-      }
-      
-      .btn {
-        width: 100%;
-        justify-content: center;
-        font-size: 1em;
-        padding: 16px 35px;
-      }
-      
-      .page-title {
-        font-size: 2em;
-      }
-      
-      .cards-grid {
-        grid-template-columns: 1fr;
-      }
-      
-      .teacher-profile {
-        flex-direction: column;
-        text-align: center;
-        padding: 30px;
-      }
-      
-      .teacher-avatar {
-        width: 150px;
-        height: 150px;
-        font-size: 4em;
-      }
-      
-      .teacher-details {
-        justify-content: center;
-      }
-      
-      .attendance-table {
-        overflow-x: auto;
-      }
-    }
-    
-    @media (max-width: 480px) {
-      .glass-card {
-        padding: 30px 20px;
-      }
-      
-      .hero-icon {
-        font-size: 2.5em;
-      }
-      
-      .hero-title {
-        font-size: 1.8em;
-      }
-      
-      .hero-subtitle {
-        font-size: 1em;
-      }
-      
-      .hero-welcome {
-        font-size: 0.9em;
-      }
-      
-      .badge {
-        padding: 10px 20px;
-        font-size: 0.9em;
-      }
-      
-      .page-title {
-        font-size: 1.6em;
-      }
-      
-      .info-card {
-        padding: 25px;
-      }
-      
-      .stat-number {
-        font-size: 2.5em;
-      }
     }
   </style>
   <style>@view-transition { navigation: auto; }</style>
   <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
-  <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
  </head>
- <body><!-- Background Layer -->
-  <div class="hero-background">
-   <div class="illustration-layer"></div>
-   <div class="vignette"></div>
-   <div class="floating-shape shape1"></div>
-   <div class="floating-shape shape2"></div>
-   <div class="floating-shape shape3"></div>
-  </div><!-- HOME PAGE -->
-  <div id="home-page" class="page active">
-   <div class="hero-container">
-    <article class="glass-card">
-     <div class="hero-icon">
-      🎓
-     </div>
-     <h1 class="hero-title">KELAS DIGITAL 6C SD</h1>
-     <p class="hero-subtitle">Portal Informasi Pembelajaran Siswa &amp; Orang Tua</p>
-     <p class="hero-welcome">"Selamat datang di Kelas Digital 6C. Platform ini dibuat untuk memudahkan komunikasi, memantau perkembangan belajar, dan mendukung kolaborasi antara guru, orang tua, dan siswa."</p>
-     <div class="badges-container">
-      <div class="badge"><span class="badge-icon">👥</span> <span>Kolaboratif</span>
-      </div>
-      <div class="badge"><span class="badge-icon">💬</span> <span>Transparan</span>
-      </div>
-      <div class="badge"><span class="badge-icon">📚</span> <span>Terhubung</span>
-      </div>
-     </div>
-     <div class="cta-container"><button class="btn btn-primary" onclick="showPage('info')"> <span>📋 Lihat Info Kelas</span> </button> <button class="btn btn-secondary" onclick="showPage('portofolio')"> <span>👨‍🏫 Portofolio Guru</span> </button> <button class="btn btn-primary" onclick="showPage('materi')"> <span>📖 Akses Materi Pembelajaran</span> </button> <button class="btn btn-secondary" onclick="showPage('games')"> <span>🎮 Main Game Edukatif</span> </button>
-     </div>
-    </article>
-   </div>
-  </div><!-- INFO KELAS PAGE -->
-  <div id="info-page" class="page">
-   <div class="inner-page">
-    <div class="page-header">
-     <h1 class="page-title">📋 Info Kelas 6C</h1>
-     <p class="page-subtitle">Informasi Lengkap Kelas dan Statistik</p><button class="btn btn-back" onclick="showPage('home')"> <span>← Kembali ke Beranda</span> </button>
-    </div>
-    <div class="content-container"><!-- Statistics Cards -->
-     <div class="cards-grid">
-      <div class="info-card">
-       <div class="card-icon">
-        👨‍🎓
+ <body>
+  <div class="gradient-bg" style="width: 100%; min-height: 100%;"><!-- Navigation Bar -->
+   <nav id="navbar" style="background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(0, 0, 0, 0.05); position: sticky; top: 0; z-index: 50; width: 100%;">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 16px 24px;">
+     <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+      <div style="display: flex; align-items: center; gap: 12px;">
+       <div class="icon-circle" id="logoCircle" style="background: linear-gradient(135deg, #3B82F6, #10B981); color: white;">
+        🎓
        </div>
-       <h3 class="card-title">Jumlah Siswa</h3>
-       <div class="stat-number">
-        32
-       </div>
-       <p class="stat-label">Siswa Aktif</p>
-       <div class="card-content" style="margin-top: 15px;">
-        <p>• Laki-laki: 16 siswa</p>
-        <p>• Perempuan: 16 siswa</p>
+       <div>
+        <h1 id="navTitle" style="font-size: 18px; font-weight: 700; line-height: 1.3; margin: 0;">Kelas Digital 6C</h1>
+        <p style="font-size: 12px; color: #6B7280; margin: 0;">SDN 19 Martapura</p>
        </div>
       </div>
-      <div class="info-card">
-       <div class="card-icon">
-        📊
-       </div>
-       <h3 class="card-title">Tingkat Kehadiran</h3>
-       <div class="stat-number">
-        95%
-       </div>
-       <p class="stat-label">Rata-rata Bulan Ini</p>
-       <div class="card-content" style="margin-top: 15px;">
-        <p>• Hadir: 30 siswa</p>
-        <p>• Izin: 1 siswa</p>
-        <p>• Sakit: 1 siswa</p>
-       </div>
+      <div style="display: flex; gap: 8px; flex-wrap: wrap;"><button onclick="showPage('home')" class="nav-btn" id="nav-home" style="padding: 8px 16px; border-radius: 8px; border: none; background: #3B82F6; color: white; font-size: 14px; font-weight: 500; cursor: pointer;">Beranda</button> <button onclick="showPage('guru')" class="nav-btn" id="nav-guru" style="padding: 8px 16px; border-radius: 8px; border: none; background: white; color: #374151; font-size: 14px; font-weight: 500; cursor: pointer; border: 1px solid #E5E7EB;">Profil Guru</button> <button onclick="showPage('info')" class="nav-btn" id="nav-info" style="padding: 8px 16px; border-radius: 8px; border: none; background: white; color: #374151; font-size: 14px; font-weight: 500; cursor: pointer; border: 1px solid #E5E7EB;">Info</button> <button onclick="showPage('materi')" class="nav-btn" id="nav-materi" style="padding: 8px 16px; border-radius: 8px; border: none; background: white; color: #374151; font-size: 14px; font-weight: 500; cursor: pointer; border: 1px solid #E5E7EB;">Materi</button> <button onclick="showPage('nilai')" class="nav-btn" id="nav-nilai" style="padding: 8px 16px; border-radius: 8px; border: none; background: white; color: #374151; font-size: 14px; font-weight: 500; cursor: pointer; border: 1px solid #E5E7EB;">Nilai</button> <button onclick="showPage('poin')" class="nav-btn" id="nav-poin" style="padding: 8px 16px; border-radius: 8px; border: none; background: white; color: #374151; font-size: 14px; font-weight: 500; cursor: pointer; border: 1px solid #E5E7EB;">Poin</button> <button onclick="showPage('galeri')" class="nav-btn" id="nav-galeri" style="padding: 8px 16px; border-radius: 8px; border: none; background: white; color: #374151; font-size: 14px; font-weight: 500; cursor: pointer; border: 1px solid #E5E7EB;">Galeri</button> <button onclick="showPage('kontak')" class="nav-btn" id="nav-kontak" style="padding: 8px 16px; border-radius: 8px; border: none; background: white; color: #374151; font-size: 14px; font-weight: 500; cursor: pointer; border: 1px solid #E5E7EB;">Kontak</button>
       </div>
-      <div class="info-card">
-       <div class="card-icon">
-        🏆
-       </div>
-       <h3 class="card-title">Prestasi Kelas</h3>
-       <div class="stat-number">
-        15
-       </div>
-       <p class="stat-label">Penghargaan Tahun Ini</p>
-       <div class="card-content" style="margin-top: 15px;">
-        <p>• Juara Olimpiade: 5</p>
-        <p>• Lomba Seni: 6</p>
-        <p>• Olahraga: 4</p>
-       </div>
-      </div>
-     </div><!-- Attendance Table -->
-     <h2 style="text-align: center; color: #2E7D32; margin: 40px 0 25px; font-size: 2em;">📅 Absensi Hari Ini</h2>
-     <div class="attendance-table">
-      <table>
-       <thead>
-        <tr>
-         <th>No</th>
-         <th>Nama Siswa</th>
-         <th>Status</th>
-         <th>Keterangan</th>
-        </tr>
-       </thead>
-       <tbody>
-        <tr>
-         <td>1</td>
-         <td>Ahmad Rizki Pratama</td>
-         <td><span class="status-badge status-hadir">✓ Hadir</span></td>
-         <td>-</td>
-        </tr>
-        <tr>
-         <td>2</td>
-         <td>Siti Nurhaliza</td>
-         <td><span class="status-badge status-hadir">✓ Hadir</span></td>
-         <td>-</td>
-        </tr>
-        <tr>
-         <td>3</td>
-         <td>Budi Santoso</td>
-         <td><span class="status-badge status-izin">⚠ Izin</span></td>
-         <td>Keperluan Keluarga</td>
-        </tr>
-        <tr>
-         <td>4</td>
-         <td>Dewi Lestari</td>
-         <td><span class="status-badge status-hadir">✓ Hadir</span></td>
-         <td>-</td>
-        </tr>
-        <tr>
-         <td>5</td>
-         <td>Eko Prasetyo</td>
-         <td><span class="status-badge status-sakit">✗ Sakit</span></td>
-         <td>Demam</td>
-        </tr>
-        <tr>
-         <td>6</td>
-         <td>Fitri Handayani</td>
-         <td><span class="status-badge status-hadir">✓ Hadir</span></td>
-         <td>-</td>
-        </tr>
-       </tbody>
-      </table>
      </div>
     </div>
-   </div>
-  </div><!-- PORTOFOLIO GURU PAGE -->
-  <div id="portofolio-page" class="page">
-   <div class="inner-page">
-    <div class="page-header">
-     <h1 class="page-title">👨‍🏫 Portofolio Guru</h1>
-     <p class="page-subtitle">Profil Lengkap Wali Kelas 6C</p><button class="btn btn-back" onclick="showPage('home')"> <span>← Kembali ke Beranda</span> </button>
+   </nav><!-- Homepage -->
+   <div id="page-home" class="page-section active">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 40px 24px;"><!-- Hero Section -->
+     <div class="section-card card-hover" style="border-radius: 24px; padding: 48px 32px; margin-bottom: 32px; text-align: center; background: rgba(255, 255, 255, 0.95);">
+      <div style="width: 120px; height: 120px; border-radius: 50%; margin: 0 auto 24px; background: linear-gradient(135deg, #3B82F6, #10B981); display: flex; align-items: center; justify-content: center; font-size: 64px;">
+       🏫
+      </div>
+      <h1 id="heroTitle" style="font-size: 36px; font-weight: 800; margin-bottom: 16px; background: linear-gradient(135deg, #3B82F6, #10B981); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Kelas Digital 6C SDN 19 Martapura</h1>
+      <p id="heroSubtitle" style="font-size: 18px; color: #6B7280; max-width: 600px; margin: 0 auto;">Selamat Datang di Portal Pembelajaran Digital Kami</p>
+     </div><!-- Class Info Cards -->
+     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-bottom: 32px;">
+      <div class="section-card card-hover" style="border-radius: 16px; padding: 24px; background: rgba(255, 255, 255, 0.95);">
+       <div class="icon-circle" style="background: linear-gradient(135deg, #3B82F6, #60A5FA); color: white; margin-bottom: 16px;">
+        👨‍🏫
+       </div>
+       <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 8px; color: #111827;">Wali Kelas</h3>
+       <p id="teacherNameCard" style="font-size: 14px; color: #6B7280; margin-bottom: 12px;">Ibu Siti Rahma, S.Pd</p><button onclick="showPage('guru')" style="padding: 8px 16px; border-radius: 8px; border: none; background: #E0F2FE; color: #0369A1; font-size: 13px; font-weight: 500; cursor: pointer; width: 100%;">Lihat Profil</button>
+      </div>
+      <div class="section-card card-hover" style="border-radius: 16px; padding: 24px; background: rgba(255, 255, 255, 0.95);">
+       <div class="icon-circle" style="background: linear-gradient(135deg, #10B981, #34D399); color: white; margin-bottom: 16px;">
+        👥
+       </div>
+       <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 8px; color: #111827;">Jumlah Siswa</h3>
+       <p style="font-size: 14px; color: #6B7280; margin-bottom: 12px;">27 Siswa Aktif</p><button onclick="showPage('info')" style="padding: 8px 16px; border-radius: 8px; border: none; background: #D1FAE5; color: #065F46; font-size: 13px; font-weight: 500; cursor: pointer; width: 100%;">Lihat Jadwal</button>
+      </div>
+      <div class="section-card card-hover" style="border-radius: 16px; padding: 24px; background: rgba(255, 255, 255, 0.95);">
+       <div class="icon-circle" style="background: linear-gradient(135deg, #F59E0B, #FBBF24); color: white; margin-bottom: 16px;">
+        📚
+       </div>
+       <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 8px; color: #111827;">Materi Tersedia</h3>
+       <p style="font-size: 14px; color: #6B7280; margin-bottom: 12px;">9 Mata Pelajaran</p><button onclick="showPage('materi')" style="padding: 8px 16px; border-radius: 8px; border: none; background: #FEF3C7; color: #92400E; font-size: 13px; font-weight: 500; cursor: pointer; width: 100%;">Akses Materi</button>
+      </div>
+     </div><!-- Quick Access -->
+     <div class="section-card" style="border-radius: 16px; padding: 32px; background: rgba(255, 255, 255, 0.95);">
+      <h2 style="font-size: 24px; font-weight: 700; margin-bottom: 24px; color: #111827;">Akses Cepat</h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px;"><button onclick="showPage('info')" class="card-hover" style="padding: 20px; border-radius: 12px; border: 2px solid #E5E7EB; background: white; text-align: left; cursor: pointer;">
+        <div style="font-size: 28px; margin-bottom: 8px;">
+         📅
+        </div>
+        <div style="font-size: 15px; font-weight: 600; color: #111827;">
+         Jadwal Pelajaran
+        </div></button> <button onclick="showPage('info')" class="card-hover" style="padding: 20px; border-radius: 12px; border: 2px solid #E5E7EB; background: white; text-align: left; cursor: pointer;">
+        <div style="font-size: 28px; margin-bottom: 8px;">
+         📢
+        </div>
+        <div style="font-size: 15px; font-weight: 600; color: #111827;">
+         Pengumuman
+        </div></button> <button onclick="showPage('materi')" class="card-hover" style="padding: 20px; border-radius: 12px; border: 2px solid #E5E7EB; background: white; text-align: left; cursor: pointer;">
+        <div style="font-size: 28px; margin-bottom: 8px;">
+         📖
+        </div>
+        <div style="font-size: 15px; font-weight: 600; color: #111827;">
+         Download LKPD
+        </div></button> <button onclick="showPage('poin')" class="card-hover" style="padding: 20px; border-radius: 12px; border: 2px solid #E5E7EB; background: white; text-align: left; cursor: pointer;">
+        <div style="font-size: 28px; margin-bottom: 8px;">
+         ⭐
+        </div>
+        <div style="font-size: 15px; font-weight: 600; color: #111827;">
+         Poin Kebaikan
+        </div></button>
+      </div>
+     </div>
     </div>
-    <div class="content-container"><!-- Teacher Portfolio -->
-     <div class="teacher-profile">
-      <div class="teacher-avatar"><img src="https://i.imgur.com/F21qyfV.jpeg" alt="Foto Profil Guru" onerror="this.style.display='none'; this.parentElement.innerHTML='👨‍🏫';">
-      </div>
-      <div class="teacher-info">
-       <h2 class="teacher-name">Bapak Dian Agung Pamungkas, S.Pd.</h2>
-       <p class="teacher-role">Wali Kelas 6C &amp; Guru Matematika</p>
-       <p class="teacher-bio">Pendidik berpengalaman 8 tahun dalam bidang pendidikan dasar. Menerapkan metode pembelajaran inovatif berbasis Project Based Learning (PjBL) dan pendekatan diferensiasi untuk mengakomodasi kebutuhan belajar setiap siswa. Berkomitmen menciptakan lingkungan belajar yang inklusif, menyenangkan, dan bermakna.</p>
-       <div class="teacher-details">
-        <div class="detail-item"><span class="detail-icon">🎓</span> <span>S1 PGSD - Universitas Negeri Yogyakarta</span>
-        </div>
-        <div class="detail-item"><span class="detail-icon">📜</span> <span>Sertifikat Guru Profesional</span>
-        </div>
-        <div class="detail-item"><span class="detail-icon">🏆</span> <span>Guru Berprestasi Tingkat Kecamatan 2023</span>
-        </div>
-        <div class="detail-item"><span class="detail-icon">💼</span> <span>8 Tahun Pengalaman Mengajar</span>
-        </div>
+   </div><!-- Profil Guru Page -->
+   <div id="page-guru" class="page-section">
+    <div style="max-width: 900px; margin: 0 auto; padding: 40px 24px;">
+     <div class="section-card" style="border-radius: 24px; padding: 40px; background: rgba(255, 255, 255, 0.95);">
+      <div style="text-align: center; margin-bottom: 40px;">
+       <div style="width: 150px; height: 150px; border-radius: 50%; margin: 0 auto 24px; background: linear-gradient(135deg, #3B82F6, #10B981); display: flex; align-items: center; justify-content: center; font-size: 72px; box-shadow: 0 10px 25px rgba(59, 130, 246, 0.3);">
+        👩‍🏫
        </div>
-       <div style="margin-top: 30px;">
-        <h4 style="color: #0277BD; margin-bottom: 15px; font-size: 1.2em;">Mata Pelajaran yang Diampu:</h4>
-        <div style="display: flex; flex-wrap: wrap; gap: 10px;"><span class="badge">📐 Matematika</span> <span class="badge">🔬 IPAS</span> <span class="badge">📖 Bahasa Indonesia</span> <span class="badge">🏛️ PPKn</span>
-        </div>
-       </div>
-       <div style="margin-top: 25px;">
-        <h4 style="color: #0277BD; margin-bottom: 15px; font-size: 1.2em;">Keahlian Khusus:</h4>
-        <div style="display: flex; flex-wrap: wrap; gap: 10px;"><span class="badge">✨ Pembelajaran Berdiferensiasi</span> <span class="badge">🎯 Project Based Learning</span> <span class="badge">💻 Teknologi Pembelajaran</span> <span class="badge">❤️ Pendekatan Sosial Emosional</span>
-        </div>
+       <h2 id="teacherNameProfile" style="font-size: 32px; font-weight: 800; margin-bottom: 8px; color: #111827;">Ibu Siti Rahma, S.Pd</h2>
+       <p style="font-size: 16px; color: #6B7280; margin-bottom: 16px;">Wali Kelas 6C</p>
+       <div style="display: inline-block; padding: 12px 24px; border-radius: 12px; background: linear-gradient(135deg, #E0F2FE, #D1FAE5);">
+        <p id="teacherMottoDisplay" style="font-size: 16px; font-weight: 600; color: #111827; font-style: italic; margin: 0;">✨ Belajar dengan Hati, Tumbuh dengan Prestasi ✨</p>
        </div>
       </div>
-     </div><!-- Teaching Philosophy -->
-     <div style="margin-top: 40px; background: rgba(255, 255, 255, 0.9); border-radius: 25px; padding: 40px; box-shadow: 0 10px 30px rgba(129, 199, 132, 0.15);">
-      <h2 style="text-align: center; color: #2E7D32; margin-bottom: 30px; font-size: 2em;">💡 Filosofi Mengajar</h2>
-      <p style="color: #34495E; line-height: 1.8; font-size: 1.1em; text-align: center; max-width: 800px; margin: 0 auto;">"Setiap anak adalah unik dengan potensi luar biasa. Tugas saya adalah menciptakan ruang belajar yang aman, menyenangkan, dan menantang, sehingga setiap siswa dapat berkembang sesuai dengan kemampuan dan minat mereka. Belajar bukan hanya tentang nilai, tetapi tentang membangun karakter, kreativitas, dan kecintaan terhadap ilmu pengetahuan."</p>
-     </div><!-- Achievements & Certifications -->
-     <div style="margin-top: 50px;">
-      <h2 style="text-align: center; color: #2E7D32; margin-bottom: 30px; font-size: 2em;">🏆 Penghargaan &amp; Sertifikasi</h2>
-      <div class="cards-grid">
-       <div class="info-card">
-        <div class="card-icon">
-         🥇
-        </div>
-        <h3 class="card-title">Guru Berprestasi</h3>
-        <div class="card-content">
-         <p><strong>2023</strong> - Tingkat Kecamatan</p>
-         <p style="margin-top: 10px;">Penghargaan atas dedikasi dan inovasi dalam pembelajaran</p>
-        </div>
+      <div style="display: grid; gap: 24px;">
+       <div style="padding: 24px; border-radius: 16px; background: #F9FAFB; border-left: 4px solid #3B82F6;">
+        <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 12px; color: #111827;">🎓 Pendidikan</h3>
+        <p style="font-size: 15px; color: #374151; line-height: 1.6; margin: 0;">S1 Pendidikan Guru Sekolah Dasar<br>
+         Universitas Terbuka</p>
        </div>
-       <div class="info-card">
-        <div class="card-icon">
-         📜
-        </div>
-        <h3 class="card-title">Sertifikat Pendidik</h3>
-        <div class="card-content">
-         <p><strong>2020</strong> - Kementerian Pendidikan</p>
-         <p style="margin-top: 10px;">Guru Profesional Bersertifikat</p>
-        </div>
+       <div style="padding: 24px; border-radius: 16px; background: #F9FAFB; border-left: 4px solid #10B981;">
+        <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 12px; color: #111827;">💼 Pengalaman</h3>
+        <p style="font-size: 15px; color: #374151; line-height: 1.6; margin: 0;">8 Tahun Mengajar di SDN 19 Martapura<br>
+         Spesialisasi: Matematika &amp; IPA</p>
        </div>
-       <div class="info-card">
-        <div class="card-icon">
-         💻
-        </div>
-        <h3 class="card-title">Digital Teaching</h3>
-        <div class="card-content">
-         <p><strong>2022</strong> - Google for Education</p>
-         <p style="margin-top: 10px;">Certified Educator Level 1 &amp; 2</p>
-        </div>
-       </div>
-      </div>
-     </div><!-- Contact & Office Hours -->
-     <div style="margin-top: 50px; background: rgba(255, 255, 255, 0.9); border-radius: 25px; padding: 40px; box-shadow: 0 10px 30px rgba(129, 199, 132, 0.15);">
-      <h2 style="text-align: center; color: #2E7D32; margin-bottom: 30px; font-size: 2em;">📞 Kontak &amp; Jam Konsultasi</h2>
-      <div class="cards-grid">
-       <div style="text-align: center;">
-        <div style="font-size: 3em; margin-bottom: 15px;">
-         📧
-        </div>
-        <h4 style="color: #0277BD; margin-bottom: 10px;">Email</h4>
-        <p style="color: #34495E;">dian.pamungkas@sd6c.sch.id</p>
-       </div>
-       <div style="text-align: center;">
-        <div style="font-size: 3em; margin-bottom: 15px;">
-         ⏰
-        </div>
-        <h4 style="color: #0277BD; margin-bottom: 10px;">Jam Konsultasi</h4>
-        <p style="color: #34495E;">Senin - Jumat<br>
-         14:00 - 15:30 WIB</p>
-       </div>
-       <div style="text-align: center;">
-        <div style="font-size: 3em; margin-bottom: 15px;">
-         💬
-        </div>
-        <h4 style="color: #0277BD; margin-bottom: 10px;">WhatsApp</h4>
-        <p style="color: #34495E;">+62 812-3456-7890<br>
-         (Orang tua siswa)</p>
+       <div style="padding: 24px; border-radius: 16px; background: #F9FAFB; border-left: 4px solid #8B5CF6;">
+        <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 12px; color: #111827;">💡 Filosofi Mengajar</h3>
+        <p style="font-size: 15px; color: #374151; line-height: 1.6; margin: 0;">"Setiap anak adalah bintang yang bersinar dengan caranya sendiri. Tugas kita adalah membantu mereka menemukan cahaya itu dan membiarkannya bersinar terang."</p>
        </div>
       </div>
      </div>
     </div>
-   </div>
-  </div><!-- MATERI PEMBELAJARAN PAGE -->
-  <div id="materi-page" class="page">
-   <div class="inner-page">
-    <div class="page-header">
-     <h1 class="page-title">📚 Materi Pembelajaran</h1>
-     <p class="page-subtitle">Pilih Mata Pelajaran untuk Mengakses Materi</p><button class="btn btn-back" onclick="showPage('home')"> <span>← Kembali ke Beranda</span> </button>
-    </div>
-    <div class="content-container">
-     <div class="cards-grid"><!-- Matematika -->
-      <div class="subject-card">
-       <div class="subject-icon">
-        🔢
+   </div><!-- Info Page -->
+   <div id="page-info" class="page-section">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 40px 24px;">
+     <h2 style="font-size: 32px; font-weight: 800; margin-bottom: 32px; color: #111827; text-align: center;">Informasi Siswa &amp; Orang Tua</h2><!-- Jadwal Pelajaran -->
+     <div class="section-card" style="border-radius: 16px; padding: 32px; margin-bottom: 32px; background: rgba(255, 255, 255, 0.95);">
+      <h3 style="font-size: 24px; font-weight: 700; margin-bottom: 24px; color: #111827; display: flex; align-items: center; gap: 12px;"><span style="font-size: 32px;">📅</span> Jadwal Pelajaran</h3>
+      <div style="overflow-x: auto;">
+       <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
+        <thead>
+         <tr style="background: linear-gradient(135deg, #3B82F6, #10B981); color: white;">
+          <th style="padding: 16px; text-align: left; font-weight: 600;">Hari</th>
+          <th style="padding: 16px; text-align: left; font-weight: 600;">Jam 1-2</th>
+          <th style="padding: 16px; text-align: left; font-weight: 600;">Jam 3-4</th>
+          <th style="padding: 16px; text-align: left; font-weight: 600;">Jam 5-6</th>
+          <th style="padding: 16px; text-align: left; font-weight: 600;">Jam 7-8</th>
+         </tr>
+        </thead>
+        <tbody>
+         <tr style="border-bottom: 1px solid #E5E7EB;">
+          <td style="padding: 16px; font-weight: 600; color: #111827;">Senin</td>
+          <td style="padding: 16px; color: #374151;">Upacara</td>
+          <td style="padding: 16px; color: #374151;">Matematika</td>
+          <td style="padding: 16px; color: #374151;">PAI</td>
+          <td style="padding: 16px; color: #374151;">Bahasa Indonesia</td>
+         </tr>
+         <tr style="border-bottom: 1px solid #E5E7EB; background: #F9FAFB;">
+          <td style="padding: 16px; font-weight: 600; color: #111827;">Selasa</td>
+          <td style="padding: 16px; color: #374151;">Bahasa Indonesia</td>
+          <td style="padding: 16px; color: #374151;">Bahasa Inggris</td>
+          <td style="padding: 16px; color: #374151;">PKn</td>
+          <td style="padding: 16px; color: #374151;">PAI</td>
+         </tr>
+         <tr style="border-bottom: 1px solid #E5E7EB;">
+          <td style="padding: 16px; font-weight: 600; color: #111827;">Rabu</td>
+          <td style="padding: 16px; color: #374151;">PJOK</td>
+          <td style="padding: 16px; color: #374151;">Seni &amp; Budaya</td>
+          <td style="padding: 16px; color: #374151;">-</td>
+          <td style="padding: 16px; color: #374151;">-</td>
+         </tr>
+         <tr style="border-bottom: 1px solid #E5E7EB; background: #F9FAFB;">
+          <td style="padding: 16px; font-weight: 600; color: #111827;">Kamis</td>
+          <td style="padding: 16px; color: #374151;">Matematika</td>
+          <td style="padding: 16px; color: #374151;">Bahasa Indonesia</td>
+          <td style="padding: 16px; color: #374151;">-</td>
+          <td style="padding: 16px; color: #374151;">-</td>
+         </tr>
+         <tr style="border-bottom: 1px solid #E5E7EB;">
+          <td style="padding: 16px; font-weight: 600; color: #111827;">Jumat</td>
+          <td style="padding: 16px; color: #374151;">Senam</td>
+          <td style="padding: 16px; color: #374151;">IPAS</td>
+          <td style="padding: 16px; color: #374151;">-</td>
+          <td style="padding: 16px; color: #374151;">-</td>
+         </tr>
+         <tr style="border-bottom: 1px solid #E5E7EB; background: #F9FAFB;">
+          <td style="padding: 16px; font-weight: 600; color: #111827;">Sabtu</td>
+          <td style="padding: 16px; color: #374151;">PKn</td>
+          <td style="padding: 16px; color: #374151;">Budaya Komering</td>
+          <td style="padding: 16px; color: #374151;">-</td>
+          <td style="padding: 16px; color: #374151;">-</td>
+         </tr>
+        </tbody>
+       </table>
+      </div>
+     </div><!-- Pengumuman -->
+     <div class="section-card" style="border-radius: 16px; padding: 32px; margin-bottom: 32px; background: rgba(255, 255, 255, 0.95);">
+      <h3 style="font-size: 24px; font-weight: 700; margin-bottom: 24px; color: #111827; display: flex; align-items: center; gap: 12px;"><span style="font-size: 32px;">📢</span> Pengumuman Terbaru</h3>
+      <div style="display: grid; gap: 16px;">
+       <div style="padding: 20px; border-radius: 12px; background: #FEF3C7; border-left: 4px solid #F59E0B;">
+        <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 8px;">
+         <h4 style="font-size: 16px; font-weight: 700; color: #92400E; margin: 0;">Ujian Tengah Semester</h4><span style="font-size: 12px; color: #92400E; background: white; padding: 4px 12px; border-radius: 6px;">15 Jan 2024</span>
+        </div>
+        <p style="font-size: 14px; color: #78350F; margin: 0; line-height: 1.6;">UTS akan dilaksanakan tanggal 22-26 Januari 2024. Harap mempersiapkan diri dengan baik.</p>
        </div>
-       <h3 class="subject-name">Matematika</h3>
-       <p class="subject-description">Pelajari konsep matematika dengan cara yang menyenangkan dan mudah dipahami</p>
-       <div class="subject-topics">
-        <h4>📌 Topik Utama:</h4>
-        <ul>
-         <li>Bilangan Bulat</li>
-         <li>Pecahan &amp; Desimal</li>
-         <li>Geometri</li>
-         <li>Pengukuran</li>
-         <li>Statistika Dasar</li>
-        </ul>
+       <div style="padding: 20px; border-radius: 12px; background: #DBEAFE; border-left: 4px solid #3B82F6;">
+        <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 8px;">
+         <h4 style="font-size: 16px; font-weight: 700; color: #1E40AF; margin: 0;">Pengumpulan Tugas Proyek</h4><span style="font-size: 12px; color: #1E40AF; background: white; padding: 4px 12px; border-radius: 6px;">12 Jan 2024</span>
+        </div>
+        <p style="font-size: 14px; color: #1E3A8A; margin: 0; line-height: 1.6;">Deadline pengumpulan tugas proyek IPA tanggal 20 Januari 2024 pukul 15.00 WIB.</p>
        </div>
-      </div><!-- IPAS -->
-      <div class="subject-card">
-       <div class="subject-icon">
-        🔬
-       </div>
-       <h3 class="subject-name">IPAS</h3>
-       <p class="subject-description">Ilmu Pengetahuan Alam dan Sosial - Jelajahi dunia sains dan kehidupan sosial</p>
-       <div class="subject-topics">
-        <h4>📌 Topik Utama:</h4>
-        <ul>
-         <li>Makhluk Hidup</li>
-         <li>Energi &amp; Perubahannya</li>
-         <li>Bumi &amp; Alam Semesta</li>
-         <li>Kehidupan Sosial</li>
-         <li>Teknologi Sederhana</li>
-        </ul>
-       </div>
-      </div><!-- Bahasa Indonesia -->
-      <div class="subject-card">
-       <div class="subject-icon">
-        📖
-       </div>
-       <h3 class="subject-name">Bahasa Indonesia</h3>
-       <p class="subject-description">Tingkatkan kemampuan membaca, menulis, dan berkomunikasi dalam bahasa Indonesia</p>
-       <div class="subject-topics">
-        <h4>📌 Topik Utama:</h4>
-        <ul>
-         <li>Membaca Pemahaman</li>
-         <li>Menulis Karangan</li>
-         <li>Tata Bahasa</li>
-         <li>Puisi &amp; Pantun</li>
-         <li>Presentasi Lisan</li>
-        </ul>
-       </div>
-      </div><!-- PPKn -->
-      <div class="subject-card">
-       <div class="subject-icon">
-        🏛️
-       </div>
-       <h3 class="subject-name">PPKn</h3>
-       <p class="subject-description">Pendidikan Pancasila dan Kewarganegaraan - Membangun karakter bangsa</p>
-       <div class="subject-topics">
-        <h4>📌 Topik Utama:</h4>
-        <ul>
-         <li>Nilai-nilai Pancasila</li>
-         <li>Hak &amp; Kewajiban</li>
-         <li>Keberagaman</li>
-         <li>Persatuan &amp; Kesatuan</li>
-         <li>Gotong Royong</li>
-        </ul>
-       </div>
-      </div><!-- Bahasa Inggris -->
-      <div class="subject-card">
-       <div class="subject-icon">
-        🌍
-       </div>
-       <h3 class="subject-name">Bahasa Inggris</h3>
-       <p class="subject-description">Learn English in a fun and interactive way - Practice speaking, listening, and writing</p>
-       <div class="subject-topics">
-        <h4>📌 Topik Utama:</h4>
-        <ul>
-         <li>Daily Conversation</li>
-         <li>Vocabulary Building</li>
-         <li>Simple Grammar</li>
-         <li>Reading Stories</li>
-         <li>Songs &amp; Games</li>
-        </ul>
+       <div style="padding: 20px; border-radius: 12px; background: #D1FAE5; border-left: 4px solid #10B981;">
+        <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 8px;">
+         <h4 style="font-size: 16px; font-weight: 700; color: #065F46; margin: 0;">Kunjungan Edukasi</h4><span style="font-size: 12px; color: #065F46; background: white; padding: 4px 12px; border-radius: 6px;">10 Jan 2024</span>
+        </div>
+        <p style="font-size: 14px; color: #064E3B; margin: 0; line-height: 1.6;">Rencana kunjungan edukasi ke Museum Wasaka pada tanggal 5 Februari 2024.</p>
        </div>
       </div>
-     </div><!-- Portfolio Section in Materi Page -->
-     <div style="margin-top: 60px;">
-      <h2 style="text-align: center; color: #2E7D32; margin-bottom: 30px; font-size: 2.5em;">🎨 Portofolio Proyek Koding &amp; AI</h2>
-      <p style="text-align: center; color: #0277BD; margin-bottom: 40px; font-size: 1.2em;">Karya dan Proyek Siswa Kelas 6C</p><!-- Portfolio Grid -->
-      <div class="cards-grid"><!-- Project 1 -->
-       <div class="info-card">
-        <div class="card-icon">
-         🎮
+     </div><!-- Kalender Kegiatan -->
+     <div class="section-card" style="border-radius: 16px; padding: 32px; background: rgba(255, 255, 255, 0.95);">
+      <h3 style="font-size: 24px; font-weight: 700; margin-bottom: 24px; color: #111827; display: flex; align-items: center; gap: 12px;"><span style="font-size: 32px;">📆</span> Kalender Kegiatan</h3>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px;">
+       <div class="card-hover" style="padding: 20px; border-radius: 12px; background: linear-gradient(135deg, #E0F2FE, #DBEAFE); border: 2px solid #3B82F6;">
+        <div style="font-size: 32px; margin-bottom: 12px;">
+         🎯
         </div>
-        <h3 class="card-title">Game Matematika</h3>
-        <div class="card-content">
-         <p style="margin-bottom: 15px;"><strong>Pembuat:</strong> Ahmad Rizki Pratama</p>
-         <p style="margin-bottom: 15px;">Game interaktif untuk belajar perkalian dan pembagian menggunakan Scratch. Dilengkapi dengan sistem skor dan level kesulitan.</p>
-         <div style="margin-top: 20px;"><span class="badge" style="margin-right: 10px;">🎯 Scratch</span> <span class="badge">⭐ Completed</span>
-         </div>
+        <h4 style="font-size: 16px; font-weight: 700; color: #1E40AF; margin-bottom: 8px;">22-26 Jan</h4>
+        <p style="font-size: 14px; color: #1E3A8A; margin: 0;">Ujian Tengah Semester</p>
+       </div>
+       <div class="card-hover" style="padding: 20px; border-radius: 12px; background: linear-gradient(135deg, #D1FAE5, #A7F3D0); border: 2px solid #10B981;">
+        <div style="font-size: 32px; margin-bottom: 12px;">
+         🏛️
         </div>
-       </div><!-- Project 2 -->
-       <div class="info-card">
-        <div class="card-icon">
-         🌱
-        </div>
-        <h3 class="card-title">AI Tanaman Pintar</h3>
-        <div class="card-content">
-         <p style="margin-bottom: 15px;"><strong>Pembuat:</strong> Siti Nurhaliza</p>
-         <p style="margin-bottom: 15px;">Proyek AI sederhana yang dapat mengenali jenis tanaman dari gambar menggunakan Teachable Machine.</p>
-         <div style="margin-top: 20px;"><span class="badge" style="margin-right: 10px;">🤖 AI</span> <span class="badge">⭐ Completed</span>
-         </div>
-        </div>
-       </div><!-- Project 3 -->
-       <div class="info-card">
-        <div class="card-icon">
+        <h4 style="font-size: 16px; font-weight: 700; color: #065F46; margin-bottom: 8px;">5 Feb</h4>
+        <p style="font-size: 14px; color: #064E3B; margin: 0;">Kunjungan Museum Wasaka</p>
+       </div>
+       <div class="card-hover" style="padding: 20px; border-radius: 12px; background: linear-gradient(135deg, #FEF3C7, #FDE68A); border: 2px solid #F59E0B;">
+        <div style="font-size: 32px; margin-bottom: 12px;">
          🎨
         </div>
-        <h3 class="card-title">Animasi Cerita Rakyat</h3>
-        <div class="card-content">
-         <p style="margin-bottom: 15px;"><strong>Pembuat:</strong> Dewi Lestari</p>
-         <p style="margin-bottom: 15px;">Animasi interaktif cerita Malin Kundang dengan karakter yang bisa bergerak dan berbicara.</p>
-         <div style="margin-top: 20px;"><span class="badge" style="margin-right: 10px;">🎬 Animation</span> <span class="badge">⭐ Completed</span>
-         </div>
-        </div>
-       </div><!-- Project 4 -->
-       <div class="info-card">
-        <div class="card-icon">
-         🤖
-        </div>
-        <h3 class="card-title">Chatbot Sekolah</h3>
-        <div class="card-content">
-         <p style="margin-bottom: 15px;"><strong>Pembuat:</strong> Eko Prasetyo &amp; Budi Santoso</p>
-         <p style="margin-bottom: 15px;">Chatbot yang dapat menjawab pertanyaan tentang jadwal pelajaran, informasi guru, dan kegiatan sekolah.</p>
-         <div style="margin-top: 20px;"><span class="badge" style="margin-right: 10px;">💬 Chatbot</span> <span class="badge" style="margin-right: 10px;">👥 Team</span> <span class="badge">⭐ Completed</span>
-         </div>
-        </div>
-       </div><!-- Project 5 -->
-       <div class="info-card">
-        <div class="card-icon">
-         🎵
-        </div>
-        <h3 class="card-title">Piano Virtual</h3>
-        <div class="card-content">
-         <p style="margin-bottom: 15px;"><strong>Pembuat:</strong> Fitri Handayani</p>
-         <p style="margin-bottom: 15px;">Keyboard piano virtual yang bisa dimainkan dengan mouse atau keyboard komputer. Dilengkapi dengan recorder.</p>
-         <div style="margin-top: 20px;"><span class="badge" style="margin-right: 10px;">🎹 Music</span> <span class="badge">⭐ Completed</span>
-         </div>
-        </div>
-       </div><!-- Project 6 -->
-       <div class="info-card">
-        <div class="card-icon">
-         🌍
-        </div>
-        <h3 class="card-title">Kuis Geografi Indonesia</h3>
-        <div class="card-content">
-         <p style="margin-bottom: 15px;"><strong>Pembuat:</strong> Kelompok 3 (5 siswa)</p>
-         <p style="margin-bottom: 15px;">Game kuis interaktif tentang provinsi, ibu kota, dan budaya Indonesia dengan sistem multiplayer.</p>
-         <div style="margin-top: 20px;"><span class="badge" style="margin-right: 10px;">🎲 Game</span> <span class="badge" style="margin-right: 10px;">👥 Team</span> <span class="badge">🚧 In Progress</span>
-         </div>
-        </div>
+        <h4 style="font-size: 16px; font-weight: 700; color: #92400E; margin-bottom: 8px;">15 Feb</h4>
+        <p style="font-size: 14px; color: #78350F; margin: 0;">Lomba Kreativitas Kelas</p>
        </div>
-      </div><!-- Achievement Section -->
-      <div style="margin-top: 50px;">
-       <h2 style="text-align: center; color: #2E7D32; margin-bottom: 30px; font-size: 2em;">🏆 Prestasi Koding &amp; AI</h2>
-       <div class="cards-grid">
-        <div class="info-card" style="text-align: center;">
-         <div class="card-icon">
-          🥇
-         </div>
-         <h3 class="card-title">Juara 1 Lomba Scratch</h3>
-         <p class="card-content">Ahmad Rizki Pratama<br><em>Tingkat Kecamatan 2024</em></p>
+       <div class="card-hover" style="padding: 20px; border-radius: 12px; background: linear-gradient(135deg, #FCE7F3, #FBCFE8); border: 2px solid #EC4899;">
+        <div style="font-size: 32px; margin-bottom: 12px;">
+         ⚽
         </div>
-        <div class="info-card" style="text-align: center;">
-         <div class="card-icon">
-          🥈
-         </div>
-         <h3 class="card-title">Juara 2 AI Competition</h3>
-         <p class="card-content">Tim Kelas 6C<br><em>Tingkat Kabupaten 2024</em></p>
-        </div>
-        <div class="info-card" style="text-align: center;">
-         <div class="card-icon">
-          ⭐
-         </div>
-         <h3 class="card-title">Best Innovation</h3>
-         <p class="card-content">Siti Nurhaliza<br><em>Project AI Tanaman Pintar</em></p>
-        </div>
-       </div>
-      </div><!-- Learning Path -->
-      <div style="margin-top: 50px; background: rgba(255, 255, 255, 0.9); border-radius: 25px; padding: 40px; box-shadow: 0 10px 30px rgba(129, 199, 132, 0.15);">
-       <h2 style="text-align: center; color: #2E7D32; margin-bottom: 30px; font-size: 2em;">📚 Perjalanan Belajar Koding &amp; AI</h2>
-       <div style="display: grid; gap: 20px;">
-        <div style="padding: 20px; background: rgba(232, 245, 233, 0.5); border-radius: 15px; border-left: 5px solid #81C784;">
-         <h4 style="color: #0277BD; margin-bottom: 10px;">🎯 Semester 1</h4>
-         <p style="color: #34495E;">Pengenalan konsep coding • Scratch basics • Algoritma sederhana • Proyek game pertama</p>
-        </div>
-        <div style="padding: 20px; background: rgba(224, 247, 250, 0.5); border-radius: 15px; border-left: 5px solid #64B5F6;">
-         <h4 style="color: #0277BD; margin-bottom: 10px;">🤖 Semester 2</h4>
-         <p style="color: #34495E;">Pengenalan AI • Teachable Machine • Proyek AI sederhana • Kolaborasi tim • Kompetisi coding</p>
-        </div>
-       </div>
-      </div>
-     </div>
-     <div style="text-align: center; margin-top: 40px; padding: 30px; background: rgba(255, 255, 255, 0.8); border-radius: 20px;">
-      <h3 style="color: #2E7D32; margin-bottom: 15px;">💡 Tips Belajar Efektif</h3>
-      <p style="color: #34495E; line-height: 1.7;">Buat jadwal belajar rutin • Belajar di tempat yang nyaman • Istirahat cukup • Aktif bertanya • Belajar kelompok • Manfaatkan teknologi • Tetap semangat!</p>
-     </div>
-    </div>
-   </div>
-  </div><!-- GAMES PAGE -->
-  <div id="games-page" class="page">
-   <div class="inner-page">
-    <div class="page-header">
-     <h1 class="page-title">🎮 Game Edukatif Interaktif</h1>
-     <p class="page-subtitle">Belajar Sambil Bermain - Pilih Game Favoritmu!</p><button class="btn btn-back" onclick="showPage('home')"> <span>← Kembali ke Beranda</span> </button>
-    </div>
-    <div class="content-container"><!-- Game Selection Grid -->
-     <div class="cards-grid"><!-- Math Game -->
-      <div class="subject-card" onclick="showGame('math')">
-       <div class="subject-icon">
-        🔢
-       </div>
-       <h3 class="subject-name">Kuis Matematika</h3>
-       <p class="subject-description">Uji kemampuan matematikamu dengan soal perkalian dan pembagian!</p>
-       <div class="badge" style="margin-top: 15px;">
-        ⭐ Level: Mudah - Sulit
-       </div>
-      </div><!-- Science Game -->
-      <div class="subject-card" onclick="showGame('science')">
-       <div class="subject-icon">
-        🔬
-       </div>
-       <h3 class="subject-name">Tebak Gambar IPAS</h3>
-       <p class="subject-description">Kenali makhluk hidup dan benda-benda di sekitarmu!</p>
-       <div class="badge" style="margin-top: 15px;">
-        ⭐ Level: Menyenangkan
-       </div>
-      </div><!-- Indonesian Game -->
-      <div class="subject-card" onclick="showGame('indonesian')">
-       <div class="subject-icon">
-        📖
-       </div>
-       <h3 class="subject-name">Susun Kata</h3>
-       <p class="subject-description">Susun huruf acak menjadi kata yang benar!</p>
-       <div class="badge" style="margin-top: 15px;">
-        ⭐ Level: Tantangan
-       </div>
-      </div><!-- Memory Game -->
-      <div class="subject-card" onclick="showGame('memory')">
-       <div class="subject-icon">
-        🧠
-       </div>
-       <h3 class="subject-name">Memory Card</h3>
-       <p class="subject-description">Asah daya ingatmu dengan mencari pasangan kartu!</p>
-       <div class="badge" style="margin-top: 15px;">
-        ⭐ Level: Semua Umur
+        <h4 style="font-size: 16px; font-weight: 700; color: #9F1239; margin-bottom: 8px;">20 Feb</h4>
+        <p style="font-size: 14px; color: #831843; margin: 0;">Olahraga Bersama</p>
        </div>
       </div>
      </div>
     </div>
-   </div>
-  </div><!-- MATH GAME -->
-  <div id="math-game" class="page">
-   <div class="inner-page">
-    <div class="page-header">
-     <h1 class="page-title">🔢 Kuis Matematika</h1>
-     <p class="page-subtitle">Jawab sebanyak mungkin dengan benar!</p><button class="btn btn-back" onclick="showPage('games')"> <span>← Kembali ke Game</span> </button>
-    </div>
-    <div class="content-container">
-     <div style="max-width: 600px; margin: 0 auto;"><!-- Game Stats -->
-      <div style="display: flex; justify-content: space-around; margin-bottom: 30px;">
-       <div class="info-card" style="flex: 1; margin: 0 10px; text-align: center;">
-        <div style="font-size: 2.5em; color: #81C784;" id="math-score">
-         0
+   </div><!-- Materi Page -->
+   <div id="page-materi" class="page-section">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 40px 24px;">
+     <h2 style="font-size: 32px; font-weight: 800; margin-bottom: 32px; color: #111827; text-align: center;">Materi Pembelajaran</h2>
+     <div style="display: grid; gap: 24px;"><!-- Matematika -->
+      <div class="section-card card-hover" style="border-radius: 16px; padding: 28px; background: rgba(255, 255, 255, 0.95);">
+       <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 20px;">
+        <div class="icon-circle" style="background: linear-gradient(135deg, #3B82F6, #60A5FA); color: white; font-size: 28px;">
+         🔢
         </div>
-        <div style="color: #0277BD; font-weight: 600;">
-         Skor
-        </div>
+        <h3 style="font-size: 22px; font-weight: 700; color: #111827; margin: 0;">Matematika</h3>
        </div>
-       <div class="info-card" style="flex: 1; margin: 0 10px; text-align: center;">
-        <div style="font-size: 2.5em; color: #64B5F6;" id="math-question-num">
-         1
-        </div>
-        <div style="color: #0277BD; font-weight: 600;">
-         Soal
-        </div>
+       <p style="font-size: 14px; color: #6B7280; margin-bottom: 20px; line-height: 1.6;">Bilangan Bulat, Pecahan, Geometri, dan Statistika Dasar</p>
+       <div style="display: flex; flex-wrap: wrap; gap: 12px;"><button class="card-hover" style="padding: 10px 20px; border-radius: 8px; border: none; background: #DBEAFE; color: #1E40AF; font-size: 13px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 8px;"> 📄 Download LKPD </button> <button class="card-hover" style="padding: 10px 20px; border-radius: 8px; border: none; background: #DBEAFE; color: #1E40AF; font-size: 13px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 8px;"> 📖 Modul </button> <button class="card-hover" style="padding: 10px 20px; border-radius: 8px; border: none; background: #DBEAFE; color: #1E40AF; font-size: 13px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 8px;"> 🎥 Video </button>
        </div>
-      </div><!-- Question Card -->
-      <div class="info-card" style="text-align: center; padding: 50px;">
-       <div style="font-size: 3em; color: #2E7D32; margin-bottom: 30px; font-weight: 700;" id="math-question">
-        5 × 7 = ?
-       </div><!-- Answer Options -->
-       <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;"><button class="btn btn-primary" style="width: 100%; font-size: 1.5em; padding: 25px;" onclick="checkMathAnswer(0)"> <span id="math-option-0">35</span> </button> <button class="btn btn-primary" style="width: 100%; font-size: 1.5em; padding: 25px;" onclick="checkMathAnswer(1)"> <span id="math-option-1">42</span> </button> <button class="btn btn-primary" style="width: 100%; font-size: 1.5em; padding: 25px;" onclick="checkMathAnswer(2)"> <span id="math-option-2">30</span> </button> <button class="btn btn-primary" style="width: 100%; font-size: 1.5em; padding: 25px;" onclick="checkMathAnswer(3)"> <span id="math-option-3">28</span> </button>
-       </div><!-- Feedback -->
-       <div id="math-feedback" style="margin-top: 30px; font-size: 1.5em; font-weight: 700; min-height: 40px;"></div>
+      </div><!-- IPAS -->
+      <div class="section-card card-hover" style="border-radius: 16px; padding: 28px; background: rgba(255, 255, 255, 0.95);">
+       <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 20px;">
+        <div class="icon-circle" style="background: linear-gradient(135deg, #10B981, #34D399); color: white; font-size: 28px;">
+         🔬
+        </div>
+        <h3 style="font-size: 22px; font-weight: 700; color: #111827; margin: 0;">IPAS (Ilmu Pengetahuan Alam dan Sosial)</h3>
+       </div>
+       <p style="font-size: 14px; color: #6B7280; margin-bottom: 20px; line-height: 1.6;">Sistem Tubuh Manusia, Energi, Lingkungan, dan Masyarakat</p>
+       <div style="display: flex; flex-wrap: wrap; gap: 12px;"><button class="card-hover" style="padding: 10px 20px; border-radius: 8px; border: none; background: #D1FAE5; color: #065F46; font-size: 13px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 8px;"> 📄 Download LKPD </button> <button class="card-hover" style="padding: 10px 20px; border-radius: 8px; border: none; background: #D1FAE5; color: #065F46; font-size: 13px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 8px;"> 📖 Modul </button> <button class="card-hover" style="padding: 10px 20px; border-radius: 8px; border: none; background: #D1FAE5; color: #065F46; font-size: 13px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 8px;"> 🎥 Video </button>
+       </div>
+      </div><!-- Bahasa Indonesia -->
+      <div class="section-card card-hover" style="border-radius: 16px; padding: 28px; background: rgba(255, 255, 255, 0.95);">
+       <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 20px;">
+        <div class="icon-circle" style="background: linear-gradient(135deg, #F59E0B, #FBBF24); color: white; font-size: 28px;">
+         📚
+        </div>
+        <h3 style="font-size: 22px; font-weight: 700; color: #111827; margin: 0;">Bahasa Indonesia</h3>
+       </div>
+       <p style="font-size: 14px; color: #6B7280; margin-bottom: 20px; line-height: 1.6;">Teks Narasi, Deskripsi, dan Menulis Karangan</p>
+       <div style="display: flex; flex-wrap: wrap; gap: 12px;"><button class="card-hover" style="padding: 10px 20px; border-radius: 8px; border: none; background: #FEF3C7; color: #92400E; font-size: 13px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 8px;"> 📄 Download LKPD </button> <button class="card-hover" style="padding: 10px 20px; border-radius: 8px; border: none; background: #FEF3C7; color: #92400E; font-size: 13px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 8px;"> 📖 Modul </button> <button class="card-hover" style="padding: 10px 20px; border-radius: 8px; border: none; background: #FEF3C7; color: #92400E; font-size: 13px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 8px;"> 🎥 Video </button>
+       </div>
+      </div><!-- Bahasa Inggris -->
+      <div class="section-card card-hover" style="border-radius: 16px; padding: 28px; background: rgba(255, 255, 255, 0.95);">
+       <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 20px;">
+        <div class="icon-circle" style="background: linear-gradient(135deg, #EC4899, #F472B6); color: white; font-size: 28px;">
+         🗣️
+        </div>
+        <h3 style="font-size: 22px; font-weight: 700; color: #111827; margin: 0;">Bahasa Inggris</h3>
+       </div>
+       <p style="font-size: 14px; color: #6B7280; margin-bottom: 20px; line-height: 1.6;">Vocabulary, Grammar, dan Conversation</p>
+       <div style="display: flex; flex-wrap: wrap; gap: 12px;"><button class="card-hover" style="padding: 10px 20px; border-radius: 8px; border: none; background: #FCE7F3; color: #9F1239; font-size: 13px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 8px;"> 📄 Download LKPD </button> <button class="card-hover" style="padding: 10px 20px; border-radius: 8px; border: none; background: #FCE7F3; color: #9F1239; font-size: 13px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 8px;"> 📖 Modul </button> <button class="card-hover" style="padding: 10px 20px; border-radius: 8px; border: none; background: #FCE7F3; color: #9F1239; font-size: 13px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 8px;"> �� Video </button>
+       </div>
+      </div><!-- PKn -->
+      <div class="section-card card-hover" style="border-radius: 16px; padding: 28px; background: rgba(255, 255, 255, 0.95);">
+       <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 20px;">
+        <div class="icon-circle" style="background: linear-gradient(135deg, #EF4444, #F87171); color: white; font-size: 28px;">
+         ���️
+        </div>
+        <h3 style="font-size: 22px; font-weight: 700; color: #111827; margin: 0;">PKn (Pendidikan Kewarganegaraan)</h3>
+       </div>
+       <p style="font-size: 14px; color: #6B7280; margin-bottom: 20px; line-height: 1.6;">Pancasila, UUD 1945, dan Nilai Kebangsaan</p>
+       <div style="display: flex; flex-wrap: wrap; gap: 12px;"><button class="card-hover" style="padding: 10px 20px; border-radius: 8px; border: none; background: #FEE2E2; color: #991B1B; font-size: 13px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 8px;"> 📄 Download LKPD </button> <button class="card-hover" style="padding: 10px 20px; border-radius: 8px; border: none; background: #FEE2E2; color: #991B1B; font-size: 13px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 8px;"> 📖 Modul </button> <button class="card-hover" style="padding: 10px 20px; border-radius: 8px; border: none; background: #FEE2E2; color: #991B1B; font-size: 13px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 8px;"> 🎥 Video </button>
+       </div>
+      </div><!-- Budaya Komering -->
+      <div class="section-card card-hover" style="border-radius: 16px; padding: 28px; background: rgba(255, 255, 255, 0.95);">
+       <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 20px;">
+        <div class="icon-circle" style="background: linear-gradient(135deg, #06B6D4, #22D3EE); color: white; font-size: 28px;">
+         ���
+        </div>
+        <h3 style="font-size: 22px; font-weight: 700; color: #111827; margin: 0;">Budaya Komering</h3>
+       </div>
+       <p style="font-size: 14px; color: #6B7280; margin-bottom: 20px; line-height: 1.6;">Bahasa, Adat Istiadat, dan Tradisi Komering</p>
+       <div style="display: flex; flex-wrap: wrap; gap: 12px;"><button class="card-hover" style="padding: 10px 20px; border-radius: 8px; border: none; background: #CFFAFE; color: #164E63; font-size: 13px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 8px;"> 📄 Download LKPD </button> <button class="card-hover" style="padding: 10px 20px; border-radius: 8px; border: none; background: #CFFAFE; color: #164E63; font-size: 13px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 8px;"> 📖 Modul </button> <button class="card-hover" style="padding: 10px 20px; border-radius: 8px; border: none; background: #CFFAFE; color: #164E63; font-size: 13px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 8px;"> ������ Video </button>
+       </div>
+      </div><!-- PJOK -->
+      <div class="section-card card-hover" style="border-radius: 16px; padding: 28px; background: rgba(255, 255, 255, 0.95);">
+       <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 20px;">
+        <div class="icon-circle" style="background: linear-gradient(135deg, #84CC16, #A3E635); color: white; font-size: 28px;">
+         ⚽
+        </div>
+        <h3 style="font-size: 22px; font-weight: 700; color: #111827; margin: 0;">PJOK (Pendidikan Jasmani)</h3>
+       </div>
+       <p style="font-size: 14px; color: #6B7280; margin-bottom: 20px; line-height: 1.6;">Olahraga, Kesehatan, dan Kebugaran</p>
+       <div style="display: flex; flex-wrap: wrap; gap: 12px;"><button class="card-hover" style="padding: 10px 20px; border-radius: 8px; border: none; background: #ECFCCB; color: #365314; font-size: 13px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 8px;"> 📄 Download LKPD </button> <button class="card-hover" style="padding: 10px 20px; border-radius: 8px; border: none; background: #ECFCCB; color: #365314; font-size: 13px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 8px;"> �� Modul </button> <button class="card-hover" style="padding: 10px 20px; border-radius: 8px; border: none; background: #ECFCCB; color: #365314; font-size: 13px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 8px;"> 🎥 Video </button>
+       </div>
+      </div><!-- PAI -->
+      <div class="section-card card-hover" style="border-radius: 16px; padding: 28px; background: rgba(255, 255, 255, 0.95);">
+       <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 20px;">
+        <div class="icon-circle" style="background: linear-gradient(135deg, #10B981, #059669); color: white; font-size: 28px;">
+         🕌
+        </div>
+        <h3 style="font-size: 22px; font-weight: 700; color: #111827; margin: 0;">PAI (Pendidikan Agama Islam)</h3>
+       </div>
+       <p style="font-size: 14px; color: #6B7280; margin-bottom: 20px; line-height: 1.6;">Akidah, Ibadah, Akhlak, dan Sejarah Islam</p>
+       <div style="display: flex; flex-wrap: wrap; gap: 12px;"><button class="card-hover" style="padding: 10px 20px; border-radius: 8px; border: none; background: #D1FAE5; color: #065F46; font-size: 13px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 8px;"> 📄 Download LKPD </button> <button class="card-hover" style="padding: 10px 20px; border-radius: 8px; border: none; background: #D1FAE5; color: #065F46; font-size: 13px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 8px;"> 📖 Modul </button> <button class="card-hover" style="padding: 10px 20px; border-radius: 8px; border: none; background: #D1FAE5; color: #065F46; font-size: 13px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 8px;"> 🎥 Video </button>
+       </div>
+      </div><!-- Koding & Kecerdasan Artifisial -->
+      <div class="section-card card-hover" style="border-radius: 16px; padding: 28px; background: rgba(255, 255, 255, 0.95);">
+       <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 20px;">
+        <div class="icon-circle" style="background: linear-gradient(135deg, #8B5CF6, #A78BFA); color: white; font-size: 28px;">
+         💻
+        </div>
+        <h3 style="font-size: 22px; font-weight: 700; color: #111827; margin: 0;">Koding &amp; Kecerdasan Artifisial</h3>
+       </div>
+       <p style="font-size: 14px; color: #6B7280; margin-bottom: 20px; line-height: 1.6;">Pemrograman Dasar, Algoritma, dan Pengenalan AI</p>
+       <div style="display: flex; flex-wrap: wrap; gap: 12px;"><button class="card-hover" style="padding: 10px 20px; border-radius: 8px; border: none; background: #EDE9FE; color: #5B21B6; font-size: 13px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 8px;"> 📄 Download LKPD </button> <button class="card-hover" style="padding: 10px 20px; border-radius: 8px; border: none; background: #EDE9FE; color: #5B21B6; font-size: 13px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 8px;"> 📖 Modul </button> <button class="card-hover" style="padding: 10px 20px; border-radius: 8px; border: none; background: #EDE9FE; color: #5B21B6; font-size: 13px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 8px;"> 🎥 Video </button>
+       </div>
       </div>
      </div>
     </div>
-   </div>
-  </div><!-- SCIENCE GAME -->
-  <div id="science-game" class="page">
-   <div class="inner-page">
-    <div class="page-header">
-     <h1 class="page-title">🔬 Tebak Gambar IPAS</h1>
-     <p class="page-subtitle">Tebak nama makhluk hidup atau benda!</p><button class="btn btn-back" onclick="showPage('games')"> <span>← Kembali ke Game</span> </button>
-    </div>
-    <div class="content-container">
-     <div style="max-width: 600px; margin: 0 auto;"><!-- Game Stats -->
-      <div style="display: flex; justify-content: space-around; margin-bottom: 30px;">
-       <div class="info-card" style="flex: 1; margin: 0 10px; text-align: center;">
-        <div style="font-size: 2.5em; color: #81C784;" id="science-score">
-         0
+   </div><!-- Nilai Page -->
+   <div id="page-nilai" class="page-section">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 40px 24px;">
+     <h2 style="font-size: 32px; font-weight: 800; margin-bottom: 32px; color: #111827; text-align: center;">Nilai &amp; Prestasi Siswa</h2><!-- Pilih Mata Pelajaran -->
+     <div class="section-card" style="border-radius: 16px; padding: 32px; margin-bottom: 32px; background: rgba(255, 255, 255, 0.95);">
+      <h3 style="font-size: 24px; font-weight: 700; margin-bottom: 24px; color: #111827; display: flex; align-items: center; gap: 12px;"><span style="font-size: 32px;">📊</span> Pilih Mata Pelajaran</h3>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px;"><button onclick="showSubject('matematika')" id="btn-matematika" class="card-hover subject-btn" style="padding: 20px; border-radius: 12px; background: linear-gradient(135deg, #E0F2FE, #DBEAFE); border: 3px solid #3B82F6; text-align: center; cursor: pointer;">
+        <div style="font-size: 32px; margin-bottom: 8px;">
+         🔢
+        </div><h4 style="font-size: 14px; color: #1E40AF; font-weight: 700;">Matematika</h4></button> <button onclick="showSubject('ipas')" id="btn-ipas" class="card-hover subject-btn" style="padding: 20px; border-radius: 12px; background: linear-gradient(135deg, #D1FAE5, #A7F3D0); border: 2px solid #E5E7EB; text-align: center; cursor: pointer;">
+        <div style="font-size: 32px; margin-bottom: 8px;">
+         🔬
+        </div><h4 style="font-size: 14px; color: #065F46; font-weight: 700;">IPAS</h4></button> <button onclick="showSubject('indonesia')" id="btn-indonesia" class="card-hover subject-btn" style="padding: 20px; border-radius: 12px; background: linear-gradient(135deg, #FEF3C7, #FDE68A); border: 2px solid #E5E7EB; text-align: center; cursor: pointer;">
+        <div style="font-size: 32px; margin-bottom: 8px;">
+         📚
+        </div><h4 style="font-size: 14px; color: #92400E; font-weight: 700;">B. Indonesia</h4></button> <button onclick="showSubject('inggris')" id="btn-inggris" class="card-hover subject-btn" style="padding: 20px; border-radius: 12px; background: linear-gradient(135deg, #FCE7F3, #FBCFE8); border: 2px solid #E5E7EB; text-align: center; cursor: pointer;">
+        <div style="font-size: 32px; margin-bottom: 8px;">
+         🗣️
+        </div><h4 style="font-size: 14px; color: #9F1239; font-weight: 700;">B. Inggris</h4></button> <button onclick="showSubject('pkn')" id="btn-pkn" class="card-hover subject-btn" style="padding: 20px; border-radius: 12px; background: linear-gradient(135deg, #FEE2E2, #FECACA); border: 2px solid #E5E7EB; text-align: center; cursor: pointer;">
+        <div style="font-size: 32px; margin-bottom: 8px;">
+         🏛️
+        </div><h4 style="font-size: 14px; color: #991B1B; font-weight: 700;">PKn</h4></button> <button onclick="showSubject('pai')" id="btn-pai" class="card-hover subject-btn" style="padding: 20px; border-radius: 12px; background: linear-gradient(135deg, #CFFAFE, #A5F3FC); border: 2px solid #E5E7EB; text-align: center; cursor: pointer;">
+        <div style="font-size: 32px; margin-bottom: 8px;">
+         🕌
+        </div><h4 style="font-size: 14px; color: #164E63; font-weight: 700;">PAI</h4></button> <button onclick="showSubject('budaya')" id="btn-budaya" class="card-hover subject-btn" style="padding: 20px; border-radius: 12px; background: linear-gradient(135deg, #E0E7FF, #C7D2FE); border: 2px solid #E5E7EB; text-align: center; cursor: pointer;">
+        <div style="font-size: 32px; margin-bottom: 8px;">
+         🎭
+        </div><h4 style="font-size: 14px; color: #4338CA; font-weight: 700;">Budaya Komering</h4></button> <button onclick="showSubject('pjok')" id="btn-pjok" class="card-hover subject-btn" style="padding: 20px; border-radius: 12px; background: linear-gradient(135deg, #ECFCCB, #D9F99D); border: 2px solid #E5E7EB; text-align: center; cursor: pointer;">
+        <div style="font-size: 32px; margin-bottom: 8px;">
+         ⚽
+        </div><h4 style="font-size: 14px; color: #365314; font-weight: 700;">PJOK</h4></button> <button onclick="showSubject('koding')" id="btn-koding" class="card-hover subject-btn" style="padding: 20px; border-radius: 12px; background: linear-gradient(135deg, #EDE9FE, #DDD6FE); border: 2px solid #E5E7EB; text-align: center; cursor: pointer;">
+        <div style="font-size: 32px; margin-bottom: 8px;">
+         💻
+        </div><h4 style="font-size: 14px; color: #5B21B6; font-weight: 700;">Koding &amp; AI</h4></button>
+      </div>
+     </div><!-- Tabel Nilai Detail -->
+     <div id="nilai-detail-container" class="section-card" style="border-radius: 16px; padding: 32px; margin-bottom: 32px; background: rgba(255, 255, 255, 0.95);">
+      <h3 id="subject-title" style="font-size: 24px; font-weight: 700; margin-bottom: 24px; color: #111827; display: flex; align-items: center; gap: 12px;"><span style="font-size: 32px;">���</span> Nilai Matematika</h3>
+      <div style="overflow-x: auto;">
+       <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
+        <thead>
+         <tr style="background: linear-gradient(135deg, #3B82F6, #10B981); color: white;">
+          <th style="padding: 14px 12px; text-align: left; font-weight: 600; min-width: 40px;">No</th>
+          <th style="padding: 14px 12px; text-align: left; font-weight: 600; min-width: 180px;">Nama Siswa</th>
+          <th style="padding: 14px 12px; text-align: center; font-weight: 600; min-width: 60px;">NH 1</th>
+          <th style="padding: 14px 12px; text-align: center; font-weight: 600; min-width: 60px;">NH 2</th>
+          <th style="padding: 14px 12px; text-align: center; font-weight: 600; min-width: 60px;">NH 3</th>
+          <th style="padding: 14px 12px; text-align: center; font-weight: 600; min-width: 60px;">NH 4</th>
+          <th style="padding: 14px 12px; text-align: center; font-weight: 600; min-width: 60px;">NH 5</th>
+          <th style="padding: 14px 12px; text-align: center; font-weight: 600; min-width: 60px;">STS</th>
+          <th style="padding: 14px 12px; text-align: center; font-weight: 600; min-width: 60px;">SAS</th>
+          <th style="padding: 14px 12px; text-align: center; font-weight: 600; min-width: 80px;">Rata-Rata</th>
+         </tr>
+        </thead>
+        <tbody id="nilai-table-body"><!-- Data akan diisi oleh JavaScript -->
+        </tbody>
+       </table>
+      </div>
+     </div><!-- Peringkat 10 Besar -->
+     <div class="section-card" style="border-radius: 16px; padding: 32px; margin-bottom: 32px; background: rgba(255, 255, 255, 0.95);">
+      <h3 style="font-size: 24px; font-weight: 700; margin-bottom: 24px; color: #111827; display: flex; align-items: center; gap: 12px;"><span style="font-size: 32px;">🏆</span> Peringkat 10 Besar Kelas</h3>
+      <div style="overflow-x: auto;">
+       <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
+        <thead>
+         <tr style="background: linear-gradient(135deg, #3B82F6, #10B981); color: white;">
+          <th style="padding: 16px; text-align: left; font-weight: 600;">Peringkat</th>
+          <th style="padding: 16px; text-align: left; font-weight: 600;">Nama Siswa</th>
+          <th style="padding: 16px; text-align: center; font-weight: 600;">Rata-Rata</th>
+          <th style="padding: 16px; text-align: center; font-weight: 600;">Predikat</th>
+         </tr>
+        </thead>
+        <tbody id="ranking-table-body"><!-- Data akan diisi oleh JavaScript -->
+        </tbody>
+       </table>
+      </div>
+     </div><!-- Prestasi Kelas -->
+     <div class="section-card" style="border-radius: 16px; padding: 32px; background: rgba(255, 255, 255, 0.95);">
+      <h3 style="font-size: 24px; font-weight: 700; margin-bottom: 24px; color: #111827; display: flex; align-items: center; gap: 12px;"><span style="font-size: 32px;">���️</span> Prestasi &amp; Penghargaan</h3>
+      <div style="display: grid; gap: 16px;">
+       <div class="card-hover" style="padding: 20px; border-radius: 12px; background: linear-gradient(135deg, #FEF3C7, #FDE68A); border-left: 4px solid #F59E0B;">
+        <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 8px;">
+         <h4 style="font-size: 16px; font-weight: 700; color: #92400E; margin: 0; display: flex; align-items: center; gap: 8px;"><span style="font-size: 24px;">🏆</span> Juara 1 Lomba Cerdas Cermat</h4><span style="font-size: 12px; color: #92400E; background: white; padding: 4px 12px; border-radius: 6px;">Desember 2023</span>
         </div>
-        <div style="color: #0277BD; font-weight: 600;">
-         Benar
-        </div>
+        <p style="font-size: 14px; color: #78350F; margin: 0; line-height: 1.6;">Tim: Ahmad Rizki, Siti Nurhaliza, Dewi Lestari</p>
        </div>
-       <div class="info-card" style="flex: 1; margin: 0 10px; text-align: center;">
-        <div style="font-size: 2.5em; color: #64B5F6;" id="science-total">
-         0
+       <div class="card-hover" style="padding: 20px; border-radius: 12px; background: linear-gradient(135deg, #DBEAFE, #BFDBFE); border-left: 4px solid #3B82F6;">
+        <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 8px;">
+         <h4 style="font-size: 16px; font-weight: 700; color: #1E40AF; margin: 0; display: flex; align-items: center; gap: 8px;"><span style="font-size: 24px;">🥈</span> Juara 2 Lomba Membaca Puisi</h4><span style="font-size: 12px; color: #1E40AF; background: white; padding: 4px 12px; border-radius: 6px;">November 2023</span>
         </div>
-        <div style="color: #0277BD; font-weight: 600;">
-         Total
+        <p style="font-size: 14px; color: #1E3A8A; margin: 0; line-height: 1.6;">Perwakilan: Maya Sari</p>
+       </div>
+       <div class="card-hover" style="padding: 20px; border-radius: 12px; background: linear-gradient(135deg, #D1FAE5, #A7F3D0); border-left: 4px solid #10B981;">
+        <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 8px;">
+         <h4 style="font-size: 16px; font-weight: 700; color: #065F46; margin: 0; display: flex; align-items: center; gap: 8px;"><span style="font-size: 24px;">🎨</span> Juara 3 Lomba Mewarnai</h4><span style="font-size: 12px; color: #065F46; background: white; padding: 4px 12px; border-radius: 6px;">Oktober 2023</span>
         </div>
+        <p style="font-size: 14px; color: #064E3B; margin: 0; line-height: 1.6;">Perwakilan: Rina Wati</p>
        </div>
-      </div><!-- Question Card -->
-      <div class="info-card" style="text-align: center; padding: 50px;">
-       <div style="font-size: 8em; margin-bottom: 30px;" id="science-emoji">
-        🐘
+       <div class="card-hover" style="padding: 20px; border-radius: 12px; background: linear-gradient(135deg, #FCE7F3, #FBCFE8); border-left: 4px solid #EC4899;">
+        <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 8px;">
+         <h4 style="font-size: 16px; font-weight: 700; color: #9F1239; margin: 0; display: flex; align-items: center; gap: 8px;"><span style="font-size: 24px;">⚽</span> Juara 1 Futsal Antar Kelas</h4><span style="font-size: 12px; color: #9F1239; background: white; padding: 4px 12px; border-radius: 6px;">September 2023</span>
+        </div>
+        <p style="font-size: 14px; color: #831843; margin: 0; line-height: 1.6;">Tim Putra Kelas 6C</p>
        </div>
-       <div style="font-size: 1.5em; color: #2E7D32; margin-bottom: 30px; font-weight: 600;">
-        Hewan apa ini?
-       </div><!-- Answer Options -->
-       <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;"><button class="btn btn-primary" style="width: 100%; font-size: 1.2em; padding: 20px;" onclick="checkScienceAnswer(0)"> <span id="science-option-0">Gajah</span> </button> <button class="btn btn-primary" style="width: 100%; font-size: 1.2em; padding: 20px;" onclick="checkScienceAnswer(1)"> <span id="science-option-1">Singa</span> </button> <button class="btn btn-primary" style="width: 100%; font-size: 1.2em; padding: 20px;" onclick="checkScienceAnswer(2)"> <span id="science-option-2">Jerapah</span> </button> <button class="btn btn-primary" style="width: 100%; font-size: 1.2em; padding: 20px;" onclick="checkScienceAnswer(3)"> <span id="science-option-3">Badak</span> </button>
-       </div><!-- Feedback -->
-       <div id="science-feedback" style="margin-top: 30px; font-size: 1.5em; font-weight: 700; min-height: 40px;"></div>
       </div>
      </div>
     </div>
-   </div>
-  </div><!-- INDONESIAN GAME -->
-  <div id="indonesian-game" class="page">
-   <div class="inner-page">
-    <div class="page-header">
-     <h1 class="page-title">📖 Susun Kata</h1>
-     <p class="page-subtitle">Susun huruf acak menjadi kata yang benar!</p><button class="btn btn-back" onclick="showPage('games')"> <span>← Kembali ke Game</span> </button>
-    </div>
-    <div class="content-container">
-     <div style="max-width: 600px; margin: 0 auto;"><!-- Game Stats -->
-      <div style="display: flex; justify-content: space-around; margin-bottom: 30px;">
-       <div class="info-card" style="flex: 1; margin: 0 10px; text-align: center;">
-        <div style="font-size: 2.5em; color: #81C784;" id="indo-score">
-         0
+   </div><!-- Poin Page -->
+   <div id="page-poin" class="page-section">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 40px 24px;">
+     <h2 style="font-size: 32px; font-weight: 800; margin-bottom: 32px; color: #111827; text-align: center;">Program Poin Kebaikan &amp; Reward</h2><!-- Penjelasan Sistem -->
+     <div class="section-card" style="border-radius: 16px; padding: 32px; margin-bottom: 32px; background: rgba(255, 255, 255, 0.95);">
+      <h3 style="font-size: 24px; font-weight: 700; margin-bottom: 24px; color: #111827; display: flex; align-items: center; gap: 12px;"><span style="font-size: 32px;">⭐</span> Cara Mendapatkan Poin</h3>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+       <div style="padding: 20px; border-radius: 12px; background: linear-gradient(135deg, #E0F2FE, #DBEAFE); border-left: 4px solid #3B82F6;">
+        <div style="font-size: 32px; margin-bottom: 12px;">
+         ✅
         </div>
-        <div style="color: #0277BD; font-weight: 600;">
-         Skor
+        <h4 style="font-size: 16px; font-weight: 700; color: #1E40AF; margin-bottom: 8px;">+10 Poin</h4>
+        <p style="font-size: 14px; color: #1E3A8A; margin: 0;">Mengerjakan tugas tepat waktu</p>
+       </div>
+       <div style="padding: 20px; border-radius: 12px; background: linear-gradient(135deg, #D1FAE5, #A7F3D0); border-left: 4px solid #10B981;">
+        <div style="font-size: 32px; margin-bottom: 12px;">
+         🏆
+        </div>
+        <h4 style="font-size: 16px; font-weight: 700; color: #065F46; margin-bottom: 8px;">+20 Poin</h4>
+        <p style="font-size: 14px; color: #064E3B; margin: 0;">Prestasi akademik atau non-akademik</p>
+       </div>
+       <div style="padding: 20px; border-radius: 12px; background: linear-gradient(135deg, #FEF3C7, #FDE68A); border-left: 4px solid #F59E0B;">
+        <div style="font-size: 32px; margin-bottom: 12px;">
+         🤝
+        </div>
+        <h4 style="font-size: 16px; font-weight: 700; color: #92400E; margin-bottom: 8px;">+15 Poin</h4>
+        <p style="font-size: 14px; color: #78350F; margin: 0;">Membantu teman atau guru</p>
+       </div>
+       <div style="padding: 20px; border-radius: 12px; background: linear-gradient(135deg, #FCE7F3, #FBCFE8); border-left: 4px solid #EC4899;">
+        <div style="font-size: 32px; margin-bottom: 12px;">
+         ���
+        </div>
+        <h4 style="font-size: 16px; font-weight: 700; color: #9F1239; margin-bottom: 8px;">+5 Poin</h4>
+        <p style="font-size: 14px; color: #831843; margin: 0;">Kehadiran 100% seminggu</p>
+       </div>
+      </div>
+     </div><!-- Perolehan Poin Siswa -->
+     <div class="section-card" style="border-radius: 16px; padding: 32px; margin-bottom: 32px; background: rgba(255, 255, 255, 0.95);">
+      <h3 style="font-size: 24px; font-weight: 700; margin-bottom: 24px; color: #111827; display: flex; align-items: center; gap: 12px;"><span style="font-size: 32px;">📊</span> Perolehan Poin Siswa (Top 10)</h3>
+      <div style="overflow-x: auto;">
+       <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
+        <thead>
+         <tr style="background: linear-gradient(135deg, #3B82F6, #10B981); color: white;">
+          <th style="padding: 16px; text-align: left; font-weight: 600;">Peringkat</th>
+          <th style="padding: 16px; text-align: left; font-weight: 600;">Nama Siswa</th>
+          <th style="padding: 16px; text-align: center; font-weight: 600;">Total Poin</th>
+          <th style="padding: 16px; text-align: center; font-weight: 600;">Badge</th>
+         </tr>
+        </thead>
+        <tbody>
+         <tr style="border-bottom: 1px solid #E5E7EB; background: #FEF3C7;">
+          <td style="padding: 16px; font-weight: 700; color: #92400E;">🥇 1</td>
+          <td style="padding: 16px; font-weight: 600; color: #111827;">Ahmad Rizki</td>
+          <td style="padding: 16px; text-align: center; font-weight: 700; color: #92400E;">285</td>
+          <td style="padding: 16px; text-align: center;">⭐⭐⭐</td>
+         </tr>
+         <tr style="border-bottom: 1px solid #E5E7EB; background: #E5E7EB;">
+          <td style="padding: 16px; font-weight: 700; color: #6B7280;">�� 2</td>
+          <td style="padding: 16px; font-weight: 600; color: #111827;">Siti Nurhaliza</td>
+          <td style="padding: 16px; text-align: center; font-weight: 700; color: #6B7280;">270</td>
+          <td style="padding: 16px; text-align: center;">⭐⭐⭐</td>
+         </tr>
+         <tr style="border-bottom: 1px solid #E5E7EB; background: #FED7AA;">
+          <td style="padding: 16px; font-weight: 700; color: #C2410C;">🥉 3</td>
+          <td style="padding: 16px; font-weight: 600; color: #111827;">Budi Santoso</td>
+          <td style="padding: 16px; text-align: center; font-weight: 700; color: #C2410C;">255</td>
+          <td style="padding: 16px; text-align: center;">⭐⭐</td>
+         </tr>
+         <tr style="border-bottom: 1px solid #E5E7EB; background: #F9FAFB;">
+          <td style="padding: 16px; color: #374151;">4</td>
+          <td style="padding: 16px; color: #111827;">Dewi Lestari</td>
+          <td style="padding: 16px; text-align: center; font-weight: 600; color: #111827;">240</td>
+          <td style="padding: 16px; text-align: center;">⭐⭐</td>
+         </tr>
+         <tr style="border-bottom: 1px solid #E5E7EB;">
+          <td style="padding: 16px; color: #374151;">5</td>
+          <td style="padding: 16px; color: #111827;">Fajar Hidayat</td>
+          <td style="padding: 16px; text-align: center; font-weight: 600; color: #111827;">225</td>
+          <td style="padding: 16px; text-align: center;">⭐⭐</td>
+         </tr>
+         <tr style="border-bottom: 1px solid #E5E7EB; background: #F9FAFB;">
+          <td style="padding: 16px; color: #374151;">6</td>
+          <td style="padding: 16px; color: #111827;">Rina Wati</td>
+          <td style="padding: 16px; text-align: center; font-weight: 600; color: #111827;">210</td>
+          <td style="padding: 16px; text-align: center;">⭐</td>
+         </tr>
+         <tr style="border-bottom: 1px solid #E5E7EB;">
+          <td style="padding: 16px; color: #374151;">7</td>
+          <td style="padding: 16px; color: #111827;">Andi Pratama</td>
+          <td style="padding: 16px; text-align: center; font-weight: 600; color: #111827;">195</td>
+          <td style="padding: 16px; text-align: center;">⭐</td>
+         </tr>
+         <tr style="border-bottom: 1px solid #E5E7EB; background: #F9FAFB;">
+          <td style="padding: 16px; color: #374151;">8</td>
+          <td style="padding: 16px; color: #111827;">Maya Sari</td>
+          <td style="padding: 16px; text-align: center; font-weight: 600; color: #111827;">180</td>
+          <td style="padding: 16px; text-align: center;">⭐</td>
+         </tr>
+         <tr style="border-bottom: 1px solid #E5E7EB;">
+          <td style="padding: 16px; color: #374151;">9</td>
+          <td style="padding: 16px; color: #111827;">Doni Setiawan</td>
+          <td style="padding: 16px; text-align: center; font-weight: 600; color: #111827;">165</td>
+          <td style="padding: 16px; text-align: center;">⭐</td>
+         </tr>
+         <tr style="border-bottom: 1px solid #E5E7EB; background: #F9FAFB;">
+          <td style="padding: 16px; color: #374151;">10</td>
+          <td style="padding: 16px; color: #111827;">Lina Marlina</td>
+          <td style="padding: 16px; text-align: center; font-weight: 600; color: #111827;">150</td>
+          <td style="padding: 16px; text-align: center;">⭐</td>
+         </tr>
+        </tbody>
+       </table>
+      </div>
+     </div><!-- Reward -->
+     <div class="section-card" style="border-radius: 16px; padding: 32px; background: rgba(255, 255, 255, 0.95);">
+      <h3 style="font-size: 24px; font-weight: 700; margin-bottom: 24px; color: #111827; display: flex; align-items: center; gap: 12px;"><span style="font-size: 32px;">🎁</span> Reward yang Tersedia</h3>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+       <div class="card-hover" style="padding: 24px; border-radius: 12px; background: linear-gradient(135deg, #E0F2FE, #DBEAFE); text-align: center; border: 2px solid #3B82F6;">
+        <div style="font-size: 48px; margin-bottom: 12px;">
+         📚
+        </div>
+        <h4 style="font-size: 18px; font-weight: 700; color: #1E40AF; margin-bottom: 8px;">Buku Cerita</h4>
+        <p style="font-size: 14px; color: #1E3A8A; margin-bottom: 12px;">50 Poin</p>
+        <div style="padding: 8px 16px; border-radius: 8px; background: white; color: #1E40AF; font-size: 13px; font-weight: 600; display: inline-block;">
+         Tukar Poin
         </div>
        </div>
-       <div class="info-card" style="flex: 1; margin: 0 10px; text-align: center;">
-        <div style="font-size: 2.5em; color: #64B5F6;" id="indo-level">
-         1
+       <div class="card-hover" style="padding: 24px; border-radius: 12px; background: linear-gradient(135deg, #D1FAE5, #A7F3D0); text-align: center; border: 2px solid #10B981;">
+        <div style="font-size: 48px; margin-bottom: 12px;">
+         🎨
         </div>
-        <div style="color: #0277BD; font-weight: 600;">
-         Level
+        <h4 style="font-size: 18px; font-weight: 700; color: #065F46; margin-bottom: 8px;">Set Alat Tulis</h4>
+        <p style="font-size: 14px; color: #064E3B; margin-bottom: 12px;">100 Poin</p>
+        <div style="padding: 8px 16px; border-radius: 8px; background: white; color: #065F46; font-size: 13px; font-weight: 600; display: inline-block;">
+         Tukar Poin
         </div>
        </div>
-      </div><!-- Question Card -->
-      <div class="info-card" style="text-align: center; padding: 50px;">
-       <div style="font-size: 1.2em; color: #0277BD; margin-bottom: 20px;">
-        Huruf Acak:
+       <div class="card-hover" style="padding: 24px; border-radius: 12px; background: linear-gradient(135deg, #FEF3C7, #FDE68A); text-align: center; border: 2px solid #F59E0B;">
+        <div style="font-size: 48px; margin-bottom: 12px;">
+         ��
+        </div>
+        <h4 style="font-size: 18px; font-weight: 700; color: #92400E; margin-bottom: 8px;">Sertifikat Juara</h4>
+        <p style="font-size: 14px; color: #78350F; margin-bottom: 12px;">150 Poin</p>
+        <div style="padding: 8px 16px; border-radius: 8px; background: white; color: #92400E; font-size: 13px; font-weight: 600; display: inline-block;">
+         Tukar Poin
+        </div>
        </div>
-       <div style="font-size: 3em; color: #2E7D32; margin-bottom: 30px; font-weight: 700; letter-spacing: 10px;" id="indo-scrambled">
-        OBKU
-       </div><!-- Input --> <input type="text" id="indo-answer" placeholder="Ketik jawabanmu..." style="width: 100%; padding: 20px; font-size: 1.5em; border: 3px solid #81C784; border-radius: 15px; text-align: center; margin-bottom: 20px; text-transform: uppercase;" onkeypress="if(event.key==='Enter') checkIndoAnswer()"> <button class="btn btn-primary" style="width: 100%; font-size: 1.2em; padding: 20px;" onclick="checkIndoAnswer()"> <span>✓ Cek Jawaban</span> </button> <!-- Hint -->
-       <div style="margin-top: 20px; color: #0277BD; font-size: 1em;">
-        💡 Hint: <span id="indo-hint">Tempat untuk membaca</span>
-       </div><!-- Feedback -->
-       <div id="indo-feedback" style="margin-top: 30px; font-size: 1.5em; font-weight: 700; min-height: 40px;"></div>
+       <div class="card-hover" style="padding: 24px; border-radius: 12px; background: linear-gradient(135deg, #FCE7F3, #FBCFE8); text-align: center; border: 2px solid #EC4899;">
+        <div style="font-size: 48px; margin-bottom: 12px;">
+         🎒
+        </div>
+        <h4 style="font-size: 18px; font-weight: 700; color: #9F1239; margin-bottom: 8px;">Tas Sekolah</h4>
+        <p style="font-size: 14px; color: #831843; margin-bottom: 12px;">250 Poin</p>
+        <div style="padding: 8px 16px; border-radius: 8px; background: white; color: #9F1239; font-size: 13px; font-weight: 600; display: inline-block;">
+         Tukar Poin
+        </div>
+       </div>
       </div>
      </div>
     </div>
-   </div>
-  </div><!-- MEMORY GAME -->
-  <div id="memory-game" class="page">
-   <div class="inner-page">
-    <div class="page-header">
-     <h1 class="page-title">🧠 Memory Card</h1>
-     <p class="page-subtitle">Temukan semua pasangan kartu!</p><button class="btn btn-back" onclick="showPage('games')"> <span>← Kembali ke Game</span> </button>
-    </div>
-    <div class="content-container">
-     <div style="max-width: 700px; margin: 0 auto;"><!-- Game Stats -->
-      <div style="display: flex; justify-content: space-around; margin-bottom: 30px;">
-       <div class="info-card" style="flex: 1; margin: 0 10px; text-align: center;">
-        <div style="font-size: 2.5em; color: #81C784;" id="memory-moves">
-         0
-        </div>
-        <div style="color: #0277BD; font-weight: 600;">
-         Langkah
-        </div>
-       </div>
-       <div class="info-card" style="flex: 1; margin: 0 10px; text-align: center;">
-        <div style="font-size: 2.5em; color: #64B5F6;" id="memory-pairs">
-         0
-        </div>
-        <div style="color: #0277BD; font-weight: 600;">
-         Pasangan
-        </div>
-       </div>
-      </div><!-- Memory Cards Grid -->
-      <div id="memory-grid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-bottom: 30px;"><!-- Cards will be generated by JavaScript -->
-      </div><!-- Reset Button --> <button class="btn btn-secondary" style="width: 100%; font-size: 1.2em;" onclick="initMemoryGame()"> <span>🔄 Main Lagi</span> </button>
+   </div><!-- Galeri Page -->
+   <div id="page-galeri" class="page-section">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 40px 24px;">
+     <h2 style="font-size: 32px; font-weight: 800; margin-bottom: 32px; color: #111827; text-align: center;">Galeri Foto &amp; Video</h2>
+     <div class="section-card" style="border-radius: 16px; padding: 48px 32px; text-align: center; background: rgba(255, 255, 255, 0.95);">
+      <div style="font-size: 80px; margin-bottom: 24px;">
+       📸
+      </div>
+      <h3 style="font-size: 24px; font-weight: 700; color: #111827; margin-bottom: 16px;">Galeri Sedang Dipersiapkan</h3>
+      <p style="font-size: 16px; color: #6B7280; max-width: 500px; margin: 0 auto;">Foto dan video kegiatan kelas akan segera ditambahkan. Pantau terus halaman ini untuk update terbaru!</p>
      </div>
     </div>
-   </div>
+   </div><!-- Kontak Page -->
+   <div id="page-kontak" class="page-section">
+    <div style="max-width: 900px; margin: 0 auto; padding: 40px 24px;">
+     <h2 style="font-size: 32px; font-weight: 800; margin-bottom: 32px; color: #111827; text-align: center;">Hubungi Kami</h2>
+     <div style="display: grid; gap: 24px;"><!-- Kontak Guru -->
+      <div class="section-card" style="border-radius: 16px; padding: 32px; background: rgba(255, 255, 255, 0.95);">
+       <h3 style="font-size: 24px; font-weight: 700; margin-bottom: 24px; color: #111827; display: flex; align-items: center; gap: 12px;"><span style="font-size: 32px;">👨������</span> Kontak Wali Kelas</h3>
+       <div style="display: grid; gap: 16px;">
+        <div style="display: flex; align-items: center; gap: 16px; padding: 16px; border-radius: 12px; background: #F9FAFB;">
+         <div class="icon-circle" style="background: linear-gradient(135deg, #3B82F6, #60A5FA); color: white; font-size: 24px;">
+          👩‍🏫
+         </div>
+         <div>
+          <p style="font-size: 13px; color: #6B7280; margin: 0 0 4px 0;">Nama</p>
+          <p id="contactTeacherName" style="font-size: 16px; font-weight: 600; color: #111827; margin: 0;">Ibu Siti Rahma, S.Pd</p>
+         </div>
+        </div>
+        <div style="display: flex; align-items: center; gap: 16px; padding: 16px; border-radius: 12px; background: #F9FAFB;">
+         <div class="icon-circle" style="background: linear-gradient(135deg, #10B981, #34D399); color: white; font-size: 24px;">
+          ��
+         </div>
+         <div style="flex: 1;">
+          <p style="font-size: 13px; color: #6B7280; margin: 0 0 4px 0;">WhatsApp</p>
+          <p id="contactPhone" style="font-size: 16px; font-weight: 600; color: #111827; margin: 0;">0812-3456-7890</p>
+         </div><a href="https://wa.me/6281234567890" target="_blank" rel="noopener noreferrer" class="card-hover" style="padding: 10px 20px; border-radius: 8px; background: #10B981; color: white; text-decoration: none; font-size: 14px; font-weight: 600;">Chat</a>
+        </div>
+        <div style="display: flex; align-items: center; gap: 16px; padding: 16px; border-radius: 12px; background: #F9FAFB;">
+         <div class="icon-circle" style="background: linear-gradient(135deg, #F59E0B, #FBBF24); color: white; font-size: 24px;">
+          ✉️
+         </div>
+         <div>
+          <p style="font-size: 13px; color: #6B7280; margin: 0 0 4px 0;">Email</p>
+          <p style="font-size: 16px; font-weight: 600; color: #111827; margin: 0;">dianpamungkas24@guru.sd.belajar.id</p>
+         </div>
+        </div>
+       </div>
+      </div><!-- Lokasi Sekolah -->
+      <div class="section-card" style="border-radius: 16px; padding: 32px; background: rgba(255, 255, 255, 0.95);">
+       <h3 style="font-size: 24px; font-weight: 700; margin-bottom: 24px; color: #111827; display: flex; align-items: center; gap: 12px;"><span style="font-size: 32px;">📍</span> Lokasi Sekolah</h3>
+       <div style="display: grid; gap: 16px;">
+        <div style="display: flex; align-items: start; gap: 16px; padding: 16px; border-radius: 12px; background: #F9FAFB;">
+         <div class="icon-circle" style="background: linear-gradient(135deg, #8B5CF6, #A78BFA); color: white; font-size: 24px; flex-shrink: 0;">
+          🏫
+         </div>
+         <div>
+          <p style="font-size: 13px; color: #6B7280; margin: 0 0 8px 0;">Alamat</p>
+          <p id="schoolAddress" style="font-size: 16px; font-weight: 600; color: #111827; margin: 0 0 4px 0; line-height: 1.5;">Jl. Lintas Sumatera No.12, RT.01/RW.03, Kota Baru, Kec. Martapura, Kabupaten Ogan Komering Ulu Timur, Sumatera Selatan 32311</p>
+         </div>
+        </div><a href="https://maps.app.goo.gl/Fnts5WMmEKAxHppC7" target="_blank" rel="noopener noreferrer" class="card-hover" style="padding: 16px; border-radius: 12px; background: linear-gradient(135deg, #3B82F6, #10B981); color: white; text-decoration: none; text-align: center; font-size: 16px; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 8px;"> <span style="font-size: 24px;">🗺️</span> Buka di Google Maps </a>
+       </div>
+      </div><!-- Jam Operasional -->
+      <div class="section-card" style="border-radius: 16px; padding: 32px; background: rgba(255, 255, 255, 0.95);">
+       <h3 style="font-size: 24px; font-weight: 700; margin-bottom: 24px; color: #111827; display: flex; align-items: center; gap: 12px;"><span style="font-size: 32px;">⏰</span> Jam Operasional</h3>
+       <div style="display: grid; gap: 12px;">
+        <div style="display: flex; justify-content: space-between; padding: 12px 16px; border-radius: 8px; background: #F9FAFB;"><span style="font-size: 14px; color: #6B7280;">Senin - Kamis</span> <span style="font-size: 14px; font-weight: 600; color: #111827;">07.00 - 12.00 WIB</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; padding: 12px 16px; border-radius: 8px; background: #F9FAFB;"><span style="font-size: 14px; color: #6B7280;">Jumat</span> <span style="font-size: 14px; font-weight: 600; color: #111827;">07.00 - 10.30 WIB</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; padding: 12px 16px; border-radius: 8px; background: #F9FAFB;"><span style="font-size: 14px; color: #6B7280;">Sabtu</span> <span style="font-size: 14px; font-weight: 600; color: #111827;">07.00 - 11.00 WIB</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; padding: 12px 16px; border-radius: 8px; background: #F9FAFB;"><span style="font-size: 14px; color: #6B7280;">Minggu</span> <span style="font-size: 14px; font-weight: 600; color: #EF4444;">Libur</span>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div><!-- Footer -->
+   <footer style="background: rgba(255, 255, 255, 0.95); border-top: 1px solid rgba(0, 0, 0, 0.05); padding: 32px 24px; margin-top: 40px; width: 100%;">
+    <div style="max-width: 1200px; margin: 0 auto; text-align: center;">
+     <div style="width: 60px; height: 60px; border-radius: 50%; margin: 0 auto 16px; background: linear-gradient(135deg, #3B82F6, #10B981); display: flex; align-items: center; justify-content: center; font-size: 32px;">
+      🎓
+     </div>
+     <h3 style="font-size: 18px; font-weight: 700; color: #111827; margin-bottom: 8px;">Kelas Digital 6C SDN 19 Martapura</h3>
+     <p style="font-size: 14px; color: #6B7280; margin-bottom: 16px;">Belajar dengan Hati, Tumbuh dengan Prestasi</p>
+     <p style="font-size: 13px; color: #9CA3AF; margin: 0;">© 2024 SDN 19 Martapura. Dibuat dengan ❤️ untuk pendidikan yang lebih baik</p>
+    </div>
+   </footer>
   </div>
   <script>
-    // Page Navigation
-    function showPage(pageName) {
-      const pages = document.querySelectorAll('.page');
-      pages.forEach(page => page.classList.remove('active'));
-      
-      const targetPage = document.getElementById(pageName + '-page');
-      if (targetPage) {
-        targetPage.classList.add('active');
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      }
+    const defaultConfig = {
+      site_title: "Kelas Digital 6C SDN 19 Martapura",
+      welcome_text: "Selamat Datang di Portal Pembelajaran Digital Kami",
+      teacher_name: "Dian Agung Pamungkas, S.Pd",
+      teacher_motto: "Belajar dengan Hati, Tumbuh dengan Prestasi",
+      contact_phone: "0812-3456-7890",
+      school_address: "Jl. Lintas Sumatera No.12, RT.01/RW.03, Kota Baru, Kec. Martapura, Kabupaten Ogan Komering Ulu Timur, Sumatera Selatan 32311",
+      background_color: "#E0F2FE",
+      surface_color: "#FFFFFF",
+      text_color: "#111827",
+      primary_action_color: "#3B82F6",
+      secondary_action_color: "#10B981"
+    };
+
+    let config = { ...defaultConfig };
+
+    // Data nilai siswa untuk semua mata pelajaran
+    const nilaiData = {
+      matematika: [
+        { nama: "ABI MAYU", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "AFIFA SALSA RAMADHANI", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "AISYAH PUDAKARLA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "ALVIN PRATISTA HABIBI", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "AQILA NAONI IZATUNNISA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "AYU PUTRI AULIA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "BIMA SAPUTRA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "BOBBY AGUSTAV MAHARDIKA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "DEFTRA WARDANA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "DELLA CANTICA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "DHAFITHA NIZZA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "GEREN ALDOA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "GILDA RIFA APRILIA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "INTAN AYU PRATIWI", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "KAYLA DWI FEBYANTI", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "KEYLA AULIA CAHYAFITRI", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "KIRANA MEYSA PUTRI", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "M SATRIO PUTRA UTOMO", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "MEYZA DHIKA PRATAMA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "MIKA RAISA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "MUHAMMAD DAFFA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "NADYA KHORUNNISA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "NAURA AZKADINA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "QAIREEN RAISHA PUTRI", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "RAKKA DESFARIAN", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "RAMADHAN PUTRA SANDI WANTORO", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "ROBERT MUHAMMAD AMINUALLAH", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 }
+      ],
+      ipas: [
+        { nama: "ABI MAYU", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "AFIFA SALSA RAMADHANI", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "AISYAH PUDAKARLA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "ALVIN PRATISTA HABIBI", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "AQILA NAONI IZATUNNISA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "AYU PUTRI AULIA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "BIMA SAPUTRA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "BOBBY AGUSTAV MAHARDIKA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "DEFTRA WARDANA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "DELLA CANTICA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "DHAFITHA NIZZA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "GEREN ALDOA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "GILDA RIFA APRILIA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "INTAN AYU PRATIWI", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "KAYLA DWI FEBYANTI", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "KEYLA AULIA CAHYAFITRI", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "KIRANA MEYSA PUTRI", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "M SATRIO PUTRA UTOMO", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "MEYZA DHIKA PRATAMA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "MIKA RAISA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "MUHAMMAD DAFFA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "NADYA KHORUNNISA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "NAURA AZKADINA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "QAIREEN RAISHA PUTRI", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "RAKKA DESFARIAN", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "RAMADHAN PUTRA SANDI WANTORO", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "ROBERT MUHAMMAD AMINUALLAH", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 }
+      ],
+      indonesia: [
+        { nama: "ABI MAYU", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "AFIFA SALSA RAMADHANI", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "AISYAH PUDAKARLA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "ALVIN PRATISTA HABIBI", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "AQILA NAONI IZATUNNISA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "AYU PUTRI AULIA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "BIMA SAPUTRA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "BOBBY AGUSTAV MAHARDIKA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "DEFTRA WARDANA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "DELLA CANTICA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "DHAFITHA NIZZA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "GEREN ALDOA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "GILDA RIFA APRILIA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "INTAN AYU PRATIWI", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "KAYLA DWI FEBYANTI", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "KEYLA AULIA CAHYAFITRI", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "KIRANA MEYSA PUTRI", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "M SATRIO PUTRA UTOMO", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "MEYZA DHIKA PRATAMA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "MIKA RAISA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "MUHAMMAD DAFFA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "NADYA KHORUNNISA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "NAURA AZKADINA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "QAIREEN RAISHA PUTRI", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "RAKKA DESFARIAN", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "RAMADHAN PUTRA SANDI WANTORO", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "ROBERT MUHAMMAD AMINUALLAH", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 }
+      ],
+      inggris: [
+        { nama: "ABI MAYU", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "AFIFA SALSA RAMADHANI", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "AISYAH PUDAKARLA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "ALVIN PRATISTA HABIBI", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "AQILA NAONI IZATUNNISA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "AYU PUTRI AULIA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "BIMA SAPUTRA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "BOBBY AGUSTAV MAHARDIKA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "DEFTRA WARDANA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "DELLA CANTICA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "DHAFITHA NIZZA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "GEREN ALDOA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "GILDA RIFA APRILIA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "INTAN AYU PRATIWI", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "KAYLA DWI FEBYANTI", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "KEYLA AULIA CAHYAFITRI", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "KIRANA MEYSA PUTRI", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "M SATRIO PUTRA UTOMO", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "MEYZA DHIKA PRATAMA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "MIKA RAISA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "MUHAMMAD DAFFA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "NADYA KHORUNNISA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "NAURA AZKADINA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "QAIREEN RAISHA PUTRI", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "RAKKA DESFARIAN", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "RAMADHAN PUTRA SANDI WANTORO", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "ROBERT MUHAMMAD AMINUALLAH", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 }
+      ],
+      pkn: [
+        { nama: "ABI MAYU", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "AFIFA SALSA RAMADHANI", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "AISYAH PUDAKARLA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "ALVIN PRATISTA HABIBI", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "AQILA NAONI IZATUNNISA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "AYU PUTRI AULIA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "BIMA SAPUTRA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "BOBBY AGUSTAV MAHARDIKA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "DEFTRA WARDANA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "DELLA CANTICA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "DHAFITHA NIZZA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "GEREN ALDOA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "GILDA RIFA APRILIA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "INTAN AYU PRATIWI", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "KAYLA DWI FEBYANTI", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "KEYLA AULIA CAHYAFITRI", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "KIRANA MEYSA PUTRI", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "M SATRIO PUTRA UTOMO", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "MEYZA DHIKA PRATAMA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "MIKA RAISA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "MUHAMMAD DAFFA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "NADYA KHORUNNISA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "NAURA AZKADINA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "QAIREEN RAISHA PUTRI", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "RAKKA DESFARIAN", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "RAMADHAN PUTRA SANDI WANTORO", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "ROBERT MUHAMMAD AMINUALLAH", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 }
+      ],
+      pai: [
+        { nama: "ABI MAYU", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "AFIFA SALSA RAMADHANI", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "AISYAH PUDAKARLA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "ALVIN PRATISTA HABIBI", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "AQILA NAONI IZATUNNISA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "AYU PUTRI AULIA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "BIMA SAPUTRA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "BOBBY AGUSTAV MAHARDIKA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "DEFTRA WARDANA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "DELLA CANTICA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "DHAFITHA NIZZA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "GEREN ALDOA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "GILDA RIFA APRILIA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "INTAN AYU PRATIWI", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "KAYLA DWI FEBYANTI", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "KEYLA AULIA CAHYAFITRI", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "KIRANA MEYSA PUTRI", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "M SATRIO PUTRA UTOMO", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "MEYZA DHIKA PRATAMA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "MIKA RAISA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "MUHAMMAD DAFFA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "NADYA KHORUNNISA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "NAURA AZKADINA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "QAIREEN RAISHA PUTRI", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "RAKKA DESFARIAN", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "RAMADHAN PUTRA SANDI WANTORO", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "ROBERT MUHAMMAD AMINUALLAH", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 }
+      ],
+      budaya: [
+        { nama: "ABI MAYU", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "AFIFA SALSA RAMADHANI", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "AISYAH PUDAKARLA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "ALVIN PRATISTA HABIBI", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "AQILA NAONI IZATUNNISA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "AYU PUTRI AULIA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "BIMA SAPUTRA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "BOBBY AGUSTAV MAHARDIKA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "DEFTRA WARDANA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "DELLA CANTICA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "DHAFITHA NIZZA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "GEREN ALDOA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "GILDA RIFA APRILIA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "INTAN AYU PRATIWI", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "KAYLA DWI FEBYANTI", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "KEYLA AULIA CAHYAFITRI", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "KIRANA MEYSA PUTRI", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "M SATRIO PUTRA UTOMO", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "MEYZA DHIKA PRATAMA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "MIKA RAISA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "MUHAMMAD DAFFA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "NADYA KHORUNNISA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "NAURA AZKADINA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "QAIREEN RAISHA PUTRI", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "RAKKA DESFARIAN", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "RAMADHAN PUTRA SANDI WANTORO", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "ROBERT MUHAMMAD AMINUALLAH", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 }
+      ],
+      pjok: [
+        { nama: "ABI MAYU", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "AFIFA SALSA RAMADHANI", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "AISYAH PUDAKARLA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "ALVIN PRATISTA HABIBI", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "AQILA NAONI IZATUNNISA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "AYU PUTRI AULIA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "BIMA SAPUTRA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "BOBBY AGUSTAV MAHARDIKA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "DEFTRA WARDANA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "DELLA CANTICA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "DHAFITHA NIZZA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "GEREN ALDOA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "GILDA RIFA APRILIA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "INTAN AYU PRATIWI", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "KAYLA DWI FEBYANTI", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "KEYLA AULIA CAHYAFITRI", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "KIRANA MEYSA PUTRI", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "M SATRIO PUTRA UTOMO", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "MEYZA DHIKA PRATAMA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "MIKA RAISA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "MUHAMMAD DAFFA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "NADYA KHORUNNISA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "NAURA AZKADINA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "QAIREEN RAISHA PUTRI", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "RAKKA DESFARIAN", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "RAMADHAN PUTRA SANDI WANTORO", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "ROBERT MUHAMMAD AMINUALLAH", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 }
+      ],
+      koding: [
+        { nama: "ABI MAYU", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "AFIFA SALSA RAMADHANI", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "AISYAH PUDAKARLA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "ALVIN PRATISTA HABIBI", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "AQILA NAONI IZATUNNISA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "AYU PUTRI AULIA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "BIMA SAPUTRA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "BOBBY AGUSTAV MAHARDIKA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "DEFTRA WARDANA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "DELLA CANTICA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "DHAFITHA NIZZA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "GEREN ALDOA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "GILDA RIFA APRILIA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "INTAN AYU PRATIWI", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "KAYLA DWI FEBYANTI", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "KEYLA AULIA CAHYAFITRI", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "KIRANA MEYSA PUTRI", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "M SATRIO PUTRA UTOMO", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "MEYZA DHIKA PRATAMA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "MIKA RAISA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "MUHAMMAD DAFFA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "NADYA KHORUNNISA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "NAURA AZKADINA", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "QAIREEN RAISHA PUTRI", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "RAKKA DESFARIAN", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "RAMADHAN PUTRA SANDI WANTORO", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
+        { nama: "ROBERT MUHAMMAD AMINUALLAH", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 }
+      ]
+    };
+
+    const subjectInfo = {
+      matematika: { icon: "🔢", name: "Matematika", color: "#3B82F6" },
+      ipas: { icon: "🔬", name: "IPAS", color: "#10B981" },
+      indonesia: { icon: "📚", name: "Bahasa Indonesia", color: "#F59E0B" },
+      inggris: { icon: "🗣️", name: "Bahasa Inggris", color: "#EC4899" },
+      pkn: { icon: "🏛️", name: "PKn", color: "#EF4444" },
+      pai: { icon: "🕌", name: "PAI", color: "#06B6D4" },
+      budaya: { icon: "🎭", name: "Budaya Komering", color: "#6366F1" },
+      pjok: { icon: "⚽", name: "PJOK", color: "#84CC16" },
+      koding: { icon: "💻", name: "Koding & AI", color: "#8B5CF6" }
+    };
+
+    let currentSubject = 'matematika';
+
+    function calculateAverage(student) {
+      const total = student.nh1 + student.nh2 + student.nh3 + student.nh4 + student.nh5 + student.sts + student.sas;
+      return (total / 7).toFixed(1);
     }
-    
-    // Game Navigation
-    function showGame(gameName) {
-      const pages = document.querySelectorAll('.page');
-      pages.forEach(page => page.classList.remove('active'));
-      
-      const targetPage = document.getElementById(gameName + '-game');
-      if (targetPage) {
-        targetPage.classList.add('active');
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-        
-        // Initialize games when shown
-        if (gameName === 'math') initMathGame();
-        if (gameName === 'science') initScienceGame();
-        if (gameName === 'indonesian') initIndonesianGame();
-        if (gameName === 'memory') initMemoryGame();
-      }
+
+    function getPredikat(avg) {
+      if (avg >= 90) return { label: 'A', bg: '#FEF3C7', color: '#92400E' };
+      if (avg >= 80) return { label: 'B', bg: '#DBEAFE', color: '#1E40AF' };
+      if (avg >= 70) return { label: 'C', bg: '#D1FAE5', color: '#065F46' };
+      if (avg >= 60) return { label: 'D', bg: '#FEE2E2', color: '#991B1B' };
+      return { label: 'E', bg: '#F3F4F6', color: '#6B7280' };
     }
-    
-    // ===== MATH GAME =====
-    let mathScore = 0;
-    let mathQuestionNum = 1;
-    let mathCorrectAnswer = 0;
-    
-    const mathOperations = [
-      { type: '×', min: 2, max: 12 },
-      { type: '÷', min: 2, max: 12 }
-    ];
-    
-    function initMathGame() {
-      mathScore = 0;
-      mathQuestionNum = 1;
-      document.getElementById('math-score').textContent = mathScore;
-      document.getElementById('math-question-num').textContent = mathQuestionNum;
-      generateMathQuestion();
-    }
-    
-    function generateMathQuestion() {
-      const operation = mathOperations[Math.floor(Math.random() * mathOperations.length)];
-      let num1, num2, question;
-      
-      if (operation.type === '×') {
-        num1 = Math.floor(Math.random() * (operation.max - operation.min + 1)) + operation.min;
-        num2 = Math.floor(Math.random() * (operation.max - operation.min + 1)) + operation.min;
-        mathCorrectAnswer = num1 * num2;
-        question = `${num1} × ${num2} = ?`;
-      } else {
-        num2 = Math.floor(Math.random() * (operation.max - operation.min + 1)) + operation.min;
-        mathCorrectAnswer = Math.floor(Math.random() * (operation.max - operation.min + 1)) + operation.min;
-        num1 = mathCorrectAnswer * num2;
-        question = `${num1} ÷ ${num2} = ?`;
-      }
-      
-      document.getElementById('math-question').textContent = question;
-      
-      // Generate options
-      const options = [mathCorrectAnswer];
-      while (options.length < 4) {
-        const wrongAnswer = mathCorrectAnswer + Math.floor(Math.random() * 20) - 10;
-        if (wrongAnswer > 0 && !options.includes(wrongAnswer)) {
-          options.push(wrongAnswer);
-        }
-      }
-      
-      // Shuffle options
-      for (let i = options.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [options[i], options[j]] = [options[j], options[i]];
-      }
-      
-      // Display options
-      for (let i = 0; i < 4; i++) {
-        document.getElementById(`math-option-${i}`).textContent = options[i];
-      }
-      
-      document.getElementById('math-feedback').textContent = '';
-    }
-    
-    function checkMathAnswer(optionIndex) {
-      const selectedAnswer = parseInt(document.getElementById(`math-option-${optionIndex}`).textContent);
-      const feedback = document.getElementById('math-feedback');
-      
-      if (selectedAnswer === mathCorrectAnswer) {
-        mathScore += 10;
-        feedback.textContent = '🎉 Benar! Hebat!';
-        feedback.style.color = '#2E7D32';
-      } else {
-        feedback.textContent = `❌ Salah! Jawaban: ${mathCorrectAnswer}`;
-        feedback.style.color = '#C62828';
-      }
-      
-      document.getElementById('math-score').textContent = mathScore;
-      mathQuestionNum++;
-      document.getElementById('math-question-num').textContent = mathQuestionNum;
-      
-      setTimeout(() => {
-        generateMathQuestion();
-      }, 1500);
-    }
-    
-    // ===== SCIENCE GAME =====
-    let scienceScore = 0;
-    let scienceTotal = 0;
-    let scienceCorrectAnswer = '';
-    
-    const scienceQuestions = [
-      { emoji: '🐘', answer: 'Gajah', options: ['Gajah', 'Singa', 'Jerapah', 'Badak'] },
-      { emoji: '🦁', answer: 'Singa', options: ['Gajah', 'Singa', 'Harimau', 'Macan'] },
-      { emoji: '🐸', answer: 'Katak', options: ['Katak', 'Kodok', 'Kadal', 'Buaya'] },
-      { emoji: '🦋', answer: 'Kupu-kupu', options: ['Kupu-kupu', 'Capung', 'Lebah', 'Lalat'] },
-      { emoji: '🌳', answer: 'Pohon', options: ['Pohon', 'Semak', 'Rumput', 'Paku'] },
-      { emoji: '🌞', answer: 'Matahari', options: ['Matahari', 'Bulan', 'Bintang', 'Planet'] },
-      { emoji: '💧', answer: 'Air', options: ['Air', 'Minyak', 'Susu', 'Jus'] },
-      { emoji: '🔥', answer: 'Api', options: ['Api', 'Asap', 'Uap', 'Angin'] },
-      { emoji: '🌊', answer: 'Ombak', options: ['Ombak', 'Sungai', 'Danau', 'Laut'] },
-      { emoji: '⚡', answer: 'Petir', options: ['Petir', 'Kilat', 'Guntur', 'Hujan'] }
-    ];
-    
-    function initScienceGame() {
-      scienceScore = 0;
-      scienceTotal = 0;
-      document.getElementById('science-score').textContent = scienceScore;
-      document.getElementById('science-total').textContent = scienceTotal;
-      generateScienceQuestion();
-    }
-    
-    function generateScienceQuestion() {
-      const question = scienceQuestions[Math.floor(Math.random() * scienceQuestions.length)];
-      scienceCorrectAnswer = question.answer;
-      
-      document.getElementById('science-emoji').textContent = question.emoji;
-      
-      // Shuffle options
-      const shuffled = [...question.options].sort(() => Math.random() - 0.5);
-      
-      for (let i = 0; i < 4; i++) {
-        document.getElementById(`science-option-${i}`).textContent = shuffled[i];
-      }
-      
-      document.getElementById('science-feedback').textContent = '';
-    }
-    
-    function checkScienceAnswer(optionIndex) {
-      const selectedAnswer = document.getElementById(`science-option-${optionIndex}`).textContent;
-      const feedback = document.getElementById('science-feedback');
-      
-      scienceTotal++;
-      document.getElementById('science-total').textContent = scienceTotal;
-      
-      if (selectedAnswer === scienceCorrectAnswer) {
-        scienceScore++;
-        document.getElementById('science-score').textContent = scienceScore;
-        feedback.textContent = '✨ Benar Sekali!';
-        feedback.style.color = '#2E7D32';
-      } else {
-        feedback.textContent = `❌ Jawaban: ${scienceCorrectAnswer}`;
-        feedback.style.color = '#C62828';
-      }
-      
-      setTimeout(() => {
-        generateScienceQuestion();
-      }, 1500);
-    }
-    
-    // ===== INDONESIAN GAME =====
-    let indoScore = 0;
-    let indoLevel = 1;
-    let indoCorrectAnswer = '';
-    
-    const indoWords = [
-      { word: 'BUKU', hint: 'Tempat untuk membaca', scrambled: 'OBKU' },
-      { word: 'PENSIL', hint: 'Alat tulis', scrambled: 'NELPIS' },
-      { word: 'SEKOLAH', hint: 'Tempat belajar', scrambled: 'LOHASEK' },
-      { word: 'GURU', hint: 'Orang yang mengajar', scrambled: 'RUUG' },
-      { word: 'MEJA', hint: 'Tempat menulis', scrambled: 'JAME' },
-      { word: 'KURSI', hint: 'Tempat duduk', scrambled: 'RISKU' },
-      { word: 'PAPAN', hint: 'Tulis kapur di...', scrambled: 'NAPAP' },
-      { word: 'KOMPUTER', hint: 'Alat elektronik untuk bekerja', scrambled: 'RETUPKOM' },
-      { word: 'PERPUSTAKAAN', hint: 'Tempat meminjam buku', scrambled: 'KAANSUTAPERP' },
-      { word: 'PEMBELAJARAN', hint: 'Proses belajar mengajar', scrambled: 'JARANBELMAPE' }
-    ];
-    
-    function initIndonesianGame() {
-      indoScore = 0;
-      indoLevel = 1;
-      document.getElementById('indo-score').textContent = indoScore;
-      document.getElementById('indo-level').textContent = indoLevel;
-      generateIndoQuestion();
-    }
-    
-    function generateIndoQuestion() {
-      const question = indoWords[Math.min(indoLevel - 1, indoWords.length - 1)];
-      indoCorrectAnswer = question.word;
-      
-      // Scramble the word
-      const letters = question.word.split('');
-      for (let i = letters.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [letters[i], letters[j]] = [letters[j], letters[i]];
-      }
-      
-      document.getElementById('indo-scrambled').textContent = letters.join('');
-      document.getElementById('indo-hint').textContent = question.hint;
-      document.getElementById('indo-answer').value = '';
-      document.getElementById('indo-feedback').textContent = '';
-      document.getElementById('indo-answer').focus();
-    }
-    
-    function checkIndoAnswer() {
-      const userAnswer = document.getElementById('indo-answer').value.toUpperCase().trim();
-      const feedback = document.getElementById('indo-feedback');
-      
-      if (userAnswer === indoCorrectAnswer) {
-        indoScore += indoLevel * 10;
-        indoLevel++;
-        document.getElementById('indo-score').textContent = indoScore;
-        document.getElementById('indo-level').textContent = indoLevel;
-        feedback.textContent = '🎊 Sempurna! Lanjut ke level berikutnya!';
-        feedback.style.color = '#2E7D32';
-        
-        setTimeout(() => {
-          if (indoLevel <= indoWords.length) {
-            generateIndoQuestion();
-          } else {
-            feedback.textContent = '🏆 Selamat! Kamu menyelesaikan semua level!';
-            feedback.style.color = '#F57F17';
-          }
-        }, 2000);
-      } else if (userAnswer === '') {
-        feedback.textContent = '⚠️ Ketik jawabanmu dulu!';
-        feedback.style.color = '#F57F17';
-      } else {
-        feedback.textContent = '❌ Coba lagi! Perhatikan hint-nya!';
-        feedback.style.color = '#C62828';
-      }
-    }
-    
-    // ===== MEMORY GAME =====
-    let memoryCards = [];
-    let memoryFlipped = [];
-    let memoryMatched = [];
-    let memoryMoves = 0;
-    let memoryPairs = 0;
-    let memoryCanFlip = true;
-    
-    const memoryEmojis = ['🍎', '🍌', '🍊', '🍇', '🍓', '🍒', '🍑', '🥝'];
-    
-    function initMemoryGame() {
-      memoryCards = [...memoryEmojis, ...memoryEmojis];
-      memoryCards.sort(() => Math.random() - 0.5);
-      memoryFlipped = [];
-      memoryMatched = [];
-      memoryMoves = 0;
-      memoryPairs = 0;
-      memoryCanFlip = true;
-      
-      document.getElementById('memory-moves').textContent = memoryMoves;
-      document.getElementById('memory-pairs').textContent = memoryPairs;
-      
-      const grid = document.getElementById('memory-grid');
-      grid.innerHTML = '';
-      
-      memoryCards.forEach((emoji, index) => {
-        const card = document.createElement('div');
-        card.style.cssText = `
-          background: linear-gradient(135deg, #81C784, #64B5F6);
-          border-radius: 15px;
-          height: 120px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          font-size: 3em;
-          cursor: pointer;
-          transition: all 0.3s ease;
-          box-shadow: 0 4px 15px rgba(129, 199, 132, 0.3);
-        `;
-        card.dataset.index = index;
-        card.dataset.emoji = emoji;
-        card.textContent = '❓';
-        card.onclick = () => flipMemoryCard(index);
-        grid.appendChild(card);
+
+    function updateRankingTable() {
+      // Hitung rata-rata semua siswa dari semua mata pelajaran
+      const studentAverages = [];
+      const allStudents = nilaiData.matematika;
+
+      allStudents.forEach((student, index) => {
+        let totalAverage = 0;
+        let subjectCount = 0;
+
+        // Hitung rata-rata dari setiap mata pelajaran
+        Object.keys(nilaiData).forEach(subject => {
+          const studentData = nilaiData[subject][index];
+          const avg = parseFloat(calculateAverage(studentData));
+          totalAverage += avg;
+          subjectCount++;
+        });
+
+        const overallAverage = totalAverage / subjectCount;
+        studentAverages.push({
+          nama: student.nama,
+          average: overallAverage
+        });
       });
-    }
-    
-    function flipMemoryCard(index) {
-      if (!memoryCanFlip) return;
-      if (memoryFlipped.includes(index)) return;
-      if (memoryMatched.includes(index)) return;
-      
-      const card = document.getElementById('memory-grid').children[index];
-      card.textContent = memoryCards[index];
-      card.style.background = 'rgba(255, 255, 255, 0.9)';
-      memoryFlipped.push(index);
-      
-      if (memoryFlipped.length === 2) {
-        memoryCanFlip = false;
-        memoryMoves++;
-        document.getElementById('memory-moves').textContent = memoryMoves;
+
+      // Sort berdasarkan rata-rata tertinggi
+      studentAverages.sort((a, b) => b.average - a.average);
+
+      // Ambil 10 besar
+      const top10 = studentAverages.slice(0, 10);
+
+      // Update tabel ranking
+      const tbody = document.getElementById('ranking-table-body');
+      tbody.innerHTML = '';
+
+      top10.forEach((student, index) => {
+        const rank = index + 1;
+        const avg = student.average.toFixed(1);
+        const predikat = getPredikat(parseFloat(avg));
         
-        const [first, second] = memoryFlipped;
+        let rankDisplay = rank.toString();
+        let bgColor = 'white';
+        let textColor = '#374151';
         
-        if (memoryCards[first] === memoryCards[second]) {
-          memoryMatched.push(first, second);
-          memoryPairs++;
-          document.getElementById('memory-pairs').textContent = memoryPairs;
-          memoryFlipped = [];
-          memoryCanFlip = true;
-          
-          if (memoryPairs === memoryEmojis.length) {
-            setTimeout(() => {
-              const moveText = memoryMoves === 1 ? 'langkah' : 'langkah';
-              const message = document.createElement('div');
-              message.style.cssText = `
-                position: fixed;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                background: rgba(255, 255, 255, 0.95);
-                padding: 40px;
-                border-radius: 25px;
-                text-align: center;
-                box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-                z-index: 1000;
-                font-size: 1.5em;
-                color: #2E7D32;
-                font-weight: 700;
-              `;
-              message.innerHTML = `🎉 Selamat!<br>Kamu menyelesaikan dalam ${memoryMoves} ${moveText}!`;
-              document.body.appendChild(message);
-              
-              setTimeout(() => message.remove(), 3000);
-            }, 500);
-          }
+        if (rank === 1) {
+          rankDisplay = '🥇 1';
+          bgColor = '#FEF3C7';
+          textColor = '#92400E';
+        } else if (rank === 2) {
+          rankDisplay = '🥈 2';
+          bgColor = '#E5E7EB';
+          textColor = '#6B7280';
+        } else if (rank === 3) {
+          rankDisplay = '🥉 3';
+          bgColor = '#FED7AA';
+          textColor = '#C2410C';
         } else {
-          setTimeout(() => {
-            document.getElementById('memory-grid').children[first].textContent = '❓';
-            document.getElementById('memory-grid').children[first].style.background = 'linear-gradient(135deg, #81C784, #64B5F6)';
-            document.getElementById('memory-grid').children[second].textContent = '❓';
-            document.getElementById('memory-grid').children[second].style.background = 'linear-gradient(135deg, #81C784, #64B5F6)';
-            memoryFlipped = [];
-            memoryCanFlip = true;
-          }, 1000);
+          bgColor = index % 2 === 1 ? '#F9FAFB' : 'white';
         }
+
+        const row = document.createElement('tr');
+        row.style.borderBottom = '1px solid #E5E7EB';
+        row.style.background = bgColor;
+        
+        row.innerHTML = `
+          <td style="padding: 16px; font-weight: 700; color: ${textColor};">${rankDisplay}</td>
+          <td style="padding: 16px; font-weight: 600; color: #111827;">${student.nama}</td>
+          <td style="padding: 16px; text-align: center; font-weight: 700; color: ${textColor};">${avg}</td>
+          <td style="padding: 16px; text-align: center;">
+            <span style="background: ${predikat.bg}; color: ${predikat.color}; padding: 4px 12px; border-radius: 6px; font-weight: 600;">
+              ${predikat.label}
+            </span>
+          </td>
+        `;
+        
+        tbody.appendChild(row);
+      });
+    }
+
+    function showSubject(subject) {
+      currentSubject = subject;
+      
+      // Update button styles
+      document.querySelectorAll('.subject-btn').forEach(btn => {
+        btn.style.border = '2px solid #E5E7EB';
+      });
+      document.getElementById('btn-' + subject).style.border = '3px solid ' + subjectInfo[subject].color;
+
+      // Update title
+      const info = subjectInfo[subject];
+      document.getElementById('subject-title').innerHTML = `
+        <span style="font-size: 32px;">${info.icon}</span>
+        Nilai ${info.name}
+      `;
+
+      // Update table
+      const data = nilaiData[subject];
+      const tbody = document.getElementById('nilai-table-body');
+      tbody.innerHTML = '';
+
+      data.forEach((student, index) => {
+        const avg = calculateAverage(student);
+        const row = document.createElement('tr');
+        row.style.borderBottom = '1px solid #E5E7EB';
+        row.style.background = index % 2 === 0 ? '#F9FAFB' : 'white';
+        
+        row.innerHTML = `
+          <td style="padding: 14px 12px; color: #374151;">${index + 1}</td>
+          <td style="padding: 14px 12px; font-weight: 600; color: #111827;">${student.nama}</td>
+          <td style="padding: 14px 12px; text-align: center; color: #374151;">${student.nh1}</td>
+          <td style="padding: 14px 12px; text-align: center; color: #374151;">${student.nh2}</td>
+          <td style="padding: 14px 12px; text-align: center; color: #374151;">${student.nh3}</td>
+          <td style="padding: 14px 12px; text-align: center; color: #374151;">${student.nh4}</td>
+          <td style="padding: 14px 12px; text-align: center; color: #374151;">${student.nh5}</td>
+          <td style="padding: 14px 12px; text-align: center; font-weight: 600; color: #374151;">${student.sts}</td>
+          <td style="padding: 14px 12px; text-align: center; font-weight: 600; color: #374151;">${student.sas}</td>
+          <td style="padding: 14px 12px; text-align: center; font-weight: 700; color: #111827; background: #F3F4F6;">${avg}</td>
+        `;
+        
+        tbody.appendChild(row);
+      });
+    }
+
+    function showPage(pageName) {
+      const pages = document.querySelectorAll('.page-section');
+      pages.forEach(page => page.classList.remove('active'));
+      
+      const targetPage = document.getElementById('page-' + pageName);
+      if (targetPage) {
+        targetPage.classList.add('active');
+      }
+
+      const navButtons = document.querySelectorAll('.nav-btn');
+      navButtons.forEach(btn => {
+        btn.style.background = 'white';
+        btn.style.color = '#374151';
+        btn.style.border = '1px solid #E5E7EB';
+      });
+
+      const activeButton = document.getElementById('nav-' + pageName);
+      if (activeButton) {
+        activeButton.style.background = config.primary_action_color;
+        activeButton.style.color = 'white';
+        activeButton.style.border = 'none';
+      }
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      // Initialize nilai table if on nilai page
+      if (pageName === 'nilai') {
+        showSubject(currentSubject);
+        updateRankingTable();
       }
     }
-    
-    // Button Ripple Effect
-    const buttons = document.querySelectorAll('.btn');
-    
-    buttons.forEach(button => {
-      button.addEventListener('click', function(e) {
-        const ripple = document.createElement('div');
-        ripple.style.position = 'absolute';
-        ripple.style.borderRadius = '50%';
-        ripple.style.background = 'rgba(255, 255, 255, 0.6)';
-        ripple.style.width = ripple.style.height = '100px';
-        ripple.style.left = e.clientX - this.offsetLeft - 50 + 'px';
-        ripple.style.top = e.clientY - this.offsetTop - 50 + 'px';
-        ripple.style.animation = 'ripple 0.6s ease-out';
-        ripple.style.pointerEvents = 'none';
-        
-        this.appendChild(ripple);
-        
-        setTimeout(() => ripple.remove(), 600);
-      });
-    });
-    
-    // Add ripple animation
-    const style = document.createElement('style');
-    style.textContent = `
-      @keyframes ripple {
-        from {
-          transform: scale(0);
-          opacity: 1;
+
+    async function onConfigChange(newConfig) {
+      config = { ...defaultConfig, ...newConfig };
+
+      document.body.style.background = `linear-gradient(135deg, ${config.background_color} 0%, #F0FDF4 50%, #FEF3C7 100%)`;
+
+      document.getElementById('navTitle').textContent = config.site_title.split(' ').slice(0, 3).join(' ');
+      document.getElementById('heroTitle').textContent = config.site_title;
+      document.getElementById('heroSubtitle').textContent = config.welcome_text;
+      document.getElementById('teacherNameCard').textContent = config.teacher_name;
+      document.getElementById('teacherNameProfile').textContent = config.teacher_name;
+      document.getElementById('teacherMottoDisplay').textContent = `✨ ${config.teacher_motto} ✨`;
+      document.getElementById('contactTeacherName').textContent = config.teacher_name;
+      document.getElementById('contactPhone').textContent = config.contact_phone;
+      document.getElementById('schoolAddress').textContent = config.school_address;
+
+      const logoCircle = document.getElementById('logoCircle');
+      logoCircle.style.background = `linear-gradient(135deg, ${config.primary_action_color}, ${config.secondary_action_color})`;
+
+      const allButtons = document.querySelectorAll('button');
+      allButtons.forEach(btn => {
+        if (btn.classList.contains('nav-btn') && btn.id === 'nav-home') {
+          btn.style.background = config.primary_action_color;
         }
-        to {
-          transform: scale(4);
-          opacity: 0;
-        }
-      }
-    `;
-    document.head.appendChild(style);
-    
-    // Subject Card Click Animation
-    const subjectCards = document.querySelectorAll('.subject-card');
-    subjectCards.forEach(card => {
-      card.addEventListener('click', function() {
-        this.style.transform = 'scale(0.98)';
-        setTimeout(() => {
-          this.style.transform = '';
-        }, 200);
       });
-    });
+
+      document.querySelectorAll('h1, h2, h3, h4').forEach(el => {
+        el.style.color = config.text_color;
+      });
+    }
+
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange,
+        mapToCapabilities: (cfg) => ({
+          recolorables: [
+            {
+              get: () => cfg.background_color || defaultConfig.background_color,
+              set: (value) => {
+                cfg.background_color = value;
+                window.elementSdk.setConfig({ background_color: value });
+              }
+            },
+            {
+              get: () => cfg.surface_color || defaultConfig.surface_color,
+              set: (value) => {
+                cfg.surface_color = value;
+                window.elementSdk.setConfig({ surface_color: value });
+              }
+            },
+            {
+              get: () => cfg.text_color || defaultConfig.text_color,
+              set: (value) => {
+                cfg.text_color = value;
+                window.elementSdk.setConfig({ text_color: value });
+              }
+            },
+            {
+              get: () => cfg.primary_action_color || defaultConfig.primary_action_color,
+              set: (value) => {
+                cfg.primary_action_color = value;
+                window.elementSdk.setConfig({ primary_action_color: value });
+              }
+            },
+            {
+              get: () => cfg.secondary_action_color || defaultConfig.secondary_action_color,
+              set: (value) => {
+                cfg.secondary_action_color = value;
+                window.elementSdk.setConfig({ secondary_action_color: value });
+              }
+            }
+          ],
+          borderables: [],
+          fontEditable: undefined,
+          fontSizeable: undefined
+        }),
+        mapToEditPanelValues: (cfg) => new Map([
+          ["site_title", cfg.site_title || defaultConfig.site_title],
+          ["welcome_text", cfg.welcome_text || defaultConfig.welcome_text],
+          ["teacher_name", cfg.teacher_name || defaultConfig.teacher_name],
+          ["teacher_motto", cfg.teacher_motto || defaultConfig.teacher_motto],
+          ["contact_phone", cfg.contact_phone || defaultConfig.contact_phone],
+          ["school_address", cfg.school_address || defaultConfig.school_address]
+        ])
+      });
+    }
   </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9a4f9d6fb0c181f2',t:'MTc2NDIyNTQyNi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9a5a33f920e16023',t:'MTc2NDMzNjQ0OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
