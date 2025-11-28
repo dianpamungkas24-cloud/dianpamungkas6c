@@ -7,7 +7,6 @@
   <script src="/_sdk/element_sdk.js"></script>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    /* CSS yang sudah ada */
     body {
       box-sizing: border-box;
     }
@@ -79,585 +78,433 @@
       border-radius: 2px;
       transition: all 0.3s ease;
     }
-    
-    /* Loading indicator */
-    .loading {
-      display: inline-block;
-      width: 20px;
-      height: 20px;
-      border: 3px solid rgba(255,255,255,.3);
+
+    .loading-spinner {
+      border: 3px solid #f3f3f3;
+      border-top: 3px solid #3B82F6;
       border-radius: 50%;
-      border-top-color: #fff;
-      animation: spin 1s ease-in-out infinite;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+      margin: 20px auto;
     }
-    
+
     @keyframes spin {
-      to { transform: rotate(360deg); }
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .error-message {
+      background: #FEE2E2;
+      color: #991B1B;
+      padding: 12px 16px;
+      border-radius: 8px;
+      margin: 16px 0;
+      border-left: 4px solid #EF4444;
+    }
+
+    .info-message {
+      background: #DBEAFE;
+      color: #1E40AF;
+      padding: 12px 16px;
+      border-radius: 8px;
+      margin: 16px 0;
+      border-left: 4px solid #3B82F6;
+    }
+
+    /* Mobile Responsiveness */
+    @media (max-width: 768px) {
+      .nav-buttons {
+        flex-direction: column;
+        width: 100%;
+        gap: 8px;
+      }
+      
+      .nav-btn {
+        width: 100%;
+        text-align: center;
+      }
+      
+      table {
+        font-size: 12px;
+      }
+      
+      .mobile-stack {
+        flex-direction: column;
+      }
+      
+      .mobile-text-center {
+        text-align: center;
+      }
+    }
+
+    /* Gallery Grid */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 16px;
+    }
+
+    .gallery-item {
+      aspect-ratio: 1;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #F3F4F6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.05);
+    }
+
+    /* Form Styles */
+    .form-input {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1px solid #D1D5DB;
+      border-radius: 8px;
+      font-size: 14px;
+      transition: border-color 0.2s;
+    }
+
+    .form-input:focus {
+      outline: none;
+      border-color: #3B82F6;
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    }
+
+    .form-textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    /* Modal Styles */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      padding: 20px;
+    }
+
+    .modal-content {
+      background: white;
+      border-radius: 16px;
+      max-width: 500px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    /* Achievement Badges */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .badge-gold {
+      background: #FEF3C7;
+      color: #92400E;
+    }
+
+    .badge-silver {
+      background: #E5E7EB;
+      color: #6B7280;
+    }
+
+    .badge-bronze {
+      background: #FED7AA;
+      color: #C2410C;
     }
   </style>
   <style>@view-transition { navigation: auto; }</style>
   <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
 </head>
 <body>
-  <!-- Kode HTML yang sudah ada -->
   <div class="gradient-bg" style="width: 100%; min-height: 100%;">
     <!-- Navigation Bar -->
     <nav id="navbar" style="background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(0, 0, 0, 0.05); position: sticky; top: 0; z-index: 50; width: 100%;">
-      <!-- ... (kode navigasi yang sudah ada) ... -->
+      <div style="max-width: 1200px; margin: 0 auto; padding: 16px 24px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <div class="icon-circle" id="logoCircle" style="background: linear-gradient(135deg, #3B82F6, #10B981); color: white;">
+              🎓
+            </div>
+            <div>
+              <h1 id="navTitle" style="font-size: 18px; font-weight: 700; line-height: 1.3; margin: 0;">Kelas Digital 6C</h1>
+              <p style="font-size: 12px; color: #6B7280; margin: 0;">SDN 19 Martapura</p>
+            </div>
+          </div>
+          <div class="nav-buttons" style="display: flex; gap: 8px; flex-wrap: wrap;">
+            <button onclick="showPage('home')" class="nav-btn" id="nav-home" style="padding: 8px 16px; border-radius: 8px; border: none; background: #3B82F6; color: white; font-size: 14px; font-weight: 500; cursor: pointer;">Beranda</button>
+            <button onclick="showPage('guru')" class="nav-btn" id="nav-guru" style="padding: 8px 16px; border-radius: 8px; border: none; background: white; color: #374151; font-size: 14px; font-weight: 500; cursor: pointer; border: 1px solid #E5E7EB;">Profil Guru</button>
+            <button onclick="showPage('info')" class="nav-btn" id="nav-info" style="padding: 8px 16px; border-radius: 8px; border: none; background: white; color: #374151; font-size: 14px; font-weight: 500; cursor: pointer; border: 1px solid #E5E7EB;">Info</button>
+            <button onclick="showPage('materi')" class="nav-btn" id="nav-materi" style="padding: 8px 16px; border-radius: 8px; border: none; background: white; color: #374151; font-size: 14px; font-weight: 500; cursor: pointer; border: 1px solid #E5E7EB;">Materi</button>
+            <button onclick="showPage('nilai')" class="nav-btn" id="nav-nilai" style="padding: 8px 16px; border-radius: 8px; border: none; background: white; color: #374151; font-size: 14px; font-weight: 500; cursor: pointer; border: 1px solid #E5E7EB;">Nilai</button>
+            <button onclick="showPage('poin')" class="nav-btn" id="nav-poin" style="padding: 8px 16px; border-radius: 8px; border: none; background: white; color: #374151; font-size: 14px; font-weight: 500; cursor: pointer; border: 1px solid #E5E7EB;">Poin</button>
+            <button onclick="showPage('galeri')" class="nav-btn" id="nav-galeri" style="padding: 8px 16px; border-radius: 8px; border: none; background: white; color: #374151; font-size: 14px; font-weight: 500; cursor: pointer; border: 1px solid #E5E7EB;">Galeri</button>
+            <button onclick="showPage('kontak')" class="nav-btn" id="nav-kontak" style="padding: 8px 16px; border-radius: 8px; border: none; background: white; color: #374151; font-size: 14px; font-weight: 500; cursor: pointer; border: 1px solid #E5E7EB;">Kontak</button>
+          </div>
+        </div>
+      </div>
     </nav>
 
-    <!-- Halaman Nilai (dengan tambahan tombol refresh) -->
-    <div id="page-nilai" class="page-section">
+    <!-- Homepage -->
+    <div id="page-home" class="page-section active">
       <div style="max-width: 1200px; margin: 0 auto; padding: 40px 24px;">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 32px;">
-          <h2 style="font-size: 32px; font-weight: 800; color: #111827;">Nilai &amp; Prestasi Siswa</h2>
-          <button onclick="refreshData()" id="refresh-btn" style="padding: 10px 20px; border-radius: 8px; border: none; background: #3B82F6; color: white; font-size: 14px; font-weight: 500; cursor: pointer; display: flex; align-items: center; gap: 8px;">
-            <span id="refresh-icon">🔄</span> Refresh Data
-          </button>
+        <!-- Hero Section -->
+        <div class="section-card card-hover" style="border-radius: 24px; padding: 48px 32px; margin-bottom: 32px; text-align: center; background: rgba(255, 255, 255, 0.95);">
+          <div style="width: 120px; height: 120px; border-radius: 50%; margin: 0 auto 24px; background: linear-gradient(135deg, #3B82F6, #10B981); display: flex; align-items: center; justify-content: center; font-size: 64px;">
+            🏫
+          </div>
+          <h1 id="heroTitle" style="font-size: 36px; font-weight: 800; margin-bottom: 16px; background: linear-gradient(135deg, #3B82F6, #10B981); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Kelas Digital 6C SDN 19 Martapura</h1>
+          <p id="heroSubtitle" style="font-size: 18px; color: #6B7280; max-width: 600px; margin: 0 auto;">Selamat Datang di Portal Pembelajaran Digital Kami</p>
         </div>
-        
-        <!-- Konten halaman nilai yang sudah ada -->
-        <!-- ... -->
+
+        <!-- Class Info Cards -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-bottom: 32px;">
+          <div class="section-card card-hover" style="border-radius: 16px; padding: 24px; background: rgba(255, 255, 255, 0.95);">
+            <div class="icon-circle" style="background: linear-gradient(135deg, #3B82F6, #60A5FA); color: white; margin-bottom: 16px;">
+              👨‍🏫
+            </div>
+            <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 8px; color: #111827;">Wali Kelas</h3>
+            <p id="teacherNameCard" style="font-size: 14px; color: #6B7280; margin-bottom: 12px;">Dian Agung Pamungkas, S.Pd</p>
+            <button onclick="showPage('guru')" style="padding: 8px 16px; border-radius: 8px; border: none; background: #E0F2FE; color: #0369A1; font-size: 13px; font-weight: 500; cursor: pointer; width: 100%;">Lihat Profil</button>
+          </div>
+          <div class="section-card card-hover" style="border-radius: 16px; padding: 24px; background: rgba(255, 255, 255, 0.95);">
+            <div class="icon-circle" style="background: linear-gradient(135deg, #10B981, #34D399); color: white; margin-bottom: 16px;">
+              👥
+            </div>
+            <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 8px; color: #111827;">Jumlah Siswa</h3>
+            <p style="font-size: 14px; color: #6B7280; margin-bottom: 12px;">27 Siswa Aktif</p>
+            <button onclick="showPage('info')" style="padding: 8px 16px; border-radius: 8px; border: none; background: #D1FAE5; color: #065F46; font-size: 13px; font-weight: 500; cursor: pointer; width: 100%;">Lihat Jadwal</button>
+          </div>
+          <div class="section-card card-hover" style="border-radius: 16px; padding: 24px; background: rgba(255, 255, 255, 0.95);">
+            <div class="icon-circle" style="background: linear-gradient(135deg, #F59E0B, #FBBF24); color: white; margin-bottom: 16px;">
+              📚
+            </div>
+            <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 8px; color: #111827;">Materi Tersedia</h3>
+            <p style="font-size: 14px; color: #6B7280; margin-bottom: 12px;">9 Mata Pelajaran</p>
+            <button onclick="showPage('materi')" style="padding: 8px 16px; border-radius: 8px; border: none; background: #FEF3C7; color: #92400E; font-size: 13px; font-weight: 500; cursor: pointer; width: 100%;">Akses Materi</button>
+          </div>
+        </div>
+
+        <!-- Quick Access -->
+        <div class="section-card" style="border-radius: 16px; padding: 32px; background: rgba(255, 255, 255, 0.95);">
+          <h2 style="font-size: 24px; font-weight: 700; margin-bottom: 24px; color: #111827;">Akses Cepat</h2>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px;">
+            <button onclick="showPage('info')" class="card-hover" style="padding: 20px; border-radius: 12px; border: 2px solid #E5E7EB; background: white; text-align: left; cursor: pointer;">
+              <div style="font-size: 28px; margin-bottom: 8px;">
+                📅
+              </div>
+              <div style="font-size: 15px; font-weight: 600; color: #111827;">
+                Jadwal Pelajaran
+              </div>
+            </button>
+            <button onclick="showPage('info')" class="card-hover" style="padding: 20px; border-radius: 12px; border: 2px solid #E5E7EB; background: white; text-align: left; cursor: pointer;">
+              <div style="font-size: 28px; margin-bottom: 8px;">
+                📢
+              </div>
+              <div style="font-size: 15px; font-weight: 600; color: #111827;">
+                Pengumuman
+              </div>
+            </button>
+            <button onclick="showPage('materi')" class="card-hover" style="padding: 20px; border-radius: 12px; border: 2px solid #E5E7EB; background: white; text-align: left; cursor: pointer;">
+              <div style="font-size: 28px; margin-bottom: 8px;">
+                📖
+              </div>
+              <div style="font-size: 15px; font-weight: 600; color: #111827;">
+                Download LKPD
+              </div>
+            </button>
+            <button onclick="showPage('poin')" class="card-hover" style="padding: 20px; border-radius: 12px; border: 2px solid #E5E7EB; background: white; text-align: left; cursor: pointer;">
+              <div style="font-size: 28px; margin-bottom: 8px;">
+                ⭐
+              </div>
+              <div style="font-size: 15px; font-weight: 600; color: #111827;">
+                Poin Kebaikan
+              </div>
+            </button>
+          </div>
+        </div>
       </div>
     </div>
 
-    <!-- Footer -->
-    <footer style="background: rgba(255, 255, 255, 0.95); border-top: 1px solid rgba(0, 0, 0, 0.05); padding: 32px 24px; margin-top: 40px; width: 100%;">
-      <!-- ... (kode footer yang sudah ada) ... -->
-    </footer>
-  </div>
+    <!-- Profil Guru Page -->
+    <div id="page-guru" class="page-section">
+      <div style="max-width: 900px; margin: 0 auto; padding: 40px 24px;">
+        <div class="section-card" style="border-radius: 24px; padding: 40px; background: rgba(255, 255, 255, 0.95);">
+          <div style="text-align: center; margin-bottom: 40px;">
+            <div style="width: 150px; height: 150px; border-radius: 50%; margin: 0 auto 24px; background: linear-gradient(135deg, #3B82F6, #10B981); display: flex; align-items: center; justify-content: center; font-size: 72px; box-shadow: 0 10px 25px rgba(59, 130, 246, 0.3);">
+              👨‍🏫
+            </div>
+            <h2 id="teacherNameProfile" style="font-size: 32px; font-weight: 800; margin-bottom: 8px; color: #111827;">Dian Agung Pamungkas, S.Pd</h2>
+            <p style="font-size: 16px; color: #6B7280; margin-bottom: 16px;">Wali Kelas 6C</p>
+            <div style="display: inline-block; padding: 12px 24px; border-radius: 12px; background: linear-gradient(135deg, #E0F2FE, #D1FAE5);">
+              <p id="teacherMottoDisplay" style="font-size: 16px; font-weight: 600; color: #111827; font-style: italic; margin: 0;">✨ Belajar dengan Hati, Tumbuh dengan Prestasi ✨</p>
+            </div>
+          </div>
+          <div style="display: grid; gap: 24px;">
+            <div style="padding: 24px; border-radius: 16px; background: #F9FAFB; border-left: 4px solid #3B82F6;">
+              <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 12px; color: #111827;">🎓 Pendidikan</h3>
+              <p style="font-size: 15px; color: #374151; line-height: 1.6; margin: 0;">S1 Pendidikan Guru Sekolah Dasar<br>
+               Universitas Terbuka</p>
+            </div>
+            <div style="padding: 24px; border-radius: 16px; background: #F9FAFB; border-left: 4px solid #10B981;">
+              <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 12px; color: #111827;">💼 Pengalaman</h3>
+              <p style="font-size: 15px; color: #374151; line-height: 1.6; margin: 0;">4 Tahun Mengajar di SDN 19 Martapura<br>
+               Spesialisasi: Matematika &amp; IPA</p>
+            </div>
+            <div style="padding: 24px; border-radius: 16px; background: #F9FAFB; border-left: 4px solid #8B5CF6;">
+              <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 12px; color: #111827;">💡 Filosofi Mengajar</h3>
+              <p style="font-size: 15px; color: #374151; line-height: 1.6; margin: 0;">"Setiap anak adalah bintang yang bersinar dengan caranya sendiri. Tugas kita adalah membantu mereka menemukan cahaya itu dan membiarkannya bersinar terang."</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-  <script>
-    // Konfigurasi default
-    const defaultConfig = {
-      site_title: "Kelas Digital 6C SDN 19 Martapura",
-      welcome_text: "Selamat Datang di Portal Pembelajaran Digital Kami",
-      teacher_name: "Dian Agung Pamungkas, S.Pd",
-      teacher_motto: "Belajar dengan Hati, Tumbuh dengan Prestasi",
-      contact_phone: "0812-3456-7890",
-      school_address: "Jl. Lintas Sumatera No.12, RT.01/RW.03, Kota Baru, Kec. Martapura, Kabupaten Ogan Komering Ulu Timur, Sumatera Selatan 32311",
-      background_color: "#E0F2FE",
-      surface_color: "#FFFFFF",
-      text_color: "#111827",
-      primary_action_color: "#3B82F6",
-      secondary_action_color: "#10B981",
-      // Tambahkan konfigurasi Google Sheets
-      google_sheets_url: "https://docs.google.com/spreadsheets/d/e/2PACX-1vTsBnVhAQmyqDsUKGUIFzihLFGOUkQpjZ-dehgFhyYypNcR5M_LtmNJ0sKh3RQDhv_Y1gASgz6ffVZz/pubhtml"
-    };
+    <!-- Info Page -->
+    <div id="page-info" class="page-section">
+      <div style="max-width: 1200px; margin: 0 auto; padding: 40px 24px;">
+        <h2 style="font-size: 32px; font-weight: 800; margin-bottom: 32px; color: #111827; text-align: center;">Informasi Siswa &amp; Orang Tua</h2>
 
-    let config = { ...defaultConfig };
+        <!-- Jadwal Pelajaran -->
+        <div class="section-card" style="border-radius: 16px; padding: 32px; margin-bottom: 32px; background: rgba(255, 255, 255, 0.95);">
+          <h3 style="font-size: 24px; font-weight: 700; margin-bottom: 24px; color: #111827; display: flex; align-items: center; gap: 12px;"><span style="font-size: 32px;">📅</span> Jadwal Pelajaran</h3>
+          <div style="overflow-x: auto;">
+            <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
+              <thead>
+                <tr style="background: linear-gradient(135deg, #3B82F6, #10B981); color: white;">
+                  <th style="padding: 16px; text-align: left; font-weight: 600;">Hari</th>
+                  <th style="padding: 16px; text-align: left; font-weight: 600;">Jam 1-2</th>
+                  <th style="padding: 16px; text-align: left; font-weight: 600;">Jam 3-4</th>
+                  <th style="padding: 16px; text-align: left; font-weight: 600;">Jam 5-6</th>
+                  <th style="padding: 16px; text-align: left; font-weight: 600;">Jam 7-8</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr style="border-bottom: 1px solid #E5E7EB;">
+                  <td style="padding: 16px; font-weight: 600; color: #111827;">Senin</td>
+                  <td style="padding: 16px; color: #374151;">Upacara</td>
+                  <td style="padding: 16px; color: #374151;">Matematika</td>
+                  <td style="padding: 16px; color: #374151;">PAI</td>
+                  <td style="padding: 16px; color: #374151;">Bahasa Indonesia</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #E5E7EB; background: #F9FAFB;">
+                  <td style="padding: 16px; font-weight: 600; color: #111827;">Selasa</td>
+                  <td style="padding: 16px; color: #374151;">Bahasa Indonesia</td>
+                  <td style="padding: 16px; color: #374151;">Bahasa Inggris</td>
+                  <td style="padding: 16px; color: #374151;">PKn</td>
+                  <td style="padding: 16px; color: #374151;">PAI</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #E5E7EB;">
+                  <td style="padding: 16px; font-weight: 600; color: #111827;">Rabu</td>
+                  <td style="padding: 16px; color: #374151;">PJOK</td>
+                  <td style="padding: 16px; color: #374151;">Seni &amp; Budaya</td>
+                  <td style="padding: 16px; color: #374151;">-</td>
+                  <td style="padding: 16px; color: #374151;">-</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #E5E7EB; background: #F9FAFB;">
+                  <td style="padding: 16px; font-weight: 600; color: #111827;">Kamis</td>
+                  <td style="padding: 16px; color: #374151;">Matematika</td>
+                  <td style="padding: 16px; color: #374151;">Bahasa Indonesia</td>
+                  <td style="padding: 16px; color: #374151;">-</td>
+                  <td style="padding: 16px; color: #374151;">-</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #E5E7EB;">
+                  <td style="padding: 16px; font-weight: 600; color: #111827;">Jumat</td>
+                  <td style="padding: 16px; color: #374151;">Senam</td>
+                  <td style="padding: 16px; color: #374151;">IPAS</td>
+                  <td style="padding: 16px; color: #374151;">-</td>
+                  <td style="padding: 16px; color: #374151;">-</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #E5E7EB; background: #F9FAFB;">
+                  <td style="padding: 16px; font-weight: 600; color: #111827;">Sabtu</td>
+                  <td style="padding: 16px; color: #374151;">PKn</td>
+                  <td style="padding: 16px; color: #374151;">Budaya Komering</td>
+                  <td style="padding: 16px; color: #374151;">-</td>
+                  <td style="padding: 16px; color: #374151;">-</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
 
-    // Data nilai siswa untuk semua mata pelajaran
-    let nilaiData = {
-      matematika: [],
-      ipas: [],
-      indonesia: [],
-      inggris: [],
-      pkn: [],
-      pai: [],
-      budaya: [],
-      pjok: [],
-      koding: []
-    };
+        <!-- Pengumuman -->
+        <div class="section-card" style="border-radius: 16px; padding: 32px; margin-bottom: 32px; background: rgba(255, 255, 255, 0.95);">
+          <h3 style="font-size: 24px; font-weight: 700; margin-bottom: 24px; color: #111827; display: flex; align-items: center; gap: 12px;"><span style="font-size: 32px;">📢</span> Pengumuman Terbaru</h3>
+          <div style="display: grid; gap: 16px;">
+            <div style="padding: 20px; border-radius: 12px; background: #FEF3C7; border-left: 4px solid #F59E0B;">
+              <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 8px;">
+                <h4 style="font-size: 16px; font-weight: 700; color: #92400E; margin: 0;">Ujian Tengah Semester</h4>
+                <span style="font-size: 12px; color: #92400E; background: white; padding: 4px 12px; border-radius: 6px;">15 Jan 2024</span>
+              </div>
+              <p style="font-size: 14px; color: #78350F; margin: 0; line-height: 1.6;">UTS akan dilaksanakan tanggal 22-26 Januari 2024. Harap mempersiapkan diri dengan baik.</p>
+            </div>
+            <div style="padding: 20px; border-radius: 12px; background: #DBEAFE; border-left: 4px solid #3B82F6;">
+              <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 8px;">
+                <h4 style="font-size: 16px; font-weight: 700; color: #1E40AF; margin: 0;">Pengumpulan Tugas Proyek</h4>
+                <span style="font-size: 12px; color: #1E40AF; background: white; padding: 4px 12px; border-radius: 6px;">12 Jan 2024</span>
+              </div>
+              <p style="font-size: 14px; color: #1E3A8A; margin: 0; line-height: 1.6;">Deadline pengumpulan tugas proyek IPA tanggal 20 Januari 2024 pukul 15.00 WIB.</p>
+            </div>
+            <div style="padding: 20px; border-radius: 12px; background: #D1FAE5; border-left: 4px solid #10B981;">
+              <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 8px;">
+                <h4 style="font-size: 16px; font-weight: 700; color: #065F46; margin: 0;">Kunjungan Edukasi</h4>
+                <span style="font-size: 12px; color: #065F46; background: white; padding: 4px 12px; border-radius: 6px;">10 Jan 2024</span>
+              </div>
+              <p style="font-size: 14px; color: #064E3B; margin: 0; line-height: 1.6;">Rencana kunjungan edukasi ke Museum Wasaka pada tanggal 5 Februari 2024.</p>
+            </div>
+          </div>
+        </div>
 
-    // Fungsi untuk mengambil data dari Google Sheets
-    async function fetchDataFromGoogleSheets() {
-      try {
-        // Tampilkan loading state
-        const refreshBtn = document.getElementById('refresh-btn');
-        const refreshIcon = document.getElementById('refresh-icon');
-        refreshBtn.disabled = true;
-        refreshIcon.innerHTML = '<div class="loading"></div>';
-        
-        // URL Google Sheets Anda (format CSV)
-        const sheetUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTsBnVhAQmyqDsUKGUIFzihLFGOUkQpjZ-dehgFhyYypNcR5M_LtmNJ0sKh3RQDhv_Y1gASgz6ffVZz/pub?output=csv";
-        
-        const response = await fetch(sheetUrl);
-        const csvText = await response.text();
-        
-        // Parse CSV
-        const parsedData = parseCSV(csvText);
-        
-        // Update nilaiData dengan data dari Google Sheets
-        updateNilaiData(parsedData);
-        
-        // Update tampilan
-        if (currentSubject) {
-          showSubject(currentSubject);
-        }
-        updateRankingTable();
-        
-        // Tampilkan notifikasi sukses
-        showNotification('Data berhasil diperbarui!', 'success');
-        
-      } catch (error) {
-        console.error('Error fetching data from Google Sheets:', error);
-        showNotification('Gagal memperbarui data. Silakan coba lagi.', 'error');
-      } finally {
-        // Reset loading state
-        const refreshBtn = document.getElementById('refresh-btn');
-        const refreshIcon = document.getElementById('refresh-icon');
-        refreshBtn.disabled = false;
-        refreshIcon.textContent = '🔄';
-      }
-    }
-
-    // Fungsi untuk memparse CSV
-    function parseCSV(csvText) {
-      const lines = csvText.split('\n');
-      const result = [];
-      const headers = lines[0].split(',').map(header => header.trim());
-      
-      for (let i = 1; i < lines.length; i++) {
-        const obj = {};
-        const currentLine = lines[i].split(',');
-        
-        for (let j = 0; j < headers.length; j++) {
-          obj[headers[j]] = currentLine[j] ? currentLine[j].trim() : '';
-        }
-        
-        result.push(obj);
-      }
-      
-      return result;
-    }
-
-    // Fungsi untuk memperbarui data nilai berdasarkan data dari Google Sheets
-    function updateNilaiData(parsedData) {
-      // Reset data sebelumnya
-      Object.keys(nilaiData).forEach(subject => {
-        nilaiData[subject] = [];
-      });
-      
-      // Mapping kolom Google Sheets ke struktur data kita
-      // Sesuaikan dengan struktur kolom di Google Sheets Anda
-      parsedData.forEach(row => {
-        // Contoh mapping - sesuaikan dengan struktur kolom di Google Sheets Anda
-        const siswaData = {
-          nama: row.Nama || row.nama || '',
-          nh1: parseInt(row.NH1) || 0,
-          nh2: parseInt(row.NH2) || 0,
-          nh3: parseInt(row.NH3) || 0,
-          nh4: parseInt(row.NH4) || 0,
-          nh5: parseInt(row.NH5) || 0,
-          sts: parseInt(row.STS) || 0,
-          sas: parseInt(row.SAS) || 0
-        };
-        
-        // Tentukan mata pelajaran berdasarkan kolom atau struktur data
-        // Ini adalah contoh - sesuaikan dengan struktur Google Sheets Anda
-        if (row.MataPelajaran) {
-          const subject = row.MataPelajaran.toLowerCase();
-          if (nilaiData[subject]) {
-            nilaiData[subject].push(siswaData);
-          }
-        } else {
-          // Jika tidak ada kolom mata pelajaran, asumsikan semua data adalah untuk matematika
-          // Atau sesuaikan dengan logika bisnis Anda
-          nilaiData.matematika.push(siswaData);
-        }
-      });
-      
-      // Jika data tidak memiliki informasi mata pelajaran, kita bisa mendistribusikan ke semua mata pelajaran
-      // atau menggunakan logika lain sesuai kebutuhan
-      if (parsedData.length > 0 && !parsedData[0].MataPelajaran) {
-        // Contoh: Salin data matematika ke semua mata pelajaran
-        Object.keys(nilaiData).forEach(subject => {
-          if (subject !== 'matematika') {
-            nilaiData[subject] = JSON.parse(JSON.stringify(nilaiData.matematika));
-          }
-        });
-      }
-    }
-
-    // Fungsi untuk menampilkan notifikasi
-    function showNotification(message, type = 'info') {
-      // Hapus notifikasi sebelumnya jika ada
-      const existingNotification = document.getElementById('data-notification');
-      if (existingNotification) {
-        existingNotification.remove();
-      }
-      
-      // Buat elemen notifikasi
-      const notification = document.createElement('div');
-      notification.id = 'data-notification';
-      notification.style.cssText = `
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        padding: 16px 20px;
-        border-radius: 8px;
-        color: white;
-        font-weight: 500;
-        z-index: 1000;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        transition: all 0.3s ease;
-        max-width: 300px;
-      `;
-      
-      // Set warna berdasarkan jenis notifikasi
-      if (type === 'success') {
-        notification.style.background = '#10B981';
-      } else if (type === 'error') {
-        notification.style.background = '#EF4444';
-      } else {
-        notification.style.background = '#3B82F6';
-      }
-      
-      notification.textContent = message;
-      
-      // Tambahkan ke body
-      document.body.appendChild(notification);
-      
-      // Hapus notifikasi setelah 3 detik
-      setTimeout(() => {
-        notification.style.opacity = '0';
-        notification.style.transform = 'translateX(100%)';
-        setTimeout(() => {
-          if (notification.parentNode) {
-            notification.parentNode.removeChild(notification);
-          }
-        }, 300);
-      }, 3000);
-    }
-
-    // Fungsi untuk refresh data
-    function refreshData() {
-      fetchDataFromGoogleSheets();
-    }
-
-    // Panggil fungsi untuk mengambil data saat halaman dimuat
-    document.addEventListener('DOMContentLoaded', function() {
-      // Ambil data dari Google Sheets saat halaman pertama kali dimuat
-      fetchDataFromGoogleSheets();
-      
-      // Atau gunakan data default jika Google Sheets tidak tersedia
-      setTimeout(() => {
-        // Jika setelah 3 detik data masih kosong, gunakan data default
-        const hasData = Object.values(nilaiData).some(subject => subject.length > 0);
-        if (!hasData) {
-          initializeDefaultData();
-          if (currentSubject) {
-            showSubject(currentSubject);
-          }
-          updateRankingTable();
-        }
-      }, 3000);
-    });
-
-    // Fungsi untuk menginisialisasi data default jika Google Sheets tidak tersedia
-    function initializeDefaultData() {
-      // Data default siswa
-      const defaultStudents = [
-        { nama: "ABI MAYU", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
-        { nama: "AFIFA SALSA RAMADHANI", nh1: 0, nh2: 0, nh3: 0, nh4: 0, nh5: 0, sts: 0, sas: 0 },
-        // ... (siswa lainnya)
-      ];
-      
-      // Isi semua mata pelajaran dengan data default
-      Object.keys(nilaiData).forEach(subject => {
-        nilaiData[subject] = JSON.parse(JSON.stringify(defaultStudents));
-      });
-    }
-
-    // Kode JavaScript yang sudah ada
-    const subjectInfo = {
-      matematika: { icon: "🔢", name: "Matematika", color: "#3B82F6" },
-      ipas: { icon: "🔬", name: "IPAS", color: "#10B981" },
-      indonesia: { icon: "📚", name: "Bahasa Indonesia", color: "#F59E0B" },
-      inggris: { icon: "🗣️", name: "Bahasa Inggris", color: "#EC4899" },
-      pkn: { icon: "🏛️", name: "PKn", color: "#EF4444" },
-      pai: { icon: "🕌", name: "PAI", color: "#06B6D4" },
-      budaya: { icon: "🎭", name: "Budaya Komering", color: "#6366F1" },
-      pjok: { icon: "⚽", name: "PJOK", color: "#84CC16" },
-      koding: { icon: "💻", name: "Koding & AI", color: "#8B5CF6" }
-    };
-
-    let currentSubject = 'matematika';
-
-    function calculateAverage(student) {
-      const total = student.nh1 + student.nh2 + student.nh3 + student.nh4 + student.nh5 + student.sts + student.sas;
-      return (total / 7).toFixed(1);
-    }
-
-    function getPredikat(avg) {
-      if (avg >= 90) return { label: 'A', bg: '#FEF3C7', color: '#92400E' };
-      if (avg >= 80) return { label: 'B', bg: '#DBEAFE', color: '#1E40AF' };
-      if (avg >= 70) return { label: 'C', bg: '#D1FAE5', color: '#065F46' };
-      if (avg >= 60) return { label: 'D', bg: '#FEE2E2', color: '#991B1B' };
-      return { label: 'E', bg: '#F3F4F6', color: '#6B7280' };
-    }
-
-    function updateRankingTable() {
-      // Hitung rata-rata semua siswa dari semua mata pelajaran
-      const studentAverages = [];
-      const allStudents = nilaiData.matematika.length > 0 ? nilaiData.matematika : [];
-
-      if (allStudents.length === 0) return;
-
-      allStudents.forEach((student, index) => {
-        let totalAverage = 0;
-        let subjectCount = 0;
-
-        // Hitung rata-rata dari setiap mata pelajaran
-        Object.keys(nilaiData).forEach(subject => {
-          if (nilaiData[subject][index]) {
-            const studentData = nilaiData[subject][index];
-            const avg = parseFloat(calculateAverage(studentData));
-            totalAverage += avg;
-            subjectCount++;
-          }
-        });
-
-        if (subjectCount > 0) {
-          const overallAverage = totalAverage / subjectCount;
-          studentAverages.push({
-            nama: student.nama,
-            average: overallAverage
-          });
-        }
-      });
-
-      // Sort berdasarkan rata-rata tertinggi
-      studentAverages.sort((a, b) => b.average - a.average);
-
-      // Ambil 10 besar
-      const top10 = studentAverages.slice(0, 10);
-
-      // Update tabel ranking
-      const tbody = document.getElementById('ranking-table-body');
-      if (!tbody) return;
-      
-      tbody.innerHTML = '';
-
-      top10.forEach((student, index) => {
-        const rank = index + 1;
-        const avg = student.average.toFixed(1);
-        const predikat = getPredikat(parseFloat(avg));
-        
-        let rankDisplay = rank.toString();
-        let bgColor = 'white';
-        let textColor = '#374151';
-        
-        if (rank === 1) {
-          rankDisplay = '🥇 1';
-          bgColor = '#FEF3C7';
-          textColor = '#92400E';
-        } else if (rank === 2) {
-          rankDisplay = '🥈 2';
-          bgColor = '#E5E7EB';
-          textColor = '#6B7280';
-        } else if (rank === 3) {
-          rankDisplay = '🥉 3';
-          bgColor = '#FED7AA';
-          textColor = '#C2410C';
-        } else {
-          bgColor = index % 2 === 1 ? '#F9FAFB' : 'white';
-        }
-
-        const row = document.createElement('tr');
-        row.style.borderBottom = '1px solid #E5E7EB';
-        row.style.background = bgColor;
-        
-        row.innerHTML = `
-          <td style="padding: 16px; font-weight: 700; color: ${textColor};">${rankDisplay}</td>
-          <td style="padding: 16px; font-weight: 600; color: #111827;">${student.nama}</td>
-          <td style="padding: 16px; text-align: center; font-weight: 700; color: ${textColor};">${avg}</td>
-          <td style="padding: 16px; text-align: center;">
-            <span style="background: ${predikat.bg}; color: ${predikat.color}; padding: 4px 12px; border-radius: 6px; font-weight: 600;">
-              ${predikat.label}
-            </span>
-          </td>
-        `;
-        
-        tbody.appendChild(row);
-      });
-    }
-
-    function showSubject(subject) {
-      currentSubject = subject;
-      
-      // Update button styles
-      document.querySelectorAll('.subject-btn').forEach(btn => {
-        btn.style.border = '2px solid #E5E7EB';
-      });
-      
-      const subjectBtn = document.getElementById('btn-' + subject);
-      if (subjectBtn) {
-        subjectBtn.style.border = '3px solid ' + subjectInfo[subject].color;
-      }
-
-      // Update title
-      const info = subjectInfo[subject];
-      const subjectTitle = document.getElementById('subject-title');
-      if (subjectTitle) {
-        subjectTitle.innerHTML = `
-          <span style="font-size: 32px;">${info.icon}</span>
-          Nilai ${info.name}
-        `;
-      }
-
-      // Update table
-      const data = nilaiData[subject] || [];
-      const tbody = document.getElementById('nilai-table-body');
-      if (!tbody) return;
-      
-      tbody.innerHTML = '';
-
-      if (data.length === 0) {
-        const row = document.createElement('tr');
-        row.innerHTML = `
-          <td colspan="10" style="padding: 40px; text-align: center; color: #6B7280;">
-            Data belum tersedia. Klik "Refresh Data" untuk memuat data dari Google Sheets.
-          </td>
-        `;
-        tbody.appendChild(row);
-        return;
-      }
-
-      data.forEach((student, index) => {
-        const avg = calculateAverage(student);
-        const row = document.createElement('tr');
-        row.style.borderBottom = '1px solid #E5E7EB';
-        row.style.background = index % 2 === 0 ? '#F9FAFB' : 'white';
-        
-        row.innerHTML = `
-          <td style="padding: 14px 12px; color: #374151;">${index + 1}</td>
-          <td style="padding: 14px 12px; font-weight: 600; color: #111827;">${student.nama}</td>
-          <td style="padding: 14px 12px; text-align: center; color: #374151;">${student.nh1}</td>
-          <td style="padding: 14px 12px; text-align: center; color: #374151;">${student.nh2}</td>
-          <td style="padding: 14px 12px; text-align: center; color: #374151;">${student.nh3}</td>
-          <td style="padding: 14px 12px; text-align: center; color: #374151;">${student.nh4}</td>
-          <td style="padding: 14px 12px; text-align: center; color: #374151;">${student.nh5}</td>
-          <td style="padding: 14px 12px; text-align: center; font-weight: 600; color: #374151;">${student.sts}</td>
-          <td style="padding: 14px 12px; text-align: center; font-weight: 600; color: #374151;">${student.sas}</td>
-          <td style="padding: 14px 12px; text-align: center; font-weight: 700; color: #111827; background: #F3F4F6;">${avg}</td>
-        `;
-        
-        tbody.appendChild(row);
-      });
-    }
-
-    // Fungsi-fungsi lainnya yang sudah ada
-    function showPage(pageName) {
-      const pages = document.querySelectorAll('.page-section');
-      pages.forEach(page => page.classList.remove('active'));
-      
-      const targetPage = document.getElementById('page-' + pageName);
-      if (targetPage) {
-        targetPage.classList.add('active');
-      }
-
-      const navButtons = document.querySelectorAll('.nav-btn');
-      navButtons.forEach(btn => {
-        btn.style.background = 'white';
-        btn.style.color = '#374151';
-        btn.style.border = '1px solid #E5E7EB';
-      });
-
-      const activeButton = document.getElementById('nav-' + pageName);
-      if (activeButton) {
-        activeButton.style.background = config.primary_action_color;
-        activeButton.style.color = 'white';
-        activeButton.style.border = 'none';
-      }
-
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-
-      // Initialize nilai table if on nilai page
-      if (pageName === 'nilai') {
-        showSubject(currentSubject);
-        updateRankingTable();
-      }
-    }
-
-    async function onConfigChange(newConfig) {
-      config = { ...defaultConfig, ...newConfig };
-
-      document.body.style.background = `linear-gradient(135deg, ${config.background_color} 0%, #F0FDF4 50%, #FEF3C7 100%)`;
-
-      document.getElementById('navTitle').textContent = config.site_title.split(' ').slice(0, 3).join(' ');
-      document.getElementById('heroTitle').textContent = config.site_title;
-      document.getElementById('heroSubtitle').textContent = config.welcome_text;
-      document.getElementById('teacherNameCard').textContent = config.teacher_name;
-      document.getElementById('teacherNameProfile').textContent = config.teacher_name;
-      document.getElementById('teacherMottoDisplay').textContent = `✨ ${config.teacher_motto} ✨`;
-      document.getElementById('contactTeacherName').textContent = config.teacher_name;
-      document.getElementById('contactPhone').textContent = config.contact_phone;
-      document.getElementById('schoolAddress').textContent = config.school_address;
-
-      const logoCircle = document.getElementById('logoCircle');
-      logoCircle.style.background = `linear-gradient(135deg, ${config.primary_action_color}, ${config.secondary_action_color})`;
-
-      const allButtons = document.querySelectorAll('button');
-      allButtons.forEach(btn => {
-        if (btn.classList.contains('nav-btn') && btn.id === 'nav-home') {
-          btn.style.background = config.primary_action_color;
-        }
-      });
-
-      document.querySelectorAll('h1, h2, h3, h4').forEach(el => {
-        el.style.color = config.text_color;
-      });
-    }
-
-    if (window.elementSdk) {
-      window.elementSdk.init({
-        defaultConfig,
-        onConfigChange,
-        mapToCapabilities: (cfg) => ({
-          recolorables: [
-            {
-              get: () => cfg.background_color || defaultConfig.background_color,
-              set: (value) => {
-                cfg.background_color = value;
-                window.elementSdk.setConfig({ background_color: value });
-              }
-            },
-            {
-              get: () => cfg.surface_color || defaultConfig.surface_color,
-              set: (value) => {
-                cfg.surface_color = value;
-                window.elementSdk.setConfig({ surface_color: value });
-              }
-            },
-            {
-              get: () => cfg.text_color || defaultConfig.text_color,
-              set: (value) => {
-                cfg.text_color = value;
-                window.elementSdk.setConfig({ text_color: value });
-              }
-            },
-            {
-              get: () => cfg.primary_action_color || defaultConfig.primary_action_color,
-              set: (value) => {
-                cfg.primary_action_color = value;
-                window.elementSdk.setConfig({ primary_action_color: value });
-              }
-            },
-            {
-              get: () => cfg.secondary_action_color || defaultConfig.secondary_action_color,
-              set: (value) => {
-                cfg.secondary_action_color = value;
-                window.elementSdk.setConfig({ secondary_action_color: value });
-              }
-            }
-          ],
-          borderables: [],
-          fontEditable: undefined,
-          fontSizeable: undefined
-        }),
-        mapToEditPanelValues: (cfg) => new Map([
-          ["site_title", cfg.site_title || defaultConfig.site_title],
-          ["welcome_text", cfg.welcome_text || defaultConfig.welcome_text],
-          ["teacher_name", cfg.teacher_name || defaultConfig.teacher_name],
-          ["teacher_motto", cfg.teacher_motto || defaultConfig.teacher_motto],
-          ["contact_phone", cfg.contact_phone || defaultConfig.contact_phone],
-          ["school_address", cfg.school_address || defaultConfig.school_address],
-          ["google_sheets_url", cfg.google_sheets_url || defaultConfig.google_sheets_url]
-        ])
-      });
-    }
-  </script>
-</body>
-</html>
+        <!-- Jadwal Ujian Detail -->
+        <div class="section-card" style="border-radius: 16px; padding: 32px; margin-bottom: 32px; background: rgba(255, 255, 255, 0.95);">
+          <h3 style="font-size: 24px; font-weight: 700; margin-bottom: 24px; color: #111827; display: flex; align-items: center; gap: 12px;"><span style="font-size: 32px;">📝</span> Jadwal Ujian Tengah Semester</h3>
+          <div style="overflow-x: auto;">
+            <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
+              <thead>
+                <tr style="background: linear-gradient(135deg, #8B5CF6, #A78BFA); color: white;">
+                  <th style="padding: 16px; text-align: left; font-weight: 600;">Hari/Tanggal</th>
+                  <th style="padding: 16px; text-align: left; font-weight: 600;">Jam</th>
+                  <th style="padding: 16px; text-align: left; font-weight: 600;">Mata Pelajaran</th>
+                  <th style="padding: 16px; text-align: left; font-weight: 600;">Keterangan</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr style="border-bottom: 1px solid #E5E7EB;">
+                  <td style="padding: 16px; font-weight: 600; color: #111827;">Senin, 22 Jan 2024</td>
+                  <td style="padding: 16px; color: #374151;">08.00 - 09.30</td>
+                  <td style="padding: 16px; color: #374151;">Matematika</td>
+                  <td style="padding: 16px; color: #374151;">Bawa alat tulis lengkap</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #E5E7EB; background: #F9FAFB;">
+                  <td style="padding: 16px; font-weight: 600; color: #111827;">Selasa, 23 Jan 2024</td>
+                  <td style="padding: 16px; color: #374151;">08.00 - 09.30</td>
+                  <td style="padding: 16px; color: #374151;">Bahasa Indonesia</td>
+                  <td style="padding: 16px; color: #374151;">-</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #E5E7EB;">
+                  <td style
