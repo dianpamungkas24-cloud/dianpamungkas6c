@@ -1,1315 +1,2556 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="id">
- <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kelas 6C SDN 19 Martapura</title>
-  <script src="/_sdk/element_sdk.js"></script>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-        body {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Kelas 6 - Sekolah Dasar</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Fredoka+One&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2ecc71;
+            --accent-color: #f39c12;
+            --dark-color: #2c3e50;
+            --light-color: #ecf0f1;
+            --text-color: #333;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
         
         * {
+            margin: 0;
+            padding: 0;
             box-sizing: border-box;
         }
         
-        .page {
-            display: none;
-            animation: fadeIn 0.3s ease-in;
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: #f8f9fa;
         }
         
-        .page.active {
-            display: block;
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
         }
         
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+        /* Header */
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
         
-        .nav-btn {
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo i {
+            font-size: 2rem;
+        }
+        
+        .logo h1 {
+            font-family: 'Fredoka One', cursive;
+            font-size: 1.8rem;
+        }
+        
+        .logo span {
+            color: var(--accent-color);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 0;
             transition: all 0.3s ease;
+            position: relative;
         }
         
-        .nav-btn:hover {
-            transform: translateY(-2px);
+        nav ul li a:hover {
+            color: var(--accent-color);
+        }
+        
+        nav ul li a.active {
+            color: var(--accent-color);
+        }
+        
+        nav ul li a.active::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 3px;
+            background-color: var(--accent-color);
+            bottom: -5px;
+            left: 0;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(52, 152, 219, 0.8), rgba(46, 204, 113, 0.8)), var(--hero-bg-url, url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'));
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 5rem 0;
+            text-align: center;
+            transition: background-image 0.5s ease;
+        }
+        
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-family: 'Fredoka One', cursive;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: #e67e22;
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }
+        
+        .btn-secondary {
+            background-color: var(--primary-color);
+        }
+        
+        .btn-secondary:hover {
+            background-color: #2980b9;
+        }
+        
+        .btn-danger {
+            background-color: #e74c3c;
+        }
+        
+        .btn-danger:hover {
+            background-color: #c0392b;
+        }
+        
+        .btn-success {
+            background-color: var(--secondary-color);
+        }
+        
+        .btn-success:hover {
+            background-color: #27ae60;
+        }
+        
+        /* Main Content */
+        main {
+            padding: 3rem 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--dark-color);
+            position: relative;
+        }
+        
+        .section-title h2 {
+            font-size: 2.2rem;
+            font-family: 'Fredoka One', cursive;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 4px;
+            background-color: var(--accent-color);
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        /* Cards */
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
         }
         
         .card {
-            transition: all 0.3s ease;
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
         }
         
         .card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            transform: translateY(-10px);
         }
         
-        .gradient-bg {
-            background: linear-gradient(135deg, #0F172A 0%, #1E293B 50%, #334155 100%);
+        .card-header {
+            padding: 1.5rem;
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
         }
         
-        .hero-pattern {
-            background-image: 
-                radial-gradient(circle at 20% 30%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 70%, rgba(16, 185, 129, 0.1) 0%, transparent 50%);
+        .card-header i {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
         }
-
-        .table-container {
+        
+        .card-body {
+            padding: 1.5rem;
+        }
+        
+        .card-body h3 {
+            margin-bottom: 1rem;
+            color: var(--dark-color);
+        }
+        
+        /* Gallery */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+        
+        .gallery-item {
+            border-radius: 10px;
+            overflow: hidden;
+            height: 200px;
+            position: relative;
+            box-shadow: var(--shadow);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        .gallery-item .overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 10px;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .gallery-item:hover .overlay {
+            transform: translateY(0);
+        }
+        
+        .gallery-item .admin-actions {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            display: flex;
+            gap: 5px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .gallery-item:hover .admin-actions {
+            opacity: 1;
+        }
+        
+        .gallery-item .admin-actions button {
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        .gallery-item .admin-actions button:hover {
+            background-color: rgba(231, 76, 60, 0.9);
+        }
+        
+        /* Schedule */
+        .schedule {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            margin-bottom: 3rem;
             overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
         }
-
-        .data-table {
+        
+        table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 0.75rem;
-        }
-
-        .data-table th {
-            background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
-            color: #22D3EE;
-            padding: 0.75rem 0.5rem;
-            text-align: left;
-            font-weight: 600;
-            position: sticky;
-            top: 0;
-            z-index: 10;
-            border-bottom: 2px solid #06B6D4;
-        }
-
-        .data-table td {
-            padding: 0.75rem 0.5rem;
-            border-bottom: 1px solid #334155;
-            color: #E2E8F0;
-        }
-
-        .data-table tr:hover {
-            background-color: #1E293B;
         }
         
-        .data-table tbody tr {
-            background-color: #0F172A;
+        th, td {
+            padding: 1rem;
+            text-align: center;
+            border-bottom: 1px solid #eee;
         }
-
-        .loading-spinner {
-            border: 3px solid #f3f3f3;
-            border-top: 3px solid #3B82F6;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            animation: spin 1s linear infinite;
+        
+        th {
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: 600;
         }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        
+        tr:hover {
+            background-color: #f9f9f9;
         }
-
-        .folder-card {
+        
+        /* Announcements */
+        .announcements {
+            margin-bottom: 3rem;
+        }
+        
+        .announcement {
+            background-color: white;
+            border-left: 5px solid var(--secondary-color);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-radius: 5px;
+            box-shadow: var(--shadow);
+        }
+        
+        .announcement h4 {
+            color: var(--dark-color);
+            margin-bottom: 0.5rem;
+        }
+        
+        .announcement .date {
+            color: #777;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+        
+        /* Quiz Section */
+        .quiz-section {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            margin-bottom: 3rem;
+        }
+        
+        .quiz-question {
+            margin-bottom: 2rem;
+        }
+        
+        .quiz-options {
+            margin-bottom: 1.5rem;
+        }
+        
+        .quiz-option {
+            background-color: #f8f9fa;
+            padding: 1rem;
+            margin-bottom: 0.8rem;
+            border-radius: 5px;
             cursor: pointer;
             transition: all 0.3s ease;
+            border: 2px solid transparent;
         }
-
-        .folder-card:active {
-            transform: scale(0.95);
+        
+        .quiz-option:hover {
+            background-color: #e9ecef;
+        }
+        
+        .quiz-option.selected {
+            border-color: var(--primary-color);
+            background-color: #e3f2fd;
+        }
+        
+        .quiz-result {
+            display: none;
+            text-align: center;
+            padding: 2rem;
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            margin-top: 2rem;
+        }
+        
+        .quiz-result h3 {
+            color: var(--dark-color);
+            margin-bottom: 1rem;
+        }
+        
+        /* Admin Panel */
+        .admin-panel {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            margin-bottom: 3rem;
+        }
+        
+        .admin-panel h3 {
+            margin-bottom: 1.5rem;
+            color: var(--dark-color);
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--primary-color);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--dark-color);
+        }
+        
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+        }
+        
+        .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        
+        .info-box {
+            background-color: #e8f4fc;
+            border-left: 4px solid var(--primary-color);
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            border-radius: 5px;
+        }
+        
+        .info-box h4 {
+            margin-bottom: 0.5rem;
+            color: var(--dark-color);
+        }
+        
+        /* Login Modal */
+        .login-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .login-content {
+            background-color: white;
+            padding: 2.5rem;
+            border-radius: 10px;
+            max-width: 400px;
+            width: 90%;
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+        
+        .login-content h2 {
+            color: var(--dark-color);
+            margin-bottom: 1.5rem;
+            font-family: 'Fredoka One', cursive;
+        }
+        
+        .login-content .logo {
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+        
+        .login-error {
+            background-color: #ffeaea;
+            color: #e74c3c;
+            padding: 0.8rem;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+            display: none;
+        }
+        
+        .login-success {
+            background-color: #e8f6ef;
+            color: var(--secondary-color);
+            padding: 0.8rem;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+            display: none;
+        }
+        
+        /* Admin Controls */
+        .admin-controls {
+            background-color: #f8f9fa;
+            padding: 1rem;
+            border-radius: 5px;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid var(--accent-color);
+        }
+        
+        .admin-controls h4 {
+            margin-bottom: 0.5rem;
+            color: var(--dark-color);
+        }
+        
+        .admin-controls p {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+        
+        .logout-btn {
+            background-color: #95a5a6;
+            margin-left: 10px;
+        }
+        
+        .logout-btn:hover {
+            background-color: #7f8c8d;
+        }
+        
+        /* User Status */
+        .user-status {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: white;
+            font-size: 0.9rem;
+        }
+        
+        .user-status.admin {
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 3rem 0 1.5rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent-color);
+            font-family: 'Fredoka One', cursive;
+        }
+        
+        .footer-column p {
+            margin-bottom: 1rem;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-column ul li a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-column ul li a:hover {
+            color: var(--accent-color);
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .social-icons a:hover {
+            background-color: var(--accent-color);
+            transform: translateY(-5px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+        
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background-color: var(--accent-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            box-shadow: var(--shadow);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 999;
+        }
+        
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .back-to-top:hover {
+            background-color: #e67e22;
+        }
+        
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1001;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .modal-header h3 {
+            color: var(--dark-color);
+        }
+        
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #777;
+        }
+        
+        .modal-close:hover {
+            color: #e74c3c;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero h2 {
+                font-size: 2rem;
+            }
+            
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-wrap: wrap;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            nav {
+                width: 100%;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.5s ease;
+            }
+            
+            nav.active {
+                max-height: 300px;
+                margin-top: 1rem;
+            }
+            
+            nav ul {
+                flex-direction: column;
+            }
+            
+            nav ul li {
+                margin-left: 0;
+                margin-bottom: 1rem;
+            }
+            
+            .hero {
+                padding: 3rem 0;
+            }
+            
+            .hero h2 {
+                font-size: 1.8rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .user-status {
+                order: 3;
+                width: 100%;
+                margin-top: 1rem;
+                justify-content: center;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero h2 {
+                font-size: 1.6rem;
+            }
+            
+            .section-title h2 {
+                font-size: 1.5rem;
+            }
+            
+            .cards {
+                grid-template-columns: 1fr;
+            }
+            
+            .gallery {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
         }
     </style>
-  <style>@view-transition { navigation: auto; }</style>
-  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
- </head>
- <body class="gradient-bg min-h-full">
-  <div class="w-full"><!-- Navigation -->
-   <nav class="w-full bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 shadow-2xl sticky top-0 z-50 border-b border-slate-700">
-    <div class="max-w-6xl mx-auto px-4 py-3">
-     <div class="flex items-center justify-between mb-3">
-      <h1 id="nav-title" class="text-lg font-bold text-cyan-400">Kelas Digital 6C</h1>
-      <div class="text-xs text-slate-300">
-       SDN 19 Martapura
-      </div>
-     </div>
-     <div class="grid grid-cols-4 gap-2"><button onclick="showPage('home')" class="nav-btn bg-gradient-to-r from-blue-600 to-blue-700 text-white px-2 py-2 rounded-lg text-xs font-semibold hover:from-blue-700 hover:to-blue-800 shadow-lg"> 🏠 Home </button> <button onclick="showPage('profile')" class="nav-btn bg-gradient-to-r from-emerald-600 to-emerald-700 text-white px-2 py-2 rounded-lg text-xs font-semibold hover:from-emerald-700 hover:to-emerald-800 shadow-lg"> 👤 Profil </button> <button onclick="showPage('info')" class="nav-btn bg-gradient-to-r from-amber-600 to-amber-700 text-white px-2 py-2 rounded-lg text-xs font-semibold hover:from-amber-700 hover:to-amber-800 shadow-lg"> ℹ️ Info </button> <button onclick="showPage('materi')" class="nav-btn bg-gradient-to-r from-purple-600 to-purple-700 text-white px-2 py-2 rounded-lg text-xs font-semibold hover:from-purple-700 hover:to-purple-800 shadow-lg"> 📚 Materi </button>
-     </div>
-     <div class="grid grid-cols-4 gap-2 mt-2"><button onclick="showPage('nilai')" class="nav-btn bg-gradient-to-r from-indigo-600 to-indigo-700 text-white px-2 py-2 rounded-lg text-xs font-semibold hover:from-indigo-700 hover:to-indigo-800 shadow-lg"> 📊 Nilai </button> <button onclick="showPage('poin')" class="nav-btn bg-gradient-to-r from-pink-600 to-pink-700 text-white px-2 py-2 rounded-lg text-xs font-semibold hover:from-pink-700 hover:to-pink-800 shadow-lg"> ⭐ Poin </button> <button onclick="showPage('galeri')" class="nav-btn bg-gradient-to-r from-teal-600 to-teal-700 text-white px-2 py-2 rounded-lg text-xs font-semibold hover:from-teal-700 hover:to-teal-800 shadow-lg"> 📸 Galeri </button> <button onclick="showPage('kontak')" class="nav-btn bg-gradient-to-r from-orange-600 to-orange-700 text-white px-2 py-2 rounded-lg text-xs font-semibold hover:from-orange-700 hover:to-orange-800 shadow-lg"> 📞 Kontak </button>
-     </div>
-    </div>
-   </nav><!-- Homepage -->
-   <div id="home" class="page active">
-    <div class="hero-pattern w-full min-h-screen py-8 px-4">
-     <div class="max-w-4xl mx-auto"><!-- Hero Section -->
-      <div class="bg-gradient-to-br from-purple-600 via-pink-500 to-orange-500 rounded-3xl shadow-2xl p-6 mb-6 text-center border-2 border-white/20">
-       <div class="w-20 h-20 bg-white/20 backdrop-blur-sm rounded-full mx-auto mb-4 flex items-center justify-center shadow-lg border-2 border-white/30"><span class="text-4xl">🎓</span>
-       </div>
-       <h1 id="hero-title" class="text-3xl font-bold text-white mb-2 drop-shadow-lg">Kelas Digital 6C</h1>
-       <p class="text-lg text-white/95 mb-1 font-semibold">SDN 19 Martapura</p>
-       <p class="text-sm text-white/85">Tahun Ajaran 2025/2026</p>
-      </div><!-- Stats Cards -->
-      <div class="grid grid-cols-3 gap-3 mb-6">
-       <div class="card bg-gradient-to-br from-blue-500 to-cyan-600 rounded-2xl shadow-2xl p-4 text-center border-2 border-white/20">
-        <div class="text-3xl mb-2">
-         👨‍🎓
-        </div>
-        <div class="text-2xl font-bold text-white">
-         27
-        </div>
-        <div class="text-xs text-white/95 font-medium">
-         Siswa
-        </div>
-       </div>
-       <div class="card bg-gradient-to-br from-emerald-500 to-teal-600 rounded-2xl shadow-2xl p-4 text-center border-2 border-white/20">
-        <div class="text-3xl mb-2">
-         📚
-        </div>
-        <div class="text-2xl font-bold text-white">
-         9
-        </div>
-        <div class="text-xs text-white/95 font-medium">
-         Mata Pelajaran
-        </div>
-       </div>
-       <div class="card bg-gradient-to-br from-amber-500 to-orange-600 rounded-2xl shadow-2xl p-4 text-center border-2 border-white/20">
-        <div class="text-3xl mb-2">
-         🏆
-        </div>
-        <div class="text-2xl font-bold text-white">
-         100+
-        </div>
-        <div class="text-xs text-white/95 font-medium">
-         Prestasi
-        </div>
-       </div>
-      </div><!-- Quick Access -->
-      <div class="bg-gradient-to-br from-white to-blue-50 rounded-3xl shadow-xl p-6 mb-6 border-2 border-blue-200">
-       <h2 class="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-4 flex items-center"><span class="mr-2">⚡</span> Akses Cepat</h2>
-       <div class="grid grid-cols-2 gap-3"><button onclick="showPage('materi')" class="card bg-gradient-to-br from-blue-500 to-blue-700 rounded-2xl p-4 text-left shadow-lg hover:shadow-xl border-2 border-blue-400">
-         <div class="text-2xl mb-2">
-          📚
-         </div>
-         <div class="font-semibold text-white">
-          Materi Belajar
-         </div>
-         <div class="text-xs text-white/90">
-          Modul &amp; LKPD
-         </div></button> <button onclick="showPage('nilai')" class="card bg-gradient-to-br from-indigo-500 to-indigo-700 rounded-2xl p-4 text-left shadow-lg hover:shadow-xl border-2 border-indigo-400">
-         <div class="text-2xl mb-2">
-          📊
-         </div>
-         <div class="font-semibold text-white">
-          Data Nilai
-         </div>
-         <div class="text-xs text-white/90">
-          Lihat nilai
-         </div></button> <button onclick="showPage('poin')" class="card bg-gradient-to-br from-yellow-400 to-orange-500 rounded-2xl p-4 text-left shadow-lg hover:shadow-xl border-2 border-yellow-300">
-         <div class="text-2xl mb-2">
-          ⭐
-         </div>
-         <div class="font-semibold text-white">
-          Poin Reward
-         </div>
-         <div class="text-xs text-white/90">
-          Cek poinmu
-         </div></button> <button onclick="showPage('galeri')" class="card bg-gradient-to-br from-purple-500 to-purple-700 rounded-2xl p-4 text-left shadow-lg hover:shadow-xl border-2 border-purple-400">
-         <div class="text-2xl mb-2">
-          📷
-         </div>
-         <div class="font-semibold text-white">
-          Galeri Kelas
-         </div>
-         <div class="text-xs text-white/90">
-          Lihat foto
-         </div></button>
-       </div>
-      </div><!-- Announcement -->
-      <div class="bg-gradient-to-r from-cyan-500 via-blue-500 to-indigo-600 rounded-3xl shadow-2xl p-6 text-white border-2 border-white/30">
-       <h3 class="text-lg font-bold mb-3 flex items-center"><span class="mr-2">📢</span> Pengumuman Terbaru</h3>
-       <div class="bg-white/15 rounded-2xl p-4 backdrop-blur-sm border border-white/20">
-        <p class="text-sm mb-2 font-semibold">🎉 Selamat datang di website digital kelas 6C!</p>
-        <p class="text-xs text-white/90">Semua materi pembelajaran dan informasi penting ada di sini.</p>
-       </div>
-      </div>
-     </div>
-    </div>
-   </div><!-- Profile Page -->
-   <div id="profile" class="page">
-    <div class="w-full min-h-screen py-8 px-4">
-     <div class="max-w-4xl mx-auto">
-      <div class="bg-white rounded-3xl shadow-xl p-6 mb-6">
-       <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">👤 Profil Guru Wali Kelas</h2>
-       <div class="flex flex-col items-center mb-6">
-        <div class="w-32 h-32 rounded-full mb-4 overflow-hidden shadow-xl"><img src="https://i.imgur.com/F21qyfV.jpeg" alt="Foto Guru" class="w-full h-full object-cover" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'w-full h-full bg-gradient-to-br from-blue-400 to-green-400 flex items-center justify-center\'><span class=\'text-6xl\'>👨‍🏫</span></div>';">
-        </div>
-        <h3 id="teacher-name-display" class="text-xl font-bold bg-gradient-to-r from-blue-600 via-green-600 to-orange-600 bg-clip-text text-transparent">Dian Agung Pamungkas, S.Pd</h3>
-        <p class="text-sm text-gray-600">Wali Kelas 6C</p>
-       </div>
-       <div class="space-y-4">
-        <div class="bg-blue-50 rounded-2xl p-4">
-         <div class="flex items-start"><span class="text-2xl mr-3">💼</span>
-          <div>
-           <div class="font-semibold text-gray-800 mb-1">
-            Pendidikan
-           </div>
-           <div class="text-sm text-gray-600">
-            S1 Pendidikan Guru Sekolah Dasar
-            Universitas Terbuka
-           </div>
-          </div>
-         </div>
-        </div>
-        <div class="bg-green-50 rounded-2xl p-4">
-         <div class="flex items-start"><span class="text-2xl mr-3">📧</span>
-          <div class="flex-1">
-           <div class="font-semibold text-gray-800 mb-1">
-            Email
-           </div>
-           <div id="teacher-email-display" class="text-sm text-gray-600 break-all">
-            dianpamungkas24@guru.sd.belajar.id
-           </div>
-          </div>
-         </div>
-        </div>
-        <div class="bg-yellow-50 rounded-2xl p-4">
-         <div class="flex items-start"><span class="text-2xl mr-3">💡</span>
-          <div>
-           <div class="font-semibold text-gray-800 mb-1">
-            Motto Mengajar
-           </div>
-           <div id="teacher-motto-display" class="text-sm text-gray-600 italic">
-            "Mendidik dengan hati, membimbing dengan cinta, menginspirasi untuk masa depan yang gemilang"
-           </div>
-          </div>
-         </div>
-        </div>
-        <div class="bg-purple-50 rounded-2xl p-4">
-         <div class="flex items-start"><span class="text-2xl mr-3">🎯</span>
-          <div>
-           <div class="font-semibold text-gray-800 mb-1">
-            Mata Pelajaran
-           </div>
-           <div class="text-sm text-gray-600">
-            Matematika, IPAS, Bahasa Indonesia, PKN, dan semua mata pelajaran Kelas 6
-           </div>
-          </div>
-         </div>
-        </div>
-       </div>
-      </div>
-     </div>
-    </div>
-   </div><!-- Info Page -->
-   <div id="info" class="page">
-    <div class="w-full min-h-screen py-8 px-4">
-     <div class="max-w-4xl mx-auto">
-      <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">📋 Informasi Kelas</h2><!-- Jadwal Pelajaran -->
-      <div class="bg-white rounded-3xl shadow-xl p-6 mb-6">
-       <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center"><span class="mr-2">📅</span> Jadwal Pelajaran</h3>
-       <div class="space-y-3">
-        <div class="bg-blue-50 rounded-2xl p-4">
-         <div class="font-semibold text-blue-800 mb-2">
-          Senin
-         </div>
-         <div class="text-sm text-gray-600 space-y-1">
-          <div>
-           • 07:30 - 09:00 Matematika
-          </div>
-          <div>
-           • 09:00 - 10:30 Bahasa Indonesia
-          </div>
-          <div>
-           • 10:45 - 12:15 IPAS
-          </div>
-         </div>
-        </div>
-        <div class="bg-green-50 rounded-2xl p-4">
-         <div class="font-semibold text-green-800 mb-2">
-          Selasa
-         </div>
-         <div class="text-sm text-gray-600 space-y-1">
-          <div>
-           • 07:30 - 09:00 PKN
-          </div>
-          <div>
-           • 09:00 - 10:30 Bahasa Inggris
-          </div>
-          <div>
-           • 10:45 - 12:15 PJOK
-          </div>
-         </div>
-        </div>
-        <div class="bg-yellow-50 rounded-2xl p-4">
-         <div class="font-semibold text-yellow-800 mb-2">
-          Rabu
-         </div>
-         <div class="text-sm text-gray-600 space-y-1">
-          <div>
-           • 07:30 - 09:00 Matematika
-          </div>
-          <div>
-           • 09:00 - 10:30 PAI
-          </div>
-          <div>
-           • 10:45 - 12:15 Budaya Komering
-          </div>
-         </div>
-        </div>
-        <div class="bg-purple-50 rounded-2xl p-4">
-         <div class="font-semibold text-purple-800 mb-2">
-          Kamis
-         </div>
-         <div class="text-sm text-gray-600 space-y-1">
-          <div>
-           • 07:30 - 09:00 Bahasa Indonesia
-          </div>
-          <div>
-           • 09:00 - 10:30 IPAS
-          </div>
-          <div>
-           • 10:45 - 12:15 Koding &amp; AI
-          </div>
-         </div>
-        </div>
-        <div class="bg-pink-50 rounded-2xl p-4">
-         <div class="font-semibold text-pink-800 mb-2">
-          Jumat
-         </div>
-         <div class="text-sm text-gray-600 space-y-1">
-          <div>
-           • 07:30 - 09:00 PAI
-          </div>
-          <div>
-           • 09:00 - 10:30 Koding &amp; AI
-          </div>
-         </div>
-        </div>
-       </div>
-      </div><!-- Pengumuman -->
-      <div class="bg-white rounded-3xl shadow-xl p-6 mb-6">
-       <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center"><span class="mr-2">📢</span> Pengumuman</h3>
-       <div class="space-y-3">
-        <div class="bg-blue-50 rounded-2xl p-4">
-         <div class="flex items-start"><span class="text-xl mr-3">📝</span>
-          <div>
-           <div class="font-semibold text-blue-800 mb-1">
-            Ujian Tengah Semester
-           </div>
-           <div class="text-sm text-gray-600">
-            Pelaksanaan SAS (Sumatif Akhir Semester) minggu depan. Persiapkan diri dengan baik!
-           </div>
-           <div class="text-xs text-gray-500 mt-1">
-            2 hari yang lalu
-           </div>
-          </div>
-         </div>
-        </div>
-        <div class="bg-green-50 rounded-2xl p-4">
-         <div class="flex items-start"><span class="text-xl mr-3">🎉</span>
-          <div>
-           <div class="font-semibold text-green-800 mb-1">
-            Kegiatan Outdoor
-           </div>
-           <div class="text-sm text-gray-600">
-            Field trip ke museum tanggal 20 bulan ini!
-           </div>
-           <div class="text-xs text-gray-500 mt-1">
-            5 hari yang lalu
-           </div>
-          </div>
-         </div>
-        </div>
-       </div>
-      </div><!-- Kalender Kegiatan -->
-      <div class="bg-white rounded-3xl shadow-xl p-6">
-       <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center"><span class="mr-2">📆</span> Kalender Kegiatan</h3>
-       <div class="space-y-3">
-        <div class="flex items-center bg-yellow-50 rounded-2xl p-4">
-         <div class="w-12 h-12 bg-yellow-200 rounded-xl flex items-center justify-center mr-4">
-          <div class="text-center">
-           <div class="text-xs font-semibold text-yellow-800">
-            JAN
-           </div>
-           <div class="text-lg font-bold text-yellow-800">
-            15
-           </div>
-          </div>
-         </div>
-         <div>
-          <div class="font-semibold text-gray-800">
-           UTS Semester 2
-          </div>
-          <div class="text-sm text-gray-600">
-           Ujian Tengah Semester
-          </div>
-         </div>
-        </div>
-        <div class="flex items-center bg-purple-50 rounded-2xl p-4">
-         <div class="w-12 h-12 bg-purple-200 rounded-xl flex items-center justify-center mr-4">
-          <div class="text-center">
-           <div class="text-xs font-semibold text-purple-800">
-            JAN
-           </div>
-           <div class="text-lg font-bold text-purple-800">
-            20
-           </div>
-          </div>
-         </div>
-         <div>
-          <div class="font-semibold text-gray-800">
-           Field Trip Museum
-          </div>
-          <div class="text-sm text-gray-600">
-           Kunjungan Edukatif
-          </div>
-         </div>
-        </div>
-        <div class="flex items-center bg-pink-50 rounded-2xl p-4">
-         <div class="w-12 h-12 bg-pink-200 rounded-xl flex items-center justify-center mr-4">
-          <div class="text-center">
-           <div class="text-xs font-semibold text-pink-800">
-            FEB
-           </div>
-           <div class="text-lg font-bold text-pink-800">
-            05
-           </div>
-          </div>
-         </div>
-         <div>
-          <div class="font-semibold text-gray-800">
-           Lomba Kreativitas
-          </div>
-          <div class="text-sm text-gray-600">
-           Antar Kelas
-          </div>
-         </div>
-        </div>
-       </div>
-      </div>
-     </div>
-    </div>
-   </div><!-- Materi Page -->
-   <div id="materi" class="page">
-    <div class="w-full min-h-screen py-8 px-4">
-     <div class="max-w-4xl mx-auto">
-      <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">📚 Materi Pembelajaran</h2>
-      <div class="space-y-4"><!-- Matematika -->
-       <div class="card bg-white rounded-3xl shadow-xl p-5">
-        <div class="flex items-center mb-4">
-         <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mr-4"><span class="text-2xl">🔢</span>
-         </div>
-         <div>
-          <h3 class="text-lg font-bold text-gray-800">Matematika</h3>
-          <p class="text-xs text-gray-600">Semester 2 - Kelas 6</p>
-         </div>
-        </div>
-        <div class="grid grid-cols-3 gap-2"><button class="bg-blue-50 hover:bg-blue-100 text-blue-700 px-3 py-2 rounded-xl text-xs font-semibold transition"> 📄 LKPD </button> <button class="bg-blue-50 hover:bg-blue-100 text-blue-700 px-3 py-2 rounded-xl text-xs font-semibold transition"> 📖 Modul </button> <button class="bg-blue-50 hover:bg-blue-100 text-blue-700 px-3 py-2 rounded-xl text-xs font-semibold transition"> 🎥 Video </button>
-        </div>
-       </div><!-- IPAS -->
-       <div class="card bg-white rounded-3xl shadow-xl p-5">
-        <div class="flex items-center mb-4">
-         <div class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center mr-4"><span class="text-2xl">🔬</span>
-         </div>
-         <div>
-          <h3 class="text-lg font-bold text-gray-800">IPAS</h3>
-          <p class="text-xs text-gray-600">Ilmu Pengetahuan Alam &amp; Sosial</p>
-         </div>
-        </div>
-        <div class="grid grid-cols-3 gap-2"><button class="bg-green-50 hover:bg-green-100 text-green-700 px-3 py-2 rounded-xl text-xs font-semibold transition"> 📄 LKPD </button> <button class="bg-green-50 hover:bg-green-100 text-green-700 px-3 py-2 rounded-xl text-xs font-semibold transition"> 📖 Modul </button> <button class="bg-green-50 hover:bg-green-100 text-green-700 px-3 py-2 rounded-xl text-xs font-semibold transition"> 🎥 Video </button>
-        </div>
-       </div><!-- Bahasa Indonesia -->
-       <div class="card bg-white rounded-3xl shadow-xl p-5">
-        <div class="flex items-center mb-4">
-         <div class="w-12 h-12 bg-yellow-100 rounded-xl flex items-center justify-center mr-4"><span class="text-2xl">📝</span>
-         </div>
-         <div>
-          <h3 class="text-lg font-bold text-gray-800">Bahasa Indonesia</h3>
-          <p class="text-xs text-gray-600">Literasi &amp; Komunikasi</p>
-         </div>
-        </div>
-        <div class="grid grid-cols-3 gap-2"><button class="bg-yellow-50 hover:bg-yellow-100 text-yellow-700 px-3 py-2 rounded-xl text-xs font-semibold transition"> 📄 LKPD </button> <button class="bg-yellow-50 hover:bg-yellow-100 text-yellow-700 px-3 py-2 rounded-xl text-xs font-semibold transition"> 📖 Modul </button> <button class="bg-yellow-50 hover:bg-yellow-100 text-yellow-700 px-3 py-2 rounded-xl text-xs font-semibold transition"> 🎥 Video </button>
-        </div>
-       </div><!-- Bahasa Inggris -->
-       <div class="card bg-white rounded-3xl shadow-xl p-5">
-        <div class="flex items-center mb-4">
-         <div class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center mr-4"><span class="text-2xl">🌍</span>
-         </div>
-         <div>
-          <h3 class="text-lg font-bold text-gray-800">Bahasa Inggris</h3>
-          <p class="text-xs text-gray-600">English Language</p>
-         </div>
-        </div>
-        <div class="grid grid-cols-3 gap-2"><button class="bg-purple-50 hover:bg-purple-100 text-purple-700 px-3 py-2 rounded-xl text-xs font-semibold transition"> 📄 LKPD </button> <button class="bg-purple-50 hover:bg-purple-100 text-purple-700 px-3 py-2 rounded-xl text-xs font-semibold transition"> 📖 Modul </button> <button class="bg-purple-50 hover:bg-purple-100 text-purple-700 px-3 py-2 rounded-xl text-xs font-semibold transition"> 🎥 Video </button>
-        </div>
-       </div><!-- PKN -->
-       <div class="card bg-white rounded-3xl shadow-xl p-5">
-        <div class="flex items-center mb-4">
-         <div class="w-12 h-12 bg-red-100 rounded-xl flex items-center justify-center mr-4"><span class="text-2xl">🇮🇩</span>
-         </div>
-         <div>
-          <h3 class="text-lg font-bold text-gray-800">PKN</h3>
-          <p class="text-xs text-gray-600">Pendidikan Kewarganegaraan</p>
-         </div>
-        </div>
-        <div class="grid grid-cols-3 gap-2"><button class="bg-red-50 hover:bg-red-100 text-red-700 px-3 py-2 rounded-xl text-xs font-semibold transition"> 📄 LKPD </button> <button class="bg-red-50 hover:bg-red-100 text-red-700 px-3 py-2 rounded-xl text-xs font-semibold transition"> 📖 Modul </button> <button class="bg-red-50 hover:bg-red-100 text-red-700 px-3 py-2 rounded-xl text-xs font-semibold transition"> 🎥 Video </button>
-        </div>
-       </div><!-- Budaya Komering -->
-       <div class="card bg-white rounded-3xl shadow-xl p-5">
-        <div class="flex items-center mb-4">
-         <div class="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center mr-4"><span class="text-2xl">🎭</span>
-         </div>
-         <div>
-          <h3 class="text-lg font-bold text-gray-800">Budaya Komering</h3>
-          <p class="text-xs text-gray-600">Budaya Lokal</p>
-         </div>
-        </div>
-        <div class="grid grid-cols-3 gap-2"><button class="bg-orange-50 hover:bg-orange-100 text-orange-700 px-3 py-2 rounded-xl text-xs font-semibold transition"> 📄 LKPD </button> <button class="bg-orange-50 hover:bg-orange-100 text-orange-700 px-3 py-2 rounded-xl text-xs font-semibold transition"> 📖 Modul </button> <button class="bg-orange-50 hover:bg-orange-100 text-orange-700 px-3 py-2 rounded-xl text-xs font-semibold transition"> 🎥 Video </button>
-        </div>
-       </div><!-- PJOK -->
-       <div class="card bg-white rounded-3xl shadow-xl p-5">
-        <div class="flex items-center mb-4">
-         <div class="w-12 h-12 bg-teal-100 rounded-xl flex items-center justify-center mr-4"><span class="text-2xl">⚽</span>
-         </div>
-         <div>
-          <h3 class="text-lg font-bold text-gray-800">PJOK</h3>
-          <p class="text-xs text-gray-600">Pendidikan Jasmani</p>
-         </div>
-        </div>
-        <div class="grid grid-cols-3 gap-2"><button class="bg-teal-50 hover:bg-teal-100 text-teal-700 px-3 py-2 rounded-xl text-xs font-semibold transition"> 📄 LKPD </button> <button class="bg-teal-50 hover:bg-teal-100 text-teal-700 px-3 py-2 rounded-xl text-xs font-semibold transition"> 📖 Modul </button> <button class="bg-teal-50 hover:bg-teal-100 text-teal-700 px-3 py-2 rounded-xl text-xs font-semibold transition"> 🎥 Video </button>
-        </div>
-       </div><!-- PAI -->
-       <div class="card bg-white rounded-3xl shadow-xl p-5">
-        <div class="flex items-center mb-4">
-         <div class="w-12 h-12 bg-indigo-100 rounded-xl flex items-center justify-center mr-4"><span class="text-2xl">🕌</span>
-         </div>
-         <div>
-          <h3 class="text-lg font-bold text-gray-800">PAI</h3>
-          <p class="text-xs text-gray-600">Pendidikan Agama Islam</p>
-         </div>
-        </div>
-        <div class="grid grid-cols-3 gap-2"><button class="bg-indigo-50 hover:bg-indigo-100 text-indigo-700 px-3 py-2 rounded-xl text-xs font-semibold transition"> 📄 LKPD </button> <button class="bg-indigo-50 hover:bg-indigo-100 text-indigo-700 px-3 py-2 rounded-xl text-xs font-semibold transition"> 📖 Modul </button> <button class="bg-indigo-50 hover:bg-indigo-100 text-indigo-700 px-3 py-2 rounded-xl text-xs font-semibold transition"> 🎥 Video </button>
-        </div>
-       </div><!-- Koding & AI -->
-       <div class="card bg-white rounded-3xl shadow-xl p-5">
-        <div class="flex items-center mb-4">
-         <div class="w-12 h-12 bg-pink-100 rounded-xl flex items-center justify-center mr-4"><span class="text-2xl">💻</span>
-         </div>
-         <div>
-          <h3 class="text-lg font-bold text-gray-800">Koding &amp; Kecerdasan Artifisial</h3>
-          <p class="text-xs text-gray-600">Coding &amp; AI</p>
-         </div>
-        </div>
-        <div class="grid grid-cols-3 gap-2"><button class="bg-pink-50 hover:bg-pink-100 text-pink-700 px-3 py-2 rounded-xl text-xs font-semibold transition"> 📄 LKPD </button> <button class="bg-pink-50 hover:bg-pink-100 text-pink-700 px-3 py-2 rounded-xl text-xs font-semibold transition"> 📖 Modul </button> <button class="bg-pink-50 hover:bg-pink-100 text-pink-700 px-3 py-2 rounded-xl text-xs font-semibold transition"> 🎥 Video </button>
-        </div>
-       </div>
-      </div>
-     </div>
-    </div>
-   </div><!-- Nilai Page - Folder View -->
-   <div id="nilai" class="page">
-    <div class="w-full min-h-screen py-8 px-4">
-     <div class="max-w-6xl mx-auto"><!-- Folder List View -->
-      <div id="folderListView">
-       <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">📊 Data Nilai Per Mata Pelajaran</h2>
-       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"><!-- Matematika Folder -->
-        <div onclick="openSubject('matematika')" class="folder-card bg-white rounded-3xl shadow-xl p-6 hover:shadow-2xl">
-         <div class="flex items-center mb-4">
-          <div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center mr-4"><span class="text-3xl">🔢</span>
-          </div>
-          <div class="flex-1">
-           <h3 class="text-lg font-bold text-gray-800">Matematika</h3>
-           <p class="text-sm text-gray-600">Lihat data nilai →</p>
-          </div>
-         </div>
-        </div><!-- IPAS Folder -->
-        <div onclick="openSubject('ipas')" class="folder-card bg-white rounded-3xl shadow-xl p-6 hover:shadow-2xl">
-         <div class="flex items-center mb-4">
-          <div class="w-16 h-16 bg-green-100 rounded-2xl flex items-center justify-center mr-4"><span class="text-3xl">🔬</span>
-          </div>
-          <div class="flex-1">
-           <h3 class="text-lg font-bold text-gray-800">IPAS</h3>
-           <p class="text-sm text-gray-600">Lihat data nilai →</p>
-          </div>
-         </div>
-        </div><!-- Bahasa Indonesia Folder -->
-        <div onclick="openSubject('bahasa_indonesia')" class="folder-card bg-white rounded-3xl shadow-xl p-6 hover:shadow-2xl">
-         <div class="flex items-center mb-4">
-          <div class="w-16 h-16 bg-yellow-100 rounded-2xl flex items-center justify-center mr-4"><span class="text-3xl">📝</span>
-          </div>
-          <div class="flex-1">
-           <h3 class="text-lg font-bold text-gray-800">Bahasa Indonesia</h3>
-           <p class="text-sm text-gray-600">Lihat data nilai →</p>
-          </div>
-         </div>
-        </div><!-- Bahasa Inggris Folder -->
-        <div onclick="openSubject('bahasa_inggris')" class="folder-card bg-white rounded-3xl shadow-xl p-6 hover:shadow-2xl">
-         <div class="flex items-center mb-4">
-          <div class="w-16 h-16 bg-purple-100 rounded-2xl flex items-center justify-center mr-4"><span class="text-3xl">🌍</span>
-          </div>
-          <div class="flex-1">
-           <h3 class="text-lg font-bold text-gray-800">Bahasa Inggris</h3>
-           <p class="text-sm text-gray-600">Lihat data nilai →</p>
-          </div>
-         </div>
-        </div><!-- PKN Folder -->
-        <div onclick="openSubject('pkn')" class="folder-card bg-white rounded-3xl shadow-xl p-6 hover:shadow-2xl">
-         <div class="flex items-center mb-4">
-          <div class="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center mr-4"><span class="text-3xl">🇮🇩</span>
-          </div>
-          <div class="flex-1">
-           <h3 class="text-lg font-bold text-gray-800">PKN</h3>
-           <p class="text-sm text-gray-600">Lihat data nilai →</p>
-          </div>
-         </div>
-        </div><!-- Koding dan AI Folder -->
-        <div onclick="openSubject('koding_ai')" class="folder-card bg-white rounded-3xl shadow-xl p-6 hover:shadow-2xl">
-         <div class="flex items-center mb-4">
-          <div class="w-16 h-16 bg-pink-100 rounded-2xl flex items-center justify-center mr-4"><span class="text-3xl">💻</span>
-          </div>
-          <div class="flex-1">
-           <h3 class="text-lg font-bold text-gray-800">Koding &amp; AI</h3>
-           <p class="text-sm text-gray-600">Lihat data nilai →</p>
-          </div>
-         </div>
-        </div><!-- Budaya Komering Folder -->
-        <div onclick="openSubject('budaya_komering')" class="folder-card bg-white rounded-3xl shadow-xl p-6 hover:shadow-2xl">
-         <div class="flex items-center mb-4">
-          <div class="w-16 h-16 bg-orange-100 rounded-2xl flex items-center justify-center mr-4"><span class="text-3xl">🎭</span>
-          </div>
-          <div class="flex-1">
-           <h3 class="text-lg font-bold text-gray-800">Budaya Komering</h3>
-           <p class="text-sm text-gray-600">Lihat data nilai →</p>
-          </div>
-         </div>
-        </div><!-- PAI Folder -->
-        <div onclick="openSubject('pai')" class="folder-card bg-white rounded-3xl shadow-xl p-6 hover:shadow-2xl">
-         <div class="flex items-center mb-4">
-          <div class="w-16 h-16 bg-indigo-100 rounded-2xl flex items-center justify-center mr-4"><span class="text-3xl">🕌</span>
-          </div>
-          <div class="flex-1">
-           <h3 class="text-lg font-bold text-gray-800">PAI</h3>
-           <p class="text-sm text-gray-600">Lihat data nilai →</p>
-          </div>
-         </div>
-        </div><!-- PJOK Folder -->
-        <div onclick="openSubject('pjok')" class="folder-card bg-white rounded-3xl shadow-xl p-6 hover:shadow-2xl">
-         <div class="flex items-center mb-4">
-          <div class="w-16 h-16 bg-teal-100 rounded-2xl flex items-center justify-center mr-4"><span class="text-3xl">⚽</span>
-          </div>
-          <div class="flex-1">
-           <h3 class="text-lg font-bold text-gray-800">PJOK</h3>
-           <p class="text-sm text-gray-600">Lihat data nilai →</p>
-          </div>
-         </div>
-        </div>
-       </div>
-      </div><!-- Data Table View (Hidden by default) -->
-      <div id="dataTableView" class="hidden">
-       <div class="mb-6 flex items-center justify-between"><button onclick="backToFolders()" class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-xl text-sm font-semibold transition flex items-center"> ← Kembali </button>
-        <h2 id="subjectTitle" class="text-2xl font-bold text-gray-800 text-center flex-1">Data Nilai</h2><button onclick="refreshCurrentSubject()" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-xl text-sm font-semibold transition"> 🔄 Refresh </button>
-       </div><!-- Search -->
-       <div class="bg-white rounded-3xl shadow-xl p-4 mb-6"><label for="searchInput" class="block text-sm font-semibold text-gray-700 mb-2">👤 Cari Nama Siswa</label> <input type="text" id="searchInput" placeholder="Ketik nama siswa..." class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-blue-500 transition" oninput="filterTable()">
-       </div><!-- Data Table -->
-       <div class="bg-white rounded-3xl shadow-xl p-4">
-        <div id="loadingIndicator" class="flex flex-col items-center justify-center py-12">
-         <div class="loading-spinner mb-4"></div>
-         <p class="text-gray-600">Memuat data nilai...</p>
-        </div>
-        <div id="errorMessage" class="hidden">
-         <div class="bg-red-50 border-2 border-red-200 rounded-2xl p-6 text-center">
-          <div class="text-4xl mb-3">
-           ⚠️
-          </div>
-          <p class="text-red-800 font-semibold mb-2">Gagal memuat data</p>
-          <p class="text-sm text-red-600">Pastikan link Google Sheet sudah diatur dengan benar di panel edit.</p>
-         </div>
-        </div>
-        <div id="tableContainer" class="hidden table-container">
-         <table class="data-table">
-          <thead id="tableHeader"><!-- Header akan di-generate otomatis -->
-          </thead>
-          <tbody id="tableBody"><!-- Data akan di-generate otomatis -->
-          </tbody>
-         </table>
-        </div>
-        <div id="emptyState" class="hidden">
-         <div class="bg-gray-50 rounded-2xl p-8 text-center">
-          <div class="text-4xl mb-3">
-           📭
-          </div>
-          <p class="text-gray-600">Tidak ada data yang ditemukan</p>
-         </div>
-        </div>
-       </div>
-      </div>
-     </div>
-    </div>
-   </div><!-- Poin Page -->
-   <div id="poin" class="page">
-    <div class="w-full min-h-screen py-8 px-4">
-     <div class="max-w-4xl mx-auto">
-      <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">⭐ Program Poin &amp; Reward</h2><!-- Penjelasan Sistem -->
-      <div class="bg-gradient-to-r from-yellow-400 to-orange-400 rounded-3xl shadow-xl p-6 mb-6 text-white">
-       <h3 class="text-xl font-bold mb-3 flex items-center"><span class="mr-2">🎯</span> Cara Mendapat Poin</h3>
-       <div class="space-y-2 text-sm">
-        <div class="bg-white bg-opacity-20 rounded-2xl p-3 backdrop-blur-sm">
-         <p>📝 Mengerjakan tugas tepat waktu: <strong>+10 poin</strong></p>
-        </div>
-        <div class="bg-white bg-opacity-20 rounded-2xl p-3 backdrop-blur-sm">
-         <p>🌟 Aktif di kelas: <strong>+5 poin</strong></p>
-        </div>
-        <div class="bg-white bg-opacity-20 rounded-2xl p-3 backdrop-blur-sm">
-         <p>🏆 Juara lomba: <strong>+50 poin</strong></p>
-        </div>
-        <div class="bg-white bg-opacity-20 rounded-2xl p-3 backdrop-blur-sm">
-         <p>🤝 Membantu teman: <strong>+15 poin</strong></p>
-        </div>
-       </div>
-      </div><!-- Top 5 Siswa -->
-      <div class="bg-white rounded-3xl shadow-xl p-6 mb-6">
-       <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center"><span class="mr-2">🏆</span> Peringkat Teratas</h3>
-       <div class="space-y-3">
-        <div class="flex items-center bg-gradient-to-r from-yellow-50 to-yellow-100 rounded-2xl p-4">
-         <div class="text-3xl mr-4">
-          🥇
-         </div>
-         <div class="flex-1">
-          <div class="font-bold text-gray-800">
-           Ahmad Rizki
-          </div>
-          <div class="text-sm text-gray-600">
-           450 poin
-          </div>
-         </div>
-         <div class="text-2xl">
-          ⭐
-         </div>
-        </div>
-        <div class="flex items-center bg-gradient-to-r from-gray-50 to-gray-100 rounded-2xl p-4">
-         <div class="text-3xl mr-4">
-          🥈
-         </div>
-         <div class="flex-1">
-          <div class="font-bold text-gray-800">
-           Siti Nurhaliza
-          </div>
-          <div class="text-sm text-gray-600">
-           420 poin
-          </div>
-         </div>
-         <div class="text-2xl">
-          ⭐
-         </div>
-        </div>
-        <div class="flex items-center bg-gradient-to-r from-orange-50 to-orange-100 rounded-2xl p-4">
-         <div class="text-3xl mr-4">
-          🥉
-         </div>
-         <div class="flex-1">
-          <div class="font-bold text-gray-800">
-           Budi Santoso
-          </div>
-          <div class="text-sm text-gray-600">
-           395 poin
-          </div>
-         </div>
-         <div class="text-2xl">
-          ⭐
-         </div>
-        </div>
-        <div class="flex items-center bg-blue-50 rounded-2xl p-4">
-         <div class="w-10 text-center font-bold text-blue-600 mr-4">
-          4
-         </div>
-         <div class="flex-1">
-          <div class="font-semibold text-gray-800">
-           Dewi Lestari
-          </div>
-          <div class="text-sm text-gray-600">
-           370 poin
-          </div>
-         </div>
-        </div>
-        <div class="flex items-center bg-green-50 rounded-2xl p-4">
-         <div class="w-10 text-center font-bold text-green-600 mr-4">
-          5
-         </div>
-         <div class="flex-1">
-          <div class="font-semibold text-gray-800">
-           Eko Prasetyo
-          </div>
-          <div class="text-sm text-gray-600">
-           345 poin
-          </div>
-         </div>
-        </div>
-       </div>
-      </div><!-- Reward -->
-      <div class="bg-white rounded-3xl shadow-xl p-6">
-       <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center"><span class="mr-2">🎁</span> Reward Tersedia</h3>
-       <div class="grid grid-cols-2 gap-3">
-        <div class="card bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl p-4 text-center">
-         <div class="text-3xl mb-2">
-          📚
-         </div>
-         <div class="font-semibold text-blue-800 text-sm mb-1">
-          Buku Cerita
-         </div>
-         <div class="text-xs text-blue-600">
-          100 poin
-         </div>
-        </div>
-        <div class="card bg-gradient-to-br from-green-50 to-green-100 rounded-2xl p-4 text-center">
-         <div class="text-3xl mb-2">
-          ✏️
-         </div>
-         <div class="font-semibold text-green-800 text-sm mb-1">
-          Set Alat Tulis
-         </div>
-         <div class="text-xs text-green-600">
-          150 poin
-         </div>
-        </div>
-        <div class="card bg-gradient-to-br from-purple-50 to-purple-100 rounded-2xl p-4 text-center">
-         <div class="text-3xl mb-2">
-          🎨
-         </div>
-         <div class="font-semibold text-purple-800 text-sm mb-1">
-          Set Mewarnai
-         </div>
-         <div class="text-xs text-purple-600">
-          200 poin
-         </div>
-        </div>
-        <div class="card bg-gradient-to-br from-pink-50 to-pink-100 rounded-2xl p-4 text-center">
-         <div class="text-3xl mb-2">
-          🏅
-         </div>
-         <div class="font-semibold text-pink-800 text-sm mb-1">
-          Piagam Juara
-         </div>
-         <div class="text-xs text-pink-600">
-          300 poin
-         </div>
-        </div>
-       </div>
-      </div>
-     </div>
-    </div>
-   </div><!-- Galeri Page -->
-   <div id="galeri" class="page">
-    <div class="w-full min-h-screen py-8 px-4">
-     <div class="max-w-4xl mx-auto">
-      <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">📸 Galeri Kelas 6C</h2>
-      <div class="space-y-6"><!-- Kegiatan Belajar -->
-       <div class="bg-white rounded-3xl shadow-xl p-6">
-        <h3 class="text-lg font-bold text-gray-800 mb-4 flex items-center"><span class="mr-2">📖</span> Kegiatan Belajar</h3>
-        <div class="grid grid-cols-2 gap-3">
-         <div class="card bg-gradient-to-br from-blue-100 to-blue-200 rounded-2xl h-40 flex items-center justify-center">
-          <div class="text-center">
-           <div class="text-4xl mb-2">
-            🔢
-           </div>
-           <div class="text-sm font-semibold text-blue-800">
-            Belajar Matematika
-           </div>
-          </div>
-         </div>
-         <div class="card bg-gradient-to-br from-green-100 to-green-200 rounded-2xl h-40 flex items-center justify-center">
-          <div class="text-center">
-           <div class="text-4xl mb-2">
-            🔬
-           </div>
-           <div class="text-sm font-semibold text-green-800">
-            Praktikum IPAS
-           </div>
-          </div>
-         </div>
-         <div class="card bg-gradient-to-br from-yellow-100 to-yellow-200 rounded-2xl h-40 flex items-center justify-center">
-          <div class="text-center">
-           <div class="text-4xl mb-2">
-            💻
-           </div>
-           <div class="text-sm font-semibold text-yellow-800">
-            Kelas Koding
-           </div>
-          </div>
-         </div>
-         <div class="card bg-gradient-to-br from-purple-100 to-purple-200 rounded-2xl h-40 flex items-center justify-center">
-          <div class="text-center">
-           <div class="text-4xl mb-2">
-            🌍
-           </div>
-           <div class="text-sm font-semibold text-purple-800">
-            English Class
-           </div>
-          </div>
-         </div>
-        </div>
-       </div><!-- Kegiatan Outdoor -->
-       <div class="bg-white rounded-3xl shadow-xl p-6">
-        <h3 class="text-lg font-bold text-gray-800 mb-4 flex items-center"><span class="mr-2">🌳</span> Kegiatan Outdoor</h3>
-        <div class="grid grid-cols-2 gap-3">
-         <div class="card bg-gradient-to-br from-teal-100 to-teal-200 rounded-2xl h-40 flex items-center justify-center">
-          <div class="text-center">
-           <div class="text-4xl mb-2">
-            ⚽
-           </div>
-           <div class="text-sm font-semibold text-teal-800">
-            Olahraga PJOK
-           </div>
-          </div>
-         </div>
-         <div class="card bg-gradient-to-br from-orange-100 to-orange-200 rounded-2xl h-40 flex items-center justify-center">
-          <div class="text-center">
-           <div class="text-4xl mb-2">
-            🏛️
-           </div>
-           <div class="text-sm font-semibold text-orange-800">
-            Kunjungan Museum
-           </div>
-          </div>
-         </div>
-        </div>
-       </div><!-- Prestasi -->
-       <div class="bg-white rounded-3xl shadow-xl p-6">
-        <h3 class="text-lg font-bold text-gray-800 mb-4 flex items-center"><span class="mr-2">🏆</span> Prestasi Kelas</h3>
-        <div class="grid grid-cols-2 gap-3">
-         <div class="card bg-gradient-to-br from-pink-100 to-pink-200 rounded-2xl h-40 flex items-center justify-center">
-          <div class="text-center">
-           <div class="text-4xl mb-2">
-            🥇
-           </div>
-           <div class="text-sm font-semibold text-pink-800">
-            Juara Lomba
-           </div>
-          </div>
-         </div>
-         <div class="card bg-gradient-to-br from-indigo-100 to-indigo-200 rounded-2xl h-40 flex items-center justify-center">
-          <div class="text-center">
-           <div class="text-4xl mb-2">
-            🎨
-           </div>
-           <div class="text-sm font-semibold text-indigo-800">
-            Karya Seni
-           </div>
-          </div>
-         </div>
-        </div>
-       </div>
-      </div>
-     </div>
-    </div>
-   </div><!-- Kontak Page -->
-   <div id="kontak" class="page">
-    <div class="w-full min-h-screen py-8 px-4">
-     <div class="max-w-4xl mx-auto">
-      <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">📞 Hubungi Kami</h2><!-- Kontak Guru -->
-      <div class="bg-white rounded-3xl shadow-xl p-6 mb-6">
-       <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center"><span class="mr-2">👨‍🏫</span> Kontak Wali Kelas</h3>
-       <div class="space-y-4">
-        <div class="bg-blue-50 rounded-2xl p-4">
-         <div class="flex items-start"><span class="text-2xl mr-3">👤</span>
-          <div>
-           <div class="font-semibold text-gray-800 mb-1">
-            Nama
-           </div>
-           <div id="contact-teacher-name" class="text-sm text-gray-600">
-            Dian Agung Pamungkas, S.Pd
-           </div>
-          </div>
-         </div>
-        </div>
-        <div class="bg-green-50 rounded-2xl p-4">
-         <div class="flex items-start"><span class="text-2xl mr-3">📧</span>
-          <div class="flex-1">
-           <div class="font-semibold text-gray-800 mb-1">
-            Email
-           </div>
-           <div id="contact-teacher-email" class="text-sm text-gray-600 break-all">
-            dianpamungkas24@guru.sd.belajar.id
-           </div>
-          </div>
-         </div>
-        </div><a href="#" id="whatsapp-link" target="_blank" rel="noopener noreferrer" class="block">
-         <div class="card bg-gradient-to-r from-green-400 to-green-500 rounded-2xl p-4 text-white">
-          <div class="flex items-center justify-between">
-           <div class="flex items-center"><span class="text-3xl mr-3">💬</span>
-            <div>
-             <div class="font-semibold mb-1">
-              WhatsApp
-             </div>
-             <div id="whatsapp-display" class="text-sm opacity-90">
-              +62 XXX-XXXX-XXXX
-             </div>
+</head>
+<body>
+    <!-- Login Modal -->
+    <div id="loginModal" class="login-modal">
+        <div class="login-content">
+            <div class="logo">
+                <i class="fas fa-graduation-cap"></i>
+                <h1>Kelas <span>6</span></h1>
             </div>
-           </div><span class="text-2xl">→</span>
-          </div>
-         </div></a>
-       </div>
-      </div><!-- Lokasi Sekolah -->
-      <div class="bg-white rounded-3xl shadow-xl p-6">
-       <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center"><span class="mr-2">📍</span> Lokasi Sekolah</h3>
-       <div class="space-y-4">
-        <div class="bg-purple-50 rounded-2xl p-4">
-         <div class="flex items-start"><span class="text-2xl mr-3">🏫</span>
-          <div>
-           <div class="font-semibold text-gray-800 mb-1">
-            Alamat
-           </div>
-           <div id="school-address-display" class="text-sm text-gray-600">
-            SDN 19 Martapura, Kalimantan Selatan
-           </div>
-          </div>
-         </div>
-        </div><a href="https://maps.app.goo.gl/kLhuY7rYLAbscksX7" id="maps-link" target="_blank" rel="noopener noreferrer" class="block">
-         <div class="card bg-gradient-to-r from-red-400 to-red-500 rounded-2xl p-4 text-white">
-          <div class="flex items-center justify-between">
-           <div class="flex items-center"><span class="text-3xl mr-3">🗺️</span>
-            <div>
-             <div class="font-semibold mb-1">
-              Buka di Google Maps
-             </div>
-             <div class="text-sm opacity-90">
-              Lihat lokasi lengkap
-             </div>
+            <h2>Login Admin</h2>
+            
+            <div id="loginError" class="login-error">
+                <i class="fas fa-exclamation-circle"></i> Username atau password salah!
             </div>
-           </div><span class="text-2xl">→</span>
-          </div>
-         </div></a>
-       </div>
-      </div>
-     </div>
+            
+            <div id="loginSuccess" class="login-success">
+                <i class="fas fa-check-circle"></i> Login berhasil!
+            </div>
+            
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" placeholder="Masukkan username" autocomplete="username">
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" placeholder="Masukkan password" autocomplete="current-password">
+            </div>
+            
+            <button id="loginBtn" class="btn" style="width: 100%;">Login</button>
+            
+            <div style="margin-top: 1.5rem; font-size: 0.9rem; color: #666;">
+                <p><strong>Default login:</strong></p>
+                <p>Username: <code>admin</code></p>
+                <p>Password: <code>kelas6</code></p>
+                <p style="margin-top: 0.5rem; color: #888; font-size: 0.8rem;">Ganti password di panel admin setelah login pertama</p>
+            </div>
+        </div>
     </div>
-   </div>
-  </div>
-  <script>
-        const defaultConfig = {
-            site_title: "Kelas Digital 6C SDN 19 Martapura",
-            teacher_name: "Dian Agung Pamungkas, S.Pd",
-            teacher_motto: "Mendidik dengan hati, membimbing dengan cinta, menginspirasi untuk masa depan yang gemilang",
-            teacher_email: "dianpamungkas24@guru.sd.belajar.id",
-            whatsapp_number: "+62 XXX-XXXX-XXXX",
-            school_address: "Jl. Lintas Sumatera No.12, RT.01/RW.03, Kota Baru, Kec. Martapura, Kabupaten Ogan Komering Ulu Timur, Sumatera Selatan 32311",
-            maps_link: "https://maps.app.goo.gl/kLhuY7rYLAbscksX7",
-            sheet_url_matematika: "https://docs.google.com/spreadsheets/d/e/2PACX-1vTsBnVhAQmyqDsUKGUIFzihLFGOUkQpjZ-dehgFhyYypNcR5M_LtmNJ0sKh3RQDhv_Y1gASgz6ffVZz/pub?gid=0&single=true&output=csv",
-            sheet_url_ipas: "",
-            sheet_url_bahasa_indonesia: "",
-            sheet_url_bahasa_inggris: "",
-            sheet_url_pkn: "",
-            sheet_url_koding_ai: "",
-            sheet_url_budaya_komering: "",
-            sheet_url_pai: "",
-            sheet_url_pjok: ""
-        };
 
-        let allData = [];
-        let currentSubject = '';
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-graduation-cap"></i>
+                    <h1>Kelas <span>6</span></h1>
+                </div>
+                
+                <div class="user-status" id="userStatus" style="display: none;">
+                    <i class="fas fa-user-shield"></i>
+                    <span>Admin</span>
+                </div>
+                
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+                
+                <nav id="mainNav">
+                    <ul>
+                        <li><a href="#" class="nav-link active" data-page="home">Beranda</a></li>
+                        <li><a href="#" class="nav-link" data-page="about">Tentang</a></li>
+                        <li><a href="#" class="nav-link" data-page="gallery">Galeri</a></li>
+                        <li><a href="#" class="nav-link" data-page="schedule">Jadwal</a></li>
+                        <li><a href="#" class="nav-link" data-page="announcements">Pengumuman</a></li>
+                        <li><a href="#" class="nav-link" data-page="quiz">Kuis</a></li>
+                        <li><a href="#" class="nav-link" data-page="admin" id="adminNavLink">Kelola</a></li>
+                        <li><a href="#" class="nav-link" id="logoutLink" style="display: none;">Logout</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
 
-        const subjectConfig = {
-            matematika: { name: 'Matematika', icon: '🔢', configKey: 'sheet_url_matematika' },
-            ipas: { name: 'IPAS', icon: '🔬', configKey: 'sheet_url_ipas' },
-            bahasa_indonesia: { name: 'Bahasa Indonesia', icon: '📝', configKey: 'sheet_url_bahasa_indonesia' },
-            bahasa_inggris: { name: 'Bahasa Inggris', icon: '🌍', configKey: 'sheet_url_bahasa_inggris' },
-            pkn: { name: 'PKN', icon: '🇮🇩', configKey: 'sheet_url_pkn' },
-            koding_ai: { name: 'Koding & AI', icon: '💻', configKey: 'sheet_url_koding_ai' },
-            budaya_komering: { name: 'Budaya Komering', icon: '🎭', configKey: 'sheet_url_budaya_komering' },
-            pai: { name: 'PAI', icon: '🕌', configKey: 'sheet_url_pai' },
-            pjok: { name: 'PJOK', icon: '⚽', configKey: 'sheet_url_pjok' }
-        };
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h2 id="heroTitle">Selamat Datang di Website Kelas 6</h2>
+            <p id="heroDescription">Tempat belajar, berbagi, dan berkembang bersama. Website ini dibuat untuk mendukung kegiatan pembelajaran siswa kelas 6 dengan berbagai fitur interaktif yang menarik.</p>
+            <a href="#about" class="btn">Pelajari Lebih Lanjut</a>
+        </div>
+    </section>
 
-        function showPage(pageId) {
-            const pages = document.querySelectorAll('.page');
-            pages.forEach(page => page.classList.remove('active'));
-            document.getElementById(pageId).classList.add('active');
-            window.scrollTo(0, 0);
+    <!-- Main Content -->
+    <main class="container">
+        <!-- About Section -->
+        <section id="about" class="page-section">
+            <div class="section-title">
+                <h2>Tentang Kelas Kami</h2>
+            </div>
+            
+            <div class="cards">
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fas fa-users"></i>
+                        <h3>Profil Kelas</h3>
+                    </div>
+                    <div class="card-body">
+                        <p id="classProfile">Kelas 6 terdiri dari 28 siswa yang bersemangat dan kreatif. Kami adalah angkatan tahun 2023 dengan wali kelas Bapak/Ibu Guru Sari.</p>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fas fa-bullseye"></i>
+                        <h3>Visi & Misi</h3>
+                    </div>
+                    <div class="card-body">
+                        <p id="visionMission"><strong>Visi:</strong> Menjadi kelas unggulan dengan prestasi akademik dan non-akademik yang membanggakan.</p>
+                        <p><strong>Misi:</strong> Menciptakan lingkungan belajar yang kondusif, kreatif, dan penuh inovasi.</p>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                        <h3>Guru Kelas</h3>
+                    </div>
+                    <div class="card-body">
+                        <p id="teachers"><strong>Wali Kelas:</strong> Ibu Sari, S.Pd.</p>
+                        <p><strong>Guru Matematika:</strong> Bapak Budi, S.Pd.</p>
+                        <p><strong>Guru Bahasa Indonesia:</strong> Ibu Rini, S.Pd.</p>
+                        <p><strong>Guru IPA:</strong> Bapak Agus, S.Pd.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-            if (pageId === 'nilai') {
-                backToFolders();
+        <!-- Gallery Section -->
+        <section id="gallery" class="page-section" style="display: none;">
+            <div class="section-title">
+                <h2>Galeri Kegiatan</h2>
+            </div>
+            
+            <!-- Admin Controls (only visible when logged in) -->
+            <div id="galleryAdminControls" class="admin-controls" style="display: none;">
+                <h4><i class="fas fa-user-shield"></i> Kontrol Admin</h4>
+                <p>Anda dapat menambah dan menghapus gambar di galeri ini.</p>
+                <button id="addGalleryImage" class="btn btn-secondary">
+                    <i class="fas fa-plus"></i> Tambah Gambar
+                </button>
+                <button id="logoutGallery" class="btn logout-btn" style="display: none;">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+            </div>
+            
+            <div class="gallery" id="galleryContainer">
+                <!-- Gallery items will be loaded here -->
+            </div>
+            
+            <!-- Regular user view -->
+            <div id="galleryUserView" style="text-align: center; margin-top: 2rem;">
+                <p>Hanya admin yang dapat menambah atau menghapus gambar.</p>
+                <button id="requestAdminAccess" class="btn btn-secondary">
+                    <i class="fas fa-key"></i> Akses Admin
+                </button>
+            </div>
+        </section>
+
+        <!-- Schedule Section -->
+        <section id="schedule" class="page-section" style="display: none;">
+            <div class="section-title">
+                <h2>Jadwal Pelajaran</h2>
+            </div>
+            
+            <div class="schedule">
+                <table id="scheduleTable">
+                    <thead>
+                        <tr>
+                            <th>Hari</th>
+                            <th>Jam Ke-1</th>
+                            <th>Jam Ke-2</th>
+                            <th>Jam Ke-3</th>
+                            <th>Jam Ke-4</th>
+                            <th>Jam Ke-5</th>
+                        </tr>
+                    </thead>
+                    <tbody id="scheduleBody">
+                        <!-- Schedule will be loaded here -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Announcements Section -->
+        <section id="announcements" class="page-section" style="display: none;">
+            <div class="section-title">
+                <h2>Pengumuman Terbaru</h2>
+            </div>
+            
+            <div class="announcements" id="announcementsContainer">
+                <!-- Announcements will be loaded here -->
+            </div>
+            
+            <!-- Admin controls for announcements -->
+            <div id="announcementsAdminControls" class="admin-controls" style="display: none; text-align: center;">
+                <h4><i class="fas fa-user-shield"></i> Kontrol Admin</h4>
+                <p>Anda dapat menambah dan menghapus pengumuman.</p>
+                <button id="addAnnouncement" class="btn btn-secondary">
+                    <i class="fas fa-plus"></i> Tambah Pengumuman
+                </button>
+            </div>
+        </section>
+
+        <!-- Quiz Section -->
+        <section id="quiz" class="page-section" style="display: none;">
+            <div class="section-title">
+                <h2>Kuis Interaktif</h2>
+            </div>
+            
+            <div class="quiz-section">
+                <div class="quiz-question">
+                    <h3>Kuis Matematika Kelas 6</h3>
+                    <p>Jawablah pertanyaan berikut untuk menguji pengetahuan matematika kamu!</p>
+                </div>
+                
+                <div id="quizContainer">
+                    <div class="quiz-question" id="question1">
+                        <h4>Pertanyaan 1: Berapakah hasil dari 125 ÷ 5 + 12 × 3?</h4>
+                        <div class="quiz-options">
+                            <div class="quiz-option" data-option="1" data-correct="true">61</div>
+                            <div class="quiz-option" data-option="2">55</div>
+                            <div class="quiz-option" data-option="3">49</div>
+                            <div class="quiz-option" data-option="4">67</div>
+                        </div>
+                    </div>
+                    
+                    <div class="quiz-question" id="question2" style="display: none;">
+                        <h4>Pertanyaan 2: Sebuah persegi panjang memiliki panjang 15 cm dan lebar 8 cm. Berapakah luasnya?</h4>
+                        <div class="quiz-options">
+                            <div class="quiz-option" data-option="1">100 cm²</div>
+                            <div class="quiz-option" data-option="2" data-correct="true">120 cm²</div>
+                            <div class="quiz-option" data-option="3">130 cm²</div>
+                            <div class="quiz-option" data-option="4">140 cm²</div>
+                        </div>
+                    </div>
+                    
+                    <div class="quiz-question" id="question3" style="display: none;">
+                        <h4>Pertanyaan 3: Pak Anton membeli 3,5 kg apel. Jika harga apel Rp 25.000 per kg, berapa total yang harus dibayar Pak Anton?</h4>
+                        <div class="quiz-options">
+                            <div class="quiz-option" data-option="1">Rp 75.000</div>
+                            <div class="quiz-option" data-option="2">Rp 82.500</div>
+                            <div class="quiz-option" data-option="3" data-correct="true">Rp 87.500</div>
+                            <div class="quiz-option" data-option="4">Rp 90.000</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="quiz-actions">
+                    <button id="prevBtn" class="btn" style="display: none; margin-right: 10px;">Sebelumnya</button>
+                    <button id="nextBtn" class="btn">Selanjutnya</button>
+                    <button id="submitBtn" class="btn" style="display: none; background-color: var(--secondary-color);">Kirim Jawaban</button>
+                </div>
+                
+                <div class="quiz-result" id="quizResult">
+                    <h3>Hasil Kuis</h3>
+                    <p id="scoreText">Kamu menjawab benar <span id="correctAnswers">0</span> dari 3 pertanyaan.</p>
+                    <p id="scoreMessage"></p>
+                    <button id="restartQuiz" class="btn">Mulai Lagi</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Admin Section -->
+        <section id="admin" class="page-section" style="display: none;">
+            <div class="section-title">
+                <h2>Panel Admin</h2>
+            </div>
+            
+            <!-- Login Prompt for Admin Section -->
+            <div id="adminLoginPrompt" class="admin-panel" style="text-align: center;">
+                <div class="info-box">
+                    <h4><i class="fas fa-lock"></i> Akses Terbatas</h4>
+                    <p>Panel admin hanya dapat diakses oleh administrator website.</p>
+                    <p>Silakan login terlebih dahulu untuk mengelola konten website.</p>
+                </div>
+                
+                <button id="loginToAdmin" class="btn">
+                    <i class="fas fa-sign-in-alt"></i> Login sebagai Admin
+                </button>
+                
+                <div style="margin-top: 2rem; text-align: left; background-color: #f8f9fa; padding: 1.5rem; border-radius: 5px;">
+                    <h4>Default Login:</h4>
+                    <p><strong>Username:</strong> admin</p>
+                    <p><strong>Password:</strong> kelas6</p>
+                    <p style="margin-top: 1rem; font-size: 0.9rem; color: #666;">
+                        <i class="fas fa-info-circle"></i> Disarankan untuk mengganti password setelah login pertama.
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Admin Panel Content (only visible when logged in) -->
+            <div id="adminPanelContent" class="admin-panel" style="display: none;">
+                <div class="admin-controls">
+                    <h4><i class="fas fa-user-shield"></i> Selamat Datang, Admin!</h4>
+                    <p>Anda login sebagai administrator. Hati-hati dalam mengubah konten website.</p>
+                    <button id="adminLogoutBtn" class="btn logout-btn">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </button>
+                </div>
+                
+                <div class="info-box">
+                    <h4><i class="fas fa-info-circle"></i> Cara Menggunakan Google Drive</h4>
+                    <p>1. Upload gambar ke Google Drive</p>
+                    <p>2. Klik kanan pada gambar, pilih "Dapatkan link berbagi"</p>
+                    <p>3. Ubah izin akses menjadi "Siapa saja dengan link dapat melihat"</p>
+                    <p>4. Copy link dan paste di form di bawah ini</p>
+                    <p>5. Format link: <code>https://drive.google.com/uc?id=FILE_ID</code></p>
+                </div>
+                
+                <div class="form-group">
+                    <label for="heroBackgroundUrl">URL Background Hero (dari Google Drive)</label>
+                    <input type="text" id="heroBackgroundUrl" placeholder="https://drive.google.com/uc?id=FILE_ID">
+                    <button id="updateHeroBg" class="btn" style="margin-top: 10px;">Update Background Hero</button>
+                </div>
+                
+                <div class="form-group">
+                    <label for="heroTitleInput">Judul Hero</label>
+                    <input type="text" id="heroTitleInput" placeholder="Masukkan judul hero">
+                </div>
+                
+                <div class="form-group">
+                    <label for="heroDescriptionInput">Deskripsi Hero</label>
+                    <textarea id="heroDescriptionInput" rows="3" placeholder="Masukkan deskripsi hero"></textarea>
+                </div>
+                
+                <button id="updateHeroContent" class="btn" style="margin-bottom: 2rem;">Update Konten Hero</button>
+                
+                <h3>Kelola Konten Lainnya</h3>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="classProfileInput">Profil Kelas</label>
+                        <textarea id="classProfileInput" rows="4" placeholder="Masukkan profil kelas"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="visionMissionInput">Visi & Misi</label>
+                        <textarea id="visionMissionInput" rows="4" placeholder="Masukkan visi dan misi"></textarea>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="teachersInput">Data Guru</label>
+                    <textarea id="teachersInput" rows="4" placeholder="Masukkan data guru (pisahkan dengan baris baru)"></textarea>
+                </div>
+                
+                <button id="updateAboutContent" class="btn">Update Konten Tentang</button>
+                
+                <div style="margin-top: 3rem; padding-top: 2rem; border-top: 2px solid #eee;">
+                    <h3>Ganti Password Admin</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="currentPassword">Password Saat Ini</label>
+                            <input type="password" id="currentPassword" placeholder="Masukkan password saat ini">
+                        </div>
+                        <div class="form-group">
+                            <label for="newPassword">Password Baru</label>
+                            <input type="password" id="newPassword" placeholder="Masukkan password baru">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmPassword">Konfirmasi Password Baru</label>
+                        <input type="password" id="confirmPassword" placeholder="Konfirmasi password baru">
+                    </div>
+                    <button id="changePassword" class="btn btn-success">
+                        <i class="fas fa-key"></i> Ganti Password
+                    </button>
+                </div>
+                
+                <div style="margin-top: 3rem; padding-top: 2rem; border-top: 2px solid #eee;">
+                    <h3>Ekspor/Impor Data</h3>
+                    <p style="margin-bottom: 1rem;">Simpan data Anda untuk cadangan atau transfer ke komputer lain:</p>
+                    <div class="form-row">
+                        <button id="exportData" class="btn btn-secondary">
+                            <i class="fas fa-download"></i> Ekspor Data ke File
+                        </button>
+                        <button id="importData" class="btn btn-secondary">
+                            <i class="fas fa-upload"></i> Impor Data dari File
+                        </button>
+                    </div>
+                    <input type="file" id="importFileInput" accept=".json" style="display: none;">
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Kelas 6</h3>
+                    <p>Website resmi untuk kelas 6 Sekolah Dasar. Tempat untuk belajar, berbagi, dan berkembang bersama.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Kontak</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Jl. Pendidikan No. 123, Jakarta</p>
+                    <p><i class="fas fa-phone"></i> (021) 1234-5678</p>
+                    <p><i class="fas fa-envelope"></i> kelas6@sekolahdasar.sch.id</p>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Tautan Cepat</h3>
+                    <ul>
+                        <li><a href="#" class="nav-link" data-page="home">Beranda</a></li>
+                        <li><a href="#" class="nav-link" data-page="about">Tentang Kelas</a></li>
+                        <li><a href="#" class="nav-link" data-page="gallery">Galeri Kegiatan</a></li>
+                        <li><a href="#" class="nav-link" data-page="schedule">Jadwal Pelajaran</a></li>
+                        <li><a href="#" class="nav-link" data-page="announcements">Pengumuman</a></li>
+                        <li><a href="#" class="nav-link" data-page="quiz">Kuis Interaktif</a></li>
+                        <li><a href="#" class="nav-link" data-page="admin">Panel Admin</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; <span id="currentYear">2023</span> Website Kelas 6. Semua Hak Dilindungi.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modals -->
+    <div id="imageModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Tambah/Edit Gambar Galeri</h3>
+                <button class="modal-close" id="closeImageModal">&times;</button>
+            </div>
+            <div class="form-group">
+                <label for="imageUrl">URL Gambar (dari Google Drive)</label>
+                <input type="text" id="imageUrl" placeholder="https://drive.google.com/uc?id=FILE_ID">
+                <small>Format: https://drive.google.com/uc?id=FILE_ID</small>
+            </div>
+            <div class="form-group">
+                <label for="imageTitle">Judul Gambar</label>
+                <input type="text" id="imageTitle" placeholder="Kegiatan Belajar di Kelas">
+            </div>
+            <div class="form-group">
+                <label for="imageDescription">Deskripsi (opsional)</label>
+                                <textarea id="imageDescription" rows="3" placeholder="Deskripsi singkat tentang gambar"></textarea>
+            </div>
+            <button id="saveImage" class="btn">Simpan Gambar</button>
+            <button id="cancelImage" class="btn btn-secondary" style="margin-left: 10px;">Batal</button>
+            <input type="hidden" id="editingImageId" value="">
+        </div>
+    </div>
+
+    <!-- Back to Top Button -->
+    <a href="#" class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <script>
+        // ==================== AUTHENTICATION SYSTEM ====================
+        class AuthManager {
+            constructor() {
+                this.currentUser = null;
+                this.initAdminCredentials();
+                this.loadSession();
+            }
+            
+            initAdminCredentials() {
+                const defaultCredentials = {
+                    username: 'admin',
+                    password: 'kelas6',
+                    role: 'admin',
+                    lastLogin: null
+                };
+                
+                if (!localStorage.getItem('adminCredentials')) {
+                    localStorage.setItem('adminCredentials', JSON.stringify(defaultCredentials));
+                }
+            }
+            
+            getCredentials() {
+                return JSON.parse(localStorage.getItem('adminCredentials')) || {};
+            }
+            
+            saveCredentials(credentials) {
+                localStorage.setItem('adminCredentials', JSON.stringify(credentials));
+            }
+            
+            login(username, password) {
+                const credentials = this.getCredentials();
+                
+                if (username === credentials.username && password === credentials.password) {
+                    this.currentUser = {
+                        username: credentials.username,
+                        role: credentials.role,
+                        loginTime: new Date().toISOString()
+                    };
+                    
+                    // Update last login
+                    credentials.lastLogin = new Date().toISOString();
+                    this.saveCredentials(credentials);
+                    
+                    // Save session
+                    this.saveSession();
+                    
+                    return { success: true, user: this.currentUser };
+                }
+                
+                return { success: false, message: 'Username atau password salah' };
+            }
+            
+            logout() {
+                this.currentUser = null;
+                localStorage.removeItem('userSession');
+                return { success: true };
+            }
+            
+            isLoggedIn() {
+                return this.currentUser !== null;
+            }
+            
+            isAdmin() {
+                return this.currentUser && this.currentUser.role === 'admin';
+            }
+            
+            saveSession() {
+                if (this.currentUser) {
+                    const session = {
+                        user: this.currentUser,
+                        expires: new Date(Date.now() + 24 * 60 * 60 * 1000) // 24 hours
+                    };
+                    localStorage.setItem('userSession', JSON.stringify(session));
+                }
+            }
+            
+            loadSession() {
+                const sessionData = localStorage.getItem('userSession');
+                if (sessionData) {
+                    const session = JSON.parse(sessionData);
+                    const now = new Date();
+                    const expires = new Date(session.expires);
+                    
+                    if (now < expires) {
+                        this.currentUser = session.user;
+                        return true;
+                    } else {
+                        // Session expired
+                        localStorage.removeItem('userSession');
+                        return false;
+                    }
+                }
+                return false;
+            }
+            
+            changePassword(currentPassword, newPassword) {
+                const credentials = this.getCredentials();
+                
+                if (currentPassword !== credentials.password) {
+                    return { success: false, message: 'Password saat ini salah' };
+                }
+                
+                if (newPassword.length < 4) {
+                    return { success: false, message: 'Password baru harus minimal 4 karakter' };
+                }
+                
+                credentials.password = newPassword;
+                this.saveCredentials(credentials);
+                
+                return { success: true, message: 'Password berhasil diubah' };
             }
         }
 
-        function openSubject(subject) {
-            currentSubject = subject;
-            const config = subjectConfig[subject];
-            
-            document.getElementById('folderListView').classList.add('hidden');
-            document.getElementById('dataTableView').classList.remove('hidden');
-            document.getElementById('subjectTitle').textContent = `Data Nilai ${config.icon} ${config.name}`;
-            
-            loadSubjectData(subject);
-        }
-
-        function backToFolders() {
-            document.getElementById('folderListView').classList.remove('hidden');
-            document.getElementById('dataTableView').classList.add('hidden');
-            currentSubject = '';
-            allData = [];
-        }
-
-        function refreshCurrentSubject() {
-            if (currentSubject) {
-                loadSubjectData(currentSubject);
+        // ==================== DATA MANAGER ====================
+        class DataManager {
+            constructor() {
+                this.authManager = new AuthManager();
+                this.initData();
+                this.loadData();
             }
-        }
-
-        async function loadSubjectData(subject) {
-            const loadingIndicator = document.getElementById('loadingIndicator');
-            const errorMessage = document.getElementById('errorMessage');
-            const tableContainer = document.getElementById('tableContainer');
-            const emptyState = document.getElementById('emptyState');
-
-            loadingIndicator.classList.remove('hidden');
-            errorMessage.classList.add('hidden');
-            tableContainer.classList.add('hidden');
-            emptyState.classList.add('hidden');
-
-            try {
-                const config = window.elementSdk ? window.elementSdk.config : defaultConfig;
-                const configKey = subjectConfig[subject].configKey;
-                const sheetUrl = config[configKey] || defaultConfig[configKey];
+            
+            initData() {
+                const defaultData = {
+                    hero: {
+                        backgroundUrl: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
+                        title: 'Selamat Datang di Website Kelas 6',
+                        description: 'Tempat belajar, berbagi, dan berkembang bersama. Website ini dibuat untuk mendukung kegiatan pembelajaran siswa kelas 6 dengan berbagai fitur interaktif yang menarik.'
+                    },
+                    about: {
+                        classProfile: 'Kelas 6 terdiri dari 28 siswa yang bersemangat dan kreatif. Kami adalah angkatan tahun 2023 dengan wali kelas Bapak/Ibu Guru Sari.',
+                        visionMission: '<strong>Visi:</strong> Menjadi kelas unggulan dengan prestasi akademik dan non-akademik yang membanggakan.',
+                        teachers: '<strong>Wali Kelas:</strong> Ibu Sari, S.Pd.\n<strong>Guru Matematika:</strong> Bapak Budi, S.Pd.\n<strong>Guru Bahasa Indonesia:</strong> Ibu Rini, S.Pd.\n<strong>Guru IPA:</strong> Bapak Agus, S.Pd.'
+                    },
+                    gallery: [
+                        {
+                            id: 1,
+                            url: 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80',
+                            title: 'Kegiatan Belajar di Kelas',
+                            description: 'Siswa sedang belajar bersama di dalam kelas'
+                        },
+                        {
+                            id: 2,
+                            url: 'https://images.unsplash.com/photo-1524178234883-043d5c3f3cf4?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80',
+                            title: 'Eksperimen IPA',
+                            description: 'Eksperimen sains di laboratorium sekolah'
+                        },
+                        {
+                            id: 3,
+                            url: 'https://images.unsplash.com/photo-1546410531-bb4caa6b424d?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80',
+                            title: 'Presentasi Kelompok',
+                            description: 'Siswa mempresentasikan hasil kerja kelompok'
+                        },
+                        {
+                            id: 4,
+                            url: 'https://images.unsplash.com/photo-1577896851231-70ef18881754?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80',
+                            title: 'Kegiatan Olahraga',
+                            description: 'Kegiatan olahraga di lapangan sekolah'
+                        },
+                        {
+                            id: 5,
+                            url: 'https://images.unsplash.com/photo-1546410531-bb4caa6b424d?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80',
+                            title: 'Pameran Karya Siswa',
+                            description: 'Pameran karya seni dan proyek siswa'
+                        },
+                        {
+                            id: 6,
+                            url: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80',
+                            title: 'Field Trip ke Museum',
+                            description: 'Kunjungan edukatif ke museum nasional'
+                        }
+                    ],
+                    schedule: [
+                        {hari: 'Senin', jam1: 'Matematika', jam2: 'IPA', jam3: 'Bahasa Indonesia', jam4: 'Olahraga', jam5: 'Seni Budaya'},
+                        {hari: 'Selasa', jam1: 'Bahasa Indonesia', jam2: 'Matematika', jam3: 'IPS', jam4: 'Pend. Kewarganegaraan', jam5: 'Bahasa Inggris'},
+                        {hari: 'Rabu', jam1: 'IPA', jam2: 'Matematika', jam3: 'Bahasa Indonesia', jam4: 'Pend. Agama', jam5: 'Praktikum IPA'},
+                        {hari: 'Kamis', jam1: 'Matematika', jam2: 'IPS', jam3: 'Bahasa Inggris', jam4: 'Seni Budaya', jam5: 'Pramuka'},
+                        {hari: 'Jumat', jam1: 'Bahasa Indonesia', jam2: 'IPA', jam3: 'Matematika', jam4: 'Pend. Kewarganegaraan', jam5: 'Kegiatan Jumat'}
+                    ],
+                    announcements: [
+                        {
+                            id: 1,
+                            title: 'Ujian Tengah Semester',
+                            date: '10 Oktober 2023',
+                            content: 'Ujian Tengah Semester akan dilaksanakan pada tanggal 15-20 Oktober 2023. Seluruh siswa diharapkan mempersiapkan diri dengan baik.'
+                        },
+                        {
+                            id: 2,
+                            title: 'Field Trip ke Museum',
+                            date: '5 Oktober 2023',
+                            content: 'Kelas 6 akan mengadakan field trip ke Museum Nasional pada tanggal 25 Oktober 2023. Biaya field trip sebesar Rp 50.000 per siswa.'
+                        },
+                        {
+                            id: 3,
+                            title: 'Lomba Mewarnai Tingkat Sekolah',
+                            date: '1 Oktober 2023',
+                            content: 'Akan diadakan lomba mewarnai untuk seluruh siswa kelas 6 pada tanggal 28 Oktober 2023. Pendaftaran dibuka hingga 20 Oktober 2023.'
+                        },
+                        {
+                            id: 4,
+                            title: 'Pembagian Rapor Tengah Semester',
+                            date: '28 September 2023',
+                            content: 'Pembagian rapor tengah semester akan dilaksanakan pada tanggal 5 November 2023. Orang tua/wali diharapkan hadir.'
+                        }
+                    ]
+                };
                 
-                if (!sheetUrl) {
-                    throw new Error('URL Sheet belum diatur');
+                if (!localStorage.getItem('class6Data')) {
+                    localStorage.setItem('class6Data', JSON.stringify(defaultData));
+                }
+            }
+            
+            loadData() {
+                return JSON.parse(localStorage.getItem('class6Data')) || {};
+            }
+            
+            saveData(data) {
+                localStorage.setItem('class6Data', JSON.stringify(data));
+            }
+            
+            // ... (methods lainnya tetap sama seperti sebelumnya)
+            updateHero(heroData) {
+                const data = this.loadData();
+                data.hero = heroData;
+                this.saveData(data);
+                return data.hero;
+            }
+            
+            updateAbout(aboutData) {
+                const data = this.loadData();
+                data.about = aboutData;
+                this.saveData(data);
+                return data.about;
+            }
+            
+            getGallery() {
+                const data = this.loadData();
+                return data.gallery || [];
+            }
+            
+            addGalleryImage(imageData) {
+                if (!this.authManager.isAdmin()) {
+                    return { success: false, message: 'Hanya admin yang dapat menambah gambar' };
                 }
                 
-                const response = await fetch(sheetUrl);
-                if (!response.ok) throw new Error('Failed to fetch');
-                
-                const csvText = await response.text();
-                const rows = csvText.split('\n').filter(row => row.trim());
-                
-                if (rows.length < 2) {
-                    throw new Error('No data available');
+                const data = this.loadData();
+                if (!data.gallery) data.gallery = [];
+                imageData.id = Date.now();
+                data.gallery.push(imageData);
+                this.saveData(data);
+                return { success: true, data: imageData };
+            }
+            
+            updateGalleryImage(id, imageData) {
+                if (!this.authManager.isAdmin()) {
+                    return { success: false, message: 'Hanya admin yang dapat mengedit gambar' };
                 }
-
-                const headers = rows[0].split(',').map(h => h.trim().replace(/"/g, ''));
                 
-                allData = rows.slice(1).map(row => {
-                    const values = row.split(',').map(v => v.trim().replace(/"/g, ''));
-                    const obj = {};
-                    headers.forEach((header, index) => {
-                        obj[header] = values[index] || '';
-                    });
-                    return obj;
+                const data = this.loadData();
+                const index = data.gallery.findIndex(img => img.id == id);
+                if (index !== -1) {
+                    data.gallery[index] = {...data.gallery[index], ...imageData};
+                    this.saveData(data);
+                    return { success: true, data: data.gallery[index] };
+                }
+                return { success: false, message: 'Gambar tidak ditemukan' };
+            }
+            
+            deleteGalleryImage(id) {
+                if (!this.authManager.isAdmin()) {
+                    return { success: false, message: 'Hanya admin yang dapat menghapus gambar' };
+                }
+                
+                const data = this.loadData();
+                const initialLength = data.gallery.length;
+                data.gallery = data.gallery.filter(img => img.id != id);
+                
+                if (data.gallery.length < initialLength) {
+                    this.saveData(data);
+                    return { success: true, message: 'Gambar berhasil dihapus' };
+                }
+                
+                return { success: false, message: 'Gambar tidak ditemukan' };
+            }
+            
+            getSchedule() {
+                const data = this.loadData();
+                return data.schedule || [];
+            }
+            
+            updateSchedule(scheduleData) {
+                if (!this.authManager.isAdmin()) {
+                    return { success: false, message: 'Hanya admin yang dapat mengubah jadwal' };
+                }
+                
+                const data = this.loadData();
+                data.schedule = scheduleData;
+                this.saveData(data);
+                return { success: true, data: data.schedule };
+            }
+            
+            getAnnouncements() {
+                const data = this.loadData();
+                return data.announcements || [];
+            }
+            
+            addAnnouncement(announcementData) {
+                if (!this.authManager.isAdmin()) {
+                    return { success: false, message: 'Hanya admin yang dapat menambah pengumuman' };
+                }
+                
+                const data = this.loadData();
+                if (!data.announcements) data.announcements = [];
+                announcementData.id = Date.now();
+                announcementData.date = new Date().toLocaleDateString('id-ID', { 
+                    day: 'numeric', 
+                    month: 'long', 
+                    year: 'numeric' 
                 });
-
-                renderTable(headers, allData);
+                data.announcements.unshift(announcementData);
+                this.saveData(data);
+                return { success: true, data: announcementData };
+            }
+            
+            deleteAnnouncement(id) {
+                if (!this.authManager.isAdmin()) {
+                    return { success: false, message: 'Hanya admin yang dapat menghapus pengumuman' };
+                }
                 
-                loadingIndicator.classList.add('hidden');
-                tableContainer.classList.remove('hidden');
-            } catch (error) {
-                loadingIndicator.classList.add('hidden');
-                errorMessage.classList.remove('hidden');
+                const data = this.loadData();
+                const initialLength = data.announcements.length;
+                data.announcements = data.announcements.filter(ann => ann.id != id);
+                
+                if (data.announcements.length < initialLength) {
+                    this.saveData(data);
+                    return { success: true, message: 'Pengumuman berhasil dihapus' };
+                }
+                
+                return { success: false, message: 'Pengumuman tidak ditemukan' };
+            }
+            
+            exportData() {
+                const data = this.loadData();
+                const credentials = this.authManager.getCredentials();
+                const exportData = {
+                    websiteData: data,
+                    adminCredentials: {
+                        username: credentials.username,
+                        lastLogin: credentials.lastLogin
+                        // Tidak menyertakan password untuk keamanan
+                    }
+                };
+                
+                const dataStr = JSON.stringify(exportData, null, 2);
+                const dataBlob = new Blob([dataStr], { type: 'application/json' });
+                const url = URL.createObjectURL(dataBlob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `kelas6-backup-${new Date().toISOString().slice(0,10)}.json`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            }
+            
+            importData(jsonData) {
+                try {
+                    const importData = JSON.parse(jsonData);
+                    const data = importData.websiteData;
+                    
+                    if (data) {
+                        this.saveData(data);
+                        return { success: true, message: 'Data berhasil diimpor' };
+                    }
+                    
+                    return { success: false, message: 'Format data tidak valid' };
+                } catch (e) {
+                    console.error('Error importing data:', e);
+                    return { success: false, message: 'Error mengimpor data' };
+                }
             }
         }
 
-        function renderTable(headers, data) {
-            const tableHeader = document.getElementById('tableHeader');
-            const tableBody = document.getElementById('tableBody');
-
-            tableHeader.innerHTML = `
-                <tr>
-                    ${headers.map(header => `<th>${header}</th>`).join('')}
-                </tr>
-            `;
-
-            tableBody.innerHTML = data.map(row => `
-                <tr>
-                    ${headers.map(header => `<td>${row[header]}</td>`).join('')}
-                </tr>
-            `).join('');
+        // ==================== APPLICATION INITIALIZATION ====================
+        const dataManager = new DataManager();
+        
+        // DOM Elements
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mainNav = document.getElementById('mainNav');
+        const navLinks = document.querySelectorAll('.nav-link');
+        const pageSections = document.querySelectorAll('.page-section');
+        const heroSection = document.querySelector('.hero');
+        const heroTitle = document.getElementById('heroTitle');
+        const heroDescription = document.getElementById('heroDescription');
+        const galleryContainer = document.getElementById('galleryContainer');
+        const scheduleBody = document.getElementById('scheduleBody');
+        const announcementsContainer = document.getElementById('announcementsContainer');
+        const userStatus = document.getElementById('userStatus');
+        const logoutLink = document.getElementById('logoutLink');
+        const adminNavLink = document.getElementById('adminNavLink');
+        
+        // Login Modal elements
+        const loginModal = document.getElementById('loginModal');
+        const loginError = document.getElementById('loginError');
+        const loginSuccess = document.getElementById('loginSuccess');
+        const loginBtn = document.getElementById('loginBtn');
+        const usernameInput = document.getElementById('username');
+        const passwordInput = document.getElementById('password');
+        
+        // Gallery elements
+        const galleryAdminControls = document.getElementById('galleryAdminControls');
+        const galleryUserView = document.getElementById('galleryUserView');
+        const addGalleryImageBtn = document.getElementById('addGalleryImage');
+        const requestAdminAccessBtn = document.getElementById('requestAdminAccess');
+        
+        // Admin section elements
+        const adminLoginPrompt = document.getElementById('adminLoginPrompt');
+        const adminPanelContent = document.getElementById('adminPanelContent');
+        const loginToAdminBtn = document.getElementById('loginToAdmin');
+        const adminLogoutBtn = document.getElementById('adminLogoutBtn');
+        
+        // Other admin controls
+        const heroBackgroundUrl = document.getElementById('heroBackgroundUrl');
+        const updateHeroBgBtn = document.getElementById('updateHeroBg');
+        const heroTitleInput = document.getElementById('heroTitleInput');
+        const heroDescriptionInput = document.getElementById('heroDescriptionInput');
+        const updateHeroContentBtn = document.getElementById('updateHeroContent');
+        const classProfileInput = document.getElementById('classProfileInput');
+        const visionMissionInput = document.getElementById('visionMissionInput');
+        const teachersInput = document.getElementById('teachersInput');
+        const updateAboutContentBtn = document.getElementById('updateAboutContent');
+        
+        // Password change elements
+        const currentPassword = document.getElementById('currentPassword');
+        const newPassword = document.getElementById('newPassword');
+        const confirmPassword = document.getElementById('confirmPassword');
+        const changePasswordBtn = document.getElementById('changePassword');
+        
+        // Export/Import elements
+        const exportDataBtn = document.getElementById('exportData');
+        const importDataBtn = document.getElementById('importData');
+        const importFileInput = document.getElementById('importFileInput');
+        
+        // Announcements admin controls
+        const announcementsAdminControls = document.getElementById('announcementsAdminControls');
+        const addAnnouncementBtn = document.getElementById('addAnnouncement');
+        
+        // Image modal elements
+        const imageModal = document.getElementById('imageModal');
+        const closeImageModal = document.getElementById('closeImageModal');
+        const cancelImage = document.getElementById('cancelImage');
+        const saveImageBtn = document.getElementById('saveImage');
+        
+        // Quiz variables
+        let currentQuestion = 1;
+        let score = 0;
+        const totalQuestions = 3;
+        const userAnswers = {};
+        
+        // Initialize the page
+        function initPage() {
+            updateUIForLoginStatus();
+            loadHeroData();
+            loadAboutData();
+            loadGallery();
+            loadSchedule();
+            loadAnnouncements();
+            setupEventListeners();
+            
+            // Set current year
+            document.getElementById('currentYear').textContent = new Date().getFullYear();
         }
-
-        function filterTable() {
-            const searchInput = document.getElementById('searchInput');
-            const searchTerm = searchInput ? searchInput.value.toLowerCase() : '';
-            const tableBody = document.getElementById('tableBody');
-            const emptyState = document.getElementById('emptyState');
-            const tableContainer = document.getElementById('tableContainer');
-
-            if (!allData.length) return;
-
-            const filteredData = allData.filter(row => {
-                return Object.values(row).some(value => 
-                    value.toString().toLowerCase().includes(searchTerm)
-                );
-            });
-
-            const headers = Object.keys(allData[0]);
-
-            if (filteredData.length === 0) {
-                tableContainer.classList.add('hidden');
-                emptyState.classList.remove('hidden');
+        
+        // Update UI based on login status
+        function updateUIForLoginStatus() {
+            const isLoggedIn = dataManager.authManager.isLoggedIn();
+            const isAdmin = dataManager.authManager.isAdmin();
+            
+            // Show/hide user status
+            if (isLoggedIn) {
+                userStatus.style.display = 'flex';
+                logoutLink.style.display = 'block';
             } else {
-                tableContainer.classList.remove('hidden');
-                emptyState.classList.add('hidden');
-                
-                tableBody.innerHTML = filteredData.map(row => `
-                    <tr>
-                        ${headers.map(header => `<td>${row[header]}</td>`).join('')}
-                    </tr>
-                `).join('');
+                userStatus.style.display = 'none';
+                logoutLink.style.display = 'none';
+            }
+            
+            // Update gallery view
+            if (isAdmin) {
+                galleryAdminControls.style.display = 'block';
+                galleryUserView.style.display = 'none';
+            } else {
+                galleryAdminControls.style.display = 'none';
+                galleryUserView.style.display = 'block';
+            }
+            
+            // Update announcements view
+            announcementsAdminControls.style.display = isAdmin ? 'block' : 'none';
+            
+            // Update admin section
+            if (isAdmin) {
+                adminLoginPrompt.style.display = 'none';
+                adminPanelContent.style.display = 'block';
+            } else {
+                adminLoginPrompt.style.display = 'block';
+                adminPanelContent.style.display = 'none';
             }
         }
-
-        async function onConfigChange(config) {
-            const siteTitle = config.site_title || defaultConfig.site_title;
-            const teacherName = config.teacher_name || defaultConfig.teacher_name;
-            const teacherMotto = config.teacher_motto || defaultConfig.teacher_motto;
-            const teacherEmail = config.teacher_email || defaultConfig.teacher_email;
-            const whatsappNumber = config.whatsapp_number || defaultConfig.whatsapp_number;
-            const schoolAddress = config.school_address || defaultConfig.school_address;
-            const mapsLink = config.maps_link || defaultConfig.maps_link;
-
-            document.getElementById('nav-title').textContent = siteTitle.split(' ').slice(0, 3).join(' ');
-            document.getElementById('hero-title').textContent = siteTitle;
-            document.getElementById('teacher-name-display').textContent = teacherName;
-            document.getElementById('teacher-motto-display').textContent = `"${teacherMotto}"`;
-            document.getElementById('teacher-email-display').textContent = teacherEmail;
-            document.getElementById('contact-teacher-name').textContent = teacherName;
-            document.getElementById('contact-teacher-email').textContent = teacherEmail;
-            document.getElementById('whatsapp-display').textContent = whatsappNumber;
-            document.getElementById('school-address-display').textContent = schoolAddress;
-
-            const whatsappLink = document.getElementById('whatsapp-link');
-            const cleanNumber = whatsappNumber.replace(/[^0-9]/g, '');
-            whatsappLink.href = `https://wa.me/${cleanNumber}`;
-
-            const mapsLinkElement = document.getElementById('maps-link');
-            mapsLinkElement.href = mapsLink;
+        
+        // Load hero data
+        function loadHeroData() {
+            const data = dataManager.loadData();
+            if (data.hero) {
+                // Set hero background
+                heroSection.style.setProperty('--hero-bg-url', `url('${data.hero.backgroundUrl}')`);
+                
+                // Set hero content
+                heroTitle.textContent = data.hero.title;
+                heroDescription.textContent = data.hero.description;
+                
+                // Set admin inputs
+                heroBackgroundUrl.value = data.hero.backgroundUrl;
+                heroTitleInput.value = data.hero.title;
+                heroDescriptionInput.value = data.hero.description;
+            }
         }
-
-        if (window.elementSdk) {
-            window.elementSdk.init({
-                defaultConfig,
-                onConfigChange,
-                mapToCapabilities: (config) => ({
-                    recolorables: [],
-                    borderables: [],
-                    fontEditable: undefined,
-                    fontSizeable: undefined
-                }),
-                mapToEditPanelValues: (config) => new Map([
-                    ["site_title", config.site_title || defaultConfig.site_title],
-                    ["teacher_name", config.teacher_name || defaultConfig.teacher_name],
-                    ["teacher_motto", config.teacher_motto || defaultConfig.teacher_motto],
-                    ["teacher_email", config.teacher_email || defaultConfig.teacher_email],
-                    ["whatsapp_number", config.whatsapp_number || defaultConfig.whatsapp_number],
-                    ["school_address", config.school_address || defaultConfig.school_address],
-                    ["maps_link", config.maps_link || defaultConfig.maps_link],
-                    ["sheet_url_matematika", config.sheet_url_matematika || defaultConfig.sheet_url_matematika],
-                    ["sheet_url_ipas", config.sheet_url_ipas || defaultConfig.sheet_url_ipas],
-                    ["sheet_url_bahasa_indonesia", config.sheet_url_bahasa_indonesia || defaultConfig.sheet_url_bahasa_indonesia],
-                    ["sheet_url_bahasa_inggris", config.sheet_url_bahasa_inggris || defaultConfig.sheet_url_bahasa_inggris],
-                    ["sheet_url_pkn", config.sheet_url_pkn || defaultConfig.sheet_url_pkn],
-                    ["sheet_url_koding_ai", config.sheet_url_koding_ai || defaultConfig.sheet_url_koding_ai],
-                    ["sheet_url_budaya_komering", config.sheet_url_budaya_komering || defaultConfig.sheet_url_budaya_komering],
-                    ["sheet_url_pai", config.sheet_url_pai || defaultConfig.sheet_url_pai],
-                    ["sheet_url_pjok", config.sheet_url_pjok || defaultConfig.sheet_url_pjok]
-                ])
+        
+        // Load about data
+        function loadAboutData() {
+            const data = dataManager.loadData();
+            if (data.about) {
+                document.getElementById('classProfile').innerHTML = data.about.classProfile;
+                document.getElementById('visionMission').innerHTML = data.about.visionMission;
+                document.getElementById('teachers').innerHTML = data.about.teachers.replace(/\n/g, '<br>');
+                
+                // Set admin inputs
+                classProfileInput.value = data.about.classProfile;
+                visionMissionInput.value = data.about.visionMission;
+                teachersInput.value = data.about.teachers;
+            }
+        }
+        
+        // Load gallery
+        function loadGallery() {
+            const gallery = dataManager.getGallery();
+            galleryContainer.innerHTML = '';
+            
+            gallery.forEach(image => {
+                const galleryItem = document.createElement('div');
+                galleryItem.className = 'gallery-item';
+                
+                // Admin actions only visible to admins
+                const adminActions = dataManager.authManager.isAdmin() ? `
+                    <div class="admin-actions">
+                        <button class="delete-image" data-id="${image.id}"><i class="fas fa-trash"></i></button>
+                    </div>
+                ` : '';
+                
+                galleryItem.innerHTML = `
+                    <img src="${image.url}" alt="${image.title}" loading="lazy">
+                    <div class="overlay">
+                        <p>${image.title}</p>
+                        ${image.description ? `<small>${image.description}</small>` : ''}
+                    </div>
+                    ${adminActions}
+                `;
+                galleryContainer.appendChild(galleryItem);
+            });
+            
+            // Add event listeners to delete buttons (only for admin)
+            if (dataManager.authManager.isAdmin()) {
+                document.querySelectorAll('.delete-image').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        const id = btn.getAttribute('data-id');
+                        deleteGalleryImage(id);
+                    });
+                });
+            }
+        }
+        
+        // Delete gallery image
+        function deleteGalleryImage(id) {
+            if (confirm('Apakah Anda yakin ingin menghapus gambar ini?')) {
+                const result = dataManager.deleteGalleryImage(id);
+                if (result.success) {
+                    alert('Gambar berhasil dihapus!');
+                    loadGallery();
+                } else {
+                    alert('Gagal menghapus gambar: ' + result.message);
+                }
+            }
+        }
+        
+        // Load schedule
+        function loadSchedule() {
+            const schedule = dataManager.getSchedule();
+            scheduleBody.innerHTML = '';
+            
+            schedule.forEach(row => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${row.hari}</td>
+                    <td>${row.jam1}</td>
+                    <td>${row.jam2}</td>
+                    <td>${row.jam3}</td>
+                    <td>${row.jam4}</td>
+                    <td>${row.jam5}</td>
+                `;
+                scheduleBody.appendChild(tr);
             });
         }
+        
+        // Load announcements
+        function loadAnnouncements() {
+            const announcements = dataManager.getAnnouncements();
+            announcementsContainer.innerHTML = '';
+            
+            announcements.forEach(ann => {
+                const announcementDiv = document.createElement('div');
+                announcementDiv.className = 'announcement';
+                
+                // Delete button only for admin
+                const deleteButton = dataManager.authManager.isAdmin() ? `
+                    <button class="delete-announcement btn btn-danger btn-small" data-id="${ann.id}" style="margin-top: 10px; padding: 5px 10px; font-size: 0.9rem;">
+                        <i class="fas fa-trash"></i> Hapus
+                    </button>
+                ` : '';
+                
+                announcementDiv.innerHTML = `
+                    <h4>${ann.title}</h4>
+                    <div class="date">${ann.date}</div>
+                    <p>${ann.content}</p>
+                    ${deleteButton}
+                `;
+                announcementsContainer.appendChild(announcementDiv);
+            });
+            
+            // Add event listeners to delete buttons (only for admin)
+            if (dataManager.authManager.isAdmin()) {
+                document.querySelectorAll('.delete-announcement').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        const id = btn.getAttribute('data-id');
+                        deleteAnnouncement(id);
+                    });
+                });
+            }
+        }
+        
+        // Delete announcement
+        function deleteAnnouncement(id) {
+            if (confirm('Apakah Anda yakin ingin menghapus pengumuman ini?')) {
+                const result = dataManager.deleteAnnouncement(id);
+                if (result.success) {
+                    alert('Pengumuman berhasil dihapus!');
+                    loadAnnouncements();
+                } else {
+                    alert('Gagal menghapus pengumuman: ' + result.message);
+                }
+            }
+        }
+        
+        // Show login modal
+        function showLoginModal() {
+            loginModal.style.display = 'flex';
+            loginError.style.display = 'none';
+            loginSuccess.style.display = 'none';
+            usernameInput.value = '';
+            passwordInput.value = '';
+            usernameInput.focus();
+        }
+        
+        // Hide login modal
+        function hideLoginModal() {
+            loginModal.style.display = 'none';
+        }
+        
+        // Login function
+        function login() {
+            const username = usernameInput.value.trim();
+            const password = passwordInput.value;
+            
+            if (!username || !password) {
+                loginError.textContent = 'Username dan password harus diisi!';
+                loginError.style.display = 'block';
+                return;
+            }
+            
+            const result = dataManager.authManager.login(username, password);
+            
+            if (result.success) {
+                loginSuccess.style.display = 'block';
+                loginError.style.display = 'none';
+                
+                // Show success message for 1 second, then hide modal and update UI
+                setTimeout(() => {
+                    hideLoginModal();
+                    updateUIForLoginStatus();
+                    
+                    // Reload gallery and announcements to show admin controls
+                    loadGallery();
+                    loadAnnouncements();
+                    
+                    // If on admin page, show admin panel
+                    if (document.getElementById('admin').style.display === 'block') {
+                        adminLoginPrompt.style.display = 'none';
+                        adminPanelContent.style.display = 'block';
+                    }
+                }, 1000);
+            } else {
+                loginError.textContent = result.message;
+                loginError.style.display = 'block';
+                passwordInput.value = '';
+                passwordInput.focus();
+            }
+        }
+        
+        // Logout function
+        function logout() {
+            if (confirm('Apakah Anda yakin ingin logout?')) {
+                dataManager.authManager.logout();
+                updateUIForLoginStatus();
+                
+                // Reload gallery and announcements to hide admin controls
+                loadGallery();
+                loadAnnouncements();
+                
+                // If on admin page, show login prompt
+                if (document.getElementById('admin').style.display === 'block') {
+                    adminLoginPrompt.style.display = 'block';
+                    adminPanelContent.style.display = 'none';
+                }
+                
+                // If on gallery page, show user view
+                if (document.getElementById('gallery').style.display === 'block') {
+                    galleryAdminControls.style.display = 'none';
+                    galleryUserView.style.display = 'block';
+                }
+            }
+        }
+        
+        // Change password
+        function changePassword() {
+            const current = currentPassword.value;
+            const newPass = newPassword.value;
+            const confirm = confirmPassword.value;
+            
+            if (!current || !newPass || !confirm) {
+                alert('Semua field harus diisi!');
+                return;
+            }
+            
+            if (newPass !== confirm) {
+                alert('Password baru dan konfirmasi password tidak sama!');
+                return;
+            }
+            
+            const result = dataManager.authManager.changePassword(current, newPass);
+            
+            if (result.success) {
+                alert('Password berhasil diubah!');
+                currentPassword.value = '';
+                newPassword.value = '';
+                confirmPassword.value = '';
+            } else {
+                alert('Error: ' + result.message);
+            }
+        }
+        
+        // Setup event listeners
+        function setupEventListeners() {
+            // Mobile menu toggle
+            mobileMenuBtn.addEventListener('click', () => {
+                mainNav.classList.toggle('active');
+                const icon = mobileMenuBtn.querySelector('i');
+                if (mainNav.classList.contains('active')) {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-times');
+                } else {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+            });
+            
+            // Navigation between pages
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    
+                    // Get the page to show
+                    const pageId = link.getAttribute('data-page');
+                    
+                    // Check if trying to access admin page without login
+                    if (pageId === 'admin' && !dataManager.authManager.isLoggedIn()) {
+                        showLoginModal();
+                        return;
+                    }
+                    
+                    // Update active nav link
+                    navLinks.forEach(navLink => navLink.classList.remove('active'));
+                    link.classList.add('active');
+                    
+                    // Hide all page sections
+                    pageSections.forEach(section => {
+                        section.style.display = 'none';
+                    });
+                    
+                    // Show selected page
+                    if (pageId === 'home') {
+                        document.getElementById('about').style.display = 'block';
+                    } else {
+                        document.getElementById(pageId).style.display = 'block';
+                    }
+                    
+                    // Close mobile menu if open
+                    if (mainNav.classList.contains('active')) {
+                        mainNav.classList.remove('active');
+                        const icon = mobileMenuBtn.querySelector('i');
+                        icon.classList.remove('fa-times');
+                        icon.classList.add('fa-bars');
+                    }
+                    
+                    // Scroll to top of the page
+                    window.scrollTo(0, 0);
+                });
+            });
+            
+            // Login button
+            loginBtn.addEventListener('click', login);
+            
+            // Login on Enter key
+            usernameInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') login();
+            });
+            
+            passwordInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') login();
+            });
+            
+            // Logout link
+            logoutLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                logout();
+            });
+            
+            // Request admin access (from gallery)
+            requestAdminAccessBtn.addEventListener('click', () => {
+                showLoginModal();
+            });
+            
+            // Login to admin panel
+            loginToAdminBtn.addEventListener('click', () => {
+                showLoginModal();
+            });
+            
+            // Admin logout button
+            adminLogoutBtn.addEventListener('click', logout);
+            
+            // Add gallery image (only for admin)
+            addGalleryImageBtn.addEventListener('click', () => {
+                if (dataManager.authManager.isAdmin()) {
+                    resetImageForm();
+                    imageModal.style.display = 'flex';
+                } else {
+                    alert('Hanya admin yang dapat menambah gambar!');
+                }
+            });
+            
+            // Update hero background
+            updateHeroBgBtn.addEventListener('click', () => {
+                const url = heroBackgroundUrl.value;
+                if (url) {
+                    const data = dataManager.loadData();
+                    data.hero.backgroundUrl = url;
+                    dataManager.updateHero(data.hero);
+                    
+                    // Update hero background
+                    heroSection.style.setProperty('--hero-bg-url', `url('${url}')`);
+                    
+                    alert('Background hero berhasil diperbarui!');
+                }
+            });
+            
+            // Update hero content
+            updateHeroContentBtn.addEventListener('click', () => {
+                const title = heroTitleInput.value;
+                const description = heroDescriptionInput.value;
+                
+                if (title && description) {
+                    const data = dataManager.loadData();
+                    data.hero.title = title;
+                    data.hero.description = description;
+                    dataManager.updateHero(data.hero);
+                    
+                    // Update hero content
+                    heroTitle.textContent = title;
+                    heroDescription.textContent = description;
+                    
+                    alert('Konten hero berhasil diperbarui!');
+                }
+            });
+            
+            // Update about content
+            updateAboutContentBtn.addEventListener('click', () => {
+                const classProfile = classProfileInput.value;
+                const visionMission = visionMissionInput.value;
+                const teachers = teachersInput.value;
+                
+                if (classProfile && visionMission && teachers) {
+                    const aboutData = {
+                        classProfile,
+                        visionMission,
+                        teachers
+                    };
+                    
+                    dataManager.updateAbout(aboutData);
+                    
+                    // Update about content
+                    document.getElementById('classProfile').innerHTML = classProfile;
+                    document.getElementById('visionMission').innerHTML = visionMission;
+                    document.getElementById('teachers').innerHTML = teachers.replace(/\n/g, '<br>');
+                    
+                    alert('Konten tentang berhasil diperbarui!');
+                }
+            });
+            
+            // Add announcement (only for admin)
+            addAnnouncementBtn.addEventListener('click', () => {
+                if (!dataManager.authManager.isAdmin()) {
+                    alert('Hanya admin yang dapat menambah pengumuman!');
+                    return;
+                }
+                
+                const title = prompt('Masukkan judul pengumuman:');
+                if (!title) return;
+                
+                const content = prompt('Masukkan isi pengumuman:');
+                if (!content) return;
+                
+                const result = dataManager.addAnnouncement({ title, content });
+                if (result.success) {
+                    loadAnnouncements();
+                    alert('Pengumuman berhasil ditambahkan!');
+                } else {
+                    alert('Gagal menambah pengumuman: ' + result.message);
+                }
+            });
+            
+            // Change password
+            changePasswordBtn.addEventListener('click', changePassword);
+            
+            // Export data
+            exportDataBtn.addEventListener('click', () => {
+                dataManager.exportData();
+                alert('Data berhasil diekspor!');
+            });
+            
+            // Import data
+            importDataBtn.addEventListener('click', () => {
+                importFileInput.click();
+            });
+            
+            importFileInput.addEventListener('change', (e) => {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = (event) => {
+                        const result = dataManager.importData(event.target.result);
+                        if (result.success) {
+                            // Reload all data
+                            initPage();
+                            alert('Data berhasil diimpor!');
+                        } else {
+                            alert('Gagal mengimpor data: ' + result.message);
+                        }
+                    };
+                    reader.readAsText(file);
+                }
+                // Reset input
+                importFileInput.value = '';
+            });
+            
+            // Image modal controls
+            closeImageModal.addEventListener('click', () => {
+                imageModal.style.display = 'none';
+                resetImageForm();
+            });
+            
+            cancelImage.addEventListener('click', () => {
+                imageModal.style.display = 'none';
+                resetImageForm();
+            });
+            
+            // Save image
+            saveImageBtn.addEventListener('click', () => {
+                const url = document.getElementById('imageUrl').value;
+                const title = document.getElementById('imageTitle').value;
+                const description = document.getElementById('imageDescription').value;
+                const editingId = document.getElementById('editingImageId').value;
+                
+                if (!url || !title) {
+                    alert('URL dan judul gambar harus diisi!');
+                    return;
+                }
+                
+                const imageData = {
+                    url,
+                    title,
+                    description
+                };
+                
+                let result;
+                if (editingId) {
+                    // Update existing image
+                    result = dataManager.updateGalleryImage(editingId, imageData);
+                } else {
+                    // Add new image
+                    result = dataManager.addGalleryImage(imageData);
+                }
+                
+                if (result.success) {
+                    // Reload gallery
+                    loadGallery();
+                    
+                    // Close modal and reset form
+                    imageModal.style.display = 'none';
+                    resetImageForm();
+                    
+                    alert('Gambar berhasil disimpan!');
+                } else {
+                    alert('Gagal menyimpan gambar: ' + result.message);
+                }
+            });
+            
+            // Quiz functionality
+            setupQuiz();
+            
+            // Back to top button
+            setupBackToTop();
+            
+            // Smooth scrolling
+            setupSmoothScrolling();
+            
+            // Close login modal when clicking outside
+            loginModal.addEventListener('click', (e) => {
+                if (e.target === loginModal) {
+                    hideLoginModal();
+                }
+            });
+        }
+        
+        // Reset image form
+        function resetImageForm() {
+            document.getElementById('imageUrl').value = '';
+            document.getElementById('imageTitle').value = '';
+            document.getElementById('imageDescription').value = '';
+            document.getElementById('editingImageId').value = '';
+        }
+        
+        // Quiz setup
+        function setupQuiz() {
+            const quizOptions = document.querySelectorAll('.quiz-option');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const submitBtn = document.getElementById('submitBtn');
+            const quizResult = document.getElementById('quizResult');
+            const correctAnswersEl = document.getElementById('correctAnswers');
+            const scoreMessage = document.getElementById('scoreMessage');
+            const restartQuizBtn = document.getElementById('restartQuiz');
+            
+            // Handle quiz option selection
+            quizOptions.forEach(option => {
+                option.addEventListener('click', () => {
+                    // Remove selected class from all options in current question
+                    const currentQuestionEl = document.getElementById(`question${currentQuestion}`);
+                    const optionsInQuestion = currentQuestionEl.querySelectorAll('.quiz-option');
+                    optionsInQuestion.forEach(opt => opt.classList.remove('selected'));
+                    
+                    // Add selected class to clicked option
+                    option.classList.add('selected');
+                    
+                    // Store user answer
+                    userAnswers[currentQuestion] = option.getAttribute('data-option');
+                });
+            });
+            
+            // Next button functionality
+            nextBtn.addEventListener('click', () => {
+                if (currentQuestion < totalQuestions) {
+                    // Hide current question
+                    document.getElementById(`question${currentQuestion}`).style.display = 'none';
+                    
+                    // Show next question
+                    currentQuestion++;
+                    document.getElementById(`question${currentQuestion}`).style.display = 'block';
+                    
+                    // Update button visibility
+                    prevBtn.style.display = 'inline-block';
+                    
+                    if (currentQuestion === totalQuestions) {
+                        nextBtn.style.display = 'none';
+                        submitBtn.style.display = 'inline-block';
+                    }
+                    
+                    // Restore selected answer for this question if exists
+                    if (userAnswers[currentQuestion]) {
+                        const currentQuestionEl = document.getElementById(`question${currentQuestion}`);
+                        const optionToSelect = currentQuestionEl.querySelector(`.quiz-option[data-option="${userAnswers[currentQuestion]}"]`);
+                        if (optionToSelect) {
+                            const optionsInQuestion = currentQuestionEl.querySelectorAll('.quiz-option');
+                            optionsInQuestion.forEach(opt => opt.classList.remove('selected'));
+                            optionToSelect.classList.add('selected');
+                        }
+                    }
+                }
+            });
+            
+            // Previous button functionality
+            prevBtn.addEventListener('click', () => {
+                if (currentQuestion > 1) {
+                    // Hide current question
+                    document.getElementById(`question${currentQuestion}`).style.display = 'none';
+                    
+                    // Show previous question
+                    currentQuestion--;
+                    document.getElementById(`question${currentQuestion}`).style.display = 'block';
+                    
+                    // Update button visibility
+                    nextBtn.style.display = 'inline-block';
+                    submitBtn.style.display = 'none';
+                    
+                    if (currentQuestion === 1) {
+                        prevBtn.style.display = 'none';
+                    }
+                    
+                    // Restore selected answer for this question if exists
+                    if (userAnswers[currentQuestion]) {
+                        const currentQuestionEl = document.getElementById(`question${currentQuestion}`);
+                        const optionToSelect = currentQuestionEl.querySelector(`.quiz-option[data-option="${userAnswers[currentQuestion]}"]`);
+                        if (optionToSelect) {
+                            const optionsInQuestion = currentQuestionEl.querySelectorAll('.quiz-option');
+                            optionsInQuestion.forEach(opt => opt.classList.remove('selected'));
+                            optionToSelect.classList.add('selected');
+                        }
+                    }
+                }
+            });
+            
+            // Submit quiz functionality
+            submitBtn.addEventListener('click', () => {
+                // Calculate score
+                score = 0;
+                for (let i = 1; i <= totalQuestions; i++) {
+                    const userAnswer = userAnswers[i];
+                    if (userAnswer) {
+                        const questionEl = document.getElementById(`question${i}`);
+                        const selectedOption = questionEl.querySelector(`.quiz-option[data-option="${userAnswer}"]`);
+                        if (selectedOption && selectedOption.hasAttribute('data-correct')) {
+                            score++;
+                        }
+                    }
+                }
+                
+                // Show result
+                document.getElementById('quizContainer').style.display = 'none';
+                document.querySelector('.quiz-actions').style.display = 'none';
+                quizResult.style.display = 'block';
+                correctAnswersEl.textContent = score;
+                
+                // Set score message
+                if (score === totalQuestions) {
+                    scoreMessage.textContent = "Hebat! Kamu menjawab semua pertanyaan dengan benar!";
+                    scoreMessage.style.color = "var(--secondary-color)";
+                } else if (score >= totalQuestions / 2) {
+                    scoreMessage.textContent = "Bagus! Kamu sudah memahami materi dengan cukup baik.";
+                    scoreMessage.style.color = "var(--primary-color)";
+                } else {
+                    scoreMessage.textContent = "Jangan menyerah! Pelajari lagi materinya dan coba lagi.";
+                    scoreMessage.style.color = "#e74c3c";
+                }
+            });
+            
+            // Restart quiz functionality
+            restartQuizBtn.addEventListener('click', () => {
+                // Reset variables
+                currentQuestion = 1;
+                score = 0;
+                
+                // Clear user answers
+                for (let key in userAnswers) {
+                    delete userAnswers[key];
+                }
+                
+                // Reset UI
+                document.getElementById('quizContainer').style.display = 'block';
+                document.querySelector('.quiz-actions').style.display = 'block';
+                quizResult.style.display = 'none';
+                
+                // Show first question, hide others
+                for (let i = 1; i <= totalQuestions; i++) {
+                    if (i === 1) {
+                        document.getElementById(`question${i}`).style.display = 'block';
+                    } else {
+                        document.getElementById(`question${i}`).style.display = 'none';
+                    }
+                    
+                    // Clear selection
+                    const questionEl = document.getElementById(`question${i}`);
+                    const optionsInQuestion = questionEl.querySelectorAll('.quiz-option');
+                    optionsInQuestion.forEach(opt => opt.classList.remove('selected'));
+                }
+                
+                // Reset buttons
+                prevBtn.style.display = 'none';
+                nextBtn.style.display = 'inline-block';
+                submitBtn.style.display = 'none';
+            });
+        }
+        
+        // Back to top button
+        function setupBackToTop() {
+            const backToTop = document.getElementById('backToTop');
+            
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 300) {
+                    backToTop.classList.add('show');
+                } else {
+                    backToTop.classList.remove('show');
+                }
+            });
+            
+            backToTop.addEventListener('click', (e) => {
+                e.preventDefault();
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        }
+        
+        // Smooth scrolling
+        function setupSmoothScrolling() {
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    if (this.getAttribute('href') === '#') return;
+                    
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        }
+        
+        // Initialize the page when DOM is loaded
+        document.addEventListener('DOMContentLoaded', initPage);
     </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9a5dad45434981b9',t:'MTc2NDM3Mjg3NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</body>
 </html>
