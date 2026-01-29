@@ -1,0 +1,2556 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Kelas 6 - Sekolah Dasar</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Fredoka+One&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2ecc71;
+            --accent-color: #f39c12;
+            --dark-color: #2c3e50;
+            --light-color: #ecf0f1;
+            --text-color: #333;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: #f8f9fa;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo i {
+            font-size: 2rem;
+        }
+        
+        .logo h1 {
+            font-family: 'Fredoka One', cursive;
+            font-size: 1.8rem;
+        }
+        
+        .logo span {
+            color: var(--accent-color);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 0;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        nav ul li a:hover {
+            color: var(--accent-color);
+        }
+        
+        nav ul li a.active {
+            color: var(--accent-color);
+        }
+        
+        nav ul li a.active::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 3px;
+            background-color: var(--accent-color);
+            bottom: -5px;
+            left: 0;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(52, 152, 219, 0.8), rgba(46, 204, 113, 0.8)), var(--hero-bg-url, url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'));
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 5rem 0;
+            text-align: center;
+            transition: background-image 0.5s ease;
+        }
+        
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-family: 'Fredoka One', cursive;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: #e67e22;
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }
+        
+        .btn-secondary {
+            background-color: var(--primary-color);
+        }
+        
+        .btn-secondary:hover {
+            background-color: #2980b9;
+        }
+        
+        .btn-danger {
+            background-color: #e74c3c;
+        }
+        
+        .btn-danger:hover {
+            background-color: #c0392b;
+        }
+        
+        .btn-success {
+            background-color: var(--secondary-color);
+        }
+        
+        .btn-success:hover {
+            background-color: #27ae60;
+        }
+        
+        /* Main Content */
+        main {
+            padding: 3rem 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--dark-color);
+            position: relative;
+        }
+        
+        .section-title h2 {
+            font-size: 2.2rem;
+            font-family: 'Fredoka One', cursive;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 4px;
+            background-color: var(--accent-color);
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        /* Cards */
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .card-header {
+            padding: 1.5rem;
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+        }
+        
+        .card-header i {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .card-body {
+            padding: 1.5rem;
+        }
+        
+        .card-body h3 {
+            margin-bottom: 1rem;
+            color: var(--dark-color);
+        }
+        
+        /* Gallery */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+        
+        .gallery-item {
+            border-radius: 10px;
+            overflow: hidden;
+            height: 200px;
+            position: relative;
+            box-shadow: var(--shadow);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        .gallery-item .overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 10px;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .gallery-item:hover .overlay {
+            transform: translateY(0);
+        }
+        
+        .gallery-item .admin-actions {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            display: flex;
+            gap: 5px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .gallery-item:hover .admin-actions {
+            opacity: 1;
+        }
+        
+        .gallery-item .admin-actions button {
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        .gallery-item .admin-actions button:hover {
+            background-color: rgba(231, 76, 60, 0.9);
+        }
+        
+        /* Schedule */
+        .schedule {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            margin-bottom: 3rem;
+            overflow-x: auto;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        th, td {
+            padding: 1rem;
+            text-align: center;
+            border-bottom: 1px solid #eee;
+        }
+        
+        th {
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: 600;
+        }
+        
+        tr:hover {
+            background-color: #f9f9f9;
+        }
+        
+        /* Announcements */
+        .announcements {
+            margin-bottom: 3rem;
+        }
+        
+        .announcement {
+            background-color: white;
+            border-left: 5px solid var(--secondary-color);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-radius: 5px;
+            box-shadow: var(--shadow);
+        }
+        
+        .announcement h4 {
+            color: var(--dark-color);
+            margin-bottom: 0.5rem;
+        }
+        
+        .announcement .date {
+            color: #777;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+        
+        /* Quiz Section */
+        .quiz-section {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            margin-bottom: 3rem;
+        }
+        
+        .quiz-question {
+            margin-bottom: 2rem;
+        }
+        
+        .quiz-options {
+            margin-bottom: 1.5rem;
+        }
+        
+        .quiz-option {
+            background-color: #f8f9fa;
+            padding: 1rem;
+            margin-bottom: 0.8rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        
+        .quiz-option:hover {
+            background-color: #e9ecef;
+        }
+        
+        .quiz-option.selected {
+            border-color: var(--primary-color);
+            background-color: #e3f2fd;
+        }
+        
+        .quiz-result {
+            display: none;
+            text-align: center;
+            padding: 2rem;
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            margin-top: 2rem;
+        }
+        
+        .quiz-result h3 {
+            color: var(--dark-color);
+            margin-bottom: 1rem;
+        }
+        
+        /* Admin Panel */
+        .admin-panel {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            margin-bottom: 3rem;
+        }
+        
+        .admin-panel h3 {
+            margin-bottom: 1.5rem;
+            color: var(--dark-color);
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--primary-color);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--dark-color);
+        }
+        
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+        }
+        
+        .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        
+        .info-box {
+            background-color: #e8f4fc;
+            border-left: 4px solid var(--primary-color);
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            border-radius: 5px;
+        }
+        
+        .info-box h4 {
+            margin-bottom: 0.5rem;
+            color: var(--dark-color);
+        }
+        
+        /* Login Modal */
+        .login-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .login-content {
+            background-color: white;
+            padding: 2.5rem;
+            border-radius: 10px;
+            max-width: 400px;
+            width: 90%;
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+        
+        .login-content h2 {
+            color: var(--dark-color);
+            margin-bottom: 1.5rem;
+            font-family: 'Fredoka One', cursive;
+        }
+        
+        .login-content .logo {
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+        
+        .login-error {
+            background-color: #ffeaea;
+            color: #e74c3c;
+            padding: 0.8rem;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+            display: none;
+        }
+        
+        .login-success {
+            background-color: #e8f6ef;
+            color: var(--secondary-color);
+            padding: 0.8rem;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+            display: none;
+        }
+        
+        /* Admin Controls */
+        .admin-controls {
+            background-color: #f8f9fa;
+            padding: 1rem;
+            border-radius: 5px;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid var(--accent-color);
+        }
+        
+        .admin-controls h4 {
+            margin-bottom: 0.5rem;
+            color: var(--dark-color);
+        }
+        
+        .admin-controls p {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+        
+        .logout-btn {
+            background-color: #95a5a6;
+            margin-left: 10px;
+        }
+        
+        .logout-btn:hover {
+            background-color: #7f8c8d;
+        }
+        
+        /* User Status */
+        .user-status {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: white;
+            font-size: 0.9rem;
+        }
+        
+        .user-status.admin {
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 3rem 0 1.5rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent-color);
+            font-family: 'Fredoka One', cursive;
+        }
+        
+        .footer-column p {
+            margin-bottom: 1rem;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-column ul li a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-column ul li a:hover {
+            color: var(--accent-color);
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .social-icons a:hover {
+            background-color: var(--accent-color);
+            transform: translateY(-5px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+        
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background-color: var(--accent-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            box-shadow: var(--shadow);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 999;
+        }
+        
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .back-to-top:hover {
+            background-color: #e67e22;
+        }
+        
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1001;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .modal-header h3 {
+            color: var(--dark-color);
+        }
+        
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #777;
+        }
+        
+        .modal-close:hover {
+            color: #e74c3c;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero h2 {
+                font-size: 2rem;
+            }
+            
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-wrap: wrap;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            nav {
+                width: 100%;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.5s ease;
+            }
+            
+            nav.active {
+                max-height: 300px;
+                margin-top: 1rem;
+            }
+            
+            nav ul {
+                flex-direction: column;
+            }
+            
+            nav ul li {
+                margin-left: 0;
+                margin-bottom: 1rem;
+            }
+            
+            .hero {
+                padding: 3rem 0;
+            }
+            
+            .hero h2 {
+                font-size: 1.8rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .user-status {
+                order: 3;
+                width: 100%;
+                margin-top: 1rem;
+                justify-content: center;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero h2 {
+                font-size: 1.6rem;
+            }
+            
+            .section-title h2 {
+                font-size: 1.5rem;
+            }
+            
+            .cards {
+                grid-template-columns: 1fr;
+            }
+            
+            .gallery {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Login Modal -->
+    <div id="loginModal" class="login-modal">
+        <div class="login-content">
+            <div class="logo">
+                <i class="fas fa-graduation-cap"></i>
+                <h1>Kelas <span>6</span></h1>
+            </div>
+            <h2>Login Admin</h2>
+            
+            <div id="loginError" class="login-error">
+                <i class="fas fa-exclamation-circle"></i> Username atau password salah!
+            </div>
+            
+            <div id="loginSuccess" class="login-success">
+                <i class="fas fa-check-circle"></i> Login berhasil!
+            </div>
+            
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" placeholder="Masukkan username" autocomplete="username">
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" placeholder="Masukkan password" autocomplete="current-password">
+            </div>
+            
+            <button id="loginBtn" class="btn" style="width: 100%;">Login</button>
+            
+            <div style="margin-top: 1.5rem; font-size: 0.9rem; color: #666;">
+                <p><strong>Default login:</strong></p>
+                <p>Username: <code>admin</code></p>
+                <p>Password: <code>kelas6</code></p>
+                <p style="margin-top: 0.5rem; color: #888; font-size: 0.8rem;">Ganti password di panel admin setelah login pertama</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-graduation-cap"></i>
+                    <h1>Kelas <span>6</span></h1>
+                </div>
+                
+                <div class="user-status" id="userStatus" style="display: none;">
+                    <i class="fas fa-user-shield"></i>
+                    <span>Admin</span>
+                </div>
+                
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+                
+                <nav id="mainNav">
+                    <ul>
+                        <li><a href="#" class="nav-link active" data-page="home">Beranda</a></li>
+                        <li><a href="#" class="nav-link" data-page="about">Tentang</a></li>
+                        <li><a href="#" class="nav-link" data-page="gallery">Galeri</a></li>
+                        <li><a href="#" class="nav-link" data-page="schedule">Jadwal</a></li>
+                        <li><a href="#" class="nav-link" data-page="announcements">Pengumuman</a></li>
+                        <li><a href="#" class="nav-link" data-page="quiz">Kuis</a></li>
+                        <li><a href="#" class="nav-link" data-page="admin" id="adminNavLink">Kelola</a></li>
+                        <li><a href="#" class="nav-link" id="logoutLink" style="display: none;">Logout</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h2 id="heroTitle">Selamat Datang di Website Kelas 6</h2>
+            <p id="heroDescription">Tempat belajar, berbagi, dan berkembang bersama. Website ini dibuat untuk mendukung kegiatan pembelajaran siswa kelas 6 dengan berbagai fitur interaktif yang menarik.</p>
+            <a href="#about" class="btn">Pelajari Lebih Lanjut</a>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- About Section -->
+        <section id="about" class="page-section">
+            <div class="section-title">
+                <h2>Tentang Kelas Kami</h2>
+            </div>
+            
+            <div class="cards">
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fas fa-users"></i>
+                        <h3>Profil Kelas</h3>
+                    </div>
+                    <div class="card-body">
+                        <p id="classProfile">Kelas 6 terdiri dari 28 siswa yang bersemangat dan kreatif. Kami adalah angkatan tahun 2023 dengan wali kelas Bapak/Ibu Guru Sari.</p>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fas fa-bullseye"></i>
+                        <h3>Visi & Misi</h3>
+                    </div>
+                    <div class="card-body">
+                        <p id="visionMission"><strong>Visi:</strong> Menjadi kelas unggulan dengan prestasi akademik dan non-akademik yang membanggakan.</p>
+                        <p><strong>Misi:</strong> Menciptakan lingkungan belajar yang kondusif, kreatif, dan penuh inovasi.</p>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                        <h3>Guru Kelas</h3>
+                    </div>
+                    <div class="card-body">
+                        <p id="teachers"><strong>Wali Kelas:</strong> Ibu Sari, S.Pd.</p>
+                        <p><strong>Guru Matematika:</strong> Bapak Budi, S.Pd.</p>
+                        <p><strong>Guru Bahasa Indonesia:</strong> Ibu Rini, S.Pd.</p>
+                        <p><strong>Guru IPA:</strong> Bapak Agus, S.Pd.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery Section -->
+        <section id="gallery" class="page-section" style="display: none;">
+            <div class="section-title">
+                <h2>Galeri Kegiatan</h2>
+            </div>
+            
+            <!-- Admin Controls (only visible when logged in) -->
+            <div id="galleryAdminControls" class="admin-controls" style="display: none;">
+                <h4><i class="fas fa-user-shield"></i> Kontrol Admin</h4>
+                <p>Anda dapat menambah dan menghapus gambar di galeri ini.</p>
+                <button id="addGalleryImage" class="btn btn-secondary">
+                    <i class="fas fa-plus"></i> Tambah Gambar
+                </button>
+                <button id="logoutGallery" class="btn logout-btn" style="display: none;">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+            </div>
+            
+            <div class="gallery" id="galleryContainer">
+                <!-- Gallery items will be loaded here -->
+            </div>
+            
+            <!-- Regular user view -->
+            <div id="galleryUserView" style="text-align: center; margin-top: 2rem;">
+                <p>Hanya admin yang dapat menambah atau menghapus gambar.</p>
+                <button id="requestAdminAccess" class="btn btn-secondary">
+                    <i class="fas fa-key"></i> Akses Admin
+                </button>
+            </div>
+        </section>
+
+        <!-- Schedule Section -->
+        <section id="schedule" class="page-section" style="display: none;">
+            <div class="section-title">
+                <h2>Jadwal Pelajaran</h2>
+            </div>
+            
+            <div class="schedule">
+                <table id="scheduleTable">
+                    <thead>
+                        <tr>
+                            <th>Hari</th>
+                            <th>Jam Ke-1</th>
+                            <th>Jam Ke-2</th>
+                            <th>Jam Ke-3</th>
+                            <th>Jam Ke-4</th>
+                            <th>Jam Ke-5</th>
+                        </tr>
+                    </thead>
+                    <tbody id="scheduleBody">
+                        <!-- Schedule will be loaded here -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Announcements Section -->
+        <section id="announcements" class="page-section" style="display: none;">
+            <div class="section-title">
+                <h2>Pengumuman Terbaru</h2>
+            </div>
+            
+            <div class="announcements" id="announcementsContainer">
+                <!-- Announcements will be loaded here -->
+            </div>
+            
+            <!-- Admin controls for announcements -->
+            <div id="announcementsAdminControls" class="admin-controls" style="display: none; text-align: center;">
+                <h4><i class="fas fa-user-shield"></i> Kontrol Admin</h4>
+                <p>Anda dapat menambah dan menghapus pengumuman.</p>
+                <button id="addAnnouncement" class="btn btn-secondary">
+                    <i class="fas fa-plus"></i> Tambah Pengumuman
+                </button>
+            </div>
+        </section>
+
+        <!-- Quiz Section -->
+        <section id="quiz" class="page-section" style="display: none;">
+            <div class="section-title">
+                <h2>Kuis Interaktif</h2>
+            </div>
+            
+            <div class="quiz-section">
+                <div class="quiz-question">
+                    <h3>Kuis Matematika Kelas 6</h3>
+                    <p>Jawablah pertanyaan berikut untuk menguji pengetahuan matematika kamu!</p>
+                </div>
+                
+                <div id="quizContainer">
+                    <div class="quiz-question" id="question1">
+                        <h4>Pertanyaan 1: Berapakah hasil dari 125 ÷ 5 + 12 × 3?</h4>
+                        <div class="quiz-options">
+                            <div class="quiz-option" data-option="1" data-correct="true">61</div>
+                            <div class="quiz-option" data-option="2">55</div>
+                            <div class="quiz-option" data-option="3">49</div>
+                            <div class="quiz-option" data-option="4">67</div>
+                        </div>
+                    </div>
+                    
+                    <div class="quiz-question" id="question2" style="display: none;">
+                        <h4>Pertanyaan 2: Sebuah persegi panjang memiliki panjang 15 cm dan lebar 8 cm. Berapakah luasnya?</h4>
+                        <div class="quiz-options">
+                            <div class="quiz-option" data-option="1">100 cm²</div>
+                            <div class="quiz-option" data-option="2" data-correct="true">120 cm²</div>
+                            <div class="quiz-option" data-option="3">130 cm²</div>
+                            <div class="quiz-option" data-option="4">140 cm²</div>
+                        </div>
+                    </div>
+                    
+                    <div class="quiz-question" id="question3" style="display: none;">
+                        <h4>Pertanyaan 3: Pak Anton membeli 3,5 kg apel. Jika harga apel Rp 25.000 per kg, berapa total yang harus dibayar Pak Anton?</h4>
+                        <div class="quiz-options">
+                            <div class="quiz-option" data-option="1">Rp 75.000</div>
+                            <div class="quiz-option" data-option="2">Rp 82.500</div>
+                            <div class="quiz-option" data-option="3" data-correct="true">Rp 87.500</div>
+                            <div class="quiz-option" data-option="4">Rp 90.000</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="quiz-actions">
+                    <button id="prevBtn" class="btn" style="display: none; margin-right: 10px;">Sebelumnya</button>
+                    <button id="nextBtn" class="btn">Selanjutnya</button>
+                    <button id="submitBtn" class="btn" style="display: none; background-color: var(--secondary-color);">Kirim Jawaban</button>
+                </div>
+                
+                <div class="quiz-result" id="quizResult">
+                    <h3>Hasil Kuis</h3>
+                    <p id="scoreText">Kamu menjawab benar <span id="correctAnswers">0</span> dari 3 pertanyaan.</p>
+                    <p id="scoreMessage"></p>
+                    <button id="restartQuiz" class="btn">Mulai Lagi</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Admin Section -->
+        <section id="admin" class="page-section" style="display: none;">
+            <div class="section-title">
+                <h2>Panel Admin</h2>
+            </div>
+            
+            <!-- Login Prompt for Admin Section -->
+            <div id="adminLoginPrompt" class="admin-panel" style="text-align: center;">
+                <div class="info-box">
+                    <h4><i class="fas fa-lock"></i> Akses Terbatas</h4>
+                    <p>Panel admin hanya dapat diakses oleh administrator website.</p>
+                    <p>Silakan login terlebih dahulu untuk mengelola konten website.</p>
+                </div>
+                
+                <button id="loginToAdmin" class="btn">
+                    <i class="fas fa-sign-in-alt"></i> Login sebagai Admin
+                </button>
+                
+                <div style="margin-top: 2rem; text-align: left; background-color: #f8f9fa; padding: 1.5rem; border-radius: 5px;">
+                    <h4>Default Login:</h4>
+                    <p><strong>Username:</strong> admin</p>
+                    <p><strong>Password:</strong> kelas6</p>
+                    <p style="margin-top: 1rem; font-size: 0.9rem; color: #666;">
+                        <i class="fas fa-info-circle"></i> Disarankan untuk mengganti password setelah login pertama.
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Admin Panel Content (only visible when logged in) -->
+            <div id="adminPanelContent" class="admin-panel" style="display: none;">
+                <div class="admin-controls">
+                    <h4><i class="fas fa-user-shield"></i> Selamat Datang, Admin!</h4>
+                    <p>Anda login sebagai administrator. Hati-hati dalam mengubah konten website.</p>
+                    <button id="adminLogoutBtn" class="btn logout-btn">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </button>
+                </div>
+                
+                <div class="info-box">
+                    <h4><i class="fas fa-info-circle"></i> Cara Menggunakan Google Drive</h4>
+                    <p>1. Upload gambar ke Google Drive</p>
+                    <p>2. Klik kanan pada gambar, pilih "Dapatkan link berbagi"</p>
+                    <p>3. Ubah izin akses menjadi "Siapa saja dengan link dapat melihat"</p>
+                    <p>4. Copy link dan paste di form di bawah ini</p>
+                    <p>5. Format link: <code>https://drive.google.com/uc?id=FILE_ID</code></p>
+                </div>
+                
+                <div class="form-group">
+                    <label for="heroBackgroundUrl">URL Background Hero (dari Google Drive)</label>
+                    <input type="text" id="heroBackgroundUrl" placeholder="https://drive.google.com/uc?id=FILE_ID">
+                    <button id="updateHeroBg" class="btn" style="margin-top: 10px;">Update Background Hero</button>
+                </div>
+                
+                <div class="form-group">
+                    <label for="heroTitleInput">Judul Hero</label>
+                    <input type="text" id="heroTitleInput" placeholder="Masukkan judul hero">
+                </div>
+                
+                <div class="form-group">
+                    <label for="heroDescriptionInput">Deskripsi Hero</label>
+                    <textarea id="heroDescriptionInput" rows="3" placeholder="Masukkan deskripsi hero"></textarea>
+                </div>
+                
+                <button id="updateHeroContent" class="btn" style="margin-bottom: 2rem;">Update Konten Hero</button>
+                
+                <h3>Kelola Konten Lainnya</h3>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="classProfileInput">Profil Kelas</label>
+                        <textarea id="classProfileInput" rows="4" placeholder="Masukkan profil kelas"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="visionMissionInput">Visi & Misi</label>
+                        <textarea id="visionMissionInput" rows="4" placeholder="Masukkan visi dan misi"></textarea>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="teachersInput">Data Guru</label>
+                    <textarea id="teachersInput" rows="4" placeholder="Masukkan data guru (pisahkan dengan baris baru)"></textarea>
+                </div>
+                
+                <button id="updateAboutContent" class="btn">Update Konten Tentang</button>
+                
+                <div style="margin-top: 3rem; padding-top: 2rem; border-top: 2px solid #eee;">
+                    <h3>Ganti Password Admin</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="currentPassword">Password Saat Ini</label>
+                            <input type="password" id="currentPassword" placeholder="Masukkan password saat ini">
+                        </div>
+                        <div class="form-group">
+                            <label for="newPassword">Password Baru</label>
+                            <input type="password" id="newPassword" placeholder="Masukkan password baru">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmPassword">Konfirmasi Password Baru</label>
+                        <input type="password" id="confirmPassword" placeholder="Konfirmasi password baru">
+                    </div>
+                    <button id="changePassword" class="btn btn-success">
+                        <i class="fas fa-key"></i> Ganti Password
+                    </button>
+                </div>
+                
+                <div style="margin-top: 3rem; padding-top: 2rem; border-top: 2px solid #eee;">
+                    <h3>Ekspor/Impor Data</h3>
+                    <p style="margin-bottom: 1rem;">Simpan data Anda untuk cadangan atau transfer ke komputer lain:</p>
+                    <div class="form-row">
+                        <button id="exportData" class="btn btn-secondary">
+                            <i class="fas fa-download"></i> Ekspor Data ke File
+                        </button>
+                        <button id="importData" class="btn btn-secondary">
+                            <i class="fas fa-upload"></i> Impor Data dari File
+                        </button>
+                    </div>
+                    <input type="file" id="importFileInput" accept=".json" style="display: none;">
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Kelas 6</h3>
+                    <p>Website resmi untuk kelas 6 Sekolah Dasar. Tempat untuk belajar, berbagi, dan berkembang bersama.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Kontak</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Jl. Pendidikan No. 123, Jakarta</p>
+                    <p><i class="fas fa-phone"></i> (021) 1234-5678</p>
+                    <p><i class="fas fa-envelope"></i> kelas6@sekolahdasar.sch.id</p>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Tautan Cepat</h3>
+                    <ul>
+                        <li><a href="#" class="nav-link" data-page="home">Beranda</a></li>
+                        <li><a href="#" class="nav-link" data-page="about">Tentang Kelas</a></li>
+                        <li><a href="#" class="nav-link" data-page="gallery">Galeri Kegiatan</a></li>
+                        <li><a href="#" class="nav-link" data-page="schedule">Jadwal Pelajaran</a></li>
+                        <li><a href="#" class="nav-link" data-page="announcements">Pengumuman</a></li>
+                        <li><a href="#" class="nav-link" data-page="quiz">Kuis Interaktif</a></li>
+                        <li><a href="#" class="nav-link" data-page="admin">Panel Admin</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; <span id="currentYear">2023</span> Website Kelas 6. Semua Hak Dilindungi.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modals -->
+    <div id="imageModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Tambah/Edit Gambar Galeri</h3>
+                <button class="modal-close" id="closeImageModal">&times;</button>
+            </div>
+            <div class="form-group">
+                <label for="imageUrl">URL Gambar (dari Google Drive)</label>
+                <input type="text" id="imageUrl" placeholder="https://drive.google.com/uc?id=FILE_ID">
+                <small>Format: https://drive.google.com/uc?id=FILE_ID</small>
+            </div>
+            <div class="form-group">
+                <label for="imageTitle">Judul Gambar</label>
+                <input type="text" id="imageTitle" placeholder="Kegiatan Belajar di Kelas">
+            </div>
+            <div class="form-group">
+                <label for="imageDescription">Deskripsi (opsional)</label>
+                                <textarea id="imageDescription" rows="3" placeholder="Deskripsi singkat tentang gambar"></textarea>
+            </div>
+            <button id="saveImage" class="btn">Simpan Gambar</button>
+            <button id="cancelImage" class="btn btn-secondary" style="margin-left: 10px;">Batal</button>
+            <input type="hidden" id="editingImageId" value="">
+        </div>
+    </div>
+
+    <!-- Back to Top Button -->
+    <a href="#" class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <script>
+        // ==================== AUTHENTICATION SYSTEM ====================
+        class AuthManager {
+            constructor() {
+                this.currentUser = null;
+                this.initAdminCredentials();
+                this.loadSession();
+            }
+            
+            initAdminCredentials() {
+                const defaultCredentials = {
+                    username: 'admin',
+                    password: 'kelas6',
+                    role: 'admin',
+                    lastLogin: null
+                };
+                
+                if (!localStorage.getItem('adminCredentials')) {
+                    localStorage.setItem('adminCredentials', JSON.stringify(defaultCredentials));
+                }
+            }
+            
+            getCredentials() {
+                return JSON.parse(localStorage.getItem('adminCredentials')) || {};
+            }
+            
+            saveCredentials(credentials) {
+                localStorage.setItem('adminCredentials', JSON.stringify(credentials));
+            }
+            
+            login(username, password) {
+                const credentials = this.getCredentials();
+                
+                if (username === credentials.username && password === credentials.password) {
+                    this.currentUser = {
+                        username: credentials.username,
+                        role: credentials.role,
+                        loginTime: new Date().toISOString()
+                    };
+                    
+                    // Update last login
+                    credentials.lastLogin = new Date().toISOString();
+                    this.saveCredentials(credentials);
+                    
+                    // Save session
+                    this.saveSession();
+                    
+                    return { success: true, user: this.currentUser };
+                }
+                
+                return { success: false, message: 'Username atau password salah' };
+            }
+            
+            logout() {
+                this.currentUser = null;
+                localStorage.removeItem('userSession');
+                return { success: true };
+            }
+            
+            isLoggedIn() {
+                return this.currentUser !== null;
+            }
+            
+            isAdmin() {
+                return this.currentUser && this.currentUser.role === 'admin';
+            }
+            
+            saveSession() {
+                if (this.currentUser) {
+                    const session = {
+                        user: this.currentUser,
+                        expires: new Date(Date.now() + 24 * 60 * 60 * 1000) // 24 hours
+                    };
+                    localStorage.setItem('userSession', JSON.stringify(session));
+                }
+            }
+            
+            loadSession() {
+                const sessionData = localStorage.getItem('userSession');
+                if (sessionData) {
+                    const session = JSON.parse(sessionData);
+                    const now = new Date();
+                    const expires = new Date(session.expires);
+                    
+                    if (now < expires) {
+                        this.currentUser = session.user;
+                        return true;
+                    } else {
+                        // Session expired
+                        localStorage.removeItem('userSession');
+                        return false;
+                    }
+                }
+                return false;
+            }
+            
+            changePassword(currentPassword, newPassword) {
+                const credentials = this.getCredentials();
+                
+                if (currentPassword !== credentials.password) {
+                    return { success: false, message: 'Password saat ini salah' };
+                }
+                
+                if (newPassword.length < 4) {
+                    return { success: false, message: 'Password baru harus minimal 4 karakter' };
+                }
+                
+                credentials.password = newPassword;
+                this.saveCredentials(credentials);
+                
+                return { success: true, message: 'Password berhasil diubah' };
+            }
+        }
+
+        // ==================== DATA MANAGER ====================
+        class DataManager {
+            constructor() {
+                this.authManager = new AuthManager();
+                this.initData();
+                this.loadData();
+            }
+            
+            initData() {
+                const defaultData = {
+                    hero: {
+                        backgroundUrl: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
+                        title: 'Selamat Datang di Website Kelas 6',
+                        description: 'Tempat belajar, berbagi, dan berkembang bersama. Website ini dibuat untuk mendukung kegiatan pembelajaran siswa kelas 6 dengan berbagai fitur interaktif yang menarik.'
+                    },
+                    about: {
+                        classProfile: 'Kelas 6 terdiri dari 28 siswa yang bersemangat dan kreatif. Kami adalah angkatan tahun 2023 dengan wali kelas Bapak/Ibu Guru Sari.',
+                        visionMission: '<strong>Visi:</strong> Menjadi kelas unggulan dengan prestasi akademik dan non-akademik yang membanggakan.',
+                        teachers: '<strong>Wali Kelas:</strong> Ibu Sari, S.Pd.\n<strong>Guru Matematika:</strong> Bapak Budi, S.Pd.\n<strong>Guru Bahasa Indonesia:</strong> Ibu Rini, S.Pd.\n<strong>Guru IPA:</strong> Bapak Agus, S.Pd.'
+                    },
+                    gallery: [
+                        {
+                            id: 1,
+                            url: 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80',
+                            title: 'Kegiatan Belajar di Kelas',
+                            description: 'Siswa sedang belajar bersama di dalam kelas'
+                        },
+                        {
+                            id: 2,
+                            url: 'https://images.unsplash.com/photo-1524178234883-043d5c3f3cf4?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80',
+                            title: 'Eksperimen IPA',
+                            description: 'Eksperimen sains di laboratorium sekolah'
+                        },
+                        {
+                            id: 3,
+                            url: 'https://images.unsplash.com/photo-1546410531-bb4caa6b424d?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80',
+                            title: 'Presentasi Kelompok',
+                            description: 'Siswa mempresentasikan hasil kerja kelompok'
+                        },
+                        {
+                            id: 4,
+                            url: 'https://images.unsplash.com/photo-1577896851231-70ef18881754?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80',
+                            title: 'Kegiatan Olahraga',
+                            description: 'Kegiatan olahraga di lapangan sekolah'
+                        },
+                        {
+                            id: 5,
+                            url: 'https://images.unsplash.com/photo-1546410531-bb4caa6b424d?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80',
+                            title: 'Pameran Karya Siswa',
+                            description: 'Pameran karya seni dan proyek siswa'
+                        },
+                        {
+                            id: 6,
+                            url: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80',
+                            title: 'Field Trip ke Museum',
+                            description: 'Kunjungan edukatif ke museum nasional'
+                        }
+                    ],
+                    schedule: [
+                        {hari: 'Senin', jam1: 'Matematika', jam2: 'IPA', jam3: 'Bahasa Indonesia', jam4: 'Olahraga', jam5: 'Seni Budaya'},
+                        {hari: 'Selasa', jam1: 'Bahasa Indonesia', jam2: 'Matematika', jam3: 'IPS', jam4: 'Pend. Kewarganegaraan', jam5: 'Bahasa Inggris'},
+                        {hari: 'Rabu', jam1: 'IPA', jam2: 'Matematika', jam3: 'Bahasa Indonesia', jam4: 'Pend. Agama', jam5: 'Praktikum IPA'},
+                        {hari: 'Kamis', jam1: 'Matematika', jam2: 'IPS', jam3: 'Bahasa Inggris', jam4: 'Seni Budaya', jam5: 'Pramuka'},
+                        {hari: 'Jumat', jam1: 'Bahasa Indonesia', jam2: 'IPA', jam3: 'Matematika', jam4: 'Pend. Kewarganegaraan', jam5: 'Kegiatan Jumat'}
+                    ],
+                    announcements: [
+                        {
+                            id: 1,
+                            title: 'Ujian Tengah Semester',
+                            date: '10 Oktober 2023',
+                            content: 'Ujian Tengah Semester akan dilaksanakan pada tanggal 15-20 Oktober 2023. Seluruh siswa diharapkan mempersiapkan diri dengan baik.'
+                        },
+                        {
+                            id: 2,
+                            title: 'Field Trip ke Museum',
+                            date: '5 Oktober 2023',
+                            content: 'Kelas 6 akan mengadakan field trip ke Museum Nasional pada tanggal 25 Oktober 2023. Biaya field trip sebesar Rp 50.000 per siswa.'
+                        },
+                        {
+                            id: 3,
+                            title: 'Lomba Mewarnai Tingkat Sekolah',
+                            date: '1 Oktober 2023',
+                            content: 'Akan diadakan lomba mewarnai untuk seluruh siswa kelas 6 pada tanggal 28 Oktober 2023. Pendaftaran dibuka hingga 20 Oktober 2023.'
+                        },
+                        {
+                            id: 4,
+                            title: 'Pembagian Rapor Tengah Semester',
+                            date: '28 September 2023',
+                            content: 'Pembagian rapor tengah semester akan dilaksanakan pada tanggal 5 November 2023. Orang tua/wali diharapkan hadir.'
+                        }
+                    ]
+                };
+                
+                if (!localStorage.getItem('class6Data')) {
+                    localStorage.setItem('class6Data', JSON.stringify(defaultData));
+                }
+            }
+            
+            loadData() {
+                return JSON.parse(localStorage.getItem('class6Data')) || {};
+            }
+            
+            saveData(data) {
+                localStorage.setItem('class6Data', JSON.stringify(data));
+            }
+            
+            // ... (methods lainnya tetap sama seperti sebelumnya)
+            updateHero(heroData) {
+                const data = this.loadData();
+                data.hero = heroData;
+                this.saveData(data);
+                return data.hero;
+            }
+            
+            updateAbout(aboutData) {
+                const data = this.loadData();
+                data.about = aboutData;
+                this.saveData(data);
+                return data.about;
+            }
+            
+            getGallery() {
+                const data = this.loadData();
+                return data.gallery || [];
+            }
+            
+            addGalleryImage(imageData) {
+                if (!this.authManager.isAdmin()) {
+                    return { success: false, message: 'Hanya admin yang dapat menambah gambar' };
+                }
+                
+                const data = this.loadData();
+                if (!data.gallery) data.gallery = [];
+                imageData.id = Date.now();
+                data.gallery.push(imageData);
+                this.saveData(data);
+                return { success: true, data: imageData };
+            }
+            
+            updateGalleryImage(id, imageData) {
+                if (!this.authManager.isAdmin()) {
+                    return { success: false, message: 'Hanya admin yang dapat mengedit gambar' };
+                }
+                
+                const data = this.loadData();
+                const index = data.gallery.findIndex(img => img.id == id);
+                if (index !== -1) {
+                    data.gallery[index] = {...data.gallery[index], ...imageData};
+                    this.saveData(data);
+                    return { success: true, data: data.gallery[index] };
+                }
+                return { success: false, message: 'Gambar tidak ditemukan' };
+            }
+            
+            deleteGalleryImage(id) {
+                if (!this.authManager.isAdmin()) {
+                    return { success: false, message: 'Hanya admin yang dapat menghapus gambar' };
+                }
+                
+                const data = this.loadData();
+                const initialLength = data.gallery.length;
+                data.gallery = data.gallery.filter(img => img.id != id);
+                
+                if (data.gallery.length < initialLength) {
+                    this.saveData(data);
+                    return { success: true, message: 'Gambar berhasil dihapus' };
+                }
+                
+                return { success: false, message: 'Gambar tidak ditemukan' };
+            }
+            
+            getSchedule() {
+                const data = this.loadData();
+                return data.schedule || [];
+            }
+            
+            updateSchedule(scheduleData) {
+                if (!this.authManager.isAdmin()) {
+                    return { success: false, message: 'Hanya admin yang dapat mengubah jadwal' };
+                }
+                
+                const data = this.loadData();
+                data.schedule = scheduleData;
+                this.saveData(data);
+                return { success: true, data: data.schedule };
+            }
+            
+            getAnnouncements() {
+                const data = this.loadData();
+                return data.announcements || [];
+            }
+            
+            addAnnouncement(announcementData) {
+                if (!this.authManager.isAdmin()) {
+                    return { success: false, message: 'Hanya admin yang dapat menambah pengumuman' };
+                }
+                
+                const data = this.loadData();
+                if (!data.announcements) data.announcements = [];
+                announcementData.id = Date.now();
+                announcementData.date = new Date().toLocaleDateString('id-ID', { 
+                    day: 'numeric', 
+                    month: 'long', 
+                    year: 'numeric' 
+                });
+                data.announcements.unshift(announcementData);
+                this.saveData(data);
+                return { success: true, data: announcementData };
+            }
+            
+            deleteAnnouncement(id) {
+                if (!this.authManager.isAdmin()) {
+                    return { success: false, message: 'Hanya admin yang dapat menghapus pengumuman' };
+                }
+                
+                const data = this.loadData();
+                const initialLength = data.announcements.length;
+                data.announcements = data.announcements.filter(ann => ann.id != id);
+                
+                if (data.announcements.length < initialLength) {
+                    this.saveData(data);
+                    return { success: true, message: 'Pengumuman berhasil dihapus' };
+                }
+                
+                return { success: false, message: 'Pengumuman tidak ditemukan' };
+            }
+            
+            exportData() {
+                const data = this.loadData();
+                const credentials = this.authManager.getCredentials();
+                const exportData = {
+                    websiteData: data,
+                    adminCredentials: {
+                        username: credentials.username,
+                        lastLogin: credentials.lastLogin
+                        // Tidak menyertakan password untuk keamanan
+                    }
+                };
+                
+                const dataStr = JSON.stringify(exportData, null, 2);
+                const dataBlob = new Blob([dataStr], { type: 'application/json' });
+                const url = URL.createObjectURL(dataBlob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `kelas6-backup-${new Date().toISOString().slice(0,10)}.json`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            }
+            
+            importData(jsonData) {
+                try {
+                    const importData = JSON.parse(jsonData);
+                    const data = importData.websiteData;
+                    
+                    if (data) {
+                        this.saveData(data);
+                        return { success: true, message: 'Data berhasil diimpor' };
+                    }
+                    
+                    return { success: false, message: 'Format data tidak valid' };
+                } catch (e) {
+                    console.error('Error importing data:', e);
+                    return { success: false, message: 'Error mengimpor data' };
+                }
+            }
+        }
+
+        // ==================== APPLICATION INITIALIZATION ====================
+        const dataManager = new DataManager();
+        
+        // DOM Elements
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mainNav = document.getElementById('mainNav');
+        const navLinks = document.querySelectorAll('.nav-link');
+        const pageSections = document.querySelectorAll('.page-section');
+        const heroSection = document.querySelector('.hero');
+        const heroTitle = document.getElementById('heroTitle');
+        const heroDescription = document.getElementById('heroDescription');
+        const galleryContainer = document.getElementById('galleryContainer');
+        const scheduleBody = document.getElementById('scheduleBody');
+        const announcementsContainer = document.getElementById('announcementsContainer');
+        const userStatus = document.getElementById('userStatus');
+        const logoutLink = document.getElementById('logoutLink');
+        const adminNavLink = document.getElementById('adminNavLink');
+        
+        // Login Modal elements
+        const loginModal = document.getElementById('loginModal');
+        const loginError = document.getElementById('loginError');
+        const loginSuccess = document.getElementById('loginSuccess');
+        const loginBtn = document.getElementById('loginBtn');
+        const usernameInput = document.getElementById('username');
+        const passwordInput = document.getElementById('password');
+        
+        // Gallery elements
+        const galleryAdminControls = document.getElementById('galleryAdminControls');
+        const galleryUserView = document.getElementById('galleryUserView');
+        const addGalleryImageBtn = document.getElementById('addGalleryImage');
+        const requestAdminAccessBtn = document.getElementById('requestAdminAccess');
+        
+        // Admin section elements
+        const adminLoginPrompt = document.getElementById('adminLoginPrompt');
+        const adminPanelContent = document.getElementById('adminPanelContent');
+        const loginToAdminBtn = document.getElementById('loginToAdmin');
+        const adminLogoutBtn = document.getElementById('adminLogoutBtn');
+        
+        // Other admin controls
+        const heroBackgroundUrl = document.getElementById('heroBackgroundUrl');
+        const updateHeroBgBtn = document.getElementById('updateHeroBg');
+        const heroTitleInput = document.getElementById('heroTitleInput');
+        const heroDescriptionInput = document.getElementById('heroDescriptionInput');
+        const updateHeroContentBtn = document.getElementById('updateHeroContent');
+        const classProfileInput = document.getElementById('classProfileInput');
+        const visionMissionInput = document.getElementById('visionMissionInput');
+        const teachersInput = document.getElementById('teachersInput');
+        const updateAboutContentBtn = document.getElementById('updateAboutContent');
+        
+        // Password change elements
+        const currentPassword = document.getElementById('currentPassword');
+        const newPassword = document.getElementById('newPassword');
+        const confirmPassword = document.getElementById('confirmPassword');
+        const changePasswordBtn = document.getElementById('changePassword');
+        
+        // Export/Import elements
+        const exportDataBtn = document.getElementById('exportData');
+        const importDataBtn = document.getElementById('importData');
+        const importFileInput = document.getElementById('importFileInput');
+        
+        // Announcements admin controls
+        const announcementsAdminControls = document.getElementById('announcementsAdminControls');
+        const addAnnouncementBtn = document.getElementById('addAnnouncement');
+        
+        // Image modal elements
+        const imageModal = document.getElementById('imageModal');
+        const closeImageModal = document.getElementById('closeImageModal');
+        const cancelImage = document.getElementById('cancelImage');
+        const saveImageBtn = document.getElementById('saveImage');
+        
+        // Quiz variables
+        let currentQuestion = 1;
+        let score = 0;
+        const totalQuestions = 3;
+        const userAnswers = {};
+        
+        // Initialize the page
+        function initPage() {
+            updateUIForLoginStatus();
+            loadHeroData();
+            loadAboutData();
+            loadGallery();
+            loadSchedule();
+            loadAnnouncements();
+            setupEventListeners();
+            
+            // Set current year
+            document.getElementById('currentYear').textContent = new Date().getFullYear();
+        }
+        
+        // Update UI based on login status
+        function updateUIForLoginStatus() {
+            const isLoggedIn = dataManager.authManager.isLoggedIn();
+            const isAdmin = dataManager.authManager.isAdmin();
+            
+            // Show/hide user status
+            if (isLoggedIn) {
+                userStatus.style.display = 'flex';
+                logoutLink.style.display = 'block';
+            } else {
+                userStatus.style.display = 'none';
+                logoutLink.style.display = 'none';
+            }
+            
+            // Update gallery view
+            if (isAdmin) {
+                galleryAdminControls.style.display = 'block';
+                galleryUserView.style.display = 'none';
+            } else {
+                galleryAdminControls.style.display = 'none';
+                galleryUserView.style.display = 'block';
+            }
+            
+            // Update announcements view
+            announcementsAdminControls.style.display = isAdmin ? 'block' : 'none';
+            
+            // Update admin section
+            if (isAdmin) {
+                adminLoginPrompt.style.display = 'none';
+                adminPanelContent.style.display = 'block';
+            } else {
+                adminLoginPrompt.style.display = 'block';
+                adminPanelContent.style.display = 'none';
+            }
+        }
+        
+        // Load hero data
+        function loadHeroData() {
+            const data = dataManager.loadData();
+            if (data.hero) {
+                // Set hero background
+                heroSection.style.setProperty('--hero-bg-url', `url('${data.hero.backgroundUrl}')`);
+                
+                // Set hero content
+                heroTitle.textContent = data.hero.title;
+                heroDescription.textContent = data.hero.description;
+                
+                // Set admin inputs
+                heroBackgroundUrl.value = data.hero.backgroundUrl;
+                heroTitleInput.value = data.hero.title;
+                heroDescriptionInput.value = data.hero.description;
+            }
+        }
+        
+        // Load about data
+        function loadAboutData() {
+            const data = dataManager.loadData();
+            if (data.about) {
+                document.getElementById('classProfile').innerHTML = data.about.classProfile;
+                document.getElementById('visionMission').innerHTML = data.about.visionMission;
+                document.getElementById('teachers').innerHTML = data.about.teachers.replace(/\n/g, '<br>');
+                
+                // Set admin inputs
+                classProfileInput.value = data.about.classProfile;
+                visionMissionInput.value = data.about.visionMission;
+                teachersInput.value = data.about.teachers;
+            }
+        }
+        
+        // Load gallery
+        function loadGallery() {
+            const gallery = dataManager.getGallery();
+            galleryContainer.innerHTML = '';
+            
+            gallery.forEach(image => {
+                const galleryItem = document.createElement('div');
+                galleryItem.className = 'gallery-item';
+                
+                // Admin actions only visible to admins
+                const adminActions = dataManager.authManager.isAdmin() ? `
+                    <div class="admin-actions">
+                        <button class="delete-image" data-id="${image.id}"><i class="fas fa-trash"></i></button>
+                    </div>
+                ` : '';
+                
+                galleryItem.innerHTML = `
+                    <img src="${image.url}" alt="${image.title}" loading="lazy">
+                    <div class="overlay">
+                        <p>${image.title}</p>
+                        ${image.description ? `<small>${image.description}</small>` : ''}
+                    </div>
+                    ${adminActions}
+                `;
+                galleryContainer.appendChild(galleryItem);
+            });
+            
+            // Add event listeners to delete buttons (only for admin)
+            if (dataManager.authManager.isAdmin()) {
+                document.querySelectorAll('.delete-image').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        const id = btn.getAttribute('data-id');
+                        deleteGalleryImage(id);
+                    });
+                });
+            }
+        }
+        
+        // Delete gallery image
+        function deleteGalleryImage(id) {
+            if (confirm('Apakah Anda yakin ingin menghapus gambar ini?')) {
+                const result = dataManager.deleteGalleryImage(id);
+                if (result.success) {
+                    alert('Gambar berhasil dihapus!');
+                    loadGallery();
+                } else {
+                    alert('Gagal menghapus gambar: ' + result.message);
+                }
+            }
+        }
+        
+        // Load schedule
+        function loadSchedule() {
+            const schedule = dataManager.getSchedule();
+            scheduleBody.innerHTML = '';
+            
+            schedule.forEach(row => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${row.hari}</td>
+                    <td>${row.jam1}</td>
+                    <td>${row.jam2}</td>
+                    <td>${row.jam3}</td>
+                    <td>${row.jam4}</td>
+                    <td>${row.jam5}</td>
+                `;
+                scheduleBody.appendChild(tr);
+            });
+        }
+        
+        // Load announcements
+        function loadAnnouncements() {
+            const announcements = dataManager.getAnnouncements();
+            announcementsContainer.innerHTML = '';
+            
+            announcements.forEach(ann => {
+                const announcementDiv = document.createElement('div');
+                announcementDiv.className = 'announcement';
+                
+                // Delete button only for admin
+                const deleteButton = dataManager.authManager.isAdmin() ? `
+                    <button class="delete-announcement btn btn-danger btn-small" data-id="${ann.id}" style="margin-top: 10px; padding: 5px 10px; font-size: 0.9rem;">
+                        <i class="fas fa-trash"></i> Hapus
+                    </button>
+                ` : '';
+                
+                announcementDiv.innerHTML = `
+                    <h4>${ann.title}</h4>
+                    <div class="date">${ann.date}</div>
+                    <p>${ann.content}</p>
+                    ${deleteButton}
+                `;
+                announcementsContainer.appendChild(announcementDiv);
+            });
+            
+            // Add event listeners to delete buttons (only for admin)
+            if (dataManager.authManager.isAdmin()) {
+                document.querySelectorAll('.delete-announcement').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        const id = btn.getAttribute('data-id');
+                        deleteAnnouncement(id);
+                    });
+                });
+            }
+        }
+        
+        // Delete announcement
+        function deleteAnnouncement(id) {
+            if (confirm('Apakah Anda yakin ingin menghapus pengumuman ini?')) {
+                const result = dataManager.deleteAnnouncement(id);
+                if (result.success) {
+                    alert('Pengumuman berhasil dihapus!');
+                    loadAnnouncements();
+                } else {
+                    alert('Gagal menghapus pengumuman: ' + result.message);
+                }
+            }
+        }
+        
+        // Show login modal
+        function showLoginModal() {
+            loginModal.style.display = 'flex';
+            loginError.style.display = 'none';
+            loginSuccess.style.display = 'none';
+            usernameInput.value = '';
+            passwordInput.value = '';
+            usernameInput.focus();
+        }
+        
+        // Hide login modal
+        function hideLoginModal() {
+            loginModal.style.display = 'none';
+        }
+        
+        // Login function
+        function login() {
+            const username = usernameInput.value.trim();
+            const password = passwordInput.value;
+            
+            if (!username || !password) {
+                loginError.textContent = 'Username dan password harus diisi!';
+                loginError.style.display = 'block';
+                return;
+            }
+            
+            const result = dataManager.authManager.login(username, password);
+            
+            if (result.success) {
+                loginSuccess.style.display = 'block';
+                loginError.style.display = 'none';
+                
+                // Show success message for 1 second, then hide modal and update UI
+                setTimeout(() => {
+                    hideLoginModal();
+                    updateUIForLoginStatus();
+                    
+                    // Reload gallery and announcements to show admin controls
+                    loadGallery();
+                    loadAnnouncements();
+                    
+                    // If on admin page, show admin panel
+                    if (document.getElementById('admin').style.display === 'block') {
+                        adminLoginPrompt.style.display = 'none';
+                        adminPanelContent.style.display = 'block';
+                    }
+                }, 1000);
+            } else {
+                loginError.textContent = result.message;
+                loginError.style.display = 'block';
+                passwordInput.value = '';
+                passwordInput.focus();
+            }
+        }
+        
+        // Logout function
+        function logout() {
+            if (confirm('Apakah Anda yakin ingin logout?')) {
+                dataManager.authManager.logout();
+                updateUIForLoginStatus();
+                
+                // Reload gallery and announcements to hide admin controls
+                loadGallery();
+                loadAnnouncements();
+                
+                // If on admin page, show login prompt
+                if (document.getElementById('admin').style.display === 'block') {
+                    adminLoginPrompt.style.display = 'block';
+                    adminPanelContent.style.display = 'none';
+                }
+                
+                // If on gallery page, show user view
+                if (document.getElementById('gallery').style.display === 'block') {
+                    galleryAdminControls.style.display = 'none';
+                    galleryUserView.style.display = 'block';
+                }
+            }
+        }
+        
+        // Change password
+        function changePassword() {
+            const current = currentPassword.value;
+            const newPass = newPassword.value;
+            const confirm = confirmPassword.value;
+            
+            if (!current || !newPass || !confirm) {
+                alert('Semua field harus diisi!');
+                return;
+            }
+            
+            if (newPass !== confirm) {
+                alert('Password baru dan konfirmasi password tidak sama!');
+                return;
+            }
+            
+            const result = dataManager.authManager.changePassword(current, newPass);
+            
+            if (result.success) {
+                alert('Password berhasil diubah!');
+                currentPassword.value = '';
+                newPassword.value = '';
+                confirmPassword.value = '';
+            } else {
+                alert('Error: ' + result.message);
+            }
+        }
+        
+        // Setup event listeners
+        function setupEventListeners() {
+            // Mobile menu toggle
+            mobileMenuBtn.addEventListener('click', () => {
+                mainNav.classList.toggle('active');
+                const icon = mobileMenuBtn.querySelector('i');
+                if (mainNav.classList.contains('active')) {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-times');
+                } else {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+            });
+            
+            // Navigation between pages
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    
+                    // Get the page to show
+                    const pageId = link.getAttribute('data-page');
+                    
+                    // Check if trying to access admin page without login
+                    if (pageId === 'admin' && !dataManager.authManager.isLoggedIn()) {
+                        showLoginModal();
+                        return;
+                    }
+                    
+                    // Update active nav link
+                    navLinks.forEach(navLink => navLink.classList.remove('active'));
+                    link.classList.add('active');
+                    
+                    // Hide all page sections
+                    pageSections.forEach(section => {
+                        section.style.display = 'none';
+                    });
+                    
+                    // Show selected page
+                    if (pageId === 'home') {
+                        document.getElementById('about').style.display = 'block';
+                    } else {
+                        document.getElementById(pageId).style.display = 'block';
+                    }
+                    
+                    // Close mobile menu if open
+                    if (mainNav.classList.contains('active')) {
+                        mainNav.classList.remove('active');
+                        const icon = mobileMenuBtn.querySelector('i');
+                        icon.classList.remove('fa-times');
+                        icon.classList.add('fa-bars');
+                    }
+                    
+                    // Scroll to top of the page
+                    window.scrollTo(0, 0);
+                });
+            });
+            
+            // Login button
+            loginBtn.addEventListener('click', login);
+            
+            // Login on Enter key
+            usernameInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') login();
+            });
+            
+            passwordInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') login();
+            });
+            
+            // Logout link
+            logoutLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                logout();
+            });
+            
+            // Request admin access (from gallery)
+            requestAdminAccessBtn.addEventListener('click', () => {
+                showLoginModal();
+            });
+            
+            // Login to admin panel
+            loginToAdminBtn.addEventListener('click', () => {
+                showLoginModal();
+            });
+            
+            // Admin logout button
+            adminLogoutBtn.addEventListener('click', logout);
+            
+            // Add gallery image (only for admin)
+            addGalleryImageBtn.addEventListener('click', () => {
+                if (dataManager.authManager.isAdmin()) {
+                    resetImageForm();
+                    imageModal.style.display = 'flex';
+                } else {
+                    alert('Hanya admin yang dapat menambah gambar!');
+                }
+            });
+            
+            // Update hero background
+            updateHeroBgBtn.addEventListener('click', () => {
+                const url = heroBackgroundUrl.value;
+                if (url) {
+                    const data = dataManager.loadData();
+                    data.hero.backgroundUrl = url;
+                    dataManager.updateHero(data.hero);
+                    
+                    // Update hero background
+                    heroSection.style.setProperty('--hero-bg-url', `url('${url}')`);
+                    
+                    alert('Background hero berhasil diperbarui!');
+                }
+            });
+            
+            // Update hero content
+            updateHeroContentBtn.addEventListener('click', () => {
+                const title = heroTitleInput.value;
+                const description = heroDescriptionInput.value;
+                
+                if (title && description) {
+                    const data = dataManager.loadData();
+                    data.hero.title = title;
+                    data.hero.description = description;
+                    dataManager.updateHero(data.hero);
+                    
+                    // Update hero content
+                    heroTitle.textContent = title;
+                    heroDescription.textContent = description;
+                    
+                    alert('Konten hero berhasil diperbarui!');
+                }
+            });
+            
+            // Update about content
+            updateAboutContentBtn.addEventListener('click', () => {
+                const classProfile = classProfileInput.value;
+                const visionMission = visionMissionInput.value;
+                const teachers = teachersInput.value;
+                
+                if (classProfile && visionMission && teachers) {
+                    const aboutData = {
+                        classProfile,
+                        visionMission,
+                        teachers
+                    };
+                    
+                    dataManager.updateAbout(aboutData);
+                    
+                    // Update about content
+                    document.getElementById('classProfile').innerHTML = classProfile;
+                    document.getElementById('visionMission').innerHTML = visionMission;
+                    document.getElementById('teachers').innerHTML = teachers.replace(/\n/g, '<br>');
+                    
+                    alert('Konten tentang berhasil diperbarui!');
+                }
+            });
+            
+            // Add announcement (only for admin)
+            addAnnouncementBtn.addEventListener('click', () => {
+                if (!dataManager.authManager.isAdmin()) {
+                    alert('Hanya admin yang dapat menambah pengumuman!');
+                    return;
+                }
+                
+                const title = prompt('Masukkan judul pengumuman:');
+                if (!title) return;
+                
+                const content = prompt('Masukkan isi pengumuman:');
+                if (!content) return;
+                
+                const result = dataManager.addAnnouncement({ title, content });
+                if (result.success) {
+                    loadAnnouncements();
+                    alert('Pengumuman berhasil ditambahkan!');
+                } else {
+                    alert('Gagal menambah pengumuman: ' + result.message);
+                }
+            });
+            
+            // Change password
+            changePasswordBtn.addEventListener('click', changePassword);
+            
+            // Export data
+            exportDataBtn.addEventListener('click', () => {
+                dataManager.exportData();
+                alert('Data berhasil diekspor!');
+            });
+            
+            // Import data
+            importDataBtn.addEventListener('click', () => {
+                importFileInput.click();
+            });
+            
+            importFileInput.addEventListener('change', (e) => {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = (event) => {
+                        const result = dataManager.importData(event.target.result);
+                        if (result.success) {
+                            // Reload all data
+                            initPage();
+                            alert('Data berhasil diimpor!');
+                        } else {
+                            alert('Gagal mengimpor data: ' + result.message);
+                        }
+                    };
+                    reader.readAsText(file);
+                }
+                // Reset input
+                importFileInput.value = '';
+            });
+            
+            // Image modal controls
+            closeImageModal.addEventListener('click', () => {
+                imageModal.style.display = 'none';
+                resetImageForm();
+            });
+            
+            cancelImage.addEventListener('click', () => {
+                imageModal.style.display = 'none';
+                resetImageForm();
+            });
+            
+            // Save image
+            saveImageBtn.addEventListener('click', () => {
+                const url = document.getElementById('imageUrl').value;
+                const title = document.getElementById('imageTitle').value;
+                const description = document.getElementById('imageDescription').value;
+                const editingId = document.getElementById('editingImageId').value;
+                
+                if (!url || !title) {
+                    alert('URL dan judul gambar harus diisi!');
+                    return;
+                }
+                
+                const imageData = {
+                    url,
+                    title,
+                    description
+                };
+                
+                let result;
+                if (editingId) {
+                    // Update existing image
+                    result = dataManager.updateGalleryImage(editingId, imageData);
+                } else {
+                    // Add new image
+                    result = dataManager.addGalleryImage(imageData);
+                }
+                
+                if (result.success) {
+                    // Reload gallery
+                    loadGallery();
+                    
+                    // Close modal and reset form
+                    imageModal.style.display = 'none';
+                    resetImageForm();
+                    
+                    alert('Gambar berhasil disimpan!');
+                } else {
+                    alert('Gagal menyimpan gambar: ' + result.message);
+                }
+            });
+            
+            // Quiz functionality
+            setupQuiz();
+            
+            // Back to top button
+            setupBackToTop();
+            
+            // Smooth scrolling
+            setupSmoothScrolling();
+            
+            // Close login modal when clicking outside
+            loginModal.addEventListener('click', (e) => {
+                if (e.target === loginModal) {
+                    hideLoginModal();
+                }
+            });
+        }
+        
+        // Reset image form
+        function resetImageForm() {
+            document.getElementById('imageUrl').value = '';
+            document.getElementById('imageTitle').value = '';
+            document.getElementById('imageDescription').value = '';
+            document.getElementById('editingImageId').value = '';
+        }
+        
+        // Quiz setup
+        function setupQuiz() {
+            const quizOptions = document.querySelectorAll('.quiz-option');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const submitBtn = document.getElementById('submitBtn');
+            const quizResult = document.getElementById('quizResult');
+            const correctAnswersEl = document.getElementById('correctAnswers');
+            const scoreMessage = document.getElementById('scoreMessage');
+            const restartQuizBtn = document.getElementById('restartQuiz');
+            
+            // Handle quiz option selection
+            quizOptions.forEach(option => {
+                option.addEventListener('click', () => {
+                    // Remove selected class from all options in current question
+                    const currentQuestionEl = document.getElementById(`question${currentQuestion}`);
+                    const optionsInQuestion = currentQuestionEl.querySelectorAll('.quiz-option');
+                    optionsInQuestion.forEach(opt => opt.classList.remove('selected'));
+                    
+                    // Add selected class to clicked option
+                    option.classList.add('selected');
+                    
+                    // Store user answer
+                    userAnswers[currentQuestion] = option.getAttribute('data-option');
+                });
+            });
+            
+            // Next button functionality
+            nextBtn.addEventListener('click', () => {
+                if (currentQuestion < totalQuestions) {
+                    // Hide current question
+                    document.getElementById(`question${currentQuestion}`).style.display = 'none';
+                    
+                    // Show next question
+                    currentQuestion++;
+                    document.getElementById(`question${currentQuestion}`).style.display = 'block';
+                    
+                    // Update button visibility
+                    prevBtn.style.display = 'inline-block';
+                    
+                    if (currentQuestion === totalQuestions) {
+                        nextBtn.style.display = 'none';
+                        submitBtn.style.display = 'inline-block';
+                    }
+                    
+                    // Restore selected answer for this question if exists
+                    if (userAnswers[currentQuestion]) {
+                        const currentQuestionEl = document.getElementById(`question${currentQuestion}`);
+                        const optionToSelect = currentQuestionEl.querySelector(`.quiz-option[data-option="${userAnswers[currentQuestion]}"]`);
+                        if (optionToSelect) {
+                            const optionsInQuestion = currentQuestionEl.querySelectorAll('.quiz-option');
+                            optionsInQuestion.forEach(opt => opt.classList.remove('selected'));
+                            optionToSelect.classList.add('selected');
+                        }
+                    }
+                }
+            });
+            
+            // Previous button functionality
+            prevBtn.addEventListener('click', () => {
+                if (currentQuestion > 1) {
+                    // Hide current question
+                    document.getElementById(`question${currentQuestion}`).style.display = 'none';
+                    
+                    // Show previous question
+                    currentQuestion--;
+                    document.getElementById(`question${currentQuestion}`).style.display = 'block';
+                    
+                    // Update button visibility
+                    nextBtn.style.display = 'inline-block';
+                    submitBtn.style.display = 'none';
+                    
+                    if (currentQuestion === 1) {
+                        prevBtn.style.display = 'none';
+                    }
+                    
+                    // Restore selected answer for this question if exists
+                    if (userAnswers[currentQuestion]) {
+                        const currentQuestionEl = document.getElementById(`question${currentQuestion}`);
+                        const optionToSelect = currentQuestionEl.querySelector(`.quiz-option[data-option="${userAnswers[currentQuestion]}"]`);
+                        if (optionToSelect) {
+                            const optionsInQuestion = currentQuestionEl.querySelectorAll('.quiz-option');
+                            optionsInQuestion.forEach(opt => opt.classList.remove('selected'));
+                            optionToSelect.classList.add('selected');
+                        }
+                    }
+                }
+            });
+            
+            // Submit quiz functionality
+            submitBtn.addEventListener('click', () => {
+                // Calculate score
+                score = 0;
+                for (let i = 1; i <= totalQuestions; i++) {
+                    const userAnswer = userAnswers[i];
+                    if (userAnswer) {
+                        const questionEl = document.getElementById(`question${i}`);
+                        const selectedOption = questionEl.querySelector(`.quiz-option[data-option="${userAnswer}"]`);
+                        if (selectedOption && selectedOption.hasAttribute('data-correct')) {
+                            score++;
+                        }
+                    }
+                }
+                
+                // Show result
+                document.getElementById('quizContainer').style.display = 'none';
+                document.querySelector('.quiz-actions').style.display = 'none';
+                quizResult.style.display = 'block';
+                correctAnswersEl.textContent = score;
+                
+                // Set score message
+                if (score === totalQuestions) {
+                    scoreMessage.textContent = "Hebat! Kamu menjawab semua pertanyaan dengan benar!";
+                    scoreMessage.style.color = "var(--secondary-color)";
+                } else if (score >= totalQuestions / 2) {
+                    scoreMessage.textContent = "Bagus! Kamu sudah memahami materi dengan cukup baik.";
+                    scoreMessage.style.color = "var(--primary-color)";
+                } else {
+                    scoreMessage.textContent = "Jangan menyerah! Pelajari lagi materinya dan coba lagi.";
+                    scoreMessage.style.color = "#e74c3c";
+                }
+            });
+            
+            // Restart quiz functionality
+            restartQuizBtn.addEventListener('click', () => {
+                // Reset variables
+                currentQuestion = 1;
+                score = 0;
+                
+                // Clear user answers
+                for (let key in userAnswers) {
+                    delete userAnswers[key];
+                }
+                
+                // Reset UI
+                document.getElementById('quizContainer').style.display = 'block';
+                document.querySelector('.quiz-actions').style.display = 'block';
+                quizResult.style.display = 'none';
+                
+                // Show first question, hide others
+                for (let i = 1; i <= totalQuestions; i++) {
+                    if (i === 1) {
+                        document.getElementById(`question${i}`).style.display = 'block';
+                    } else {
+                        document.getElementById(`question${i}`).style.display = 'none';
+                    }
+                    
+                    // Clear selection
+                    const questionEl = document.getElementById(`question${i}`);
+                    const optionsInQuestion = questionEl.querySelectorAll('.quiz-option');
+                    optionsInQuestion.forEach(opt => opt.classList.remove('selected'));
+                }
+                
+                // Reset buttons
+                prevBtn.style.display = 'none';
+                nextBtn.style.display = 'inline-block';
+                submitBtn.style.display = 'none';
+            });
+        }
+        
+        // Back to top button
+        function setupBackToTop() {
+            const backToTop = document.getElementById('backToTop');
+            
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 300) {
+                    backToTop.classList.add('show');
+                } else {
+                    backToTop.classList.remove('show');
+                }
+            });
+            
+            backToTop.addEventListener('click', (e) => {
+                e.preventDefault();
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        }
+        
+        // Smooth scrolling
+        function setupSmoothScrolling() {
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    if (this.getAttribute('href') === '#') return;
+                    
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        }
+        
+        // Initialize the page when DOM is loaded
+        document.addEventListener('DOMContentLoaded', initPage);
+    </script>
+</body>
+</html>
