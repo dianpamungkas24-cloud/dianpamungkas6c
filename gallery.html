@@ -1,1 +1,1610 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Resmi Kelas 6 - SD Negeri Maju Jaya</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --success: #27ae60;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --shadow: 0 5px 15px rgba(0,0,0,0.08);
+            --radius: 10px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* ===== HEADER PROFESIONAL ===== */
+        .main-header {
+            background: white;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .school-logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo-icon {
+            background: var(--secondary);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+        
+        .logo-text h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.5rem;
+            color: var(--primary);
+            font-weight: 700;
+        }
+        
+        .logo-text p {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .admin-status {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .btn-login {
+            background: var(--secondary);
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        
+        .btn-login:hover {
+            background: #2980b9;
+        }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: #f8f9fa;
+            padding: 8px 15px;
+            border-radius: 5px;
+            border-left: 4px solid var(--success);
+        }
+        
+        /* ===== HERO SECTION (GAMBAR BESAR) ===== */
+        .hero-section {
+            height: 60vh;
+            min-height: 400px;
+            max-height: 600px;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 40px;
+        }
+        
+        .hero-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: opacity 0.5s ease;
+        }
+        
+        .hero-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            color: white;
+            padding: 40px 0 20px;
+            text-align: center;
+        }
+        
+        .hero-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .hero-subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+        }
+        
+        /* Admin control untuk hero image */
+        .hero-admin-control {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 100;
+            display: none;
+        }
+        
+        .hero-admin-control.show {
+            display: block;
+        }
+        
+        .btn-hero-edit {
+            background: rgba(0,0,0,0.7);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+        }
+        
+        .btn-hero-edit:hover {
+            background: rgba(0,0,0,0.9);
+        }
+        
+        /* ===== MAIN CONTENT ===== */
+        .main-content {
+            padding: 60px 0;
+            background: white;
+            min-height: 70vh;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+        
+        .section-title h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2rem;
+            color: var(--primary);
+            display: inline-block;
+            padding-bottom: 10px;
+            position: relative;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: var(--secondary);
+        }
+        
+        /* ===== GALLERY ===== */
+        .gallery-section {
+            padding: 40px 0;
+        }
+        
+        .admin-notice {
+            background: #e8f4fc;
+            border-left: 4px solid var(--secondary);
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 30px;
+            display: none;
+        }
+        
+        .admin-notice.show {
+            display: block;
+        }
+        
+        .gallery-controls {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: var(--radius);
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .gallery-controls.admin {
+            background: #e8f6ef;
+            border-left: 4px solid var(--success);
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+        
+        .gallery-card {
+            background: white;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .gallery-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .gallery-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .gallery-info {
+            padding: 20px;
+        }
+        
+        .gallery-info h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.2rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        
+        .gallery-info p {
+            color: #666;
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+        }
+        
+        .gallery-date {
+            font-size: 0.85rem;
+            color: #999;
+            margin-bottom: 15px;
+        }
+        
+        .admin-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .gallery-card:hover .admin-actions {
+            opacity: 1;
+        }
+        
+        .btn-small {
+            padding: 6px 12px;
+            font-size: 0.85rem;
+            border-radius: 4px;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.3s;
+        }
+        
+        .btn-edit {
+            background: var(--secondary);
+            color: white;
+        }
+        
+        .btn-delete {
+            background: var(--accent);
+            color: white;
+        }
+        
+        /* ===== MODALS ===== */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: var(--radius);
+            padding: 30px;
+            max-width: 500px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .modal-header h3 {
+            color: var(--primary);
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #999;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        
+        .close-modal:hover {
+            color: var(--accent);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--primary);
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: 'Roboto', sans-serif;
+            font-size: 1rem;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--secondary);
+        }
+        
+        .form-actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
+        }
+        
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .btn-primary {
+            background: var(--secondary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #2980b9;
+        }
+        
+        .btn-secondary {
+            background: #95a5a6;
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background: #7f8c8d;
+        }
+        
+        .btn-success {
+            background: var(--success);
+            color: white;
+        }
+        
+        .btn-success:hover {
+            background: #219653;
+        }
+        
+        /* ===== LOGIN MODAL ===== */
+        .login-modal {
+            display: none;
+        }
+        
+        .login-logo {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        
+        .login-logo .logo-icon {
+            margin: 0 auto 15px;
+        }
+        
+        .alert {
+            padding: 12px 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            display: none;
+        }
+        
+        .alert-error {
+            background: #ffeaea;
+            color: #e74c3c;
+            border-left: 4px solid #e74c3c;
+        }
+        
+        .alert-success {
+            background: #e8f6ef;
+            color: var(--success);
+            border-left: 4px solid var(--success);
+        }
+        
+        /* ===== FOOTER ===== */
+        .main-footer {
+            background: var(--primary);
+            color: white;
+            padding: 40px 0 20px;
+            margin-top: 60px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-section h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: var(--light);
+        }
+        
+        .footer-section p {
+            opacity: 0.8;
+            margin-bottom: 15px;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+        
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+            
+            .admin-status {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .hero-section {
+                height: 50vh;
+                min-height: 300px;
+            }
+            
+            .hero-title {
+                font-size: 1.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+            
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .gallery-controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .form-actions {
+                flex-direction: column;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero-section {
+                height: 40vh;
+                min-height: 250px;
+            }
+            
+            .hero-overlay {
+                padding: 20px 0 10px;
+            }
+            
+            .hero-title {
+                font-size: 1.3rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal-overlay login-modal">
+        <div class="modal-content">
+            <div class="login-logo">
+                <div class="logo-icon">
+                    <i class="fas fa-user-shield"></i>
+                </div>
+                <h3>Login Admin</h3>
+                <p>Panel Administrasi Kelas 6</p>
+            </div>
+            
+            <div id="loginAlert" class="alert alert-error">
+                <i class="fas fa-exclamation-circle"></i> <span id="alertMessage"></span>
+            </div>
+            
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" placeholder="Masukkan username admin" autocomplete="username">
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" placeholder="Masukkan password" autocomplete="current-password">
+            </div>
+            
+            <div class="form-group" style="background: #f8f9fa; padding: 15px; border-radius: 5px;">
+                <p style="font-size: 0.9rem; margin-bottom: 10px; color: #666;">
+                    <i class="fas fa-info-circle"></i> <strong>Login Default:</strong>
+                </p>
+                <p style="font-size: 0.85rem; color: #666;">
+                    Username: <code>admin</code><br>
+                    Password: <code>kelas6sd</code>
+                </p>
+            </div>
+            
+            <div class="form-actions">
+                <button id="loginSubmit" class="btn btn-primary">
+                    <i class="fas fa-sign-in-alt"></i> Login
+                </button>
+                <button id="loginCancel" class="btn btn-secondary">
+                    <i class="fas fa-times"></i> Batal
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Hero Image Modal -->
+    <div id="heroModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Ubah Gambar Utama</h3>
+                <button class="close-modal" id="closeHeroModal">&times;</button>
+            </div>
+            
+            <div class="form-group">
+                <label for="heroImageUrl">URL Gambar Baru</label>
+                <input type="text" id="heroImageUrl" 
+                       placeholder="https://raw.githubusercontent.com/.../gambar-hero.jpg">
+                <small style="color: #666; display: block; margin-top: 5px;">
+                    Upload ke GitHub, lalu copy URL dari tombol "Raw"
+                </small>
+            </div>
+            
+            <div class="form-group">
+                <label for="heroImageTitle">Judul (opsional)</label>
+                <input type="text" id="heroImageTitle" placeholder="Contoh: Upacara Bendera">
+            </div>
+            
+            <div class="form-group">
+                <label for="heroImageSubtitle">Sub-judul (opsional)</label>
+                <input type="text" id="heroImageSubtitle" placeholder="Contoh: Kegiatan rutin hari Senin">
+            </div>
+            
+            <div class="info-box" style="background: #f8f9fa; padding: 15px; border-radius: 5px; margin: 20px 0;">
+                <h4 style="color: var(--primary); margin-bottom: 10px;"><i class="fas fa-info-circle"></i> Tips:</h4>
+                <ul style="color: #666; font-size: 0.9rem; padding-left: 20px;">
+                    <li>Gunakan gambar landscape (lebar lebih besar dari tinggi)</li>
+                    <li>Ukuran disarankan: minimal 1200x600 pixel</li>
+                    <li>Format: JPG, PNG, atau WebP</li>
+                    <li>Upload ke GitHub untuk hosting permanen</li>
+                </ul>
+            </div>
+            
+            <div class="form-actions">
+                <button id="saveHeroBtn" class="btn btn-success">
+                    <i class="fas fa-save"></i> Simpan Perubahan
+                </button>
+                <button id="cancelHeroBtn" class="btn btn-secondary">
+                    <i class="fas fa-times"></i> Batal
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Gallery Modal -->
+    <div id="galleryModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">Tambah Gambar Baru</h3>
+                <button class="close-modal" id="closeGalleryModal">&times;</button>
+            </div>
+            
+            <div class="form-group">
+                <label for="galleryImageUrl">URL Gambar (GitHub)</label>
+                <input type="text" id="galleryImageUrl" 
+                       placeholder="https://raw.githubusercontent.com/dianpamungkas24-cloud/dianpamungkas6c/main/nama-gambar.jpg">
+                <small style="color: #666; display: block; margin-top: 5px;">
+                    Upload ke GitHub, lalu copy URL dari tombol "Raw"
+                </small>
+            </div>
+            
+            <div class="form-group">
+                <label for="galleryImageTitle">Judul Gambar</label>
+                <input type="text" id="galleryImageTitle" placeholder="Contoh: Kegiatan Belajar Matematika">
+            </div>
+            
+            <div class="form-group">
+                <label for="galleryImageDesc">Deskripsi</label>
+                <textarea id="galleryImageDesc" rows="3" placeholder="Deskripsi kegiatan atau acara..."></textarea>
+            </div>
+            
+            <div class="form-actions">
+                <button id="saveGalleryBtn" class="btn btn-success">
+                    <i class="fas fa-save"></i> Simpan
+                </button>
+                <button id="cancelGalleryBtn" class="btn btn-secondary">
+                    <i class="fas fa-times"></i> Batal
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Main Website -->
+    <header class="main-header">
+        <div class="container">
+            <div class="header-content">
+                <div class="school-logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div class="logo-text">
+                        <h1>KELAS 6 SD</h1>
+                        <p>SD Negeri Maju Jaya - Tahun Ajaran 2023/2024</p>
+                    </div>
+                </div>
+                
+                <div class="admin-status" id="adminStatus">
+                    <!-- Akan diisi oleh JavaScript -->
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Hero Section (Gambar Besar) -->
+    <section class="hero-section">
+        <!-- Tombol Edit Hero (hanya untuk admin) -->
+        <div class="hero-admin-control" id="heroAdminControl">
+            <button class="btn-hero-edit" id="editHeroBtn">
+                <i class="fas fa-camera"></i> Ganti Gambar
+            </button>
+        </div>
+        
+        <!-- Gambar Hero -->
+        <img id="heroImage" class="hero-image" 
+             src="https://raw.githubusercontent.com/dianpamungkas24-cloud/dianpamungkas6c/main/20260127_075027.jpg"
+             alt="Kegiatan Kelas 6"
+             onerror="this.src='https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'">
+        
+        <!-- Overlay untuk teks -->
+        <div class="hero-overlay">
+            <div class="container">
+                <h2 class="hero-title" id="heroTitle">Kelas 6 SD Negeri Maju Jaya</h2>
+                <p class="hero-subtitle" id="heroSubtitle">Generasi Cerdas, Berkarakter, dan Berprestasi</p>
+            </div>
+        </div>
+    </section>
+    
+    <section class="main-content">
+        <div class="container">
+            <div class="section-title">
+                <h2><i class="fas fa-images"></i> Galeri Kegiatan</h2>
+                <p>Dokumentasi kegiatan pembelajaran dan acara kelas</p>
+            </div>
+            
+            <!-- Admin Notice (hanya muncul saat login) -->
+            <div id="adminNotice" class="admin-notice">
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <div style="background: var(--success); color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                        <i class="fas fa-user-shield"></i>
+                    </div>
+                    <div>
+                        <h4 style="margin-bottom: 5px;">Mode Administrator</h4>
+                        <p>Anda login sebagai admin. Anda dapat menambah, mengedit, dan menghapus gambar di galeri ini.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Gallery Controls (hanya untuk admin) -->
+            <div id="galleryControls" class="gallery-controls">
+                <div>
+                    <button id="addImageBtn" class="btn btn-primary">
+                        <i class="fas fa-plus"></i> Tambah Gambar
+                    </button>
+                    <a href="https://github.com/dianpamungkas24-cloud/dianpamungkas6c" target="_blank" 
+                       class="btn btn-secondary" style="text-decoration: none;">
+                        <i class="fab fa-github"></i> Upload ke GitHub
+                    </a>
+                </div>
+                <div id="adminTools" style="display: none;">
+                    <button id="exportDataBtn" class="btn btn-success">
+                        <i class="fas fa-download"></i> Backup Data
+                    </button>
+                    <button id="logoutBtn" class="btn" style="background: #95a5a6; color: white;">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Gallery Grid -->
+            <div class="gallery-grid" id="galleryContainer">
+                <!-- Gambar akan dimuat di sini -->
+            </div>
+            
+            <!-- Empty State -->
+            <div id="emptyGallery" style="text-align: center; padding: 50px; display: none;">
+                <div style="font-size: 4rem; color: #ddd; margin-bottom: 20px;">
+                    <i class="fas fa-images"></i>
+                </div>
+                <h3 style="color: #666; margin-bottom: 10px;">Galeri Masih Kosong</h3>
+                <p style="color: #888; max-width: 500px; margin: 0 auto;">
+                    Belum ada gambar yang ditambahkan ke galeri.
+                    <span id="adminEmptyText" style="display: none;">
+                        <br>Login sebagai admin untuk menambahkan gambar.
+                    </span>
+                </p>
+            </div>
+        </div>
+    </section>
+    
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Kelas 6 SD</h3>
+                    <p>SD Negeri Maju Jaya</p>
+                    <p>Jl. Pendidikan No. 123, Jakarta</p>
+                    <p>Email: kelas6@sdnmajujaya.sch.id</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Wali Kelas</h3>
+                    <p>Ibu Sari, S.Pd.</p>
+                    <p>Guru Kelas 6A</p>
+                    <p>Pengalaman: 15 Tahun</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Informasi</h3>
+                    <p>Website resmi untuk komunikasi antara sekolah, siswa, dan orang tua.</p>
+                    <p>© 2023 Kelas 6 SD Negeri Maju Jaya</p>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>Hak Cipta © 2023 - Dibuat dengan ❤ untuk pendidikan</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // ==================== AUTHENTICATION SYSTEM ====================
+        class AdminAuth {
+            constructor() {
+                this.storageKey = 'kelas6_admin';
+                this.currentAdmin = null;
+                this.defaultCredentials = {
+                    username: 'admin',
+                    password: 'kelas6sd'
+                };
+                this.loadSession();
+            }
+            
+            login(username, password) {
+                if (username === this.defaultCredentials.username && 
+                    password === this.defaultCredentials.password) {
+                    
+                    this.currentAdmin = {
+                        username: username,
+                        loginTime: new Date().toISOString(),
+                        sessionId: 'session_' + Date.now()
+                    };
+                    
+                    this.saveSession();
+                    return { success: true };
+                }
+                
+                return { 
+                    success: false, 
+                    message: 'Username atau password salah' 
+                };
+            }
+            
+            logout() {
+                this.currentAdmin = null;
+                localStorage.removeItem(this.storageKey);
+                return { success: true };
+            }
+            
+            isLoggedIn() {
+                return this.currentAdmin !== null;
+            }
+            
+            saveSession() {
+                if (this.currentAdmin) {
+                    const sessionData = {
+                        admin: this.currentAdmin,
+                        expires: Date.now() + (24 * 60 * 60 * 1000) // 24 jam
+                    };
+                    localStorage.setItem(this.storageKey, JSON.stringify(sessionData));
+                }
+            }
+            
+            loadSession() {
+                const saved = localStorage.getItem(this.storageKey);
+                if (saved) {
+                    try {
+                        const sessionData = JSON.parse(saved);
+                        if (sessionData.expires > Date.now()) {
+                            this.currentAdmin = sessionData.admin;
+                            return true;
+                        } else {
+                            localStorage.removeItem(this.storageKey);
+                        }
+                    } catch (e) {
+                        console.error('Session load error:', e);
+                    }
+                }
+                return false;
+            }
+        }
+        
+        // ==================== HERO IMAGE MANAGER ====================
+        class HeroManager {
+            constructor() {
+                this.storageKey = 'kelas6_hero_data';
+                this.heroData = this.loadHeroData();
+            }
+            
+            loadHeroData() {
+                try {
+                    const saved = localStorage.getItem(this.storageKey);
+                    if (saved) {
+                        return JSON.parse(saved);
+                    }
+                } catch (e) {
+                    console.error('Load hero error:', e);
+                }
+                
+                // Data default jika pertama kali
+                return {
+                    imageUrl: 'https://raw.githubusercontent.com/dianpamungkas24-cloud/dianpamungkas6c/main/20260127_075027.jpg',
+                    title: 'Kelas 6 SD Negeri Maju Jaya',
+                    subtitle: 'Generasi Cerdas, Berkarakter, dan Berprestasi',
+                    updatedAt: new Date().toISOString()
+                };
+            }
+            
+            saveHeroData() {
+                try {
+                    localStorage.setItem(this.storageKey, JSON.stringify(this.heroData));
+                    return true;
+                } catch (e) {
+                    console.error('Save hero error:', e);
+                    return false;
+                }
+            }
+            
+            updateHero(newData) {
+                this.heroData = {
+                    ...this.heroData,
+                    ...newData,
+                    updatedAt: new Date().toISOString()
+                };
+                return this.saveHeroData();
+            }
+            
+            getHeroImageUrl() {
+                return this.heroData.imageUrl;
+            }
+            
+            getHeroTitle() {
+                return this.heroData.title;
+            }
+            
+            getHeroSubtitle() {
+                return this.heroData.subtitle;
+            }
+        }
+        
+        // ==================== GALLERY MANAGER ====================
+        class GalleryManager {
+            constructor() {
+                this.storageKey = 'kelas6_gallery_data';
+                this.githubUsername = 'dianpamungkas24-cloud';
+                this.githubRepo = 'dianpamungkas6c';
+                this.gallery = this.loadGallery();
+            }
+            
+            loadGallery() {
+                try {
+                    const saved = localStorage.getItem(this.storageKey);
+                    if (saved) {
+                        return JSON.parse(saved);
+                    }
+                } catch (e) {
+                    console.error('Load gallery error:', e);
+                }
+                
+                // Data default jika pertama kali
+                return [
+                    {
+                        id: 1,
+                        url: `https://raw.githubusercontent.com/${this.githubUsername}/${this.githubRepo}/main/20260127_075027.jpg`,
+                        title: "Kegiatan Pembelajaran",
+                        description: "Siswa sedang mengikuti pelajaran matematika dengan antusias",
+                        date: "27 Januari 2024",
+                        uploadedBy: "Admin"
+                    },
+                    {
+                        id: 2,
+                        url: `https://raw.githubusercontent.com/${this.githubUsername}/${this.githubRepo}/main/20260127_085235.jpg`,
+                        title: "Kerja Kelompok",
+                        description: "Diskusi kelompok dalam menyelesaikan tugas proyek IPA",
+                        date: "27 Januari 2024",
+                        uploadedBy: "Admin"
+                    },
+                    {
+                        id: 3,
+                        url: `https://raw.githubusercontent.com/${this.githubUsername}/${this.githubRepo}/main/20260127_085819.jpg`,
+                        title: "Eksperimen Sains",
+                        description: "Praktikum IPA di laboratorium sekolah",
+                        date: "27 Januari 2024",
+                        uploadedBy: "Admin"
+                    },
+                    {
+                        id: 4,
+                        url: `https://raw.githubusercontent.com/${this.githubUsername}/${this.githubRepo}/main/20260127_085920.jpg`,
+                        title: "Presentasi Hasil Belajar",
+                        description: "Siswa mempresentasikan hasil proyek kelompok",
+                        date: "27 Januari 2024",
+                        uploadedBy: "Admin"
+                    }
+                ];
+            }
+            
+            saveGallery() {
+                try {
+                    localStorage.setItem(this.storageKey, JSON.stringify(this.gallery));
+                    return true;
+                } catch (e) {
+                    console.error('Save gallery error:', e);
+                    return false;
+                }
+            }
+            
+            addImage(imageData) {
+                const newImage = {
+                    id: Date.now(),
+                    url: imageData.url,
+                    title: imageData.title || 'Tanpa Judul',
+                    description: imageData.description || '',
+                    date: new Date().toLocaleDateString('id-ID', {
+                        day: 'numeric',
+                        month: 'long',
+                        year: 'numeric'
+                    }),
+                    uploadedBy: 'Admin'
+                };
+                
+                this.gallery.unshift(newImage); // Tambah di awal
+                this.saveGallery();
+                return newImage;
+            }
+            
+            updateImage(id, imageData) {
+                const index = this.gallery.findIndex(img => img.id === id);
+                if (index !== -1) {
+                    this.gallery[index] = {
+                        ...this.gallery[index],
+                        title: imageData.title || this.gallery[index].title,
+                        description: imageData.description || this.gallery[index].description,
+                        url: imageData.url || this.gallery[index].url
+                    };
+                    this.saveGallery();
+                    return true;
+                }
+                return false;
+            }
+            
+            deleteImage(id) {
+                const initialLength = this.gallery.length;
+                this.gallery = this.gallery.filter(img => img.id !== id);
+                if (this.gallery.length < initialLength) {
+                    this.saveGallery();
+                    return true;
+                }
+                return false;
+            }
+            
+            exportData() {
+                const exportData = {
+                    gallery: this.gallery,
+                    exportDate: new Date().toISOString(),
+                    totalImages: this.gallery.length,
+                    version: '1.0'
+                };
+                
+                const dataStr = JSON.stringify(exportData, null, 2);
+                const blob = new Blob([dataStr], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+                
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `backup-galeri-${new Date().toISOString().slice(0,10)}.json`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+                
+                return true;
+            }
+            
+            importData(jsonData) {
+                try {
+                    const data = JSON.parse(jsonData);
+                    if (data.gallery && Array.isArray(data.gallery)) {
+                        this.gallery = data.gallery;
+                        this.saveGallery();
+                        return true;
+                    }
+                } catch (e) {
+                    console.error('Import error:', e);
+                }
+                return false;
+            }
+        }
+        
+        // ==================== APP INITIALIZATION ====================
+        const auth = new AdminAuth();
+        const heroManager = new HeroManager();
+        const galleryManager = new GalleryManager();
+        
+        // DOM Elements
+        const adminStatus = document.getElementById('adminStatus');
+        const adminNotice = document.getElementById('adminNotice');
+        const heroAdminControl = document.getElementById('heroAdminControl');
+        const galleryControls = document.getElementById('galleryControls');
+        const adminTools = document.getElementById('adminTools');
+        const galleryContainer = document.getElementById('galleryContainer');
+        const emptyGallery = document.getElementById('emptyGallery');
+        const adminEmptyText = document.getElementById('adminEmptyText');
+        
+        // Hero Elements
+        const heroImage = document.getElementById('heroImage');
+        const heroTitle = document.getElementById('heroTitle');
+        const heroSubtitle = document.getElementById('heroSubtitle');
+        
+        // Modal Elements
+        const loginModal = document.getElementById('loginModal');
+        const heroModal = document.getElementById('heroModal');
+        const galleryModal = document.getElementById('galleryModal');
+        const loginAlert = document.getElementById('loginAlert');
+        const alertMessage = document.getElementById('alertMessage');
+        
+        // Buttons
+        const loginSubmit = document.getElementById('loginSubmit');
+        const loginCancel = document.getElementById('loginCancel');
+        const editHeroBtn = document.getElementById('editHeroBtn');
+        const saveHeroBtn = document.getElementById('saveHeroBtn');
+        const cancelHeroBtn = document.getElementById('cancelHeroBtn');
+        const closeHeroModal = document.getElementById('closeHeroModal');
+        const addImageBtn = document.getElementById('addImageBtn');
+        const saveGalleryBtn = document.getElementById('saveGalleryBtn');
+        const cancelGalleryBtn = document.getElementById('cancelGalleryBtn');
+        const closeGalleryModal = document.getElementById('closeGalleryModal');
+        const exportDataBtn = document.getElementById('exportDataBtn');
+        const logoutBtn = document.getElementById('logoutBtn');
+        
+        // Form Inputs
+        const usernameInput = document.getElementById('username');
+        const passwordInput = document.getElementById('password');
+        const heroImageUrl = document.getElementById('heroImageUrl');
+        const heroImageTitle = document.getElementById('heroImageTitle');
+        const heroImageSubtitle = document.getElementById('heroImageSubtitle');
+        const galleryImageUrl = document.getElementById('galleryImageUrl');
+        const galleryImageTitle = document.getElementById('galleryImageTitle');
+        const galleryImageDesc = document.getElementById('galleryImageDesc');
+        
+        // Modal State
+        let isEditing = false;
+        let editingImageId = null;
+        
+        // ==================== UI FUNCTIONS ====================
+        function updateUIForLoginStatus() {
+            const isLoggedIn = auth.isLoggedIn();
+            
+            // Update Admin Status
+            if (isLoggedIn) {
+                adminStatus.innerHTML = `
+                    <div class="user-info">
+                        <i class="fas fa-user-shield"></i>
+                        <div>
+                            <div style="font-weight: 500;">Admin Mode</div>
+                            <small style="font-size: 0.8rem;">${auth.currentAdmin.username}</small>
+                        </div>
+                    </div>
+                `;
+                heroAdminControl.classList.add('show');
+            } else {
+                adminStatus.innerHTML = `
+                    <button id="showLoginBtn" class="btn-login">
+                        <i class="fas fa-sign-in-alt"></i> Login Admin
+                    </button>
+                `;
+                heroAdminControl.classList.remove('show');
+                
+                // Add event listener to login button
+                setTimeout(() => {
+                    const showLoginBtn = document.getElementById('showLoginBtn');
+                    if (showLoginBtn) {
+                        showLoginBtn.addEventListener('click', showLoginModal);
+                    }
+                }, 100);
+            }
+            
+            // Update Admin Notice
+            if (isLoggedIn) {
+                adminNotice.classList.add('show');
+                galleryControls.classList.add('admin');
+                adminTools.style.display = 'flex';
+                adminEmptyText.style.display = 'none';
+            } else {
+                adminNotice.classList.remove('show');
+                galleryControls.classList.remove('admin');
+                adminTools.style.display = 'none';
+                adminEmptyText.style.display = 'inline';
+            }
+            
+            // Load Hero Image
+            loadHeroImage();
+            
+            // Re-render gallery
+            renderGallery();
+        }
+        
+        function loadHeroImage() {
+            heroImage.src = heroManager.getHeroImageUrl();
+            heroTitle.textContent = heroManager.getHeroTitle();
+            heroSubtitle.textContent = heroManager.getHeroSubtitle();
+            
+            // Prefill modal with current data
+            heroImageUrl.value = heroManager.getHeroImageUrl();
+            heroImageTitle.value = heroManager.getHeroTitle();
+            heroImageSubtitle.value = heroManager.getHeroSubtitle();
+        }
+        
+        function renderGallery() {
+            const isLoggedIn = auth.isLoggedIn();
+            const gallery = galleryManager.gallery;
+            
+            // Show empty state if no images
+            if (gallery.length === 0) {
+                galleryContainer.style.display = 'none';
+                emptyGallery.style.display = 'block';
+                return;
+            }
+            
+            // Show gallery if has images
+            galleryContainer.style.display = 'grid';
+            emptyGallery.style.display = 'none';
+            galleryContainer.innerHTML = '';
+            
+            gallery.forEach(image => {
+                const card = document.createElement('div');
+                card.className = 'gallery-card';
+                
+                let adminActions = '';
+                if (isLoggedIn) {
+                    adminActions = `
+                        <div class="admin-actions">
+                            <button class="btn-small btn-edit" data-id="${image.id}">
+                                <i class="fas fa-edit"></i> Edit
+                            </button>
+                            <button class="btn-small btn-delete" data-id="${image.id}">
+                                <i class="fas fa-trash"></i> Hapus
+                            </button>
+                        </div>
+                    `;
+                }
+                
+                card.innerHTML = `
+                    <img src="${image.url}" alt="${image.title}" class="gallery-image"
+                         onerror="this.src='https://via.placeholder.com/400x200/ecf0f1/95a5a6?text=Gambar+Tidak+Tersedia'">
+                    <div class="gallery-info">
+                        <h3>${image.title}</h3>
+                        <p>${image.description}</p>
+                        <div class="gallery-date">
+                            <i class="far fa-calendar"></i> ${image.date}
+                            ${image.uploadedBy ? ` • <i class="fas fa-user"></i> ${image.uploadedBy}` : ''}
+                        </div>
+                        ${adminActions}
+                    </div>
+                `;
+                
+                galleryContainer.appendChild(card);
+            });
+            
+            // Add event listeners for admin actions
+            if (isLoggedIn) {
+                document.querySelectorAll('.btn-edit').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        const id = parseInt(btn.getAttribute('data-id'));
+                        editImage(id);
+                    });
+                });
+                
+                document.querySelectorAll('.btn-delete').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        const id = parseInt(btn.getAttribute('data-id'));
+                        deleteImage(id);
+                    });
+                });
+            }
+        }
+        
+        // ==================== MODAL FUNCTIONS ====================
+        function showLoginModal() {
+            loginModal.style.display = 'flex';
+            loginAlert.style.display = 'none';
+            usernameInput.value = '';
+            passwordInput.value = '';
+            usernameInput.focus();
+        }
+        
+        function hideLoginModal() {
+            loginModal.style.display = 'none';
+        }
+        
+        function showHeroModal() {
+            if (!auth.isLoggedIn()) {
+                showLoginModal();
+                return;
+            }
+            
+            heroModal.style.display = 'flex';
+            heroImageUrl.focus();
+        }
+        
+        function hideHeroModal() {
+            heroModal.style.display = 'none';
+        }
+        
+        function showGalleryModal(editMode = false, imageData = null) {
+            if (!auth.isLoggedIn()) {
+                showLoginModal();
+                return;
+            }
+            
+            const modalTitle = document.getElementById('modalTitle');
+            
+            if (editMode && imageData) {
+                modalTitle.textContent = 'Edit Gambar';
+                galleryImageUrl.value = imageData.url || '';
+                galleryImageTitle.value = imageData.title || '';
+                galleryImageDesc.value = imageData.description || '';
+                isEditing = true;
+                editingImageId = imageData.id;
+            } else {
+                modalTitle.textContent = 'Tambah Gambar Baru';
+                galleryImageUrl.value = '';
+                galleryImageTitle.value = '';
+                galleryImageDesc.value = '';
+                isEditing = false;
+                editingImageId = null;
+            }
+            
+            galleryModal.style.display = 'flex';
+            galleryImageUrl.focus();
+        }
+        
+        function hideGalleryModal() {
+            galleryModal.style.display = 'none';
+            isEditing = false;
+            editingImageId = null;
+        }
+        
+        // ==================== HERO IMAGE OPERATIONS ====================
+        function updateHeroImage() {
+            const url = heroImageUrl.value.trim();
+            const title = heroImageTitle.value.trim();
+            const subtitle = heroImageSubtitle.value.trim();
+            
+            if (!url) {
+                alert('URL gambar hero harus diisi!');
+                return;
+            }
+            
+            const newData = {
+                imageUrl: url,
+                title: title || 'Kelas 6 SD Negeri Maju Jaya',
+                subtitle: subtitle || 'Generasi Cerdas, Berkarakter, dan Berprestasi'
+            };
+            
+            const success = heroManager.updateHero(newData);
+            if (success) {
+                loadHeroImage();
+                hideHeroModal();
+                alert('✅ Gambar hero berhasil diperbarui!');
+            } else {
+                alert('❌ Gagal memperbarui gambar hero');
+            }
+        }
+        
+        // ==================== GALLERY OPERATIONS ====================
+        function addImage() {
+            const url = galleryImageUrl.value.trim();
+            const title = galleryImageTitle.value.trim();
+            const description = galleryImageDesc.value.trim();
+            
+            if (!url) {
+                alert('URL gambar harus diisi!');
+                return;
+            }
+            
+            if (!title) {
+                alert('Judul gambar harus diisi!');
+                return;
+            }
+            
+            const imageData = { url, title, description };
+            galleryManager.addImage(imageData);
+            renderGallery();
+            hideGalleryModal();
+            
+            alert('✅ Gambar berhasil ditambahkan ke galeri!');
+        }
+        
+        function editImage(id) {
+            const image = galleryManager.gallery.find(img => img.id === id);
+            if (image) {
+                showGalleryModal(true, image);
+            }
+        }
+        
+        function updateImage() {
+            const url = galleryImageUrl.value.trim();
+            const title = galleryImageTitle.value.trim();
+            const description = galleryImageDesc.value.trim();
+            
+            if (!url) {
+                alert('URL gambar harus diisi!');
+                return;
+            }
+            
+            if (!title) {
+                alert('Judul gambar harus diisi!');
+                return;
+            }
+            
+            const imageData = { url, title, description };
+            const success = galleryManager.updateImage(editingImageId, imageData);
+            
+            if (success) {
+                renderGallery();
+                hideGalleryModal();
+                alert('✅ Gambar berhasil diperbarui!');
+            } else {
+                alert('❌ Gagal memperbarui gambar');
+            }
+        }
+        
+        function deleteImage(id) {
+            if (confirm('Apakah Anda yakin ingin menghapus gambar ini?')) {
+                const success = galleryManager.deleteImage(id);
+                if (success) {
+                    renderGallery();
+                    alert('✅ Gambar berhasil dihapus!');
+                } else {
+                    alert('❌ Gagal menghapus gambar');
+                }
+            }
+        }
+        
+        // ==================== EVENT LISTENERS ====================
+        // Login
+        loginSubmit.addEventListener('click', () => {
+            const username = usernameInput.value.trim();
+            const password = passwordInput.value;
+            
+            if (!username || !password) {
+                alertMessage.textContent = 'Username dan password harus diisi';
+                loginAlert.style.display = 'block';
+                return;
+            }
+            
+            const result = auth.login(username, password);
+            
+            if (result.success) {
+                hideLoginModal();
+                updateUIForLoginStatus();
+                alert('✅ Login berhasil! Mode admin aktif.');
+            } else {
+                alertMessage.textContent = result.message;
+                loginAlert.style.display = 'block';
+                passwordInput.value = '';
+                passwordInput.focus();
+            }
+        });
+        
+        loginCancel.addEventListener('click', hideLoginModal);
+        
+        // Hero Image
+        editHeroBtn.addEventListener('click', showHeroModal);
+        
+        saveHeroBtn.addEventListener('click', updateHeroImage);
+        
+        cancelHeroBtn.addEventListener('click', hideHeroModal);
+        closeHeroModal.addEventListener('click', hideHeroModal);
+        
+        // Gallery
+        addImageBtn.addEventListener('click', () => showGalleryModal(false));
+        
+        saveGalleryBtn.addEventListener('click', () => {
+            if (isEditing) {
+                updateImage();
+            } else {
+                addImage();
+            }
+        });
+        
+        cancelGalleryBtn.addEventListener('click', hideGalleryModal);
+        closeGalleryModal.addEventListener('click', hideGalleryModal);
+        
+        // Admin Tools
+        exportDataBtn.addEventListener('click', () => {
+            galleryManager.exportData();
+            alert('✅ Data galeri berhasil di-export ke file JSON!');
+        });
+        
+        logoutBtn.addEventListener('click', () => {
+            if (confirm('Apakah Anda yakin ingin logout?')) {
+                auth.logout();
+                updateUIForLoginStatus();
+                alert('👋 Anda telah logout dari mode admin.');
+            }
+        });
+        
+        // Close modals when clicking outside
+        document.querySelectorAll('.modal-overlay').forEach(modal => {
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+        });
+        
+        // Enter key in login form
+        usernameInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') loginSubmit.click();
+        });
+        
+        passwordInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') loginSubmit.click();
+        });
+        
+        // Enter key in hero modal
+        heroImageUrl.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') saveHeroBtn.click();
+        });
+        
+        // Enter key in gallery modal
+        galleryImageUrl.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') saveGalleryBtn.click();
+        });
+        
+        // GitHub URL auto-suggestion
+        heroImageUrl.addEventListener('focus', () => {
+            if (!heroImageUrl.value) {
+                heroImageUrl.placeholder = `Contoh: https://raw.githubusercontent.com/dianpamungkas24-cloud/dianpamungkas6c/main/gambar-hero.jpg`;
+            }
+        });
+        
+        galleryImageUrl.addEventListener('focus', () => {
+            if (!galleryImageUrl.value) {
+                galleryImageUrl.placeholder = `Contoh: https://raw.githubusercontent.com/dianpamungkas24-cloud/dianpamungkas6c/main/nama-gambar.jpg`;
+            }
+        });
+        
+        // ==================== INITIALIZE ====================
+        document.addEventListener('DOMContentLoaded', () => {
+            updateUIForLoginStatus();
+            
+            // Auto login for testing (remove in production)
+            // auth.login('admin', 'kelas6sd');
+            // updateUIForLoginStatus();
+        });
+    </script>
+</body>
+</html>
 
