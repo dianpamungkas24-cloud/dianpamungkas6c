@@ -38,8 +38,53 @@
             padding: 0 20px;
         }
         
-        /* ===== HEADER PROFESIONAL ===== */
-        .main-header {
+        /* ===== TOP NAVIGATION BAR ===== */
+        .top-nav {
+            background: var(--primary);
+            color: white;
+            padding: 10px 0;
+            font-size: 0.9rem;
+        }
+        
+        .top-nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .top-nav-links {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+        
+        .top-nav-links a {
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: color 0.3s;
+        }
+        
+        .top-nav-links a:hover {
+            color: var(--secondary);
+        }
+        
+        .top-nav-contact {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        /* ===== MAIN NAVIGATION MENU ===== */
+        .main-nav {
             background: white;
             box-shadow: var(--shadow);
             position: sticky;
@@ -47,14 +92,14 @@
             z-index: 1000;
         }
         
-        .header-content {
+        .nav-content {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 15px 0;
         }
         
-        .school-logo {
+        .logo-section {
             display: flex;
             align-items: center;
             gap: 15px;
@@ -84,35 +129,60 @@
             color: #666;
         }
         
-        .admin-status {
+        .nav-menu {
             display: flex;
+            gap: 25px;
             align-items: center;
-            gap: 10px;
         }
         
-        .btn-login {
-            background: var(--secondary);
-            color: white;
-            border: none;
-            padding: 8px 20px;
-            border-radius: 5px;
-            cursor: pointer;
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--primary);
             font-weight: 500;
+            padding: 8px 12px;
+            border-radius: 5px;
             transition: all 0.3s;
+            position: relative;
         }
         
-        .btn-login:hover {
-            background: #2980b9;
+        .nav-links a:hover {
+            color: var(--secondary);
+            background: #f8f9fa;
         }
         
-        .user-info {
+        .nav-links a.active {
+            color: var(--secondary);
+        }
+        
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--secondary);
+        }
+        
+        .nav-actions {
             display: flex;
             align-items: center;
-            gap: 10px;
-            background: #f8f9fa;
-            padding: 8px 15px;
-            border-radius: 5px;
-            border-left: 4px solid var(--success);
+            gap: 15px;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--primary);
+            cursor: pointer;
         }
         
         /* ===== HERO SECTION (GAMBAR BESAR) ===== */
@@ -123,6 +193,12 @@
             position: relative;
             overflow: hidden;
             margin-bottom: 40px;
+        }
+        
+        .hero-image-container {
+            width: 100%;
+            height: 100%;
+            position: relative;
         }
         
         .hero-image {
@@ -223,7 +299,7 @@
             background: var(--secondary);
         }
         
-        /* ===== GALLERY ===== */
+        /* ===== GALLERY - FOTO PROPORSIONAL ===== */
         .gallery-section {
             padding: 40px 0;
         }
@@ -258,35 +334,60 @@
             border-left: 4px solid var(--success);
         }
         
+        /* Grid Gallery dengan proporsi yang baik */
         .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
             margin-top: 30px;
         }
         
+        /* Container untuk menjaga proporsi foto */
         .gallery-card {
             background: white;
             border-radius: var(--radius);
             overflow: hidden;
             box-shadow: var(--shadow);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
         }
         
         .gallery-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        /* Container gambar dengan aspect ratio 4:3 */
+        .gallery-image-container {
+            width: 100%;
+            height: 0;
+            padding-bottom: 75%; /* 4:3 Aspect Ratio */
+            position: relative;
+            overflow: hidden;
+            background: #f5f5f5;
         }
         
         .gallery-image {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
-            height: 200px;
+            height: 100%;
             object-fit: cover;
-            display: block;
+            transition: transform 0.5s ease;
+        }
+        
+        .gallery-card:hover .gallery-image {
+            transform: scale(1.05);
         }
         
         .gallery-info {
             padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
         }
         
         .gallery-info h3 {
@@ -294,42 +395,47 @@
             font-size: 1.2rem;
             color: var(--primary);
             margin-bottom: 10px;
+            line-height: 1.3;
         }
         
         .gallery-info p {
             color: #666;
             font-size: 0.95rem;
             margin-bottom: 15px;
+            line-height: 1.5;
+            flex-grow: 1;
         }
         
         .gallery-date {
             font-size: 0.85rem;
             color: #999;
             margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
         
         .admin-actions {
             display: flex;
             gap: 10px;
             margin-top: 15px;
-            opacity: 0;
-            transition: opacity 0.3s;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
         }
         
-        .gallery-card:hover .admin-actions {
-            opacity: 1;
-        }
-        
+        /* Style untuk tombol edit/hapus */
         .btn-small {
-            padding: 6px 12px;
+            padding: 8px 15px;
             font-size: 0.85rem;
-            border-radius: 4px;
+            border-radius: 5px;
             border: none;
             cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 6px;
             transition: all 0.3s;
+            flex: 1;
+            justify-content: center;
         }
         
         .btn-edit {
@@ -337,9 +443,17 @@
             color: white;
         }
         
+        .btn-edit:hover {
+            background: #2980b9;
+        }
+        
         .btn-delete {
             background: var(--accent);
             color: white;
+        }
+        
+        .btn-delete:hover {
+            background: #c0392b;
         }
         
         /* ===== MODALS ===== */
@@ -502,6 +616,112 @@
             border-left: 4px solid var(--success);
         }
         
+        /* ===== MOBILE MENU ===== */
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 280px;
+            height: 100vh;
+            background: white;
+            box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+            z-index: 1001;
+            padding: 30px 20px;
+            transition: right 0.3s ease;
+            overflow-y: auto;
+        }
+        
+        .mobile-menu.active {
+            right: 0;
+        }
+        
+        .mobile-menu-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .mobile-menu-header h3 {
+            color: var(--primary);
+        }
+        
+        .close-mobile-menu {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #999;
+            cursor: pointer;
+        }
+        
+        .mobile-nav-links {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+        
+        .mobile-nav-links li {
+            margin-bottom: 15px;
+        }
+        
+        .mobile-nav-links a {
+            display: block;
+            padding: 12px 15px;
+            color: var(--primary);
+            text-decoration: none;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+        
+        .mobile-nav-links a:hover {
+            background: #f8f9fa;
+            color: var(--secondary);
+        }
+        
+        .mobile-nav-links a.active {
+            background: var(--secondary);
+            color: white;
+        }
+        
+        .mobile-menu-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+        }
+        
+        .mobile-menu-overlay.active {
+            display: block;
+        }
+        
+        /* ===== ASPECT RATIO OPTIONS ===== */
+        .aspect-ratio-selector {
+            display: flex;
+            gap: 10px;
+            margin: 10px 0;
+        }
+        
+        .aspect-btn {
+            padding: 8px 15px;
+            border: 1px solid #ddd;
+            background: white;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .aspect-btn.active {
+            background: var(--secondary);
+            color: white;
+            border-color: var(--secondary);
+        }
+        
         /* ===== FOOTER ===== */
         .main-footer {
             background: var(--primary);
@@ -538,14 +758,37 @@
         }
         
         /* ===== RESPONSIVE ===== */
+        @media (max-width: 992px) {
+            .top-nav {
+                display: none;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            }
+        }
+        
         @media (max-width: 768px) {
-            .header-content {
+            .nav-content {
                 flex-direction: column;
                 gap: 15px;
                 text-align: center;
             }
             
-            .admin-status {
+            .logo-section {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .nav-actions {
                 width: 100%;
                 justify-content: center;
             }
@@ -565,6 +808,7 @@
             
             .gallery-grid {
                 grid-template-columns: 1fr;
+                gap: 20px;
             }
             
             .gallery-controls {
@@ -593,6 +837,28 @@
             
             .hero-subtitle {
                 font-size: 0.9rem;
+            }
+            
+            .modal-content {
+                padding: 20px;
+            }
+            
+            .gallery-info {
+                padding: 15px;
+            }
+            
+            .admin-actions {
+                flex-direction: column;
+            }
+            
+            .btn-small {
+                width: 100%;
+            }
+        }
+        
+        @media (min-width: 1200px) {
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
             }
         }
     </style>
@@ -730,11 +996,61 @@
         </div>
     </div>
     
-    <!-- Main Website -->
-    <header class="main-header">
+    <!-- Mobile Menu Overlay -->
+    <div id="mobileMenuOverlay" class="mobile-menu-overlay"></div>
+    
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="mobile-menu">
+        <div class="mobile-menu-header">
+            <h3>Menu</h3>
+            <button class="close-mobile-menu" id="closeMobileMenu">&times;</button>
+        </div>
+        
+        <ul class="mobile-nav-links">
+            <li><a href="#home" class="active"><i class="fas fa-home"></i> Beranda</a></li>
+            <li><a href="#gallery"><i class="fas fa-images"></i> Galeri</a></li>
+            <li><a href="#students"><i class="fas fa-users"></i> Siswa</a></li>
+            <li><a href="#schedule"><i class="fas fa-calendar-alt"></i> Jadwal</a></li>
+            <li><a href="#news"><i class="fas fa-newspaper"></i> Berita</a></li>
+            <li><a href="#teachers"><i class="fas fa-chalkboard-teacher"></i> Guru</a></li>
+            <li><a href="#contact"><i class="fas fa-envelope"></i> Kontak</a></li>
+        </ul>
+        
+        <div class="mobile-menu-actions">
+            <button id="mobileLoginBtn" class="btn btn-primary" style="width: 100%; margin-bottom: 10px;">
+                <i class="fas fa-sign-in-alt"></i> Login Admin
+            </button>
+            <a href="https://github.com/dianpamungkas24-cloud/dianpamungkas6c" target="_blank" 
+               class="btn btn-secondary" style="width: 100%; text-decoration: none;">
+                <i class="fab fa-github"></i> GitHub Repo
+            </a>
+        </div>
+    </div>
+    
+    <!-- Top Navigation Bar -->
+    <div class="top-nav">
         <div class="container">
-            <div class="header-content">
-                <div class="school-logo">
+            <div class="top-nav-content">
+                <div class="top-nav-links">
+                    <a href="#"><i class="fas fa-phone"></i> (021) 1234-5678</a>
+                    <a href="#"><i class="fas fa-envelope"></i> kelas6@sdnmajujaya.sch.id</a>
+                    <a href="#"><i class="fas fa-map-marker-alt"></i> Jl. Pendidikan No. 123, Jakarta</a>
+                </div>
+                <div class="top-nav-contact">
+                    <div class="contact-item">
+                        <i class="fas fa-clock"></i>
+                        <span>Senin - Jumat: 07:00 - 14:00</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Main Navigation Menu -->
+    <nav class="main-nav">
+        <div class="container">
+            <div class="nav-content">
+                <div class="logo-section">
                     <div class="logo-icon">
                         <i class="fas fa-graduation-cap"></i>
                     </div>
@@ -744,12 +1060,27 @@
                     </div>
                 </div>
                 
-                <div class="admin-status" id="adminStatus">
-                    <!-- Akan diisi oleh JavaScript -->
+                <div class="nav-menu">
+                    <ul class="nav-links">
+                        <li><a href="#home" class="active"><i class="fas fa-home"></i> Beranda</a></li>
+                        <li><a href="#gallery"><i class="fas fa-images"></i> Galeri</a></li>
+                        <li><a href="#students"><i class="fas fa-users"></i> Siswa</a></li>
+                        <li><a href="#schedule"><i class="fas fa-calendar-alt"></i> Jadwal</a></li>
+                        <li><a href="#news"><i class="fas fa-newspaper"></i> Berita</a></li>
+                    </ul>
+                    
+                    <div class="nav-actions">
+                        <div id="adminStatus">
+                            <!-- Akan diisi oleh JavaScript -->
+                        </div>
+                        <button class="mobile-menu-btn" id="openMobileMenu">
+                            <i class="fas fa-bars"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
-    </header>
+    </nav>
     
     <!-- Hero Section (Gambar Besar) -->
     <section class="hero-section">
@@ -760,11 +1091,13 @@
             </button>
         </div>
         
-        <!-- Gambar Hero -->
-        <img id="heroImage" class="hero-image" 
-             src="https://raw.githubusercontent.com/dianpamungkas24-cloud/dianpamungkas6c/main/20260127_075027.jpg"
-             alt="Kegiatan Kelas 6"
-             onerror="this.src='https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'">
+        <!-- Container untuk gambar hero -->
+        <div class="hero-image-container">
+            <img id="heroImage" class="hero-image" 
+                 src="https://raw.githubusercontent.com/dianpamungkas24-cloud/dianpamungkas6c/main/20260127_075027.jpg"
+                 alt="Kegiatan Kelas 6"
+                 onerror="this.src='https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'">
+        </div>
         
         <!-- Overlay untuk teks -->
         <div class="hero-overlay">
@@ -1172,6 +1505,13 @@
         const loginAlert = document.getElementById('loginAlert');
         const alertMessage = document.getElementById('alertMessage');
         
+        // Mobile Menu Elements
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+        const openMobileMenu = document.getElementById('openMobileMenu');
+        const closeMobileMenu = document.getElementById('closeMobileMenu');
+        const mobileLoginBtn = document.getElementById('mobileLoginBtn');
+        
         // Buttons
         const loginSubmit = document.getElementById('loginSubmit');
         const loginCancel = document.getElementById('loginCancel');
@@ -1207,7 +1547,7 @@
             // Update Admin Status
             if (isLoggedIn) {
                 adminStatus.innerHTML = `
-                    <div class="user-info">
+                    <div class="user-info" style="background: #f8f9fa; padding: 8px 15px; border-radius: 5px; border-left: 4px solid var(--success); display: flex; align-items: center; gap: 10px;">
                         <i class="fas fa-user-shield"></i>
                         <div>
                             <div style="font-weight: 500;">Admin Mode</div>
@@ -1218,7 +1558,7 @@
                 heroAdminControl.classList.add('show');
             } else {
                 adminStatus.innerHTML = `
-                    <button id="showLoginBtn" class="btn-login">
+                    <button id="showLoginBtn" class="btn-login" style="background: var(--secondary); color: white; border: none; padding: 8px 20px; border-radius: 5px; cursor: pointer; font-weight: 500; transition: all 0.3s;">
                         <i class="fas fa-sign-in-alt"></i> Login Admin
                     </button>
                 `;
@@ -1244,6 +1584,15 @@
                 galleryControls.classList.remove('admin');
                 adminTools.style.display = 'none';
                 adminEmptyText.style.display = 'inline';
+            }
+            
+            // Update Mobile Login Button
+            if (isLoggedIn) {
+                mobileLoginBtn.innerHTML = '<i class="fas fa-user-shield"></i> Admin Mode';
+                mobileLoginBtn.className = 'btn btn-success';
+            } else {
+                mobileLoginBtn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Login Admin';
+                mobileLoginBtn.className = 'btn btn-primary';
             }
             
             // Load Hero Image
@@ -1299,8 +1648,10 @@
                 }
                 
                 card.innerHTML = `
-                    <img src="${image.url}" alt="${image.title}" class="gallery-image"
-                         onerror="this.src='https://via.placeholder.com/400x200/ecf0f1/95a5a6?text=Gambar+Tidak+Tersedia'">
+                    <div class="gallery-image-container">
+                        <img src="${image.url}" alt="${image.title}" class="gallery-image"
+                             onerror="this.src='https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80'">
+                    </div>
                     <div class="gallery-info">
                         <h3>${image.title}</h3>
                         <p>${image.description}</p>
@@ -1333,6 +1684,19 @@
             }
         }
         
+        // ==================== MOBILE MENU FUNCTIONS ====================
+        function openMobileMenuFunc() {
+            mobileMenu.classList.add('active');
+            mobileMenuOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeMobileMenuFunc() {
+            mobileMenu.classList.remove('active');
+            mobileMenuOverlay.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+        
         // ==================== MODAL FUNCTIONS ====================
         function showLoginModal() {
             loginModal.style.display = 'flex';
@@ -1340,6 +1704,7 @@
             usernameInput.value = '';
             passwordInput.value = '';
             usernameInput.focus();
+            closeMobileMenuFunc();
         }
         
         function hideLoginModal() {
@@ -1492,6 +1857,12 @@
         }
         
         // ==================== EVENT LISTENERS ====================
+        // Mobile Menu
+        openMobileMenu.addEventListener('click', openMobileMenuFunc);
+        closeMobileMenu.addEventListener('click', closeMobileMenuFunc);
+        mobileMenuOverlay.addEventListener('click', closeMobileMenuFunc);
+        mobileLoginBtn.addEventListener('click', showLoginModal);
+        
         // Login
         loginSubmit.addEventListener('click', () => {
             const username = usernameInput.value.trim();
@@ -1555,6 +1926,31 @@
             }
         });
         
+        // Navigation links
+        document.querySelectorAll('.nav-links a, .mobile-nav-links a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Remove active class from all links
+                document.querySelectorAll('.nav-links a, .mobile-nav-links a').forEach(l => {
+                    l.classList.remove('active');
+                });
+                
+                // Add active class to clicked link
+                this.classList.add('active');
+                
+                // Close mobile menu if open
+                closeMobileMenuFunc();
+                
+                // Scroll to section if it exists
+                const targetId = this.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+        
         // Close modals when clicking outside
         document.querySelectorAll('.modal-overlay').forEach(modal => {
             modal.addEventListener('click', (e) => {
@@ -1607,4 +2003,3 @@
     </script>
 </body>
 </html>
-
